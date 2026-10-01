@@ -1,0 +1,1356 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Strage di Ustica">
+	<meta name="keywords" content="ustica,ih870">
+	<title>Strage di Ustica - Luoghi comuni</title>
+	<link rel="stylesheet" type="text/css" href="../../stile.css">
+	<script src="../../crea_indice.js"></script>
+	<script src="../../plotly-latest.min.js"></script>
+	<script src="../../comune.js"></script>
+	<style>
+	table, td {
+		border-spacing: 0px;
+		border-collapse: collapse;
+		border: 1px solid #999999;
+		text-align: center;
+		overflow: hidden;
+	}
+	td {
+		padding: .1em .5em .1em .5em;
+	}
+	</style>	
+</head>
+
+<body>
+
+<div class="indice"><a href="../../index.html">Indice</a></div>
+
+<h2>Dati radaristici pervenuti all'Autorità Giudiziaria</h2>
+
+<b>Luogo comune</b>: tutti i dati radaristici prodotti la sera della strage dai centri radar della <abbr title="Difesa Aerea">D.A.</abbr> sono stati consegnati all'<abbr title="Autorità Giudiziaria">A.G.</abbr><br>
+<b>Motivazione</b>: questo luogo comune viene sempre collegato al fatto che la sera della strage non sarebbe accaduto niente d'insolito nei cieli italiani e, quindi, non ci sarebbe niente da nascondere. Dunque, non ci sarebbe stata alcuna ragione per non consegnare tali dati con completezza e tutti nella loro interezza.<br>
+<br>
+
+<hr>
+<br>
+
+Il giudice istruttore Priore, nella sua <a href="https://www.stragi80.it/doc/la-sentenza-ordinanza-del-g-i/" target="_blank">Ordinanza di rinvio a giudizio - Sentenza istruttoria di proscioglimento</a>, riporta con dovizia di particolari tutto ciò che l'<abbr title="Autorità Giudiziaria">A.G.</abbr> riesce a trovare nei vari centri radar della <abbr title="Difesa Aerea">D.A.</abbr> e tutto ciò che, invece, non viene rinvenuto.<br>
+Sebbene questo dettagliato elenco sia presente dall’agosto del 1999 (data di emissione dell’<abbr title="Ordinanza-Sentenza">O-S</abbr>), c’è chi ancora sembra avere le idee confuse su ciò che l’A.G. ha effettivamente rinvenuto.<br>
+<br>
+Lo scopo di questa pagina è chiarire come stanno veramente le cose.<br>
+<br>
+
+
+<!-- ========================================================================================================== -->
+
+
+<p style="margin-left: 5em"><b>INDICE</b></p>
+
+<p id="indice" style="margin-left: 3em">
+<!-- riempito dal JS -->
+</p>
+<br>
+
+<hr>
+
+<br>
+
+
+<!-- ====  ORGANIZZAZIONE CENTRI RADAR D.A.  ====================================================================================================== -->
+
+
+<h3 id="orgcram">Organizzazione dei centri radar</h3>
+
+Al fine di comprendere meglio i contenuti trattati in questa pagina, nel presente paragrafo vengono fornite alcune informazioni di base sull'organizzazione dei centri radar della <abbr title="Difesa Aerea">D.A.</abbr> Tali informazioni sono tratte in massima parte dal documento "<a href="http://cristianopi.altervista.org/straus/v1f306_WP002020_001.pdf" target="_blank">WP002020_001.DOC</a>" <i><sup><abbr title="Procura della Repubblica di Roma, VOL. I - FASC. 306 - PAG. 70160 - 70235, RELAZIONE INERENTE IL 21° G.R.A.M. DI POGGIO BALLONE, POSTAZIONE RADAR UBICATA NEL COMUNE DI CASTIGLION DELLA PESCAIA - FRAZ. TIRLI (GR). ALLEGATO AL FG. 230855/866 DATATO 09.12.97 (UI 2019).">fonte</abbr></sup></i> da pag. 25.<br>
+<br>
+
+
+<!-- Cartina ubicazione centri radar -->
+<div style="margin-bottom: 2em; display: inline-block;">
+<div id="cartina_radar" style="width: 700px; height: 600px; float:left; padding-right: 2em"></div>
+La cartina mostra l'ubicazione dei centri radar, i collegamenti tra di essi e la rotta seguita dall'IH870 (in rosso).<br>
+I cerchi tratteggiati rappresentano la copertura approssimativa.<br>
+</div>
+
+
+<script>
+"use strict";
+
+var trk= {
+	type:'scattermapbox', hoverinfo: 'none',
+	lat: [], lon: [],
+	mode: 'markers', marker: { size: 3, color: 'red' }
+};
+
+var raggio= {
+	type:'scattermapbox', hoverinfo: 'none',
+	lat: [], lon: [],
+	//mode: 'lines', line: { width: 1, color: 'blue' }
+	mode: 'markers', marker: { size: 2, color: 'blue' }
+};
+
+var xtell= { // Collegamenti tra i vari centri radar
+	type:'scattermapbox', hoverinfo: 'none',
+	lat: [], lon: [],
+	mode: 'lines', line: { width: 1, color: 'blue' }
+};
+
+
+Plotly.d3.csv('../../fasi/trk.csv', function(err, rows) {
+	// UTC,ID,col,rdr,lat,lon,FL,SSR
+	const lat= unpack(rows, 'lat');
+	const lon= unpack(rows, 'lon');
+	const ID= unpack(rows, 'ID');
+	for(var j= 0; j < lat.length; j++) {
+		if(ID[j] === '1136') { trk.lat.push(lat[j]); trk.lon.push(lon[j]); }
+	}
+
+	RADAR.marker.size= 8; RADAR.marker.color= 'blue';
+	RADAR.mode= "markers+text";
+	RADAR.textposition= 'top';
+	layout.font= {
+		family: 'monospace', size: 17, color: 'blue'
+	};
+
+	layout.showlegend= false;
+//		layout.mapbox.style= "open-street-map";
+	layout.mapbox.style= "streets";
+	Plotly.setPlotConfig({
+		mapboxAccessToken: 'pk.eyJ1IjoiY3Jpc3RpYW5vcGkiLCJhIjoiY2pycXl1N3piMXAzODQzbnRtZzd4NzBlbiJ9.QugZVJkXpGrSJpoz_ghJqQ'
+	});
+	
+	
+	Plotly.d3.csv('raggio_radar.csv', function(err, rows) {
+		raggio.lat= unpack(rows, 'lat');
+		raggio.lon= unpack(rows, 'lon');
+
+// 'Marconi',  'Selenia', 'Poggio Ballone', 'Marsala', 'Capo Mele', 'Jacotenente', 'Licola' , 'Mortara', 'Poggio Renatico', 'Potenza Picena', 'Otranto', 'Siracusa', 1° ROC, 3° ROC
+//     0           1             2              3           4             5           6           7             8                   9             10         11        12      13
+
+		RADAR.text[0]= ""; RADAR.text[1]= ""; // Non mostra la label Marconi e Selenia
+		RADAR.text.push("1° ROC"); RADAR.lat.push(45.315), RADAR.lon.push(11.690); // Monte Venda
+		RADAR.text.push("3° ROC"); RADAR.lat.push(40.708), RADAR.lon.push(17.333); // Martina Franca
+		RADAR.text.push("Solenzara"); RADAR.lat.push(41.926), RADAR.lon.push(9.391); // Solenzara N° 14
+		RADAR.text.push("Nizza"); RADAR.lat.push(43.771), RADAR.lon.push(7.419); // Nizza N° 15
+
+		var coll= [
+			2, 14, 15, -1, // PB -> Solenzara e Nizza
+			3, 6, 2, 11, 13, -1, // Licola,  Poggio Ballone  e  Siracusa;  inviava,  inoltre,  informazioni  al  3°  SOC  di  Martina Franca
+			6, 2, -1,
+			4, 2, 7, -1,
+			7, 12, 2, 8, -1,
+			8, 12, 2, 9, -1, // 1° ROC, Mortara, Poggio Ballone e Potenza Picena.
+			// Potenza Picena?
+			5, 13, 9, 6, 3, 10, -1, // 3° ROC/SOC  Martina  Franca,  Potenza  Picena, Pescara, Licola, Marsala e Otranto.
+			// Siracusa?
+			-1
+		];
+		var xt_i= 0, idx= 0;
+		while(coll[idx] !== -1) {
+			const s0= coll[idx];
+			while(coll[++idx] !== -1) {
+				const s1= coll[idx];
+				xtell.lat[xt_i]= RADAR.lat[s0]; xtell.lon[xt_i]= RADAR.lon[s0]; xt_i++;
+				xtell.lat[xt_i]= RADAR.lat[s1]; xtell.lon[xt_i]= RADAR.lon[s1]; xt_i++;
+				xtell.lat[xt_i]= "null"; xtell.lon[xt_i]= "null"; xt_i++;
+			}
+			idx++;
+		}
+
+		layout.mapbox.zoom= 5.1;
+		layout.mapbox.center.lat= 41.6;
+		layout.mapbox.center.lon= 12.5;
+		Plotly.newPlot('cartina_radar', [xtell, raggio, trk, RADAR], layout, {responsive: true, displayModeBar: false});
+
+	});
+});
+
+</script>
+<br>
+
+I compiti assegnati ad un centro radar sono:
+<ul style="margin-top: 0px">
+<li>assicurare la sorveglianza dello spazio aereo (v. definizione poco più sotto) in tutta l'area coperta dal radar;</li>
+<li>effettuare l'identificazione di tutto il traffico aereo in transito nell'area di responsabilità del centro radar;</li>
+<li>fornire informazioni agli enti superiori ed adiacenti circa la situazione aerea e l'impiego delle armi;</li>
+<li>esercitare il controllo tattico degli intercettori;</li>
+<li>fornire assistenza alla navigazione aerea ed alle missioni offensive;</li>
+<li>concorrere alle operazioni di soccorso.</li>
+</ul>
+
+Per ogni centro radar è definita la <abbr title="Track Production Area, area di produzione tracce">TPA</abbr>, che è la porzione di spazio aereo assegnata all'unità radar ai fini dell'assolvimento dei compiti relativi a: inizializzazione, numerazione, identificazione, tracciamento e riporto delle tracce agli altri centri. All'interno della propria TPA, quindi, un centro radar ha la responsabilità di:
+<ul style="margin-top: 0px">
+<li>associare un'adeguata simbologia (traccia) ad ogni eco radar correlabile con oggetti in movimento;</li>
+<li>attribuire a ciascuna traccia un numero distintivo;</li>
+<li>individuare l'identità e le caratteristiche cinematiche di tali eco (quota, velocità, direzione, ecc).</li>
+</ul>
+
+<u>Importanti eccezioni</u> a quanto appena detto esistono in presenza di <a href="../tf104g/tf104g.html#FPA" target="_blank"><i>Free Plot Area</i></a>.<br>
+<br>
+
+
+La sorveglianza aerea è la sistematica osservazione di un definito volume di spazio aereo mediante mezzi elettronici ed è limitata esclusivamente dalla capacità di copertura dei radar. Ciò significa che i limiti stabiliti per le TPA non si applicano alla sorveglianza aerea, che deve essere svolta per 360 gradi alla massima portata del radar.<br>
+<br>
+
+
+Il capo controllore (<abbr title="Master Controller">M.C.</abbr>) coordina e dirige le attività ed è responsabile di fronte al comandante della condotta di tutte le operazioni di <abbr title="Difesa Aerea">D.A.</abbr> che si svolgono in sala operativa. Ha la delega di ordinare o meno il decollo dei velivoli intercettori in caso di necessità operativa ed ha al suo fianco l'assegnatore di intercettori (<abbr title="Fighter Allocator">F.A.</abbr>).<br>
+<br>
+
+La sala operativa è organizzata in tre sezioni:
+<ol style="margin-top: 0px">
+<li>sezione armi;</li>
+<li>sezione sorveglianza;</li>
+<li>sezione addetti all'elaboratore elettronico.</li>
+</ol>
+
+Della sezione armi fanno parte gli operatori guida caccia, che hanno il compito di guidare i velivoli intercettori verso il velivolo da intercettare.<br>
+<br>
+La sezione sorveglianza svolge il compito di scoperta, identificazione ed inseguimento degli aeromobili. Fanno parte di questa sezione:
+<ul style="margin-top: 0px">
+<li>il supervisore (<abbr title="Track Production Officer">T.P.O.</abbr>) controlla e coordina il lavoro della sezione, svolge normalmente anche il compito di sorveglianza generale dello spazio aereo;</li>
+<li>l'assistente del T.P.O. (<abbr title="Track Production Officer Assistant">T.P.O./A</abbr>);</li>
+<li>l'identificatore (<abbr title="Identification Officer">I.O.</abbr>) provvede alle azioni necessarie all'identificazione dei velivoli;</li>
+<li>l'inizializzatore (<abbr title="Initializator o Initializer">I.N.</abbr>) è responsabile della scoperta della traccia e del suo inserimento nel sistema (inizializzazione della traccia);</li>
+<li>il tracciatore (<abbr title="Track Monitor">T.K.M.</abbr>) controlla l'inseguimento automatico delle tracce locali (cioè di quelle all'interno della TPA del centro radar) e, all'occorrenza, effettua il tracciamento manuale;</li>
+<li>l'addetto allo scambio dati con i reparti superiori limitrofi (<abbr title="Track Cross Teller">T.K.X.</abbr>) cura e controlla la trasmissione e ricezione automatica dei dati relativi al traffico aereo che interessa l'area di competenza del centro radar.</li>
+</ul>
+
+In caso di esercitazione era presente anche la figura del controllore di esercitazione (<abbr title="Exercise Controller">E.C.</abbr>).<br>
+<br>
+
+La sezione addetti all'elaboratore elettronico cura il funzionamento operativo del computer. Il <abbr title="Manual Input Operator">M.I.O.</abbr> carica il programma da far eseguire al computer, inserisce i nastri necessari per le esercitazioni simulate (SYNADEX) ed effettua le riduzioni dati.<br>
+<br>
+
+Di fatto, la sala operativa può funzionare con molte meno persone che assumono su di sé più funzioni. Tutte le console sono intercambiabili, cioè possono
+svolgere tutte le funzioni. Ad esempio, per abilitare una console alla funzione di T.K.X. bisogna inserire un'apposita mascherina da T.K.X. ed eseguire una serie di operazioni che abilitano la console a funzionare come T.K.X.<br>
+<br>
+
+I centri radar italiani erano connessi tra loro e con quelli limitrofi delle nazioni NATO tramite ponte radio o linea telefonica per formare un sistema integrato di superficie per la difesa aerea (NADGE) che si estendeva per tutta l'Europa, dalla Norvegia alla Turchia.<br>
+Un centro NADGE:
+<ul style="margin-top: 0px; margin-bottom: 3em">
+<li>consente, per quanto attiene alla sorveglianza, di rappresentare e aggiornare la situazione aerea in tempo reale;</li>
+<li>permette la registrazione automatica su nastro della suddetta situazione;</li>
+<li>fornisce, mediante l'elaborazione automatica di dati e la loro rappresentazione visiva, adeguata assistenza nella guida degli intercettori pilotati.</li>
+</ul>
+
+
+
+
+<!-- ====  DECRETI di SEQUESTRO   ====================================================================================================== -->
+
+
+<h3 id="decseq">Decreti di sequestro iniziali</h3>
+
+L'oggetto dei decreti di sequestro che interessano in questa sede (cioè i dati radaristici) erano costituiti da nastri magnetici e tabulati cartacei.<br>
+<br>
+I nastri venivano utilizzati nei centri radar che funzionavano in modalità automatica o semiautomatica. Questi centri avevano un computer di tracciamento che poteva inizializzare automaticamente (cioè senza l'intervento dell'operatore) le tracce associabili a velivoli. Una volta inizializzata la traccia, il computer poteva seguirla automaticamente (cioè senza l'intervento dell'operatore) aggiornandone la posizione e i dati di volo.<br>
+<br>
+In base alle dichiarazioni rese da alcuni controllori della D.A., risulterebbe che la modalità automatica non fosse mai usata o fosse usata molto raramente, poiché lo schermo tendeva a riempirsi di falsi bersagli generati dal rumore di fondo (orografia, fenomeni meteo, grosse navi, ecc), sovraccaricando il computer di tracciamento, che all'epoca aveva capacità molto limitate. Così l'inizializzazione delle tracce era demandata all'operatore, mentre il tracciamento era lasciato al computer. In altre parole, i centri radar funzionavano quasi sempre in modalità semiautomatica.<br>
+<br>
+Su nastro venivano registrate moltissime informazioni, sia relative alle tracce che alle azioni compiute dall'operatore alla console e tutte queste informazioni potevano essere stampate su carta, qualora venisse richiesto.<br>
+Per evitare un enorme spreco di nastri, vigevano specifiche disposizioni che prescrivevano di smagnetizzare i nastri (per cancellarli) e di riutilizzarli dopo 30 giorni dall'ultima registrazione, salvo diverse disposizioni.<br>
+<br>
+I centri radar più obsoleti non possedevano un registratore a nastro magnetico come quello presente nei siti automatici o semiautomatici, per cui i plot venivano registrati su di un apposito modello cartaceo chiamato DA-1.<br>
+Questo modello era utilizzato anche nei centri radar dotati di nastri magnetici quando il sistema di registrazione non era operativo (manutenzione, malfunzionamento, ecc). Nei centri che funzionavano in modalità fonetico-manuale, invece, il DA-1 era l'unico mezzo per registrare e preservare le tracce avvistate.<br>
+Nei centri di tipo fonetico-manuale, uno o più operatori (detti lettori) erano addetti alla lettura sui monitor delle tracce di qualsiasi velivolo militare o civile. Essi comunicavano per interfono i dati radaristici ad altri operatori (detti marcatori), che provvedevano a riportarli su tabellone di plexiglass con gessi vetrografici, indicando: posizione, direzione, velocità e nominativo delle tracce. Parallelamente, ancora altri operatori trascrivevano gli stessi dati sul DA-1.<br>
+<br><br>
+
+
+Il Sostituto Procuratore Guarino, della Procura della Repubblica di Palermo, si muove con esemplare sollecitudine, mettendo in essere molteplici attività già a partire dal 28 giugno.<br>
+<br>
+Il primo decreto di sequestro delle registrazioni radar viene emesso sabato 5 luglio 1980 (v. "<a href="http://cristianopi.altervista.org/straus/v1f2_WP000132_001.pdf" target="_blank">WP000132_001.DOC</a>"
+<i><sup><abbr title="Procura della Repubblica di Roma, VOL. I - FASC. 2, PAG. 258., DATA DOCUMENTO 05.07.80, PROCURA DELLA REPUBBLICA PA: DISPOSIZIONE DEL P.M. DR. ALDO GUARINO AFFINCHE' LE REGISTRAZIONI DELLE INTERCETTAZIONI DEI RADAR MILITARI OPERANTI NEL TIRRENO TRA 27.06.80 E 28.06.80 SIANO CONSEGNATE ALL'UFFICIALE DI P.G. INCARICATO DEL RITIRO.">fonte</abbr></sup></i>):<br>
+
+
+<div class="cita" style="white-space: pre">                      PROCURA DELLA REPUBBLICA DI PALERMO                       
+                                                                                
+                                    IL P.M.                                     
+                                                                                
+VISTI GLI ATTI RELATIVI AL DISASTRO AEREO DC9 VOLO ITAVIA IH-870 DEL 27.06.80;  
+RILEVATO  CHE  <u>OCCORRE ACQUISIRE AGLI ATTI PROCESSUALI  LE  REGISTRAZIONI  DELLE
+INTERCETTAZIONI DEI RADAR MILITARI <b>COMUNQUE OPERANTI SUL MAR TIRRENO</b> NELLA NOTTE
+TRA VENERDI' 27.06.80 E SABATO 28.06.80, TRA LE ORE 20,00 E LE ORE 23,15</u>;
+VISTO L'ART. 342 C.P.P.                                                         
+                                                                                
+                                    DISPONE                                     
+                                                                                
+CHE  LE  REGISTRAZIONI PREDETTE SIANO IMMEDIATAMENTE CONSEGNATE DA  CHIUNQUE  LE
+DETENGA E DOVUNQUE SI TROVINO, ALL'UFFICIALE DI P.G. ALL'UOPO INCARICATO;       
+                                                                                
+<u>DELEGA PER L'ESECUIONE IL COMANDANE DEL GRUPPO C.C. DI PALERMO</u>, CONFERENDOGLI LA
+FACOLTA' DI PROCEDERE ALL'INCOMBENTE ANCHE A MEZZO DI ALTRO UFFICIALE DI P.G. DA
+LUI STESSO INCARICATO.                                                          
+                                                                                
+PALERMO, LI' <b>05.07.80</b>
+                                                                                
+                                              IL SOST. PROC. DELLA REPUBBLICA   
+                                                     DOTT. ALDO GUARINO         
+</div>
+
+
+L'A.G. inizierà ben presto a rendersi conto delle difficoltà che si troverà ad affrontare durante l'espletamento delle sue attività.<br>
+Infatti, il lunedì seguente, il comandante del Gruppo Carabinieri di Palermo comunica la delega al Comando della 3<sup>a</sup> Regione Aerea, ma, improvvisandosi Procuratore della Repubblica, modifica l'oggetto del sequestro aggiungendo una precisazione pesantemente limitativa (v. "<a href="http://cristianopi.altervista.org/straus/v1f308_WP002320_001.pdf" target="_blank">WP002320_001.DOC</a>"
+<i><sup><abbr title="Procura della Repubblica di Roma, VOL. I - FASC. 308 - PAG. 70954, DATA  07.07.80 DA C.C. GRUPPO PALERMO A COMANDO 3^ R.A. BARI: PROT. NR. 1083/10. RICHIESTA DI ACQUISIRE REGISTRAZIONI INTERCETTAZIONI RADAR MILITARI OPERANTI SU MAR TIRRENO TRA LE ORE 20,00 E 23,15 DEL 27.06.80, CON PARTICOLARE RIFERIMENTO AD ALLINEAMENTO LATINA - PONZA - PALERMO. ALL. 9 A RELAZIONE TRASMESSA CON FG. NR. 100776/I DEL 11.12.97 (UI 2200).">fonte</abbr></sup></i>):<br>
+
+
+<div class="cita" style="white-space: pre">DA C.C. GRUPPO           PALERMO                                                
+AT <b>COMANDO 3^ R.A.</b>       BARI                                                   
+PERCO:                                                                          
+C.C. LEGIONE - OAIO -    PALERMO (COPIA)                                        
+PROCURA REPUBBLICA       PALERMO (COPIA)                                        
+                                                                                
+NON CLASSIFICATO                                                                
+NR. 1083/10                                                                     
+                                                                                
+SOSTITUTO  PROCURATORE  REPUBBLICA PALERMO DR. ALDO GUARINO (,) CHE  PROCEDE  IN
+ORDINE  DISASTRO  AEREO DC9 VOLO ITAVIA IH870 DEL 27.06.80  (,)  HABET  DELEGATO
+QUESTO  COMANDO <u>ACQUISIRE REGISTRAZIONI INTERCETTAZIONI RADAR MILITARI  COMUNQUE
+OPERANTI  SU  MARE  TIRRENO  TRA  ORE 20,00 ET  ORE  23,15  DETTO  27.06.80  <b>CON
+PARTICOLARE  RIFERIMENTO  AT  ALLINEAMENTO  LATINA  PONZA  PALERMO</b></u>  (.)  PREGASI
+PERTANTO   VOLERE   APPRONTARE   CORTESE   URGENZA   DOCUMENTAZIONE    ARGOMENTO
+ACCENTRANDOLA PRESSO CODESTO COMANDO DOVE SARA' RILEVATA DA UFFICIALE DIPENDENTE
+APPOSITAMENTE  DELEGATO  ET NON APPENA  GIUNGERA'  COMUNICAZIONE  DISPONIBILITA'
+CITATO MATERIALE FINE TEN. COL. VALENTINI
+
+PALERMO, <b>07.07.80</b>
+                                                                                
+                               IL TEN. COLONNELLO                               
+                             COMANDANTE DEL GRUPPO                              
+                             (FRANCESCO VALENTINI)                              
+</div>
+
+
+
+Molti anni dopo (nel 1996), il comandante del Gruppo Carabinieri, davanti a Priore, giustificherà la sua aggiunta con l'esigenza d'individuare il punto d'impatto sul mare (v. "<a href="http://cristianopi.altervista.org/straus/v3f129_WP000801_001.pdf" target="_blank">WP000801_001.DOC</a>"
+<i><sup><abbr title="Procura della Repubblica di Roma, VOL. III - FASC. 129 - PAG. 26055 - 26056, DATA 21.05.96, TRIBUNALE ROMA UFFICIO ISTRUZIONE: RESO DA VALENTINI FRANCESCO, NATO A COSENZA IL 25.02.33 E RESIDENTE IN ROMA [...], DINNANZI AL G.I. DR. PRIORE. PRESENTI M.LLO CAPO GRADANTI ED ISP. CAPO CASTELLANI.- A PAG. 26057 MESSAGGIO TR3-134/3032/NC/G53-1 DEL 10.07.80 (COPIA DI DOCUMENTO GIA' PRESENTE IN ARCHIVIO).">fonte</abbr></sup></i>):<br>
+
+<div class="cita">
+A D.R.: UNO DEI PRIMI INTERROGATIVI DA SCIOGLIERE ERA QUELLO DI <u>CAPIRE IL PUNTO DI IMPATTO DEL VELIVOLO IN MARE</u>, CIO' POTEVO INFATTI VARIARE LA COMPETENZA DELLA MAGISTRATURA.<br>
+<br>
+AL TESTE VIENE MOSTRATO IL MESSAGGIO GRUPPO DATA-ORARIO 071230/B LUGL INVIATO DA C.C. GRUPPO PALERMO AL COMANDO 3^ R.A. BARI - DOCUMENTO ESISTENTE AGLI ATTI DEL PROCESSO. VIENE QUINDI RICHIESTO DI SPIEGARE LA FRASE "... CON PARTICOLARE RIFERIMENTO AT ALLINEAMENTO LATINA PONZA PALERMO".<br>
+<br>
+IN PROPOSITO IL TESTE DICHIARA: "LA FRASE DELLA QUALE MI VIENE RICHIESTA SPIEGAZIONE RIGUARDA QUANTO DA ME SOPRA RIFERITO CIRCA L'ESIGENZA DI RICERCARE IL PUNTO DI IMPATTO SUL MARE DEL VELIVOLO."
+</div>
+
+
+Non è chiaro in che modo la presenza dei dati radaristici di tutti i centri radar avrebbe potuto ostacolare la ricerca del punto d'impatto, ma tant'è.<br>
+<br>
+
+<div style="margin-bottom: 2em; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="seq_gua-radar_esclusi.png" style="float:left; padding-right: 2em;" alt="" title="">
+Ciò che, invece, è chiaro è il disastro derivato dall'arbitraria aggiunta, come mostrato dalla cartina. Cinque centri radar vengono esclusi dal sequestro, due dei quali (Poggio Renatico e Poggio Ballone) sono di fondamentale importanza per coprire il volo del DC-9.
+</div>
+
+
+Nel frattempo, la competenza viene trasferita alla Procura della Repubblica di Roma, il cui sostituto Santacroce, in data 16 luglio 1980, emette un decreto di sequestro concernente (v. "<a href="https://www.stragi80.it/documenti/gi/Titolo1.pdf" target="_blank">Motivazione</a>" a pag. 54):
+
+<div class="cita">
+1. le registrazioni su nastro magnetico dei tracciati del radar della difesa aero-territoriale operante nella zona compresa tra Latina-Ponza-Palermo, "da ricercarsi presso l’ITAV-Traffic di Roma-Eur"; 2. le registrazioni su nastro magnetico dei tracciati radar "Marconi e Selenia" riguardanti il volo IH-870 Bologna-Palermo del 27.06.80, "da ricercarsi come sopra"; <span style="font-family: sans-serif"><i>[...]</i></span><br>
+</div>
+
+Il 21 luglio, il decreto viene notificato al comandante del 2° Reparto ITAV-TRAFF, ma egli riferisce (v. "<a href="http://cristianopi.altervista.org/straus/v1f216_WP003558_001.pdf" target="_blank">WP003558_001.DOC</a>"
+<i><sup><abbr title="Procura della Repubblica di Roma, VOL. I - FASC. 216 - PAG. 50814, DATA 21.07.80, NUCLEO CENTRALE POLIZIA TRIBUTARIA G.D.F. GRUPPO SEZIONI SPECIALI: P.V. DI NOTIFICA DEL DECRETO DI SEQUESTRO EMESSO IN DATA 16.07.80 DAL SOST. PROC. ROMA DR. SANTACROCE, CONSEGNATO AL COL. FIORITO DE FALCO NICOLA NEI LOCALI ITAV - TRAFF 2° REPARTO. ALLEGATO 12 AL RAPPORTO C.C. 230855/732-1 DATATO 29.08.95 (UI 3537).">fonte</abbr></sup></i>):<br>
+
+<div class="cita">
+LE REGISTRAZIONI DEI TRACCIATI DEL RADAR DELLA D.A. OPERANTI NELLA ZONA TRA LATINA-PONZA E PALERMO (C.R.A.M. LICOLA E C.R.A.M. PALERMO <span style="font-family: sans-serif">[<i>Marsala, ndr</i>]</span>) SONO  STATE ACCENTRATE PRESSO L'AEROPORTO DI PALERMO A SEGUITO DI ACCORDI PRECEDENTI CON L'A.G. DI PALERMO PER FACILITARNE LA MESSA A DISPOSIZIONE DELLA PREDETTA PROCURA, PRECEDENTEMENTE INCARICATA DEL CASO IN ESAME.
+</div>
+
+
+Il giorno seguente, il comandante trasmette un messaggio a vari enti per ricevere il materiale con la massima urgenza (v. "<a href="http://cristianopi.altervista.org/straus/v1f228_WP000213_001.pdf" target="_blank">WP000213_001.DOC</a>"
+<i><sup><abbr title="Procura della Repubblica di Roma, VOL. I - FASC. 228 - PAG. 53456, DATA 22.07.80, DA ITAV TRAFF ROMA EUR AD AEROINFORMAZIONI CIAMPINO: PROT. NR. 233/03674/GHO-5. MESSAGGIO CON CUI SI COMUNICA CHE IL SOST. PROC. ROMA HA RICHIESTO DOCUMENTAZIONE RELATIVA AD INCIVOLO IH870, CON DECRETO DI SEQUESTRO DATATO 16.07.80. ALL. 6A AD ESAME ACQUISIZIONE 480 TRASMESSO CON FG. 224/B/1347/DIV.3^ (UI 206).">fonte</abbr></sup></i>):<br>
+
+<div class="cita">
+PAGINA DUE RIFTB 1332 UNCLAS<br>
+2.  SEGUITO ACCORDI INTERCORSI CON AEROREGIONI COMPETENTI PREGASI  VOLER PROVVEDERE AFFINCHE' PREDETTA DOCUMENTAZIONE SIA INVIATA CON MASSIMA URGENZA POSSIBILE PRESSO SCRIVENTE ITAV-TRAFF PER SUCCESSIVA CONSEGNA AT PROCURA ROMA.
+</div>
+
+
+Ancor prima di trasmettere il messaggio, lo stesso 21 luglio un aereo atterra a Trapani-Birgi per ritirare il plico da consegnare all'ITAV e riparte alla volta di Ciampino, dove il plico viene consegnato (v. "<a href="https://www.stragi80.it/documenti/gi/Titolo2a.pdf" target="_blank">TITOLO 2 - L’istruttoria dal 27 luglio 90 al 31 dicembre 97.</a>" a pag. 313).<br>
+
+Nella lettera d'accompagno a firma del comandante dell'aeroporto di Birgi, veniva specificato (sempre a pag. 313):
+
+<div class="cita">
+Seguito contatti verbali con capo Ufficio Operazioni della 3<sup>a</sup> Regione Aerea, in allegato si trasmettono le registrazioni effettuate dai 
+CRC di <b>Marsala</b>, <b>Licola</b> e <u><b>Poggio Ballone</b></u> il 27.06.80 dalle ore 18.00 alle ore 21.34
+</div>
+
+Quindi anche quest'ultimo, inizialmente escluso, venne considerato. Il centro di Poggio Ballone, infatti, arrivava a coprire lo spazio aereo fino a circa 90 km a sud di Ponza, quindi comprendeva un'ampia parte della zona Latina - Ponza - Palermo.<br>
+<br>
+Il comandante del 2° reparto ITAV consegna il plico alla Guardia di Finanza di Roma il 22 luglio, ma non senza qualche sorpresa (v. ancora pag. 313):
+
+<div class="cita">
+Veniva così acquisito lo stralcio delle registrazioni dei tracciati radar della Difesa Aerea territoriale di <u>Licola e Marsala</u>. Nell’occasione il Fiorito De Falco riferiva che il radar di Licola non aveva nastri di registrazione in quanto basato su sistema fonetico-manuale, mentre <u>le registrazioni su nastro relative al radar di Marsala erano inserite nell’elaboratore elettronico del citato radar</u>.<br>
+Così come emerge sempre da questo verbale che il Fiorito De Falco <b>non consegnava la documentazione di Poggio Ballone</b>, pur pervenuta da Trapani Birgi, documentazione che unitamente a quella di Licola e Marsala era stata concentrata in quell’aeroporto <span style="font-family: sans-serif"><i>[...]</i></span>
+</div>
+
+Non vengono, quindi, consegnati né i nastri di Marsala né alcun dato radaristico relativo a Poggio Ballone.<br>
+<br>
+
+In base a quanto disposto da Santacroce con il decreto del 16 luglio, il materiale sequestrato (comprendente i dati radaristici) doveva essere affidato al presidente Luzzatti della Commissione d'inchiesta tecnico-formale del Ministero dei Trasporti "<i>per le determinazioni di competenza con riferimento allo sviluppo e all’interpretazione delle registrazioni su nastro magnetico dei rilevamenti radar</i>".<br>
+Il fatto di affidare alla Commissione Luzzatti il materiale sequestrato, anziché consegnarlo ai collegi peritali, impedirà ai periti giudiziari di analizzare il materiale radaristico sino al 1988, a causa di forti inconvenienti ed incomprensioni che si protrarranno per anni, probabilmente dovute ad errate o carenti comunicazioni tra le Procure (v. "<a href="https://www.stragi80.it/documenti/gi/Titolo1.pdf" target="_blank">Motivazione</a>" a pag. 56).<br>
+<br>
+
+
+
+<!-- ==  POGGIO BALLONE   ======================================================================================================== -->
+
+<h3 id="crcPB">Poggio Ballone</h3>
+
+Nella sua <abbr title="Ordinanza-Sentenza">O-S</abbr>, il giudice Priore dedica centinaia di pagine al centro radar di Marsala. Tuttavia, il centro radar A.M. che riveste la massima importanza ai fini della ricostruzione dei fatti è senza dubbio Poggio Ballone.<br>
+<br>
+Le <a href="https://www.stragi80.it/documenti/pm/RequisitoriePm.pdf" target="_blank">requisitorie del Pubblico Ministero</a> ci dicono quali dati radaristici non sono pervenuti (v. fondo pag. 322):
+
+<div class="cita">
+D) POGGIO BALLONE: <b>MANCANO I NASTRI DELLE REGISTRAZIONI RADAR</b> NONCHE' DELLE TELEFONATE TBT; EPPURE DAL CAPOVERSO DELLA NOTA DI TRASMISSIONE DA POGGIO BALLONE ALL'ITAV DEL 14.07.80 E DALLA NOTA DI TRASMISSIONE DI TRAPANI BIRGI ALL'ITAV DEL 21.07.80 (DAL CUI COMBINATO DISPOSTO EMERGE CHE LE REGISTRAZIONI RADAR DI POGGIO BALLONE FURONO INVIATE DA POGGIO BALLONE A TRAPANI E POI DA TRAPANI ALL'ITAV) NONCHE' DALLE DEPOSIZIONI DEI PILOTI DI GROSSETO TRAPANI E POI DA TRAPANI ALL'ITAV) NONCHE' DALLE DEPOSIZIONI DEI PILOTI DI GROSSETO GON E MARESIO (G.I. 26.03.92 E CONFRONTO 07.07.95; GON G.I. 22.01.93 E CONFRONTO 07.07.95 CHE EVIDENZIANO CHE FU LORO CONSEGNATO A GROSSETO DA POGGIO BALLONE UN PLICO CONTENENTE DEI NASTRI CON TANTO DI CUSTODIA METALLICA DA CONSEGNARE A TRAPANI) RISULTA CHE GIA' <u>IL 13.07.80 FURONO TRASPORTATE IN AEREO DA GROSSETO A TRAPANI I NASTRI DEI RADAR</u>, CHE POCHI GIORNI DOPO PROSEGUIRONO PER L'ITAV OVE PERALTRO (VEDI ANCHE SUB POSIZIONE IMPUTATO FIORITO DE FALCO) <b>NON FURONO MAI RINVENUTI</b>.
+</div>
+
+
+Stando al registro del <abbr title="Manual Input Operator, l'operatore al computer">M.I.O.</abbr> i nastri magnetici usati quella sera erano i numeri 60 e 61 (v. "<a href="https://www.stragi80.it/documenti/gi/Titolo2a.pdf" target="_blank">TITOLO 2 - L’istruttoria dal 27 luglio 90 al 31 dicembre 97.</a>" a pag. 316):
+
+<div class="cita">
+La sera del 27 giugno al tempo dell’incidente e immediatamente prima era inserito il nastro 60; il successivo il nr.61 fu inserito alle ore 21.40. Ebbene i nastri nr.60 e 61 non sono stati reimpiegati subito dopo l’ultimazione del ciclo dei nastri a disposizione e cioè il 31 luglio, ma bensì il <b>22.08.80</b> (come risulta dal registro MIO e dall’ordine cronologico). 
+</div>
+
+
+Il mancato riutilizzo dei due nastri dopo il normale periodo di 30 giorni è anche confermato dall'operatore montante del turno serale (v. "<a href="http://cristianopi.altervista.org/straus/v1f220_WP003919_001.pdf" target="_blank">WP003919_001.DOC</a>" <i><sup><abbr title="Procura della Repubblica di Roma, VOL. I - FASC. 220 - PAG. 51517 - 51518, DATA 19.10.95, DIREZIONE CENTRALE POLIZIA PREVENZIONE: RESE DA CALLIERI FABIO, NATO A ROMA IL 26.06.53 E RESIDENTE IN GUIDONIA [...]; NEL 1980 IN SERVIZIO C/O 21° G.R.A.M. POGGIO BALLONE COME OPERATORE MIO. ALLEGATO AL FG. 224/15546/B/DIV.3^(N) DATATO 21.10.95 (UI 3817).">fonte</abbr></sup></i>):<br>
+
+<div class="cita">
+A D.R.: NEL TURNO TRA IL 30 E IL 31.07.80, L'OPERATORE SMONTANTE MIRACCO ANNOTA L'INSERIMENTO DEL NASTRO DI RECORDING NR. 59/A, IL MONTANTE CIOE' IO, INSERISCE IL NASTRO NR. 62, SALTANDO I NASTRI NR. 60 E 61; TALE CIRCOSTANZA SI POTEVA VERIFICARE O PERCHE' I NASTRI ERANO "STIRATI" E NON UTILIZZABILI OPPURE PERCHE' ACCANTONATI SU DISPOSIZIONE DEL CAPO UFFICIO OPERAZIONI. NON RICORDO SE DEI NASTRI ACCANTONATI O "STIRATI" VENIVA FATTA RELAZIONE DELL'UFFICIO OPERAZIONI. 
+</div>
+
+A prescindere dall'effettivo stato di usura dei due nastri, è evidente che fu diramato l'ordine di accantonarli. Infatti, quando il 31 luglio arriva il momento di riutilizzare il nastro 60, questo viene saltato insieme al 61. Se non ci fosse stato l'ordine di accantonarli è ovvio che sarebbero stati riutilizzati nel normale riciclo di nastri (il 31 luglio).<br>
+Invece i due nastri vengono reimmessi nel riciclo a 1 mese di distanza da quel 22 luglio, giorno in cui il comandante del 2° reparto ITAV consegna il plico con i dati radaristici alla Guardia di Finanza (come detto nel precedente paragrafo).<br>
+<br>
+
+&Egrave;, quindi, evidente che era stato diramato l'ordine di non rimettere in circolo i nastri e di conservarli, ma a seguito di difformità negli adempimenti burocratici tra A.G., Ministero della Difesa e 3<sup>a</sup> Regione Aerea, che hanno creato confusione e perdite di tempo, i nastri vengono comunque riutilizzati, con esemplare rispetto delle regole da parte dell'A.M. che prevedono, appunto, di rimettere in circolo i nastri registrati dopo 30 giorni, evitando lo spreco di nastri vergini.<br>
+Evidentemente, l'A.M. non ha ritenuto di dover conservare scrupolosamente materiale radaristico sottoposto a sequestro e sembra anche non aver ritenuto significativo il fatto che sul nastro numero 60 (rimesso in circolo o rottamato per usura) erano presenti circa 12 minuti di registrazione relativa ad un aereo abbattuto.<br>
+<br>
+
+Dopo vari infruttuosi tentativi di recuperare i dati radaristici di Poggio Ballone, si arriva all'agosto del 1988 (v. "<a href="http://cristianopi.altervista.org/straus/v1f187_WP001297_001.pdf" target="_blank">WP001297_001.DOC</a>" <i><sup><abbr title="Procura della Repubblica di Roma, VOL. I - FASC. 187 - PAG. 43052 - 43057, RAPPORTO SULL'ATTIVITA' DEL SITO A.M. DI POGGIO BALLONE. ALLEGATO AL FG. 224/B/746/DIV.3^(N) DATATO 10.03.95 (UI 1291).">fonte</abbr></sup></i>):<br>
+
+<div class="cita">
+IN DATA 12.08.88, IN ESECUZIONE DELL'ORDINE EMANATO DAL TRIBUNALE DI ROMA (DR. BUCARELLI), IL MAGG. PETRACCIANI E IL BRIG. UMBRO DEL NUCLEO DI P.G. C.C. DI ROMA ACQUISIVANO LA DOCUMENTAZIONE DEL RADAR DI POGGIO BALLONE.<br>
+TRA LA DOCUMENTAZIONE CONSEGNATA FIGURAVANO LE 11 CARTINE DEGLI AVVISTAMENTI RADAR, MA NON FIGURAVA NE' LA "DATA REDUCTION" NON PIU' IN POSSESSO DEL SITO (4 COPIE ERANO STATE INVIATE AL 1^ R.O.C. E 1 COPIA AL COMANDO AEROPORTO TRAPANI BIRGI), NE' I NASTRI DI REGISTRAZIONE NON PIU' REPERIBILI PRESSO IL SITO DI POGGIO BALLONE.
+</div>
+
+Le 11 cartine costituiscono la rappresentazione grafica dei plot registrati da Poggio Ballone dalle 18:00 alle 21:15 del 27.06.80 e fanno parte della documentazione misteriosamente scomparsa nel luglio 1980 (v. precedente paragrafo).<br>
+<br>
+
+Gli anni passano e arriviamo al 04.06.90, quando l'allora giudice istruttore Bucarelli emette un ulteriore decreto di sequestro presso il centro radar di Poggio Ballone riguardante (v. "<a href="http://cristianopi.altervista.org/straus/v1f306_WP002020_001.pdf" target="_blank">WP002020_001.DOC</a>" <i><sup><abbr title="Procura della Repubblica di Roma, VOL. I - FASC. 306 - PAG.  70160 - 70235, RELAZIONE  INERENTE  IL 21° G.R.A.M. DI POGGIO BALLONE, POSTAZIONE RADAR UBICATA NEL COMUNE DI CASTIGLION DELLA PESCAIA - FRAZ. TIRLI (GR). ALLEGATO AL FG. 230855/866 DATATO 09.12.97 (UI 2019).">fonte</abbr></sup></i> a pag. 10):<br>
+
+<div class="cita">
+NASTRI DELLE REGISTRAZIONI RADAR; TRACK HISTORY RECORDING IN ORIGINALE; CONSOLE DATA RECORDING IN ORIGINALE; DA-1 IN ORIGINALE E OGNI ALTRO EVENTUALE  DOCUMENTO ATTINENTE ALLE REGISTRAZIONI RADAR AD ESCLUSIONE DI QUELLI CONSEGNATI IN DATA 22.11.89; WINTR IN ORIGINALE, IL TUTTO RELATIVO AL 27.06.80 DALLE ORE 18,00 ALLE ORE 20,00 GMT.
+</div>
+
+Il 30 giugno, Bucarelli emette un altro decreto di sequestro da eseguirsi presso il 1° R.O.C. di Montevenda riguardante (v. stessa fonte precedente a pag. 11):
+
+<div class="cita">
+TRACK HISTORY RELATIVI ALLE ORE 21,00 CIRCA DEL 27.06.80 DEL 21° GRUPPO RADAR DI POGGIO BALLONE;: NASTRO DELLE REGISTRAZIONI RADAR COME SOPRA.
+</div>
+
+A tempo di record, il 2 luglio, il comandante del 1° R.O.C. consegna all'A.G. l'ultima copia di 4 <abbr title="Track History Recording">THR</abbr>. Le altre copie furono trasmesse alla 1<sup>a</sup> R.A. nell'88 e al capo ufficio relazioni esterne dello S.M.A. nel '90.<br>
+<br>
+
+Nel disperato tentativo di recuperare i nastri di Poggio Ballone, a febbraio del '92 vengono emessi altri decreti di sequestro (tutti concernenti i nastri di Poggio Ballone) presso gli aeroporti di Trapani-Birgi, Palermo-Boccadifalco, Punta Raisi e 3° R.O.C. di Martinafranca (v. stessa fonte precedente a pag. 16). Sappiamo bene che l'esito fu negativo.<br>
+<br>
+
+Dopo altri 3 anni, il 25.05.95, viene sequestrata la 2<sup>a</sup> copia della THR di Poggio Ballone (v. stessa fonte precedente a pag. 18).<br>
+<br>
+
+In data 27.03.96 vengono sequestrate altre 2 THR presso lo S.M.A., arrivando alle attuali 4 copie cartacee della sola THR, che è la sequenza temporale dei plot con tutti i dati a corredo, mentre le altre informazioni presenti sui nastri (come la sequenza delle azioni compiute dagli operatori alla console e il tabulato intercettazioni) andranno perse per sempre.<br>
+<br>
+
+Ma la storia non finisce qui, poiché le copie risultano avere le seguenti anomalie (v. sempre "<a href="http://cristianopi.altervista.org/straus/v1f306_WP002020_001.pdf" target="_blank">WP002020_001.DOC</a>" <i><sup><abbr title="Procura della Repubblica di Roma, VOL. I - FASC. 306 - PAG.  70160 - 70235, RELAZIONE  INERENTE  IL 21° G.R.A.M. DI POGGIO BALLONE, POSTAZIONE RADAR UBICATA NEL COMUNE DI CASTIGLION DELLA PESCAIA - FRAZ. TIRLI (GR). ALLEGATO AL FG. 230855/866 DATATO 09.12.97 (UI 2019).">fonte</abbr></sup></i>, pag. 21):<br>
+
+<div class="cita">
+* NR. 3 TRACK HISTORY SEQUESTRATE IN DATA 02.07.90 AL 1° R.O.C. IL 25.05.95 ALLA 1^  R.A.  E IL 27.03.96 PRESSO LO SMA, QUEST'ULTIMA PERVENUTA DALLA 1°  R.A.  IN DATA  04.07.88, RISULTAVANO ESSERE UGUALI TRA DI LORO, CON UNA MANCANZA DI  DATI TRA LE ORE 18,30/Z E LE ORE 18,33/Z;<br>
+<br>
+*  NR. 1 TRACK HISTORY SEQUESTRATA IN DATA 27.03.96 PRESSO LO SMA, PERVENUTA  IN DATA 01.06.90 DAL 1° R.O.C., CONFRONTATA CON LE ANZIDETTE PRESENTAVA:<br>
+<br>
+1) NON AVERE UNA NUMERAZIONE PROGRESSIVA DA PAGINA 1 A PAGINA 305 COME LE  ALTRE COPIE  BENSI'  ALCUNE RIPETIZIONI CIOE' DA PAGINA 2 A PAGINA 69; DA PAGINA  1  A PAGINA 21; DA PAGINA 1 A PAGINA 228;<br>
+<br>
+2)  <u>UN VUOTO DI REGISTRAZIONE</u> DA ORE <b>18,31,540</b> A ORE <b>18,36,251</b>,  MENTRE  NELLE ALTRE 3 COPIE IL VUOTO E' COMPRESO TRA LE ORE <b>18,30,180</b> E LE ORE <b>18,33,536</b>;<br>
+<br>
+3) LA  NON RIPETIZIONE DI DATI DA ORE 19,32,276 A ORE 19,37,186 CHE  INVECE  E' PRESENTE NELLE ALTRE 3 COPIE;<br>
+<br>
+4) AVERE DEI "ZERO LENGHT RECORD" IN ORARI DIVERSI RISPETTO ALLE ALTRE 3 COPIE;<br>
+<br>
+5) ESSERE STAMPATA IN UNICA COPIA ORIGINALE A MODULO CONTINUO, MENTRE LE ALTRE 3 RISULTANO ESSERE COPIE DI UNA STAMPATA A MODULO CONTINUO FORMATA DA 4 FOGLI.
+</div>
+
+<br>
+
+La differenza, forse, più significativa riguarda il buco temporale, lungo circa 3 minuti e mezzo nelle prime THR sequestrate e circa 4 minuti e mezzo nell'altra. Anche l'inizio del vuoto è diverso ed è posticipato di circa 1 minuto e mezzo nella THR con buco di 4 minuti e mezzo.<br>
+<br>
+
+
+<div style="margin-bottom: 2em; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="pb-tab_buco.png" style="float:left; padding-right: 30px;" alt="" title="">
+<br>
+L'immagine mostra una parte del tabulato (composto da 170 pagine) che il Capo di Stato Maggiore dell'Aeronautica inviò il 17.09.90 al presidente della Commissione parlamentare d'inchiesta sul terrorismo in Italia e sulle cause della mancata individuazione dei responsabili delle stragi.<br>
+<br>
+L'esempio serve soltanto per vedere in cosa consiste, in pratica, questo famoso buco temporale.<br>
+Si nota che i plot di questa traccia sono registrati con una certa regolarità, poi c'è il salto improvviso di oltre 4 minuti evidenziato con le due barrette rosse.<br>
+<br>
+Questo buco temporale riguarda non solo LG461 dell'esempio, ma tutte le tracce presenti nel tabulato.
+</div>
+
+
+Una delle tante conferme in merito alla presenza del buco temporale ce la dà il programmatore del centro radar di Poggio Ballone, che dichiara (v. "<a href="http://cristianopi.altervista.org/straus/v1f306_WP002066_001.pdf" target="_blank">WP002066_001.DOC</a>" <i><sup><abbr title="Procura della Repubblica di Roma, VOL. I - FASC. 306 - PAG. 70344 - 70350, SCHEDA TESTE NR. 46: STASIO FAUSTO - INCARICO ALL'EPOCA: PROGRAMMATORE. ALLEG. A RELAZIONE TRASMESSA CON FG. NR. 230855/866 DATATA 09.12.97 (UI 2019).">fonte</abbr></sup></i> a pag. 3):
+
+<div class="cita">
+NOTO CHE ESISTE UN "SALTO" NELLA REGISTRAZIONE TRA LE ORE 18,30,180 E LE ORE
+18,33,535 SENZA CHE SULLA RIDUZIONE DATI COMPAIA ALCUN DIAGNOSTICO; PER
+DIAGNOSTICO INTENDO UN MESSAGGIO CHE DICE CHE IN QUEL TRATTO IL NASTRO ABBIA
+TROVATO DIFFICOLTA' O NON RIESCE A LEGGERE NULLA, CIOE' <u>NON E' ASSOLUTAMENTE NORMALE</u>: AD ESEMPIO POTREBBE ESSERCI STATO UN MESSAGGIO TIPO "ZERO LENGHT
+RECORD". ANCHE NELL'IPOTESI CHE CI SIA UN CALO DI TENSIONE CHE DETERMINEREBBE UN
+FERMO DEL SISTEMA CI SAREBBE COMUNQUE UN DIAGNOSTICO.
+</div>
+
+
+Il capitano Pongiluppi, all'epoca comandante dell'Ufficio Operazioni del centro radar di Poggio Ballone, riferisce (v. "<a href="http://cristianopi.altervista.org/straus/v3f102_WP000877_001.pdf" target="_blank">WP000877_001.DOC</a>" <i><sup><abbr title="Procura della Repubblica di Roma, VOL. III - FASC. 102 - PAG.  20827 - 20829, DATA 03.10.95, TRIBUNALE ROMA UFFICIO ISTRUZIONE: RESO  DA  PONGILUPPI  DANTE,  GIA'  GENERALIZZATO  IN ATTI, DINNANZI AL G.I. DR. PRIORE.">fonte</abbr></sup></i> a pag. 2):
+
+<div class="cita">
+A D.R.: - <u>NON HO NOTATO NELLA RIDUZIONE DATI ALCUN BUCO DI ORARIO</u>; SE LI  AVESSI NOTATI,  MI SAREI CHIESTO IL PERCHE' E LO AVREI CHIESTO ALL'UFFICIALE TECNICO  E AL M.I.O., GIACCHE' SE C'E' MANCATA RIDUZIONE C'E' MANCATA REGISTRAZIONE. SE  SI EFFETTUA  LA  RIDUZIONE DATI IL PROGRAMMA NON REGISTRA. NON HO NOTATO  BUCHI  DI ORARIO NELLA RIDUZIONE DATI DEL 27.06.80.<br>
+PRENDO  VISIONE  DELLA  TRACK HISTORY DEL 27.06.80 ED IN RELAZIONE  AL  BUCO  DI ORARIO  TRA  LE 18,30,180/Z E LE 18,33,535/Z NON RICORDO DI  AVERLO  NOTATO  NE' QUANDO HO EFFETTUATO LA TRASPOSIZIONE SU CARTINA NEL 1980 NE' QUANDO MI E' STATO ORDINATO  DALL'UFFICIO DA CUI DIPENDEVO NEL 1990, CIOE' L'ITAV. IL  BUCO  ORARIO PUO'  DETERMINARSI  O DA UNA INTERRUZIONE DEL RECORDING O  DAL  MALFUNZIONAMENTO DELL'APPARATO STESSO O DA UNA SOSTITUZIONE DEL NASTRO.
+</div>
+
+<br>
+
+<div style="margin-bottom: 2em; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="pb-cartina_buco_pb.png" style="float:left; padding-right: 30px;" alt="" title="">
+Le THR con il buco di 3,5 minuti mostrano un aereo di linea, l'IH870, sparire improvvisamente (inizio del buco temporale) quando si trova 67 km a sud del VOR di Firenze, per poi ricomparire (al termine del buco) 127 km a sud del VOR.<br>
+<br>
+Se Pongiluppi avesse usato la stessa riduzione dati consegnata all'A.G. (quella con il buco temporale), risulta impossibile pensare che non si sarebbe accorto dell'improvvisa ed ingiustificabile scomparsa della traccia esaminata. Molto verosimilmente, accortosi di una tale stranezza, avrebbe esaminato anche altre tracce, arrivando certamente ad accorgersi che mancavano più di tre minuti di registrazione, ma lui riferisce di non aver notato buchi.
+</div>
+
+Appare evidente, quindi, che il fatto di non aver notato buchi di orario non significa che sbadatamente il capitano non ha visto un buco di oltre 3 minuti e mezzo, ma significa che la riduzione dati originale era completa, mentre l’A.G. ha ricevuto copie incomplete perché successivamente modificate.<br>
+
+
+Il pubblico ministero, nell'evidenziare la presenza di THR tra loro differenti, giunge all'ovvia deduzione che il buco temporale è stato creato in fase di stampa e non dipende da difetti di registrazione (v. "<a href="http://cristianopi.altervista.org/straus/v1f321_WP000299_001.pdf" target="_blank">WP000299_001.DOC</a>" <i><sup><abbr title="Procura della Repubblica di Roma, VOL. I - FASC. 321 - PAG. 73456 - 73471, DATA 31.07.98, REQUISITORIE P.P. NR. 266/90A P.M. E 527/84A G.I. "CD. STRAGE DI USTICA". PARTE SECONDA - ELEMENTI SULLE CAUSE DEL DISASTRO DEMUSIBILI DAI DATI RADAR: II.18. I RADAR MILITARI.">fonte</abbr></sup></i> a fine pag. 2):
+
+<div class="cita">
+IL  FATTO  CHE, ALMENO IN PARTE, IL SECONDO TABULATO CONTENGA DATI  ASSENTI  NEL PRIMO IMPLICA CHE NON SI TRATTO' DI UN DIFETTO NELLA REGISTRAZIONE DEI DATI,  MA CHE <u>VI FU UN INTERVENTO NELLA FASE DI STAMPA</u>. TALE INTERVENTO, PERALTRO, FU TALE DA EVITARE I MESSAGGI DI DIAGNOSTICA (E CIOE' QUELLI CHE INDICANO LA FINE STAMPA E L'INIZIO STAMPA).                                                             
+</div>
+
+Grazie alla presenza dei tabulati radar di Ciampino, possiamo verificare ciò che è stato tolto con il buco temporale di 3 minuti e mezzo.<br>
+<br>
+
+<div style="margin-bottom: 2em; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="pb-cartina_buco1.png" style="float:left; padding-right: 30px;" alt="" title="">
+La cartina mostra tutti i plot registrati dai due radar di Roma nell'intervallo temporale corrispondente al buco temporale di Poggio Ballone di 3 minuti e mezzo.<br>
+<br>
+Si notano vari plot aventi una sequenza temporale tale da mostrare un aereo che si sposta velocemente dall'IH870 all'AA464.<br>
+Si può dedurre, quindi, che doveva essere presente almeno un aereo tra i due voli Itavia.<br>
+<br>
+Non appena l'IH870 inizia la salita al livello di volo di crociera, l'aereo misterioso schizza via dal DC-9 e si va ad appiccicare al caccia che vola in parallelo al convoglio.<br>
+<br>
+Le linee gialle collegano i plot del Marconi rilevati tutti nello stesso istante.<br>
+La spiegazione è troppo complessa per lo scopo di questa pagina, ma in sostanza, si nota che la circuiteria del radar (il correlatore) inizia improvvisamente a non correlare più i plot rilevati dal radar secondario con quelli rilevati dal primario. Ciò è dovuto alla presenza di un aereo tra il caccia e il DC-9 che riflette il segnale del primario ma non risponde all'interrogazione del secondario, mentre AA464 e il DC-9 rispondono entrambi al secondario.<br>
+Quando l'aereo misterioso è sufficientemente vicino ad AA464, i radar di Roma iniziano a confondere le risposte dei transponder, al punto che il Marconi arriva ad associare sia il primario che il secondario al plot arancione situato circa a metà strada tra il caccia e il DC-9, momento in cui si nota l'assenza di un plot associabile all'IH870, poiché il correlatore, sbagliando, associa la risposta del transponder del DC-9 all'eco dell'aereo misterioso.
+</div>
+
+
+Un'animazione dovrebbe rendere maggiormente evidente quanto finora visto.<br>
+<br>
+
+<div style="margin-bottom: 2em; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="pb-spiega_celle.png" style="float:left; padding-right: 30px;" alt="" title="">
+Durante l'animazione vengono mostrati anche due rettangoli associati all'IH870, che in realtà sono settori di due corone circolari entrambe centrate sull'antenna del radar Marconi.<br>
+<br>
+La cella più ampia è la zona soggetta al fenomeno del mascheramento che interessava il radar Marconi. Si estende per circa 2 km dietro all'aereo rilevato dal radar (il DC-9, in questo caso) ed è ampia 2 gradi, equivalenti a circa 6 km nel tratto oggetto della simulazione.<br>
+Da notare che con l'espressione "dietro all'aereo" non s'intende il senso del moto dell'aereo, ma significa in direzione opposta a quella dell'antenna del radar.<br>
+<br>
+L'altra cella si chiama di risoluzione perché il radar non riesce a risolvere (o a distinguere) due o più aerei che dovessero trovarsi all'interno della cella. Questa si estende per circa la metà di quella di mascheramento ed è centrata sull'aereo che riflette il segnale radar.<br>
+<br>
+Un aereo che si trovasse all'interno di una delle due celle non sarebbe visualizzato sullo schermo del radar Marconi (verrebbe visualizzato solo 1 plot), a prescindere dalla differenza di quota tra i due aerei.<br>
+La differenza tra le due celle, oltre alla grandezza, è che quella di mascheramento si estende dietro all'aereo che la genera, mentre quella di risoluzione è centrata sull'aereo che la genera.
+</div>
+
+<br>
+
+<div style="margin-bottom: 2em; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="pb-anima_buco_1.gif" style="float:left; padding-right: 30px;" alt="" title="">
+L'animazione a velocità normale mostra i due voli Itavia e il caccia AA464 che gli vola in parallelo, mantenendo un perfetto sincronismo con l'IH870.<br>
+La linea grigia rappresenta l'asse dell'aerovia A-14 nel tratto Firenze - Bolsena.<br>
+<br>
+Non c'è molto da aggiungere a quanto detto, salvo il fatto che, grazie ai plot animati, risultano ben evidenti sia il perfetto sincronismo tra il caccia e il DC-9 che l'evidente spostamento di plot dal DC-9 al caccia.<br>
+<br>
+Durante questa fase, la distanza tra AA464 e l'IH870 è inizialmente pari a 17 km e si riduce a poco più di 14 km al termine dell'animazione.
+</div>
+
+<br>
+Per concludere il capitolo su Poggio Ballone, vediamo in cosa consiste il secondo buco temporale, quello di 4 minuti e mezzo.<br>
+<br>
+
+<div style="margin-bottom: 2em; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="pb-cartina_buco_2.png" style="float:left; padding-right: 30px;" alt="" title="">
+Sfruttando i tabulati di Roma e quello di Poggio Ballone disponibile su <a href="https://www.stragi80.it/tracciato/" target="_blank">STRAGI80.it</a>, si può appurare che questo secondo buco temporale elimina il cambio d'aereo già visto in corrispondenza del precedente buco e la serie di plot relativi ad AA041 (certamente militare per la presenza del codice SIF di modo 2) che si allontana a gran velocità dal caccia AA464 che gli ha dato un passaggio (l'elevata velocità di circa 920 kn potrebbe essere attribuibile all'errore commesso dall'operatone nel posizionare il cursore sui plot grezzi).
+</div>
+
+
+Preso atto di ciò che concerne i due buchi temporali, è veramente difficile pensare che tali vuoti si siano creati per puro caso.<br>
+<br>
+In conclusione, per Poggio Ballone sono disponibili due versioni di THR certamente non originali che messe insieme riducono i due buchi temporali ad uno solo di lunghezza pari a 1<sup>m</sup>36<sup>s</sup>. Tale vuoto, termina esattamente quando termina il passaggio dell'aereo misterioso dal DC-9 al caccia.<br>
+<br>
+Ciò che invece non abbiamo sono i nastri con tutte le informazioni che da essi si ricavano.<br>
+
+<br>
+
+
+
+
+<!-- ====  MARSALA  ====================================================================================================== -->
+
+
+<h3 id="crcMA">Marsala</h3>
+
+
+<!-- 3- Plot Marsala -->
+Le informazioni radaristiche che si possono ottenere dal centro radar di Marsala sembrano di scarsa rilevanza, dal momento che i tabulati mostrano quasi esclusivamente traffico civile conosciuto.<br>
+<br>
+
+<div style="margin-bottom: 2em; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="ma-tutto.png" style="float:left; padding-right: 30px;" alt="" title="">
+Nell'intervallo di tempo che interessa la tragedia non compaiono tracce significative, a meno che non venga usata una certa dose d'immaginazione sulla traccia AJ450, il famoso presunto pallone sonda ritenuto dai consulenti di parte lesa un aereo militare che attua azioni d'inganno nei confronti del radar di Marsala.<br>
+</div>
+
+
+<br>
+
+<!-- 3a- Plot Marsala -->
+<div style="margin-bottom: 2em; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="ma-ka011.png" style="float:left; padding-right: 30px;" alt="" title="">
+Circa 3<sup>h</sup>40<sup>m</sup> dopo il disastro, inizia a comparire la traccia KA011, che sembra replicare la traccia AJ450 sia per il percorso che per l'elevatissima quota; arriva infatti a superare i 70000 piedi, oltre 23 km.<br>
+<br>
+Su queste due tracce ci sono alcune teorie, ma nessuna che abbia una base solida né, tantomeno, oggettiva.<br>
+</div>
+<br>
+
+
+<!-- 3b- I radar 'vedono' tutto -->
+Tra le innumerevoli bufale che affliggono questa tragedia, ce n'è una che riguarda da vicino il radar di Marsala: l'assenza di plot nelle vicinanze del DC-9 al momento del disastro certificherebbe anche l'assenza di aerei.<br>
+Per rendersi conto di quanto sia falsa e ridicola tale bufala, è caldamente raccomandato di prendere visione di come stanno realmente le cose sfruttando la pagina "<a href="../ritutto/ritutto.html" target="_blank">I radar &laquo;vedono&raquo; tutto</a>".<br>
+<br>
+
+Per ciò che attiene all'argomento qui trattato, questo centro radar è tra quelli interessati dal decreto di sequestro emesso dal Sostituto Procuratore Guarino il 5 luglio 1980, di cui s'è già detto nel paragrafo "<a href="#decseq" target="_blank">Decreti di sequestro iniziali</a>".<br>
+<br>
+
+<!-- 5- Verbale consegna nastri - 1 -->
+Priore sottolinea le numerose difficoltà incontrate per acquisire i nastri di registrazione, ma a parte questo, ciò che interessa in questa sede è che il 3 ottobre il comandante del centro radar consegna i nastri all'allora giudice istruttore Santacroce, informandolo che il materiale consegnato è coperto da segreto militare (v. "<a href="http://cristianopi.altervista.org/straus/v1f2_WP000189_001.pdf" target="_blank">WP000189_001.DOC</a>"
+<i><sup><abbr title="Procura della Repubblica di Roma, VOL. I - FASC. 2, PAG. 448. DATA DOCUMENTO 03.10.80, A.M. 35^ CENTRO RADAR: VERBALE DI CONSEGNA DI MATERIALE CLASSIFICATO AL P.M. DR. SANTACROCE.">fonte</abbr></sup></i>):
+
+<div class="cita">
+L'ANNO  <b>MILLENOVECENTOTTANTA</b>,  IL GIORNO <b>3 OTTOBRE</b>, DAVANTI  A  ME,  MAGG.AA.RS. MONTINARO  PASQUALE, COMANDANTE DEL 35^ CRAM, SI E' PRESENTATO NEL MIO  UFFICIO, SITO  NELL'AREA  OPERATIVA  DI  TIMPONE  GUDDINO,  MARSALA,  IL  DOTT.   GIORGIO SANTACROCE.<br>
+<span style="font-family: sans-serif"><i>[...]</i></span><br>
+PER QUANTO SOPRA IL COMPARENTE MI RICHIEDE LA CONSEGNA DEL SEGUENTE MATERIALE:<br>
+- COMPUTER TAPE NR. 99 N.D.C. 5835-15-R59-7254 CONTENENTE LA "TRACK HISTORY DATA RECORDING"  DALLE ORE 11,20/Z DEL 27.06.80 ALLE ORE 19,00/Z E DALLE 19,25/Z  DEL 27.06.80 ALLE ORE 10,47/Z DEL 28.06.80;<br>
+-  COMPUTER  TAPE NR. 100 N.D.C. 5835-15-R59-7254 CONTENENTE LA  "TRACH  HISTORY DATA RECORDING" DALLE ORE 19,00/Z DEL 27.06.80 ALLE ORE 19,25/Z DEL 27.06.80;<br>
+<span style="font-family: sans-serif"><i>[...]</i></span><br>
+PREVENGO  INOLTRE IL COMPARENTE CHE <u>IL MATERIALE CONSEGNATO CONTIENE NOTIZIE  ED INFORMAZIONI COPERTE DA SEGRETO MILITARE</u>.<br>
+LA  TRATTAZIONE  DI  DETTO MATERIALE, IL SUO USO, LA  SUA  CONSERVAZIONE  ED  IL TRASPORTO  DEVONO  UNIFORMARSI A QUANTO PRESCRITTO DAL R.D. 11 LUGLIO  1941  NR. 1161  (NORME RELATIVE AL SEGRETO MILITARE) ED ALLA PUBBLICAZIONE SMD 1/R  (NORME SULLA TUTELA DEL SEGRETO MILITARE).
+</div>
+
+
+Il fatto del segreto militare sarà ripreso in considerazione dai P.M. nel '91 al momento d'analizzare un messaggio inviato al SISMI dal SIOS Aeronautica; ecco la parte del messaggio d'interesse
+(v. "<a href="http://cristianopi.altervista.org/straus/v3f19_WP002923_002.pdf" target="_blank">WP002923_002.DOC</a>"
+<i><sup><abbr title="Procura della Repubblica di Roma, VOL. III - FASC. 19 PAG.  4563 - 4565, DATA DOCUMENTO 09.07.91, TRIBUNALE ROMA UFFICIO ISTRUZIONE: RESO  DA  MONTINARI  GIULIANO  N.  SALSOMAGGIORE  IL  21.09.34 RES. VICENZA V.LE FERRARIN  N.  130,  DINANZI  G.I.  DR. PRIORE, PRESENTI I P.M. DR. ROSELLI E DR. SALVI. I DOCUMENTI ESIBITI NEL CORSO DELL'ESAME TESTIMONIALE (PAGG. 4566 - 4570) SONO CONSULTABILI ALLE NOTE 2, 3 E 4.">fonte</abbr></sup></i>):
+
+<div class="cita">
+IN  ESITO A QUANTO RICHIESTO PRECISASI CHE AT MAGISTRATO INQUIRENTE  SUNT  STATE CONSEGNATE /:/<br>
+-  NR.  2 BOBINE DI REGISTRAZIONE RADAR CONTENENTI DATI  CINEMATICI  RELATIVI  A TRACCIAMENTI NON CLASSIFICATI NELL'AREA INTERESSATA DALL'EVENTO /./  I  NASTRI CONTENGONO  ANCHE ALCUNI DATI TECNICI DEL RADAR CON <u>CLASSIFICA  "RISERVATO"</u> /./ TALI ULTIMI DATI NON SUNT RELATIVI AT EVENTO ET POSSUNT ESSERE ESTRATTI SOLO CON APPARATI SPECIALI IN DOTAZIONE ALL'A.M. /./ <b>PER PROTEGGERE TALI DATI SUNT  STATE COMUNQUE ADOTTATE ADEGUATE MISURE CAUTELATIVE</b> /;/
+</div>
+
+Il legittimo dubbio dei P.M. è
+(v. "<a href="http://cristianopi.altervista.org/straus/v1f23_WP015954_001.pdf" target="_blank">WP015954_001.DOC</a>"
+<i><sup><abbr title="Procura della Repubblica di Roma, VOL. I - FASC. 23 PAG. 6003 - 6017, DATA DOCUMENTO 18.06.91, DA PROCURA REPUBBLICA ROMA SOST. DR. SALVI E DR. ROSELLI A G.I. DR. PRIORE: RICHIESTE DEI P.M. AD INTEGRAZIONE DI QUELLE PRESENTATE IN DATA 14.05.91.">fonte</abbr></sup></i>, pag. 5):
+
+<div class="cita">
+DA  CIOE' RISULTA CHE I NASTRI CONSEGNATI ALL'A.G. IN ESECUZIONE DELL'ORDINE  DI SEQUESTRO <u>POTREBBERO ESSERE STATI MANIPOLATI</u> AL FINE DI IMPEDIRNE  L'INTEGRALE LETTURA.
+</div>
+
+Ma le "misure cautelative" non costituiranno l'unico motivo per dubitare dell'effettiva integrità dei nastri di Marsala, come si vedrà tra poco.<br>
+<br>
+
+
+<!-- 7- Verbale sopralluogo a Borgo Piave - 1 -->
+Tornando al 1980, l'undici novembre, Santacroce ed altro personale si recano presso la Brigata Tecnica Addestrativa della Difesa Aerea di Borgo Piave per decifrare i nastri. Da questi vengono ottenuti due tabulati che pur coprendo l'orario del disastro, presentano un buco temporale di 8 minuti a partire dalle 19:04
+(v. "<a href="http://cristianopi.altervista.org/straus/v1f2_WP000208_001.pdf" target="_blank">WP000208_001.DOC</a>"
+<i><sup><abbr title="Procura della Repubblica di Roma, VOL. I - FASC. 2, DA PAG. 480 A PAG. 481. DATA DOCUMENTO 11.11.80, C/O  C.C.T.A.  DIFESA  AEREA  BORGO  PIAVE  (LT)  ALLO  SCOPO  DI  DECIFRARE  LE RILEVAZIONI   RADAR  CONTENUTE  NEI  NASTRI  MAGNETICI  SEQUESTRATI  C/O  L'AREA OPERATIVA DI TIMPONE GUDDINO (MARSALA) IL 03.10.80.">fonte</abbr></sup></i>):
+
+<div class="cita">
+IL GIORNO <b>11.11.80</b>, NOI, DR. GIORGIO SANTACROCE, SOST. PROC. DELLA REPUBBLICA DI ROMA, ASSISTITI DAL TEN. DELLA G.D.F. FABIO MORERA, CI SIAMO RECATI IN LOCALITA' BORGO  PIAVE  (LT), <u>PRESSO IL CENTRO TECNICO ADDESTRAMENTO  DIFESA  AEREA</u>,  ALLO SCOPO  DI  DECIFRARE  LE  RILEVAZIONI  RADAR  CONTENUTE  NEI  NASTRI MAGNETICI SEQUESTRATI PRESSO L'AERA OPERATIVA DI TIMPONE GUDDINO (MARSALA) IL 03.10.80.<br>
+<span style="font-family: sans-serif"><i>[...]</i></span><br>
+VENGONO CONSEGNATI DUE TABULATI:<br>
+- IL PRIMO SI RIFERISCE AL PERIODO DI TEMPO 18,43 - 19,04;<br>
+- IL SECONDO AL PERIODO DI TEMPO 19,12 - 7,31.<br>
+L'INTERVALLO  DI TEMPO 19,04 - 19,12 E' <u>VEROSIMILMENTE IMPUTABILE  AL  MATERIALE CAMBIAMENTO DEI NASTRI</u>.<br>
+ESISTE  POI UN ULTERIORE INTERVALLO DI TEMPO CHE VA DALLE 19,22 ALLE  ORE  06,47 DEL GIORNO 28.06.80.
+</div>
+
+Ciò che sul momento sembrò verosimile (il cambiamento dei nastri) non lo sarà più dopo approfondite ricerche.<br>
+
+<!-- 9- Tit2 85 - Dubbio SYNADEX per cambio nastri -->
+
+Infatti, sul cambio dei nastri l'A.G. esprime dubbi derivanti dall'analisi dei registri dell'operatore al computer prodotti negli anni dal 1979 all'83, dai quali non risulta mai stato effettuato un cambio di nastro per l'esecuzione delle esercitazioni SYNADEX (v. "<a href="https://www.stragi80.it/documenti/gi/Titolo2a.pdf" target="_blank">TITOLO 2 - L’istruttoria dal 27 luglio 90 al 31 dicembre 97.</a>" a pag. 85):
+
+<div class="cita">
+Va  rilevato,  infine,  che  <u>la  sostituzione  del  nastro  di  registrazione finalizzata alla effettuazione di un’esercitazione Synadex</u> - definita dai vari testi  e  imputati  come  prassi  costante  -  <u>non  corrisponde  al  vero</u>,  poiché dall’analisi  del  registro  del  MIO  relativo  agli  anni  79-81  (v.  decreto  di esibizione  29.11.89)  e  di  quelli  relativi  al  periodo  81-83  (v.  decreto  di sequestro 06.10.97) non risulta essere mai stata effettuata una sostituzione di nastri  di  registrazione  in  occasione  delle  esercitazioni  Synadex.  Il comandante  del  CRAM,  tenente  colonnello  Cespa,  dichiarava  che  in occasione delle esercitazioni Synadex veniva sostituito anche il nastro reale.<br>
+A contestazione del fatto che il nastro di registrazione reale venne sostituito solo  in  occasione  dell’esercitazione  del  27  giugno  affermava  di  non 
+ricordare di aver dato alcuna disposizione in merito (v. esame Cespa Pietro, GI  23.04.96).  Da  ultimo  l’Ufficio  ha  accertato  che  non  solo  il  nastro  di programma relativo alla Synadex non corrispondeva, ma che altresì la sera del 27.06.80 non fu dato alcun comando per l’accesso ad un qualsiasi Raid-Tape Synadex. 
+</div>
+
+
+Un'ulteriore indizio sull'insussistente cambio di nastri arriva da un ex maresciallo A.M. che era di servizio presso lo SHOC (il centro operativo dello <abbr title="Supreme headquarters Allied Powers Europe">SHAPE</abbr>). &Egrave; il telespettatore che intervenne con una telefonata alla trasmissione "Telefono Giallo" del 10.10.1991. Un paio di settimane dopo la trasmissione egli afferma davanti a Priore
+(v. "<a href="http://cristianopi.altervista.org/straus/v3f21_WP003034_001.pdf" target="_blank">WP003034_001.DOC</a>"
+<i><sup><abbr title="Procura della Repubblica di Roma, VOL. III - FASC. 21 PAG. 4940 - 4941, DATA DOCUMENTO 28.10.91, TRIBUNALE ROMA UFFICIO ISTRUZIONE: RESO DA SPARLA GIOVAN BATTISTA, N. MARSALA IL 18.06.36 RES. [...]; IN SERVIZIO, NEL 1980, A SHAPE SITO IN BELGIO A MONS, DINANZI G.I. DR. PRIORE.">fonte</abbr></sup></i>):
+
+<div class="cita">
+A D.R.: PER QUANTO SO LA REGISTRAZIONE DEI DATI RADAR NON AVVIENE SU UN NASTRO SOLO, BENSI' SU PIU' NASTRI. <u><b>E' IMPOSSIBILE</b> PERCIO' CHE SI POTESSE PRODURRE UN "BUCO", PER IL CAMBIAMENTO DI UN NASTRO</u>.
+</div>
+
+
+<!-- b0- Tit2 96 - Dubbio SYNADEX per consegna nastro errato -->
+I dubbi sull'effettiva esecuzione della SYNADEX derivano anche dallo smarrimento del nastro contenente l'esercitazione che è risultato utilizzato la sera del disastro.<br>
+
+<!-- b1- Verbale consegna SPS 5404 -->
+Questo nastro viene consegnato il 12 febbraio 1987 ai Carabinieri di Roma a seguito di loro sopralluogo presso il centro radar di Marsala ed è il nastro SPS 5904
+(v. "<a href="http://cristianopi.altervista.org/straus/v1f4_WP000403_001.pdf" target="_blank">WP000403_001.DOC</a>"
+<i><sup><abbr title="Procura della Repubblica di Roma, VOL. I - FASC. 4, PAG. 1038. DOCUMENTO IN DATA 12.02.87 C.C. P.G. ROMA: P.V. ACQUISIZIONE DOCUMENTAZIONE C/O 35^ G.R.A.M. MARSALA. DOCUMENTAZIONE ACQUISITA ALLE PAGINE 1039-1042.">fonte</abbr></sup></i>):
+
+<div class="cita">
+L'ANNO  <b>1987</b>,  ADDI' <b>12 DEL MESE DI FEBBRAIO</b>, IN MARSALA, NEGLI UFFICI  DEL  35^
+GRUPPO RADAR (SEZIONE DIFESA) DELL'A.M. DI MARSALA, ALLE ORE 13,45.<br>
+<span style="font-family: sans-serif"><i>[...]</i></span> IL CAP. DEL  ZOPPO  ANDREA,
+<span style="font-family: sans-serif"><i>[...]</i></span>, CI HA  CONSEGNATO LA SOTTOELENCATA DOCUMENTAZIONE:<br>
+-  <span style="font-family: sans-serif"><i>[...]</i></span><br>
+-  NASTRO  COMPUTER <b>SPS 5904</b>, CONTENENTE LE TRACCE SIMULATE  UTILIZZATE  DURANTE L'ESERCITAZIONE DEL 27.06.80.<br>
+</div>
+
+<!-- b2- Tit2 96_111 - 1 - Nastro consegnato AG diverso da quello del 27 -->
+
+Tuttavia, l'ufficio operazioni aveva disposto l'utilizzo del nastro SPS 5901 e non del 5904 consegnato all'A.G. (v. "<a href="https://www.stragi80.it/documenti/gi/Titolo2a.pdf" target="_blank">TITOLO 2 - L’istruttoria dal 27 luglio 90 al 31 dicembre 97.</a>" a pag. 96):
+
+<div class="cita">
+Come è stato già rilevato, la disposizione emanata dall'Ufficio Operazioni del 23 giugno 80, indicava invece, per l'esercitazione del 27 giugno 80, l'utilizzo del nastro <b>SPS 5901</b>. Pertanto  la  comparazione  tra  le  tracce  simulate  del  nastro Synadex con quelle registrate nel nastro 100 non é stata di utilità, se non nel permettere di accertare che <u>il nastro di registrazione SP 5904, consegnato da Del Zoppo, non era lo stesso che sarebbe stato impiegato la sera del disastro</u> (v. riunione  peritale  collegio  Blasi  23.01.90).  Del  Zoppo  dichiarava  in proposito  di  non  ricordare  il  criterio  usato  per  individuare  il  nastro consegnato alla PG (v. esame Del Zoppo Andrea, GI 26.01.96).<br>
+<span style="font-family: sans-serif"><i>[...]</i></span><br>
+Rimangono  molte  perplessità  sull'errore  di  consegna  del  nastro  di esercitazione Synadex impiegato la sera del disastro. Nastro di cui si sono 
+perse  le  tracce. <u>Anche  queste  circostanze  rafforzano  i  dubbi  sull’effettivo inizio della esercitazione</u>.
+</div>
+
+
+<!-- b3- Tit2 96_111 - 2 - Nastro consegnato AG diverso da quello del 27 -->
+
+Gli esperti del Centro di Programmazione della NATO confermano che i due nastri sono tra loro differenti, sebbene molto simili (v. "<a href="https://www.stragi80.it/documenti/gi/Titolo2a.pdf" target="_blank">TITOLO 2 - L’istruttoria dal 27 luglio 90 al 31 dicembre 97.</a>" a pag. 111):
+
+<div class="cita">
+Scrivono gli esperti del NPC nel loro Report del 10.3.97: “sebbene molto  simili, <u>il nastro  della  Synadex  effettivamente  usato  il  27.06.80 è 
+diverso dal nastro SPS5904 che ci è stato fornito</u>”. Quindi diverso da quello consegnato  all’AG.  A  questo  punto  ci  si  domanda  se  le  tracce  simulate facciano riferimento al contenuto di un diverso raid tape Synadex - come già detto il nastro di esercitazione di quella sera era l’SPS5901 mai consegnato - o siano tracce simulate e basta, cioè non afferenti ad alcun raid tape.
+</div>
+
+Tra i dati radaristici non consegnati all'A.G. quindi, c'è anche il nastro SYNADEX.<br>
+<br>
+
+<!-- b4- Tit2 80 - Non trovato DA1 -->
+Oltre a questo nastro e oltre ai vari registri non consegnati, non è stato trovato nemmeno il registro DA-1, che doveva essere usato per registrare manualmente i plot durante il buco temporale attribuito all'ipotizzato cambio dei nastri (v. "<a href="https://www.stragi80.it/documenti/gi/Titolo2a.pdf" target="_blank">TITOLO 2 - L’istruttoria dal 27 luglio 90 al 31 dicembre 97.</a>" a pag. 80).<br>
+
+&Egrave; da sottolineare, inoltre, che durante il sopralluogo dell'11 novembre 1980 presso la Brigata Tecnica Addestrativa sono state consegnate le THR, mentre non vengono consegnati gli altri tabulati ricavabili dai nastri (come la CDR) consegnati anni dopo.<br>
+<br>
+
+Nell'85 viene fatto un altro tentativo per estrarre tutti i dati contenuti nei nastri (v. "<a href="https://www.stragi80.it/documenti/gi/Titolo2b.pdf" target="_blank">Capitolo VII - B.T.A. di Borgo Piave – BTADA.</a>" a pag. 36):
+
+<div class="cita">
+In data 20.02.85 viene dato parere favorevole all’accesso dei periti d’Ufficio (collegio peritale Blasi) presso la Brigata Tecnico Addestrativa Difesa Aerea di Borgo Piave per l’estrapolazione dei dati contenuti nei nastri del sito di Marsala; operazione effettuata in data <b>04.03.85</b>.
+</div>
+
+
+L'esito della visita lo leggiamo nell'ultimo capoverso di pag. 14:
+<div class="cita">
+Secondo le conclusioni raggiunte dalla Commissione di verifica, il nastro n.1142 sarebbe, secondo le dichiarazioni giudicate “attendibili” del maggiore Raffaelli, il risultato della riproduzione della registrazione del nastro originale n.100 e della riproduzione del nastro originale n.99; tale operazione di ri-registrazione, avrebbe causato la cancellazione dei dati preesistenti.
+</div>
+
+La Commissione di verifica della BTA è quella sollecitata dal Capo di Stato Maggiore (generale Pisano) nell'ottobre/novembre '89 per fare chiarezza sui tre nastri di cui sopra.<br>
+<br>
+
+Probabilmente, il materiale prodotto nel marzo '85 è quello rinvenuto nell'88 in una cassaforte dell'area riservata del Gruppo Sviluppo e Sistemi della D.A. presso la B.T.A. di Borgo Piave (v. "<a href="http://cristianopi.altervista.org/straus/v1f256_WP002101_001.pdf" target="_blank">WP002101_001.DOC</a>"
+<i><sup><abbr title="Procura della Repubblica di Roma, VOL. I - FASC. 256 - PAG. 59108 - 59110, DATA 11.11.88, B.T.A. - D.A. BORGO PIAVE IL COMANDANTE: VERBALE TCT-00/190 INERENTE IL RINVENIMENTO DI UN PLICO CUSTODITO C/O L'AREA RISERVATA DEL GRUPPO SSADA, RIPORTANTE LA SCRITTA: CAP. DI NATALE - PRATICA USTICA. ALLEGATO AL FG. 224/B/33719/DIV.3^(N) DATATO 18.09.96 (UI 2098).">fonte</abbr></sup></i> per tutti i dettagli).<br>
+<br>
+
+
+<!-- b5- Verbale consegna ulteriori tabulati - 1 2 3 -->
+Per avere la riduzione dati completa dei due nastri di Marsala bisogna attendere dicembre dell'89, quando alcuni periti d'ufficio e altri di parte si recano nuovamente presso la B.T.A. con i nastri da decodificare
+(v. "<a href="http://cristianopi.altervista.org/straus/v3f141_WP001237_001.pdf" target="_blank">WP001237_001.DOC</a>"
+<i><sup><abbr title="Procura della Repubblica di Roma, VOL. III - FASC. 141 - PAG. 27792 - 27798, DATA 11.12.89, VERBALE DI SOPRALLUOGO ESEGUITO C/O IL CENTRO B.T.A.-D.A. DI BORGO PIAVE DAI MEMBRI DEL COLLEGIO PERITALE, NOMINATO DAL G.I. BUCARELLI. A PAGG. 27789-27791 ALLEGATO III.H-1 TABULATO RADAR MARSALA - NASTRO NR. 1 (VDS. ORIGINALE). ALLEGATO AD ESAME TESTIMONIALE RESO DA LECCE L. IN DATA 18.10.96 (UI 1235).">fonte</abbr></sup></i>):
+
+<div class="cita">
+IL GIORNO <b>11.12.89</b> SONO CONVENUTI <u>PRESSO IL CENTRO B.T.A. - D.A. DI BORGO PIAVE</u>
+(LATINA) DELL'A.M. I MEMBRI DELLA COMM.NE PERITALE, <span style="font-family: sans-serif"><i>[...]</i></span>.
+<u>LO SCOPO DELLA VISITA A BORGO PIAVE E' LA RILETTURA DEI DATI RADAR REGISTRATI IL 27.06.80 DAL CENTRO DI MARSALA</u>
+NELL'INTORNO DELL'ORA IN CUI ACCADDE L'INCIDENTE DEL DC9 DELL'ITAVIA.<br>
+<span style="font-family: sans-serif"><i>[...]</i></span>. SI OSSERVA CHE I NASTRI SONO RELATIVI ALLE REGISTRAZIONI SEGUENTI:<br>
+1) DALLE ORE 11,20/Z ALLE ORE 19,00/Z DEL 27.06.80 E DALLE ORE 19,25/Z DEL 27.06.80 ALLE ORE 10,47/Z DEL 28.06.80 (CLASS RR - FCICD - FCITD - INTER - WEATH);<br>
+2) DALLE ORE 19,00/Z ALLE ORE 19,25/Z DEL 27.06.80 (CLASS RR - FCICD - FCITD - INTER - WEATH);<br>
+3) SYNADEX SPS5904 - SPS - SPS5904 - RDID TAPE - SITO 59 (CLASS NU; MTU 1; FROM 2 REEL 1 OF 1).<br>
+SI PRECISA CHE SUL NASTRO DI CUI AL PUNTO 1 E' SCRITTO INOLTRE: DATE: 27.06.80; LOC.: MARSALA; NAME: RIDUZIONE DATI; SUL NASTRO DI CUI AL PUNTO 2 E' SCRITTO: DATE: 27.06.80; LOC.: MARSALA; NAME: RIDUZIONE DATI; SUL NASTRO DI CUI AL PUNTO 3 E' SCRITTO: PROJ 4; DATE: 06.02.79; LOC.: MARSALA.<br>
+SUL NASTRO DI CUI AL PUNTO 3 CON FOGLIO A PARTE E' INDICATA LA SCRITTA: "ESERCITAZIONE SYNADEX DEL 27.06.80".<br>
+L'OBIETTIVO DELLA RILETTURA CONSISTE NEL TENTATIVO DI ACCERTARE SE SUI NASTRI, DI CUI AI PUNTI 1 E 2, SIANO PRESENTI ALTRE INFORMAZIONI, NON ESTRATTE NEL CORSO DELLA PRECEDENTE LETTURA DEL 04.03.85. L'ULTERIORE OBIETTIVO CONSISTE NELLA LETTURA DEL NASTRO NR. 3, NON LETTO IN PRECEDENZA E CHE DOVREBBE FORNIRE CHIARIMENTI SULLE TRACCE RELATIVE ALLA SIMULAZIONE, PRESENTI NEL NASTRO NR. 2.<br>
+PER SALVAGUARDARE LA INTEGRITA' DEI NASTRI VIENE AUTORIZZATA UNA COPIA PARZIALE DI LAVORO DI CIASCUN NASTRO, CHE VERRA' COMUNQUE PRELEVATA DALLA COMM.NE PERITALE.
+<span style="font-family: sans-serif"><i>[...]</i></span><br>
+ALLE ORE 18,30 VENGONO CONSEGNATI I TABULATI OTTENUTI DAI NASTRI E PRECISAMENTE:<br>
+A) TRE COPIE DEL CONSOLE DATA RECORDING DALLE 11H 15'52'' ALLE 19H 04'31'' DEL NASTRO 1;<br>
+B) TRE COPIE DEL CONSOLE DATA RECORDING DALLE 19H 48'41'' ALLE 20H 03'47'', SEMPRE DEL NASTRO 1;<br>
+C) TRE COPIE DEL CONSOLE DATA RECORDING DALLE 19H 13'21'' ALLE 19H 22'48'' DEL NASTRO 2;<br>
+D) TRE COPIE DEL TRACK DATA DALLE ORE 18H 09'09'' ALLE 20H 06'37'' DEL NASTRO 1 (TRACK HISTORY RECORDING);<br>
+(SI OSSERVI CHE LA TERZA COPIA INIZIA ALLE 18H 18'02'' E TERMINA ALLE 20H 15'38'').<br>
+E) TRE COPIE DEL TRACK HISTORY RECORDING DALLE ORE 19H 12'49'' ALLE ORE 19H 22'39'' DEL NASTRO 2;<br>
+F) TRE COPIE DEL WINTR (INTERCETTAZIONI) DALLE 11H 36'37'' ALLE 18H 23'26'' DEL NASTRO 1 (CIASCUNA COPIA E' RELATIVA A QUATTRO PASSAGGI SUL NASTRO);<br>
+<span style="font-family: sans-serif"><i>[...]</i></span><br>
+RELATIVAMENTE AL NASTRO NR. 3 (SYNADEX) SI SONO OTTENUTE I SEGUENTI TABULATI:<br>
+A) TRE COPIE DEL CONSOLE DATA RECORDING DALLE 00H 06'33'' FINO A 00H 33'00'' (IL TEMPO RIFERITO E' FITTIZIO ED E' RELATIVO ALL'INIZIO DEL NASTRO);<br>
+B) TRE COPIE DEL TRACK HISTORY RECORDING DALLE 00H 06'05'' FINO A 00H 33'28'' (CON LA PRECEDENTE INDICAZIONE CIRCA IL TEMPO).<br>
+<span style="font-family: sans-serif"><i>[...]</i></span> DA UN ESAME SOMMARIO EFFETTUATO <u>SEMBRA CHE I DATI NON SIANO CORRISPONDENTI A QUELLI DI SIMULAZIONE CONTENUTI NEL NASTRO NR. 2</u>.
+</div>
+
+Purtroppo, si nota fin da subito che i plot simulati contenuti nel nastro numero 100 (il secondo dei tre usati) non corrispondono a quelli contenuti nel nastro SYNADEX SPS 5904, come già detto.<br>
+Resta dunque il dubbio sull'effettiva attendibilità dei nastri 2 e 3.<br>
+
+
+<!-- RELAZIONE TOZIO -->
+
+<h3 id="relTozio" style="margin-left:2em">- L'inquietante relazione</h3>
+
+
+<!-- b8- Tit2 98 - Tozio -->
+
+A conclusione di questo paragrafo su Marsala, vale la pena esaminare la relazione che l'operatore al computer redige a seguito di una sua testimonianza dell'86 davanti al giudice istruttore Bucarelli (v. "<a href="https://www.stragi80.it/documenti/gi/Titolo2a.pdf" target="_blank">TITOLO 2 - L’istruttoria dal 27 luglio 90 al 31 dicembre 97.</a>" da pag. 98).<br>
+La relazione appare utile su tre punti in cui il M.I.O.:
+<ol style="margin-top: 0px">
+<li>riferisce che avevano circa 120 nastri magnetici da usare ciclicamente per registrare le informazioni radaristiche (il dato tornerà utile tra poco);</li>
+<li>sembra preoccupato nel notare la perplessità del giudice e del tecnico che lo affiancava durante l'esame;</li>
+<li>aggiunge nella relazione un consiglio per "fronteggiare" due particolari domande.</li>
+</ol>
+
+Sebbene le perplessità notate dal teste riguardino le risposte 2, 4, 6 e 7, egli si sente di dare un consiglio solo per le domande 3 e 4:
+
+<div class="cita">
+Consigli: Onde evitare il ripetersi della questione inerente alle domande N.3 e 4, consigliabile consultare il mio capo Servizio – colonnello Nicolino Pugliese; nde - che <u>ha emanato delle disposizioni in merito</u>
+</div>
+
+Il giudice Priore fa una deduzione logica e condivisibile:
+
+<div class="cita">
+Il documento <span style="font-family: sans-serif"><i>[le disposizioni del caposervizio, ndr]</i></span> sembra rappresentare per chi l’ha scritto ma soprattutto per coloro ai quali probabilmente doveva essere sottoposto in visione, quasi una serie di regole da seguire per fronteggiare gli esami testimoniali.
+</div>
+
+Vediamo cosa chiedono queste due pericolose domande:
+
+<div class="cita">
+3. Domanda: Questo nastro lei lo ha utilizzato anche di mattina?<br>
+A questo interrogativo il giudice mi fa notare che l’orario di registrazione del nastro nr.100 iniziava dalle 19.00Z e <u>dopo le 19.22Z continuava la 
+registrazione dalla 06.00Z</u>.<br>
+Risposta: La registrazione dalle 06.00Z appartiene ad una registrazione precedente, dato che i nastri sono riutilizzati in base alla rotazione precedente.<br>
+4. Domanda: Allora come mi spiega che c’è la data del 27.06.80?<br>
+Risposta: Perché ad ogni inizio di registrazione sul nastro si inserisce la data del giorno in cui si effettua la registrazione. <u>Iniziando a registrare si cancella automaticamente la registrazione precedente</u>, infatti essendo durata circa 20 minuti la registrazione Synadex quello che segue appartiene ad una registrazione precedente.<br>
+</div>
+
+Sono domande talmente banali che, ad una prima analisi superficiale, non si riesce a capire quale possa essere la necessità di emanare apposite disposizioni. Il teste, dopotutto, si limita ad esprimere due soli banali concetti:
+<ol style="margin-top: 0px">
+<li>i nastri sono riutilizzati ciclicamente;</li>
+<li>i nastri da riciclare sono sovrascritti con i nuovi dati, lasciando che i vecchi dati seguano la nuova registrazione.</li>
+</ol>
+
+Mentre il 1° punto è confermato sia dagli operatori di vari centri radar sia dal fatto che non erano disponibili migliaia di nastri vergini nei centri radar (v. oltre), il 2° punto, invece, è tutto da dimostrare. Cerchiamo, quindi, di focalizzare l'attenzione su questo secondo punto, sfruttando, come sempre, elementi oggettivi dai quali trarre ovvie deduzioni.<br>
+<br>
+
+La domanda/risposta n° 3 mette in evidenza una cosa abbastanza strana, poiché la registrazione sul nastro n° 100 s'interrompe alle 19:22 per poi riprendere alle 6:00.<br>
+Il teste asserisce che ciò sia dovuto al riutilizzo di un nastro sul quale erano rimasti i vecchi dati. Cosa confermata in modo apparentemente logico con la risposta n° 4.<br>
+<br>
+
+Tuttavia, qualunque nastro magnetico già registrato deve essere smagnetizzato prima di essere riutilizzato, altrimenti il segnale della nuova registrazione si "somma" a quello già esistente.<br>
+
+
+<!-- SMAGNETIZZATORE -->
+
+<h3 id="smagnetizza" style="margin-left:2em">- Il misconosciuto smagnetizzatore</h3>
+
+
+<!-- c0- Per27 3 - Nastri smagnetizzati prima dell'utilizzo -->
+
+La smagnetizzazione può essere ottenuta usando un registratore provvisto di una testina di cancellazione anteposta a quella di registrazione ed è questa la soluzione adottata per le applicazioni a basso costo o comunque non professionali.<br>
+<br>
+Ma nel caso di un centro radar, lasciare dati vecchi che seguono una nuova registrazione può essere molto critico. Infatti, la presenza di una qualunque discontinuità di registrazione, ad esempio per un fermo nastro accidentale o voluto, potrebbe rendere impossibile capire se i dati che seguono la discontinuità sono vecchi o nuovi.<br>
+L'uso di questa soluzione, inoltre, renderebbe troppo macchinosa e non sicura la cancellazione di nastri contenenti dati coperti da segreto militare, dal momento che la sovrascritura di un nastro con dati casuali allo scopo di cancellarlo lascia un segnale residuo rilevabile con apposite apparecchiature, quindi <u>è un metodo non utilizzabile in ambito militare</u>.<br>
+&Egrave; evidente dunque, che questa modalità non può essere adottata in un centro radar.<br>
+<br>
+
+<!-- c0a- Taber Audio Tape Degausser 1976 -->
+
+Ciò che normalmente si fa in questi casi, è utilizzare un apposito apparecchio smagnetizzatore (o <i>degausser</i>), in grado di cancellare i nastri in modo veloce e sicuro. L'utilizzo di questo apparecchio, inoltre, rende la nuova registrazione di migliore qualità (più affidabile), dal momento che il precedente segnale viene totalmente cancellato, contrariamente a quanto avviene con la testina di cancellazione, che genera un basso campo magnetico.<br>
+<br>
+
+<div style="margin-bottom: 2em; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="ma-degausser.jpg" style="float:left; padding-right: 30px;" alt="" title="">
+Qui vediamo l'esempio di un vecchio smagnetizzatore degli anni 70.<br>
+<br>
+Si appoggiava la bobina sul piano dell'apparecchio e si accendeva l'interruttore. La bobina veniva ruotata manualmente intorno al perno per due o tre giri e si ripeteva l'operazione girando la bobina sotto-sopra. In circa 10/20 secondi il nastro era pronto per essere riutilizzato o dismesso.<br>
+</div>
+<br>
+
+
+<!-- c1- Smagnetizzazione nastro radar -->
+
+Possiamo vedere un esempio d'adozione dello smagnetizzatore nel seguente stralcio relativo ad un decreto d'acquisizione del nastro radar di Otranto:
+(v. "<a href="http://cristianopi.altervista.org/straus/v1f158_WP001814_001.pdf" target="_blank">WP001814_001.DOC</a>"
+<i><sup><abbr title="Procura della Repubblica di Roma, VOL. I - FASC. 158 - PAG. 37585 - 37591, ALLEGATO 5 AL RAPPORTO C.C. NR. 230855/657-1 DATATO 08.10.94 (UI 1809). NOTA INFORMATIVA SULL'ATTIVITA' DEL 32° CRAM DI OTRANTO.">fonte</abbr></sup></i>, pag. 2):
+
+<div class="cita">
+16.01.91: - DECRETO DI ACQUISIZIONE DEL NASTRO DI REGISTRAZIONE DELL'ATTIVITA' DI AVVISTAMENTO DEL SITO RADAR DI OTRANTO DEL 18.06.80.<br>
+ESITO NEGATIVO, IN QUANTO <u>IL NASTRO E' STATO SMAGNETIZZATO PER  ESSERE RIUTILIZZATO</u>.
+</div>
+
+Si legge che il nastro con i dati radaristici non può essere acquisito poiché è stato smagnetizzato prima di poter essere riutilizzato.<br>
+
+<br>
+Se questa fosse stata la procedura sistematicamente usata (come è ovvio che fosse), è chiaro che nessun nastro poteva contenere dati vecchi, contrariamente a quanto afferma l'operatore al computer di Marsala.<br>
+
+
+<!-- c2- PP senza smagnetizzatore -->
+
+Tuttavia, in base a quanto riferito da alcuni operatori dei vari centri radar, sembrerebbe che non tutti i siti avessero lo smagnetizzatore, come ad esempio riferisce il programmatore di Potenza Picena, il quale, in un primo momento afferma che i nastri venivano smagnetizzati, ma poi rileggendo il verbale ci ripensa e riferisce che Potenza Picena non aveva lo smagnetizzatore
+(v. "<a href="http://cristianopi.altervista.org/straus/v3f102_WP000958_001.pdf" target="_blank">WP000958_001.DOC</a>"
+<i><sup><abbr title="Procura della Repubblica di Roma, VOL. III - FASC. 102 - PAG. 21005 - 21008, DATA 27.10.95, TRIBUNALE ROMA UFFICIO ISTRUZIONE: RESO DA MINISCHETTI ERMANNO, NATO IL [...].; NEL 1980 PROGRAMMATORE DI SITO IN SERVIZIO C/O 14° G.R.A.M. POTENZA PICENA, DINNANZI AL G.I. DR. PRIORE. PRESENTI M.LLO C.C. GRADANTI E V.ISP. CASTELLANI.">fonte</abbr></sup></i>):
+
+<div class="cita">
+A D.R.: SE UN NASTRO SI "STIRAVA" E QUINDI NON ERA PIU' UTILIZZABILE OCCORRE FARE RICHIESTA DI UN NUOVO NASTRO ALL'UFFICIO OPERAZIONI ED ANNOTARE L'EVENTO SUL REGISTRO DEL MIO. SE UN NASTRO VENIVA CONSERVATO IL NUMERO PROPRIO DEL NASTRO NON VENIVA UTILIZZATO PER ALTRI NASTRI, SE SUCCESSIVAMENTE VIENE UTILIZZATO QUEL NUMERO SIGNIFICA CHE <u>VIENE <b>SMAGNETIZZATO</b> E RIUTILIZZATO</u>.<br>
+<span style="font-family: sans-serif"><i>[...]</i></span><br>
+A RILETTURA IL TESTE PRECISA CHE LADDOVE E' SCRITTO: <u>I NASTRI VENIVANO <b>SMAGNETIZZATI</b> PRIMA DI ESSERE RIUTILIZZATI</u>, CHE <u>IL SITO DI POTENZA PICENA NON DISPONEVA DI UN APPARATO PER LA SMAGNETIZZAZIONE DEI NASTRI</u> E CHE IL RIUTILIZZO AVVENIVA MEDIANTE REGISTRAZIONE SUI DATI PRECEDENTI
+</div>
+
+
+<!-- c3- PB senza smagnetizzatore -->
+
+Anche il programmatore di Poggio Ballone riferisce che il sito non era dotato di smagnetizzatore, precisando che lo stava affermando sulla base della sua conoscenza, come se un programmatore potesse anche disporre di un apparato senza esserne a conoscenza
+(v. "<a href="http://cristianopi.altervista.org/straus/v1f226_WP004437_001.pdf" target="_blank">WP004437_001.DOC</a>"
+<i><sup><abbr title="Procura della Repubblica di Roma, VOL. I - FASC. 226 - PAG. 52820 - 52822, DATA 10.11.95, DIREZIONE CENTRALE POLIZIA PREVENZIONE: RESE DA STASIO FAUSTO, NATO AD AMELIA (TR) IL 21.03.49 E RESIDENTE IN ARICCIA (RM) VIA DEL TESORO 39; NEL 1980 PROGRAMMATORE IN SERVIZIO C/O 21° G.R.A.M. POGGIO BALLONE. ALLEGATO AL RAPPORTO 224/B/15591/DIV.3^(N) DATATO 30.12.95 (UI 4432).">fonte</abbr></sup></i>, pag. 1):
+
+<div class="cita">
+A D.R.: POGGIO BALLONE, PER QUANTO ERA IN MIA CONOSCENZA, NON AVEVA ALCUN APPARATO PER LA SMAGNETIZZAZIONE DEI NASTRI;
+</div>
+
+Sembra che Priore non sbagli molto nel definirlo palesemente reticente (v. "<a href="http://cristianopi.altervista.org/straus/v1f306_WP002066_001.pdf" target="_blank">WP002066_001.DOC</a>" <i><sup><abbr title="Procura della Repubblica di Roma, VOL. I - FASC. 306 - PAG. 70344 - 70350, SCHEDA TESTE NR. 46: STASIO FAUSTO - INCARICO ALL'EPOCA: PROGRAMMATORE. ALLEG. A RELAZIONE TRASMESSA CON FG. NR. 230855/866 DATATA 09.12.97 (UI 2019).">fonte</abbr></sup></i> inizio pag. 1).<br>
+<br>
+
+Probabilmente si comincia ad intuire quale potesse essere il contenuto delle disposizioni emanate dal caposervizio di Marsala in merito alla relazione del M.I.O.<br>
+<br>
+
+Cerchiamo di farci un'idea quanto più fondata possibile in merito alla possibilità che un centro radar automatico o semi automatico potesse essere sprovvisto di un apparecchio così importante come lo smagnetizzatore.<br>
+Si potrebbe considerare il costo dell'apparecchio e la numerosità dei nastri normalmente presenti; se i nastri sono pochi e il costo è esorbitante, si può anche credere che solo alcuni siti ne venissero dotati, altrimenti ciò sarebbe poco credibile.<br>
+<br>
+
+<!-- c4- Dotazione nastri AUDIO -->
+
+La normale dotazione di nastri magnetici la possiamo appurare grazie al seguente atto d'approvazione di una normativa ITAV del '79, che riguarda i soli nastri audio
+(v. "<a href="http://cristianopi.altervista.org/straus/v1f18_WP015581_003.pdf" target="_blank">WP015581_003.DOC</a>"
+<i><sup><abbr title="Procura della Repubblica di Roma, VOL. I - FASC. 18 PAG. 4670 - 4677, DATA DOCUMENTO 08.01.91, DA C.C. REPARTO OPERATIVO ROMA A TRIBUNALE ROMA UFFICIO ISTRUZIONE: RAPPORTO RELATIVO A DOCUMENTAZIONE ACQUISITA C/O L'ITAV DI ROMA. I DOCUMENTI ALLEGATI AL RAPPORTO SONO CONSULTABILI ALLE NOTE 2 E 3.">fonte</abbr></sup></i>, pag. 1):
+
+<div class="cita">
+OGGETTO: ATTO DI APPROVAZIONE NORMATIVA ITAV TLC/RI-04.<br>
+<br>
+"APPROVO LA SEGUENTE NORMATIVA TECNICA ITAV:<br>
+RI-04: RACCOLTA DELLE DISPOSIZIONI PER IL PERSONALE TLC, AV E DA RELATIVA AL SERVIZIO DEL MATERIALE SPECIALE AERONAUTICO (MANUTENZIONE E RIFORNIMENTO)".<br>
+<br>
+ROMA/EUR <b>20.12.79</b><br>
+<span style="font-family: sans-serif"><i>[...]</i></span><br>
+NR. 1 FOGLIO CONTENENTE "DISPOSIZIONI CIRCA LA DOTAZIONE DI NASTRI MAGNETICI PER REGISTRATORI <b>AUDIO</b> DI NUOVA CONCEZIONE - ABOLIZIONE DELLE SCORTE CENTRALIZZATE".<br>
+<span style="font-family: sans-serif"><i>[...]</i></span><br>
+B. LA DOTAZIONE STANDARD DI NASTRI MAGNETICI, STABILITA DALL'ITAV, E' LA SEGUENTE:<br>
+NR. 70 NASTRI PER I REGISTRATORI A 24 CANALI THERMIONIC NDC 5835=RN=048=2140;<br>
+NR. 70 NASTRI PER I REGISTRATORI A 32 CANALI THERMIONIC RACAL ICR32;<br>
+NR. 70 NASTRI PER I REGISTRATORI A 8 CANALI PHILIPS NDC 5835=15=R53=6227;<br>
+NR. 70 NASTRI PER I REGISTRATORI A 15 E 22 CANALI PHILIPS.<br>
+TALE DOTAZIONE TIENE CONTO DI:<br>
+- 30 GG. DI DOTAZIONE;<br>
+- 30 GG. DI CONSERVAZIONE DEI NASTRI INCISI;<br>
+- 10 GG. DI ULTERIORE CONSERVAZIONE DI NASTRI PER INDAGINI.
+</div>
+
+Se a questi 280 nastri audio aggiungiamo i circa 120 utilizzati per i dati radaristici, è facile capire che l'assenza di uno smagnetizzatore può essere molto problematica.<br>
+<br>
+Nello stesso atto d'approvazione si legge a pag. 2:
+
+<div class="cita">
+B. IL CAPO SEZ. T.A. DEL CAVC, AL TERMINE DEI 30 GG. PROVVEDERA' A RICONSEGNARE AL CAPO SERVIZIO TLC O SUO RAPPRESENTANTE LE BOBINE PER <b>LA SMAGNETIZZAZIONE</b> E SUCCESSIVA RIUTILIZZAZIONE.
+</div>
+
+Il <abbr title="Traffico Aereo">T.A.</abbr> e il <abbr title="Commissariato Assistenza al Volo Civile">CAVC</abbr> erano enti militari che gestivano il traffico aereo civile e, come si nota, erano <u>obbligati</u> a smagnetizzare i nastri <u>audio</u>. Figuriamoci se può essere possibile che tale obbligo non ci fosse per i dati radaristici coperti da segreto militare!<br>
+<br>
+
+<!-- c4a- Costo smagnetizzatore -->
+
+Passando al costo degli smagnetizzatori, vediamo questo verbale di consegna
+(v. "<a href="http://cristianopi.altervista.org/straus/v1f69_WP018612_003.pdf" target="_blank">WP018612_003.DOC</a>"
+<i><sup><abbr title="Procura della Repubblica di Roma, VOL. I - FASC. 69 - PAG. 16865 - 16869, DATA 19.06.92, DOCUMENTI INVIATI CON RAPPORTO DEI C.C. DATATO 13.07.92 (U.I. 18594) ALL. C AL FG. TR1-131/26803/G40-5 DEL 08.07.92 (U.I. 18595) DA COMANDO 1^ BRIGATA AEREA GRUPPO TELECOMUNICAZIONI A COM.TE 1^ BRIGATA AEREA SEDE: PROT. RA1-4/1/2518/G56-1 IN MERITO A RICHIESTA NORMATIVA IN VIGORE NEL 1980 RELATIVA AD INCIDENTI DI VOLO - NOTE 2, 3: VERBALE PROVV. DI CONSEGNA BENI">fonte</abbr></sup></i>):
+
+<div class="cita" style="white-space: pre">5835.15.R58.6229     NASTRO MAGNETICO                          30        20.000
+5835.15.R70.0552     <b>SMAGNETIZZATORE</b>                            1     <b>2.000.000</b>
+5835.15.R70.4839     COMPLESSO REGISTRATORE PHILIPS TIPO LDB
+                     8122/01 CORREDATO DI DUE NASTRI MAGNE-
+                     TICI, PARTI DI SCORTA COME DA ALLEGATO C
+                     IN 4 PAGINE                                1    27.000.000
+5835.15.R70.7121     NASTRO MAGNETICO                          47        50.000
+</div>
+
+&Egrave; un modello da due milioni di lire; non era regalato, ma non era nemmeno un costo significativo per l'amministrazione di una forza armata. Quasi certamente si tratta di un modello molto più complesso di quello mostrato nella fotografia di prima.<br>
+<br>
+
+<div style="margin-bottom: 2em; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="ma-dega_nato.png" style="float:left; padding-right: 30px;" alt="" title="">
+Nel caso di un centro radar della D.A. è più probabile che venissero usati smagnetizzatori di questo tipo, approvati dalla NATO.<br>
+Le "pizze" venivano caricate e il macchinario faceva tutto in automatico, lasciando l'operatore libero di svolgere altre attività d'archiviazione, etichettatura, ecc. durante la cancellazione sicura del nastro.
+</div>
+
+
+<!-- c5- Costo smagnetizzatrice -->
+Il modello "semplice" della foto di prima probabilmente aveva un costo simile a quello dell'apparecchio qui indicato come smagnetizzatrice, di appena 110 mila lire
+(v. "<a href="http://cristianopi.altervista.org/straus/v1f172_WP000101_001.pdf" target="_blank">WP000101_001.DOC</a>"
+<i><sup><abbr title="Procura della Repubblica di Roma, VOL. I - FASC. 172 - PAG.  39909, ALLEGATO 'B' AL FG. TM1/040/G15-6 DATATO 13.01.95 (UI 97). A.M. COMANDO AEROPORTO U. NIUTTA GRUPPO S.T.O.: VERBALE DI DISTRUZIONE DI DOCUMENTAZIONE. - N.B. LE CORREZIONI MANOSCRITTE NON SONO STATE RIPORTATE (VDS. ORIGINALE). DOC. CONTENUTO IN ALL. 1 A RAPPORTO C.C. 230855/679-19 DEL 31.01.95 (UI 68).">fonte</abbr></sup></i>, fine pag. 2):
+
+<div class="cita" style="white-space: pre">5835-15-R58-6225  <b>SMAGNETIZZATRICE</b>    "            1        <b>110.000</b>    110.000
+5835-RI-421-7722  NASTRI MAGNETICI    "           18         66.345  1.194.210
+5835-RN-085-9625  SISTEMA MEMORIZ.    "            1     24.107.000 24.107.000
+</div>
+
+<br>
+
+Insomma, i costi sono veramente modesti. Ciò che invece è esorbitante è la quantità di nastri da riciclare e da cancellare con modalità approvate dalla NATO.<br>
+Non è in alcun modo possibile poter credere che un centro radar non disponesse di apparecchi così utili e di fatto, indispensabili.<br>
+<br>
+
+Risulta, dunque, molto semplice fare ipotesi logiche e lineari sulla necessità di formalizzare disposizioni per affrontare le domande poste dall'A.G.<br>
+Il prontuario di risposte emesso dal caposervizio di Marsala potrebbe essere stato distribuito ai vari addetti al computer, non solo di Marsala, per uniformarsi nel riferire che nel loro sito non c'era lo smagnetizzatore. Quindi, i nastri venivano semplicemente sovrascritti usando registratori con testina di cancellazione. Così facendo, si giustifica la presenza di una vecchia registrazione che segue quella nuova.<br>
+Ovviamente questa è solo un'ipotesi, ma uno che si limita a dire semplicemente la verità non ha bisogno di disposizioni per dirla; dice le cose come stanno per ciò che gli compete e basta.<br>
+<br>
+<br>
+Chiusa questa parentesi sulla relazione del M.I.O. di Marsala, comunque molto utile per valutare l'autenticità del nastro numero 100, possiamo tirare le somme.<br>
+
+Oltre alla mancata consegna del registro DA-1, bisogna aggiungere anche la mancata consegna del nastro SYNADEX e restano dubbi più che fondati sull'autenticità del nastro numero 100.<br>
+<br>
+
+
+
+<!-- ====  LICOLA  ====================================================================================================== -->
+
+
+<h3 id="crcLI">Licola</h3>
+
+
+Il capitolo dell'<abbr title="Ordinanza-Sentenza">O-S</abbr> che c'interessa ha un titolo perfettamente esplicativo: "La scomparsa del DA1" (v. "<a href="https://www.stragi80.it/documenti/gi/Titolo2a.pdf" target="_blank">TITOLO 2 - L’istruttoria dal 27 luglio 90 al 31 dicembre 97.</a>" a fine pag. 146).<br>
+<br>
+
+Il centro radar di Licola è tra quelli interessati fin da subito (5 e 16 luglio 1980) dai decreti di sequestro (v. "<a href="#decseq" target="_blank">Decreti di sequestro iniziali</a>").<br>
+
+<!-- a5- Pisano - Distru doc - 1 -->
+Nonostante il peso dei due decreti che gravano sul centro radar di Licola, il registro DA-1 viene comunque distrutto, presumibilmente nel 1984, come si ipotizza in una relazione per il Ministro della Difesa
+(v. "<a href="http://cristianopi.altervista.org/straus/v1f185_WP001228_001.pdf" target="_blank">WP001228_001.DOC</a>"
+<i><sup><abbr title="Procura della Repubblica di Roma, VOL. I - FASC. 185 - PAG. 42872, DATA 03.08.89, APPUNTO  PER IL CAPO S.M., REDATTO DAL GEN. CAVATORTA, RELATIVO ALLA DISTRUZIONE DEL MOD. DA-1 DI LICOLA. TRASMESSO CON NOTA G.I. DR. PRIORE DATATA 03.03.95 (UI 1226).">fonte</abbr></sup></i>):
+
+<div class="cita">
+1.  COME  NOTO,  SOTTO  LA  SPINTA DEGLI  AVVOCATI  DI  PARTE  CIVILE  E'  STATA FOCALIZZATA L'ATTENZIONE ANCHE SULLA <u>DISTRUZIONE DEL MOD. DA1 DI LICOLA</u> RELATIVO AL 27.06.80.<br>
+AL RIGUARDO, SULLA BASE DELLE DICHIARAZIONI RILASCIATE DAL TEN. COL. M.  ORABONA COMANDANTE  PRO-TEMPORE  DI LICOLA (P.V. DI ACQUISIZIONE DI  DOCUMENTAZIONE  DEL 18.08.88,  ALL.  12) DOVE SI LEGGE CHE I PLOTTAGGI RADAR... SONO  STATI  INVIATI AGLI  ENTI  SUPERIORI E CHE "DI TALE DOCUMENTAZIONE NON SI ALLEGA  FOTOCOPIA  IN QUANTO  DISTRUTTA  IN DATA <b>13.09.84</b>", ALLEGATO "A", LA RELAZIONE PER  IL  SIGNOR MINISTRO DELLA DIFESA RIFERISCE:<br>
+"<u>PUR NON AVENDO TROVATO VERBALI DI DISTRUZIONE</u>, DI CUI PERALTRO - TRATTANDOSI DI MATERIALE  NON CLASSIFICATO - NON E' PREVISTA LA COMPILAZIONE, <u>SI HA RAGIONE  DI RITENERE CHE CONTESTUALMENTE SIA STATO DISTRUTTO ANCHE IL MOD. DA-1 DAL QUALE LO STRALCIO E' DERIVATO</u>." (PAG. 45)
+</div>
+<br>
+
+<div style="margin-bottom: 2em; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="li-pisano.png" style="float:left; padding-right: 30px;" alt="" title="">
+Il generale Pisano, nella sua <a href="https://www.stragi80.it/documenti/sma/relazione_sma.pdf" target="_blank">relazione</a> del maggio '89, ammette l'inopportunità della distruzione dei documenti (v. pag. 49), ma aggiunge alcuni motivi che la giustificherebbero.<br>
+<br>
+Per valutare tali giustificazioni, conviene tener presente che i documenti distrutti contenevano informazioni d'importanza critica per analizzare lo scenario aereo presente intorno ad un velivolo caduto in mare.<br>
+</div>
+
+
+<!-- a9- rPM - Presenza traccia vicina al DC9 -->
+L'inopportuna distruzione del DA-1 e la mancanza di coordinamento tra le varie Procure (come detto al termine del paragrafo "<a href="#decseq" target="_blank">Decreti di sequestro iniziali</a>") sono rese ancor più gravi da quanto afferma il Pubblico Ministero nelle sue requisitorie
+(v. <a href="https://www.stragi80.it/documenti/pm/RequisitoriePm.pdf" target="_blank">Requisitorie del Pubblico Ministero nel procedimento NR. 266/90A P.M. E 527/84A G.I.</a>" a pag. 258):
+
+<div class="cita">
+*  IL DA1 DI LICOLA E' STATO SOPPRESSO, INSIEME AI TELEX CONTENENTI I  PLOTTAGGI EFFETTUATI IL 27 E 28 GIUGNO E INVIATI A MARTINA FRANCA; I DATI RELATIVI A DETTI PLOTTAGGI  DESUMIBILI DALLE TELEFONATE REGISTRATE SONO IN  INSANABILE  CONTRASTO CON QUELLI RIPORTATI NEL "PLOTTAGGIO" UFFICIALE, INVIATO L'11.07.80 E NEL  QUALE <u>RISULTA LA PRESENZA DI UN AEREO NON IDENTIFICATO IN PROSSIMITA' DEL DC9, <b>DIVERSO DALL'AIR MALTA</b></u>.
+</div>
+
+
+<!--  b1- Orabona - 1  -->
+
+Non dovrebbe essere necessario sottolineare che tutta la documentazione utile per ricostruire lo scenario di un disastro aereo dovrebbe essere messa a disposizione degli organi preposti alle indagini. Una conferma in tal senso (nel caso ce ne fosse bisogno) arriva dal tenente colonnello Orabona, comandante del centro radar di Licola dall’85.<br>
+Nella seguente trascrizione della testimonianza resa nel '91 davanti al giudice Priore e al Pubblico Ministero Salvi, il comandante sottolinea l'importanza di conservare il DA-1 nel caso d'incidente aereo, come lui fece nei primi anni '70. Egli riferisce, inoltre, che durante il precedente servizio sempre presso Licola come controllore e Capo Ufficio Operazioni, durato 8/9 anni, non è mai successo che venissero distaccati fogli dal DA-1
+(v. "<a href="http://cristianopi.altervista.org/straus/v3f22_WP003110_001.pdf" target="_blank">WP003110_001.DOC</a>"
+<i><sup><abbr title="Procura della Repubblica di Roma, VOL. III - FASC. 22 PAG. 5018 - 5019, DATA DOCUMENTO 19.11.91, TRIBUNALE ROMA UFFICIO ISTRUZIONE: RESO  DA  ORABONA  MODESTINO  N.  TOBRUK  (LIBIA)  IL  14.03.40 RES. [...]; DINANZI G.I. DR. PRIORE, PRESENTE IL P.M. DR. SALVI.">fonte</abbr></sup></i>):
+
+<div class="cita">
+A  D.R.:  IL  MODELLO  DA1  NON ERA  DOCUMENTO  CLASSIFICATO.  A  LICOLA  VENIVA CONSERVATO IN UN LOCALE SITO IN UNA BARACCA IN MURATURA CHIUSA CON LUCCHETTO. IL DA1  CONSISTE IN UN VOLUME RILEGATO COMPOSTO DA QUALCHE CENTINAIO DI FOGLI. <u>NON E' MAI  AVVENUTO CHE SE NE DISTACCASSE QUALCUNO</u> SIA INVOLONTARIAMENTE  CHE  PER ACCEDERE  A RICHIESTA DI ENTI ESTERNI, ALMENO PER QUANTO CONCERNE IL PERIODO  IN CUI IO SONO STATO IN SERVIZIO PRESSO QUEL G.R.A.M.<br>
+<span style="font-family: sans-serif"><i>[...]</i></span><br>
+FACCIO PRESENTE CHE NON E' STATO CORRETTAMENTE VERBALIZZATO IL MIO PENSIERO CIRCA LA " RILEVANZA DEL DA1 ". IO INFATTI RITENGO CHE IL DA1 SIA UN DOCUMENTO IMPORTANTE, TANTO E' VERO  CHE IN  OCCASIONE  DI UN ALTRO INCIDENTE AEREO, NEL '71 / '72, <u>PROVVIDI  A  DISPORRE IMMEDIATAMENTE CHE <b>VENISSE CUSTODITO</b></u>; INFATTI <u>PROPRIO SUI PLOTTAGGI RILEVATI DAL DA1  SI  SVOLSE  POI L'ATTIVITA' DELLA  COMM.NE  INCARICATA  DELL'INCHIESTA</u>. IO INTENDEVO  QUINDI  DIRE CHE IL DA1 NON RIENTRAVA TRA I DOCUMENTI  PER  IL  QUALE FOSSE PREVISTA LA REDAZIONE DEL VERBALE DI DISTRUZIONE.
+</div>
+
+
+Gli avvocati di parte civile, in un loro esposto alla Procura della Repubblica, sottolineano la presenza di precise regole che impongono la conservazione dei documenti relativi ad un incidente aereo
+(v. "<a href="http://cristianopi.altervista.org/straus/v1f7_WP000707_001.pdf" target="_blank">WP000707_001.DOC</a>"
+<i><sup><abbr title="Procura della Repubblica di Roma, VOL. I - FASC. 7, PAG. 1810-1812. DATA DOCUMENTO 06.05.89, DA  AVV.TI  FERRUCCI  ROMEO,  GALASSO ALFREDO, GAMBERINI ALESSANDRO DIFENSORI DI PARTE CIVILE A PROCURA DELLA REPUBBLICA NA: RICHIESTA  DISPOSIZIONE  INCRIMINAZIONE  IN  MERITO AD INCIVOLO DC9 ITAVIA ITIGI IH-870 DEL 27.06.80. ALLEGATA PERIZIA SU INCIDENTE SUDDETTO (PAGG. 1813-1825) ALLA NOTA 2 E SEGUENTI.">fonte</abbr></sup></i> a fine pag. 1):
+
+<div class="cita">
+SI  NOTI,  TRA L'ALTRO CHE <u>LA DISTRUZIONE VIOLA ANCHE  PRECISE  REGOLE  MILITARI (ITAV) GIA' ASSISTENTI ALL'EPOCA</u> - ALLEGHIAMO COPIA DI QUELLE ATTUALI IN MATERIA -  PER  LE QUALI COMUNQUE TALI DOCUMENTI ANDAVANO  CONSERVATI,  PROPRIO  PERCHE' RELATIVI AD UN INCIDENTE, COMPLETI ED IN ORIGINALE.
+</div>
+
+Risulta quindi chiaro, oltre che ovvio, che il DA-1 doveva essere conservato nella sua integrità e tenuto a disposizione per qualsivoglia richiesta da parte delle commissioni preposte ad investigare sugli incidenti aerei.<br>
+<br>
+
+<!--  b3- Trasmissione plottaggi  -->
+
+Pur non riuscendo ad entrare in possesso del DA-1, l'A.G. riesce comunque a recuperare nel novembre dell'88 una sorta di elenco di tracce ridotte dal DA-1 (v. "<a href="https://www.stragi80.it/documenti/gi/Titolo1.pdf" target="_blank">Motivazione</a>" a pag. 119). Per sapere quale fosse l'elenco in questione, possiamo leggerne i riferimenti nel "<a href="https://www.stragi80.it/documenti/gi/perizie/001-007.pdf" target="_blank">TITOLO 3 - Le Perizie.</a>" a fine pag. 81: "<i>cinque fogli dattiloscritti con protocollo 433-9/589/1 dell’11.07.80</i>".<br>
+
+<!--  b5- Plottaggio Licola + es GEOREF  -->
+Ecco la parte iniziale del plottaggio pervenuto all'A.G.
+(v. "<a href="http://cristianopi.altervista.org/straus/v1f6_WP000539_002.pdf" target="_blank">WP000539_002.DOC</a>"
+<i><sup><abbr title="Procura della Repubblica di Roma, VOL. I - FASC. 6, PAG. 1494. DATA DOCUMENTO 26.11.88, DA  C.C.  P.G.  ROMA  A  TRIBUNALE  ROMA  UFFICIO  ISTRUZIONE  G.I. DR. VITTORIO BUCARELLI: COMUNICAZIONE  RELATIVA  ALL'INVIO  DELLA DOCUMENTAZIONE ACQUISITA C/O VARI ENTI DELL'A.M.  -  ALLEGATI  PLOTTAGGI  DEGLI AVVISTAMENTI RADAR ESEGUITI IL 27.06.80 (NOTA 2). COPIA DEGLI ALLEGATI ALLE PAGG. 1503-1507 E 1568-1572">fonte</abbr></sup></i>):
+
+<div class="cita" style="white-space: pre"><b>22^ CENTRO RADAR A.M. LICOLA</b> (NA)
+UFFICIO OPERAZIONI
+OPERAZIONI E ADDESTRAMENTO
+                                              ALL. 1 AL FOG. <b>433-9/589/1</b>
+                                              DELL'<b>11.07.80</b>
+                                                                                
+                         <b>PLOTTAGGIO DEL GIORNO 27.06.80
+             - AVVISTAMENTI RADAR EFFETTUATI NELLA ZONA DEL TIRRENO
+               DALLE ORE 1800/Z ALLE ORE 2134/Z</b>
+                                                                                
+1801/Z NNE     AJ045 PK 4830 F.1 - Q. 24 - VEL. 460 FAJ045                      
+       NNE     AJ045 PK 5850                                                    
+       NNE     AJ045 QL 2020                                                    
+1811/Z NNE     AJ045 QL 2050                                                    
+1813/Z NNE     AJ045 CEASE                                                      
+</div>
+
+
+Si può ben notare che le informazioni sono poche ed approssimative. &Egrave; evidente, infatti, l'ampio intervallo di tempo intercorrente tra due posizioni consecutive, l'orario arrotondato al minuto, la posizione data in coordinate GEOREF anziché in distanza e azimut, non sono nemmeno indicati i codici SIF.<br>
+<br>
+
+
+<!-- Cartina GEOREF -->
+<div style="margin-bottom: 2em; display: inline-block; width:100%;">
+<div id="cartina_georef" style="width: 700px; height: 600px; float:left; padding-right: 2em"></div>
+Per ciò che concerne la posizione in coordinate <a href="https://en.wikipedia.org/wiki/World_Geographic_Reference_System" target="_blank">GEOREF</a>, qui vediamo una griglia d'esempio con la codifica limitata alla zona d'interesse.<br>
+<br>
+Se, ad esempio, si vuole convertire la prima riga "PK 4830", bisogna iniziare a considerare che NJ è sottinteso: NJ PK 4830.<br>
+Il "blocco" principale, ampio 15 gradi, della longitudine è rappresentato dalla lettera N, ciò significa che la longitudine è compresa tra 0 e 15°.<br>
+P è il "sotto-blocco" ampio 1 grado e va da 13 a 14°. Infine, il numero 48 rappresenta i primi di grado; risultato: 13° 48’ E.<br>
+<br>
+Per la latitudine il procedimento è identico. La lettera J rappresenta una latitudine compresa tra 30 e 45°, K va da 9 a 10°; risultato: (30 + 9)° 30’ N.
+</div>
+
+<div style="margin-bottom: 2em; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="li-georef_fiume.png" style="float:left; padding-right: 30px;" alt="" title="">
+Come detto, la griglia della precedente cartina va suddivisa in primi di grado.<br>
+<br>
+Questa cartina d'esempio mostra le lunghissime piste dell'aeroporto di Fiumicino (lunghe circa 4 km) e la griglia in primi di grado. &Egrave; così possibile avere un'idea sull'approssimazione usata nel definire la posizione dei plot tramite le coordinate riportate nello stralcio del DA-1.<br>
+</div>
+
+<br>
+
+<!--  b7- Plottaggi grossolani  -->
+Gli avvocati di parte civile, sempre nell'esposto già nominato, scrivono
+(v. "<a href="http://cristianopi.altervista.org/straus/v1f7_WP000707_002.pdf" target="_blank">WP000707_002.DOC</a>"
+<i><sup><abbr title="Procura della Repubblica di Roma, VOL. I - FASC. 7, PAG. 1810-1812. DATA DOCUMENTO 06.05.89, DA  AVV.TI  FERRUCCI  ROMEO,  GALASSO ALFREDO, GAMBERINI ALESSANDRO DIFENSORI DI PARTE CIVILE A PROCURA DELLA REPUBBLICA NA: RICHIESTA  DISPOSIZIONE  INCRIMINAZIONE  IN  MERITO AD INCIVOLO DC9 ITAVIA ITIGI IH-870 DEL 27.06.80. ALLEGATA PERIZIA SU INCIDENTE SUDDETTO (PAGG. 1813-1825) ALLA NOTA 2 E SEGUENTI.">fonte</abbr></sup></i> a pag. 2):
+
+<div class="cita">
+A   PARERE  DEL  COLLEGIO <span style="font-family: sans-serif"><i>[peritale, ndr]</i></span> DETTA  TRACCIA  PUO'  COINCIDERE  CON  AIRMALTA   PUR RISCONTRANDO LA <u>NOTEVOLE GROSSOLANITA' CON CUI DETTI DATI SONO STATI RIPORTATI</u>.<br>
+<span style="font-family: sans-serif"><i>[...]</i></span><br>
+DIFFICILE E' L'INTERPRETAZIONE DEI DATI RADAR DERIVANTI DAL DOCUMENTO IN  ESAME.<br>
+CERTAMENTE SI SONO RILEVATE CARENZE NEL PLOTTAGGIO PER LE <u>GROSSOLANE INDICAZIONI</u> IN ESSO RIPORTATE.<br>
+VA  COMUNQUE  RILEVATO  CHE LA DIFESA AEREA NON AVEVA NE HA  TUTTORA  I  COMPITI SPECIFICI DEL CONTROLLO DEL TRAFFICO AEREO, IN QUANTO ALLA STESSA INTERESSA SOLO STABILIRE  SE  UN AEREO E' AMICO O NON. UNA VOLTA FATTA  QUESTA  IDENTIFICAZIONE L'A/M VIENE SEGUITO SOLO PER QUALCHE BATTUTA E POI LASCIATO.
+</div>
+
+Nonostante l'utilizzo delle coordinate GEOREF, il posizionamento dei plot potrebbe anche essere accettabile. Ciò che invece, rende questo plottaggio privo di utilità è la scarsezza delle informazioni riportate e il fatto che nessuno può garantire la presenza di tutte le tracce che furono registrate nel DA-1.<br>
+<br>
+
+
+
+
+
+<!-- ====  CENTRI MINORI  ====================================================================================================== -->
+
+
+<h3 id="centriMinori">Centri radar minori</h3>
+
+I centri radar non trattati nei precedenti paragrafi vengono considerati "minori" dal giudice Priore, che li tratta in <abbr title="Ordinanza-Sentenza">O-S</abbr> sia in forma sintetica che in forma dettagliata.<br>
+In effetti, su questi centri minori non c'è molto da rilevare in merito ai dati radaristici.<br>
+Qui di seguito viene considerato il solo centro di Siracusa per la singolarità delle informazioni pervenute all'A.G. sul suo stato di funzionamento.<br>
+
+
+<!--  Siracusa   -->
+
+<h3 id="siracusa" style="margin-left:2em">- Siracusa</h3>
+
+Il centro radar di Siracusa era di tipo fonetico-manuale.<br>
+In merito al ritrovamento dei dati radaristici c'è poco da dire (v. "<a href="https://www.stragi80.it/documenti/gi/Titolo2a.pdf" target="_blank">TITOLO 2 - L’istruttoria dal 27 luglio 90 al 31 dicembre 97.</a>" a metà pag. 434):
+
+<div class="cita">
+Nel  sito  non  sono  mai  stati  rinvenuti  i  registri  di  sala  operativa,  il <u>DA1</u>, i nastri di registrazione TBT.
+</div>
+
+Ciò che è singolare è che per questo centro sono state fornite varie versioni sullo stato di funzionamento del radar (v. "<a href="https://www.stragi80.it/documenti/gi/Titolo2a.pdf" target="_blank">TITOLO 2 - L’istruttoria dal 27 luglio 90 al 31 dicembre 97.</a>" a pag. 453):
+
+<div class="cita">
+Questione fondamentale di queste indagini, è chiaro, è stata quella di stabilire se al momento dell’incidente del DC9 <u>il radar di Siracusa fosse o meno in manutenzione.</u> A tal riguardo è opportuno ricordare che l’AM ha prospettato, nel corso degli anni, versioni diverse sull’efficienza del radar di Siracusa  quel  27  giugno  80.
+<u>La  prima  versione  è  stata  quella  del  <b>perfetto funzionamento</b>  di  Marsala,  Licola  e  Siracusa</u>,  come  si  evince  dalle  lettere dello SMA del 20.12.80 e del SIOS del 23.12.80. Nello stesso senso si era espresso  il  generale  Arati  avanti  alla  Commissione  Stragi  il  10.01.90, precisando  che  il  funzionamento  del  radar  di  Siracusa  era  condizione imprescindibile dell’esercitazione Synadex di Marsala.
+<u>La seconda versione dava lo stato di <b>avaria assoluta</b> del Centro radar di Siracusa</u>. In tal senso si era  espresso  il  generale  Tascio  nella  sua  terza  audizione  avanti  alla Commissione  Stragi  in  data  31.10.89.
+<u>La  terza  voleva  la  cessazione dell’avaria  alle  ore  21.00  del  27.06.80</u>.  In  questo  senso  si  è  espresso  il generale Carlo Blandini, responsabile del Servizio relazioni esterne dell’AM nell’intervista resa al “TG2 Dossier” in onda il 9.01.90. Nello stesso senso si  è  espresso  avanti  alla  Commissione  Stragi  il  maggiore  Patroni  Griffi, Controllore del SOC di Martina Franca all’epoca del disastro nell’audizione del  10.01.90.  Da  ultimo  l’ITAV  ha  comunicato  in  data  19.09.90  che  <u>la situazione del sito radar di Siracusa, alla data del 27.06.80, era la seguente: “radar primario e secondario in manutenzione programmata dalle 12.00 alle ore 19.00; efficiente dopo tale ora”</u>. 
+</div>
+<br>
+
+Per ciò che concerne gli altri centri radar, si rimanda al capitolo "5. Sintesi dei siti minori." del "<a href="https://www.stragi80.it/documenti/gi/Titolo2a.pdf" target="_blank">TITOLO 2 - L’istruttoria dal 27 luglio 90 al 31 dicembre 97.</a>" da pag. 402.<br>
+
+
+<br>
+<hr>
+<br>
+
+
+
+<!-- ===   CONCLUSIONE   ==================================================================================================== -->
+
+
+<span style="margin-left: 2em"><b>Conclusione</b></span><br>
+
+La seguente tabella sintetizza ciò che è stato detto in questa pagina e include anche i centri minori non direttamente trattati:<br>
+<br>
+
+<table style="margin-left: auto; margin-right: auto;">
+
+<tr> <td colspan="5" style="text-align:centre; background-color:#fff4d5;"><b><i>RIEPILOGO DATI RADARISTICI RINVENUTI</i></b></td></tr>
+<tr style="font-weight:bold; background-color:#ecf4ff"> <td>Centro radar</td> <td>Tipo</td> <td>Nastri</td> <td>Tabulati/DA1</td> <td>Note</td> </tr>
+
+<tr> <td>Capo Mele      </td> <td><img src="tr_manu.png"/></td> <td>n. a.              </td> <td><img src="si.svg"/></td> <td></td> </tr>
+
+<tr> <td>Jacotenente    </td> <td><img src="tr_semi.png"/></td> <td><img src="no.svg"/></td> <td><img src="no.svg"/></td> <td></td> </tr>
+
+<tr> <td>Licola         </td> <td><img src="tr_manu.png"/></td> <td>n. a.              </td> <td><img src="no.svg"/></td> <td style="text-align:left;">Rinvenuto stralcio DA1</td> </tr>
+
+<tr> <td>Marsala        </td> <td><img src="tr_semi.png"/></td> <td><img src="sb.png"/></td> <td><img src="sn.png"/></td> <td style="text-align:left;">Rinvenute THR e CDR, dubbi su manipolazione nastri, non rinvenuto né DA1 né nastro Synadex</td> </tr>
+
+<tr> <td>Mortara        </td> <td><img src="tr_semi.png"/></td> <td><img src="no.svg"/></td> <td><img src="no.svg"/></td> <td></td> </tr>
+
+<tr> <td>Poggio Ballone </td> <td><img src="tr_semi.png"/></td> <td><img src="no.svg"/></td> <td><img src="sn.png"/></td> <td style="text-align:left;">Rinvenute THR parziali</td> </tr>
+
+<tr> <td>Poggio Renatico</td> <td><img src="tr_semi.png"/></td> <td><img src="no.svg"/></td> <td><img src="no.svg"/></td> <td></td> </tr>
+
+<tr> <td>Potenza Picena </td> <td><img src="tr_semi.png"/></td> <td><img src="no.svg"/></td> <td><img src="sn.png"/></td> <td style="text-align:left;">Rinvenuta solo THR</td> </tr>
+
+<tr> <td>Siracusa       </td> <td><img src="tr_manu.png"/></td> <td>n. a.              </td> <td><img src="no.svg"/></td> <td></td> </tr>
+
+</table>
+
+<br>
+
+&Egrave; evidente che la reale situazione dimostrata su base documentale è molto differente da quella che si vuole far credere, poiché i dati radaristici effettivamente pervenuti all'A.G. rappresentano soltanto una piccolissima parte di quelli prodotti e su quei pochi dati acquisiti ci sono seri e fondati dubbi sulla loro autenticità.<br>
+<br>
+
+
+<script>
+CreaIndice();
+
+
+"use strict";
+
+layout.showlegend= false; layout.mapbox.style= "basic";	Plotly.setPlotConfig({ mapboxAccessToken: 'pk.eyJ1IjoiY3Jpc3RpYW5vcGkiLCJhIjoiY2pycXl1N3piMXAzODQzbnRtZzd4NzBlbiJ9.QugZVJkXpGrSJpoz_ghJqQ'});
+layout.mapbox.zoom= 6; layout.mapbox.center.lat= 40; layout.mapbox.center.lon= 12;
+
+
+// Coordinate RADAR
+var RADAR= {
+	//textfont: { family: 'monospace', size: 18, color: 'red' },	
+	type:'scattermapbox', name: 'Antenne', hoverinfo: "text",
+	text:['Marconi',  'Selenia', 'Poggio Ballone', 'Marsala', 'Capo Mele', 'Jacotenente', 'Licola' , 'Mortara', 'Poggio Renatico', 'Potenza Picena', 'Otranto', 'Siracusa'],
+	lat: [41.798275,  41.806389, 42.829          , 37.82694 , 43.95825   , 41.79161     , 40.894178, 45.231413, 44.791079        , 43.36656        , 40.11656 , 37.08278  ],
+	lon: [12.219387,  12.249444, 10.8804         , 12.53778 ,  8.169613  , 16.05103     , 14.040118,  8.803515, 11.493964        , 13.67392        , 18.50018 , 15.2475   ],
+	mode: 'markers', marker: { size: 6, color: 'red' }, 
+};
+
+
+var GRID= {
+	type:'scattermapbox', mode: 'lines', line: { width: 1, color: 'black' },
+	lat: [], lon: []
+};
+
+
+var stp= 1; // Each of the 1-degree quadrangles is further subdivided into 60 1-minute longitude zones
+
+// LON
+for(var i= 0; i < 360; i += stp) {
+	GRID.lat.push(-90); GRID.lat.push(90); GRID.lat.push('null');
+	GRID.lon.push(i); GRID.lon.push(i); GRID.lon.push('null');
+}
+
+// LAT
+for(var i= -90 + stp; i < 90; i += stp) {
+	GRID.lat.push(i); GRID.lat.push(i); GRID.lat.push('null');
+	GRID.lon.push(0); GRID.lon.push(360); GRID.lon.push('null');
+}
+
+
+// Punti per far comparire la popup label
+var LAB= {
+	type:'scattermapbox', mode: 'markers', marker: { size: 1, color: 'black' },
+	lat: [], lon: []
+};
+stp= 1;
+for(var lo= 0; lo < 360; lo += stp) {
+	for(var la= -90 + stp; la < 90; la += stp) {
+		LAB.lon.push(lo); LAB.lat.push(la);
+	}
+}
+
+
+// GEOREF  [https://en.wikipedia.org/wiki/World_Geographic_Reference_System]
+var GR= {
+	type:'scattermapbox', name: '',
+	lat: [], lon: [],
+	text:[], textposition: "top right",
+	mode: 'markers+text', marker: { size: .1, color: 'blue' }
+};
+
+const LE= ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'J', 'K', 'L', 'M', 'N', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+
+var LO1i= 0;
+for(var lo1= -180; lo1 < 180; lo1 += 15) { // 1° LIVELLO
+	var LA1i= 0;
+	for(var la1= -90; la1 < 90; la1 += 15) { // 1° LIVELLO
+		
+		console.log(lo1 + " " + la1 + "  " + LE[LO1i] + LE[LA1i]); // 1° LIVELLO
+
+		var LO2i= 0;
+		for(var lo2= 0; lo2 < 15; lo2++) { // 2° LIVELLO
+			var LA2i= 0;
+			for(var la2= 0; la2 < 15; la2++) { // 2° LIVELLO
+				if(lo1 === 0 || lo1 === 15) if(la1 === 30) {
+					//console.log((lon + lo2) + "  " + (la1 + la2) + "  " + LE[LO1i] + LE[LA1i] + "  " + LE[LO2i] + LE[LA2i]);
+					GR.lon.push(lo1 + lo2); GR.lat.push(la1 + la2); GR.text.push(LE[LO1i] + LE[LA1i] + " " + LE[LO2i] + LE[LA2i]);
+				}
+				LA2i++;
+			}
+			LO2i++;
+		}
+		LA1i++;
+	}
+	LO1i++;
+}
+
+
+Plotly.plot('cartina_georef', [GRID, LAB, GR, RADAR], layout, {responsive: true, displayModeBar: false});
+
+</script>
+
+
+</body>
+</html>

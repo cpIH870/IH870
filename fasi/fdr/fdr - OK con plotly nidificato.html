@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>	
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Strage di Ustica">
+	<meta name="keywords" content="ustica,ih870">
+	<title>Strage di Ustica - Grafici FDR</title>
+	<link rel="stylesheet" type="text/css" href="../../stile.css">
+	<script src="../../plotly-latest.min.js"></script>
+	<script src="../../comune.js"></script>
+	<script src="../../crea_indice.js"></script>
+</head>
+<body>
+
+<div class="indice"><a href="../../index.html">Indice</a></div>
+
+<h2>Fasi del volo - Grafici <i>flight data recorder</i></h2>
+
+
+
+La perizia Misiti include alcuni grafici relativi ai parametri di volo dell'IH870 registrati dalla "scatola nera", propriamente chiamata <abbr title="Flight Data Recorder">FDR</abbr> o registratore dei dati di volo.<br>
+In questa pagina vengono riportati i grafici più significativi. I parametri di volo sono messi in relazione ai punti salienti attraversati dall'IH870 lungo il suo percorso.<br>
+<br>
+
+
+<!-- ========================================================================================================== -->
+
+
+<p style="margin-left: 5em"><b>INDICE</b></p>
+
+<p id="indice" style="margin-left: 3em">
+<!-- riempito dal JS -->
+</p>
+<br>
+
+<hr>
+
+<br>
+
+<!-- ========================================================================================================== -->
+
+
+La perizia Misiti tratta con sufficiente dettaglio le caratteristiche dell'FDR installato a bordo del DC-9 I-TIGI a partire da pag. IV-15 e riporta i seguenti grafici a partire dalla fig. IV-14:
+<ul style="margin-top: 0px">
+<li>posizione geografica;</li>
+<li>altitudine;</li>
+<li>velocità indicata dall'anemometro (<a href="https://it.wikipedia.org/wiki/Velocit%C3%A0_indicata" target="_blank">IAS</a>);</li>
+<li>prua magnetica;</li>
+<li>accelerazione verticale.</li>
+</ul>
+
+L'FDR iniziava a registrare i parametri di volo in funzione del tempo non appena veniva acceso il radio bus di sinistra e incideva le tracce sulle due facce di un nastro metallico tramite "pennini" con la punta di diamante. Il nastro veniva trascinato alla velocità di 6 pollici/ora o 0,042 mm/s.<br>
+<br>
+
+
+<!-- ===  GRAFICO PARAMETRI di VOLO  === -->
+
+<h3 id="paravolo">Parametri di volo</h3>
+
+Il grafico seguente visualizza in due scale diverse la quota (scala di sinistra) e la prua e la velocità indicata (scala di destra). Le linee tratteggiate verticali e le relative etichette rappresentano alcuni momenti salienti del volo; muovendo il puntatore del mouse all'interno delle etichette compare la spiegazione.<br>
+Le etichette associate alle tre tracce (che compaiono muovendo il mouse nell'area del grafico) mostrano: il tempo trascorso dall'attivazione dell'FDR nel formato "MM:SS (secondi)", l'orario UTC e il valore del parametro.<br>
+<br>
+<span style="background:#ffeb3b; color:#000; padding:1px 1px; border-radius:4px;"><b>NOTA BENE</b></span> Il particolare modo di registrazione dei valori (veramente arcaico) e la bassa qualità dei grafici (deformati e con tratto non sempre netto) introducono incertezze significative nella sincronizzazione dei parametri di volo. Si pensi, ad esempio, alla bassissima velocità di trascinamento del nastro; se i pennini non sono posizionati perfettamente allineati gli uni con gli altri, un errore di posizionamento di appena mezzo millimetro produce uno sfasamento temporale di ben 12 secondi. Tutto ciò implica che il sorvolo dei punti indicati rispetto all'orario UTC e lo sfasamento tra i vari parametri possono essere affetti da errori fino ad una trentina di secondi. Per ulteriori informazioni, si veda il prossimo paragrafo "<a href="#conversione" target="_blank">Conversione dai grafici originali</a>".<br>
+<br>
+
+<div id="ALT_IAS_HDG" style="height: 700px"></div>
+
+<br>
+
+
+<!-- ===  CONVERSIONE DAI GRAFICI ORIGINALI  === -->
+
+
+<h3 id="conversione">Conversione dai grafici originali</h3>
+
+<!-- v. P:\PRG_VC2019\USTICA - Radar\FDR\Grafici\Grafici.docx -->
+
+I grafici presentati in questa pagina sono stati ottenuti tramite un processo di conversione automatica dei grafici originali presenti nel file PDF della perizia Misiti.<br>
+<br>
+
+<div style="margin-bottom: 2em; display: inline-block; width:100%;">
+<img src="ias.png" style="float:left; padding-right: 1em;" alt="" title="">
+In questo esempio si nota bene la non ortogonalità degli assi, la deformazione del grafico e l'imperfezione della traccia in vari punti, oltre ai vari puntini e strisce.<br>
+<br>
+La lettura automatica di questo grafico genera 12443 punti per il valore della velocità indicata. Tutti questi punti vengono raggruppati (con opportuna tecnica) e ridotti a 1700 punti utili per ricostruire il grafico originale. Ciò è necessario principalmente per evitare che ad un dato tempo (asse orizzontale) corrispondano vari valori del parametro considerato.<br>
+Sebbene la ricostruzione sia fedele punto per punto, la deformazione del grafico introduce errori dovuti alla mancanza di punti di riferimento determinabili con esattezza.<br>
+</div>
+
+
+Il collegio peritale cerca di stabilire la corrispondenza tra la scala temporale dell'FDR (in secondi) e l'orario UTC facendo alcune deduzioni. Quelle che seguono sono alcune delle considerazioni riportate a pag. IV-17 della perizia:<br>
+
+<div class="cita">
+
+L'esame del tabulato, consente anche di verificare che il rilascio freni al decollo, si è avuto dopo 366 sec dall'attivazione dell'FDR e, pertanto, l'incidente si è verificato dopo 52' 54" dall'inizio della manovra di decollo.<br>
+Poiché, come riportato nella Parte I, il decollo è avvenuto circa alle ore 20 08' locali (18 08' GMT), l'incidente può essersi verificato nell'intorno delle ore 21 00'.54" locali (19 00'.54" GMT).<br>
+Tale dato è in buon accordo con quanto ricavabile dai dati radar che, come riferito in altra parte della relazione, rilevano l'ultimo segnale del trasponder alle 20h 59' 45" locali (18h 59' 45" GMT).<br>
+Sempre dal tabulato allegato al documento dell'Ente inglese, si può osservare che il velivolo ha raggiunto il livello di volo FL290 a t=1854 sec dall'inizio della registrazione, e quindi a t=24' 48" dal decollo e cioè alle 18h 32'48" GMT ed ha iniziato la discesa a t=2796 sec e cioè alle 18h 48' 30" GMT.<br>
+Anche questi dati risultano in buon accordo con quanto riportato nelle trascrizioni delle registrazione delle comunicazioni Bordo/Terra/Bordo (B/T/B) dalle quali risulta che il velivolo si è livellato al FL290 (29000 ft) alle 18h 31' 56" GMT, e tale livello è stato mantenuto fino alle 18h 46' 31" GMT.<br>
+
+</div>
+
+Tuttavia, tali considerazioni non possono essere prese tali e quali per essere usate in questa pagina, poiché è necessario mantenere la coerenza della scala dei grafici su tutta l'aerea di ognuno dei grafici.<br>
+Pertanto, è preferibile fissare l'unico punto temporale determinabile con certezza: l'istante dell'interruzione dell'energia elettrica e da questo calcolare la scala temporale di ogni grafico (asse orizzontale).<br>
+Siccome dai tabulati radar di Roma si nota bene che l'abbattimento è avvenuto circa 3,5 s dopo dell'ultima risposta del transponder del DC-9 e che tale risposta è stata trasmessa alle 18:59:45 (orario di Roma Radar), si può facilmente fissare l'estremo destro dei grafici alle 18:59:48,5. Tenendo conto della scala, si ottiene che il tempo zero dell'FDR corrisponde alle 18:00:40, con precisione ampiamente sufficiente in relazione a quanto già detto sulla scarsa qualità tipografica dei grafici.<br>
+Procedendo in questo modo, risulta che la velocità indicata inizia a salire dopo 364 s dall'inizio della registrazione, tempo praticamente identico a quello calcolato dai periti. Una differenza leggermente maggiore si riscontra, invece, nella durata totale della registrazione, che risulta di circa 3549 s, contro i 3540 s calcolati dai periti, differenza, comunque, ben più piccola rispetto all'incertezza sulla corrispondenza del tempo FDR all'orario UTC.<br>
+<br>
+
+
+
+
+
+
+<h3 id="pos_IH870">Posizione IH870</h3>
+
+Come detto, l'FDR registrava anche la posizione dell'aereo. Tuttavia, l'assenza del dato temporale e la registrazione della posizione molto approssimativa (come si evidenzia dal confronto con i dati radaristici), rende questo grafico praticamente inutile.<br>
+<br>
+
+<div style="margin-bottom:1em; width:100%; display:flex; align-items:flex-start; gap:1em;">
+<img src="POS.png" alt="">
+<div id="cartina" style="width:500px; height:700px;"></div>
+<div>
+L'immagine di sinistra (tratta dalla fig. IV-14 della perizia) è compressa in orizzontale di un fattore 0,743 per portare in scala la longitudine rispetto alla latitudine media di 42°.<br>
+
+Il tratto blu rappresenta la rotta ricavata dall'immagine di sinistra, mentre col tratto verde viene mostrata la rotta calcolata con il processo d'integrazione spiegato in precedenza. Di questa seconda rotta, è riportata soltanto la parte fino a Peretola, non coperta dai dati dei radar di Roma.
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+"use strict";
+
+// File in "P:\PRG_VC2019\wxGraphRead" modificati a mano
+
+
+// Posizioni salienti
+Plotly.d3.csv('pos_salienti.csv', function(err, rows)
+{
+	var POS= {
+		type: "scatter", hoverinfo: 'skip', showlegend: false,
+	//	mode: "markers+text", textposition: 'top center', marker: { size: 1, color: 'red' },
+		text: unpack(rows, 'txt'), hovertext: unpack(rows, 'hover'),
+		x: unpack(rows, 't'), y: []
+	};
+
+
+	var config= {
+		//showLink: true, plotlyServerURL: "https://chart-studio.plotly.com",
+		responsive: true
+	};
+
+
+	Plotly.d3.csv('alt_hdg_ias.csv', function(err, rows)
+	{
+		// t,alt,hdg,ias
+		var tSec= unpack(rows, 't');
+		const MMSS= tSec.map(s => new Date(Number(s) * 1000).toISOString());
+
+		const t0= Date.parse("1980-06-27T18:00:40Z");
+		const UTC= tSec.map(s => new Date(t0 + Number(s) * 1000));	
+
+		POS.x= POS.x.map(s => new Date(Number(s) * 1000).toISOString());
+		
+		var ALT= {
+			type: "scatter", name: "ALT",
+			hoverinfo: 'text', text: [],
+			mode: "lines", line: { width: 2, color: '#0000ff' },
+			x: MMSS, y: unpack(rows, 'alt')
+		};
+		
+		var IAS= {
+			type: "scatter", name: "IAS",
+			hoverinfo: 'text', text: [],
+			mode: "lines", line: { width: 2, color: '#ff9900' },
+			x: MMSS, y: unpack(rows, 'ias'),
+			yaxis: 'y2'
+		};
+
+		var HDG= {
+			type: "scatter", name: "HDG",
+			hoverinfo: 'text', text: [],
+			mode: "lines", line: { width: 2, color: '#336600' },
+			x: MMSS, y: unpack(rows, 'hdg'),
+			yaxis: 'y2'
+		};
+
+		for(var i= 0; i < MMSS.length; i++) {
+	//		const t= 'Tempo: ' + MMSS[i].substring(14,19) + '<br>' + 'UTC: ' + UTC[i].toISOString().substring(11,19) + '<br>';
+			const t= 'Tempo: ' + MMSS[i].substring(14,19) + ' (' + tSec[i] + ')<br>' + 'UTC: ' + UTC[i].toISOString().substring(11,19) + '<br>';
+			ALT.text[i] = t + 'ALT: ' + Number(ALT.y[i]).toFixed(0) + ' ft';
+			IAS.text[i] = t + 'IAS: ' + Number(IAS.y[i]).toFixed(1) + ' kn';
+			HDG.text[i] = t + 'HDG: ' + Number(HDG.y[i]).toFixed(1) + '°';
+		}
+
+		var lay= {
+			separators: ',', showlegend: false,
+			margin: { l:0, r:0, t:10, b:0},
+			xaxis: {
+				title: '<b>Tempo</b> [mm:ss]', automargin: true,
+				tickformat: '%M:%S'
+			},
+			yaxis: {
+				title: { text: '<b>Quota</b> [ft]', standoff: 15 },
+				automargin: true,
+				titlefont: { color: 'blue' }, tickfont: { color: 'blue' }, gridcolor: '#ccccff',
+				tickformat: '.0f'
+			},
+			yaxis2: {
+				title: { text: '<b>IAS</b> [kn] e <b>HDG</b> [gradi]', standoff: 15 }, // Aumenta lo spazio tra titolo e numeri
+				automargin: true,
+				overlaying: 'y', side: 'right'
+			},
+			shapes: [], annotations: []
+		};
+
+
+		for(var i= 0; i < POS.x.length; i++) {
+			 lay.shapes.push({
+				  type: 'line',
+				  xref: 'x', yref: 'paper',
+				  x0: POS.x[i], x1: POS.x[i],
+				  y0: 0, y1: 1,
+				  line: { color: 'red', width: 1, dash: 'dot' }
+			 });
+
+			lay.annotations.push({
+				x: POS.x[i], xref: 'x',
+				y: 1, yref: 'paper',
+
+				text: POS.text[i], hovertext: POS.hovertext[i],
+
+				showarrow: false,
+
+				xanchor: 'center',
+				yanchor: 'top', yshift: -5,
+				align: 'center',
+
+				//font: { family: 'Verdana, sans-serif', size: 14, color: 'red' }
+				bgcolor: 'white', bordercolor: 'red', borderwidth: 1, borderpad: 3, opacity: 1		
+			});	 
+		}
+
+
+		Plotly.newPlot('ALT_IAS_HDG', [ALT, IAS, HDG], lay, config);
+		
+		
+		
+		// PRUA su grafico VERTICALE
+		
+		var HDG_vert= {
+			type: "scatter", name: "HDG",
+			mode: "lines", line: { width: 2, color: '#336600' },
+			x: unpack(rows, 'hdg'), y: MMSS,
+			hovertemplate:
+				'Tempo: %{y|%M:%S}<br>' +
+				'Prua: %{x:.1f}°' +
+				'<extra></extra>' // elimina il riquadro con il nome della traccia ("HDG")
+		};
+		
+		var lay_vert= {
+			separators: ',', showlegend: false, hovermode: 'y',//closest',
+			margin: { l:0, r:0, t:0, b:0},
+			yaxis: {
+				automargin: true,
+				autorange: 'reversed', // 0 in alto
+				type: 'date', tickformat: '%H:%M:%S',
+				title: {
+					text: '<b>Tempo</b> [mm:ss]',
+					standoff: 15 // Aumenta lo spazio tra titolo e numeri
+				}
+			},
+			xaxis: {
+				zeroline: false, // non mostra la linea verticale X = 0
+				automargin: true,
+				autorange: 'reversed', // 0 a destra
+				title: '<b>Prua</b> [gradi]',
+				titlefont: { color: '#336600' }, tickfont: { color: '#336600' }, gridcolor: '#d9ffb3'
+			},
+			shapes: [{ // Sostituisce la linea verticale X = 0 (evita che sia più marcata della griglia)
+				type: 'line', yref: 'paper',
+				x0: 0, x1: 0, y0: 0, y1: 1,
+				line: {
+					color: '#d9ffb3', width: 1, dash: 'solid'
+				}
+			}]
+		};
+		Plotly.newPlot('HDG_vert', [HDG_vert], lay_vert, config);
+	});
+});
+
+
+
+// ------------------------------------------------------------------------------------------------------------------
+
+// CARTINA POSIZIONE
+
+Plotly.setPlotConfig({
+	mapboxAccessToken: 'pk.eyJ1IjoiY3Jpc3RpYW5vcGkiLCJhIjoiY2pycXl1N3piMXAzODQzbnRtZzd4NzBlbiJ9.QugZVJkXpGrSJpoz_ghJqQ'
+});
+
+
+Plotly.d3.csv('gra_lon-lat.csv', function(err, rows)
+{
+	var FDR= {
+		type:'scattermapbox', name: 'Pos. FDR',
+		//text: [], hoverinfo: "text",
+		lat: unpack(rows, 'lat'), lon: unpack(rows, 'lon'),
+		mode: 'markers', marker: { size: 4, color: 'blue' }
+	};
+	
+	PUNTI.text.push('PIPPO'); PUNTI.lat.push(44 + 41.3/60); PUNTI.lon.push(11 + 30.6/60); 
+	AYW.lat.push(44.8133); AYW.lon.push(11.6167); // FER
+	
+	layout.legend= {
+		x: 0.99, y: 0.99,
+		xanchor: 'right', yanchor: 'top',
+		bgcolor: 'rgba(255,255,255,0.7)',
+		bordercolor: 'black',
+		borderwidth: 1
+	};
+	
+	layout.mapbox= {
+		style: 'basic', // "streets"; // Orografia e strade
+		center: { lat: 42.25, lon: 12 },
+		zoom: 6.1, bearing: 0, pitch: 0
+	};
+
+
+	Plotly.d3.csv('../rafari.csv', function(err, rows)
+	{
+		// ID,T,LAT,LON
+		var ID= unpack(rows, 'ID');
+		var T= unpack(rows, 'T');
+		var lat= unpack(rows, 'LAT');
+		var lon= unpack(rows, 'LON');
+		var n= ID.length;
+		for(var i= 0; i < n; i++) {
+			// T: 0= VOR/DME, 1= VORTAC, 2= VOR, 3= NDB, 4= TACAN
+			// MLG: VOR/DME o TACAN
+			switch(T[i]) {
+			case '0': VORDME.text.push(ID[i]); VORDME.lat.push(lat[i]); VORDME.lon.push(lon[i]); break;
+			case '1': VORTAC.text.push(ID[i]); VORTAC.lat.push(lat[i]); VORTAC.lon.push(lon[i]); break;
+			case '2': VOR.text.push(ID[i])   ; VOR.lat.push(lat[i])   ; VOR.lon.push(lon[i])   ; break;
+			case '3': NDB.text.push(ID[i])   ; NDB.lat.push(lat[i])   ; NDB.lon.push(lon[i])   ; break;
+			case '4': TACAN.text.push(ID[i]) ; TACAN.lat.push(lat[i]) ; TACAN.lon.push(lon[i]) ; break;
+			}
+		}
+
+
+		// Posizione INTEGRATA
+		Plotly.d3.csv('pos_integrata.csv', function(err, rows)
+		{
+			// t,UTC,lon,lat,ias,tas,alt,hdgT,ws,wd
+			var POS_INTE= {
+				type:'scattermapbox', name: 'Calcolata',
+				text: unpack(rows, 'UTC'), hoverinfo: "text",
+				lat: unpack(rows, 'lat'), lon: unpack(rows, 'lon'),
+				mode: 'lines+markers', line: { width: 1, color: '#008800' },
+				marker: { size: 4, color: '#008800' }
+			};
+
+			const t= unpack(rows, 't');
+			const ias= unpack(rows, 'ias');
+			const tas= unpack(rows, 'tas');
+			const alt= unpack(rows, 'alt');
+			const hdgT= unpack(rows, 'hdgT');
+			const wspd= unpack(rows, 'ws'), wdir= unpack(rows, 'wd');
+			for(var i= 0; i < POS_INTE.lat.length; i++)
+				POS_INTE.text[i] += ', t: ' + t[i] +
+					'<br>h: ' + alt[i] + ', hdgT: ' + hdgT[i] +
+					'<br>IAS: ' + ias[i] + ', TAS: ' + tas[i] +
+					'<br>WND: ' + wdir[i] + '@' + wspd[i]
+
+			Plotly.newPlot('cartina', [FDR, AYW, VORTAC, VORDME, VOR, NDB, TACAN, PUNTI, POS_INTE], layout, {responsive: true});
+
+		});
+	});
+});
+
+
+CreaIndice();
+
+</script>
+
+</body>
+</html>

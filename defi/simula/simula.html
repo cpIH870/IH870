@@ -1,0 +1,1256 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Strage di Ustica">
+	<meta name="keywords" content="ustica,ih870">
+	<title>Strage di Ustica - Simulazioni numeriche</title>
+	<link rel="stylesheet" type="text/css" href="../../stile.css">
+	<script src="../../plotly-latest.min.js"></script>
+	<script src="../../crea_indice.js"></script>
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=default' async></script>
+	<style>
+	body {
+		line-height: 1.8;
+	}
+	table, th, td {
+		border: 1px solid black;
+		border-collapse: collapse;
+		border: 1px solid Gray;
+		text-align: center;
+	}
+	td {
+		padding: 0px 4px 0px 4px;
+	}
+	</style>
+</head>
+
+<body>
+
+<div class="indice"><a href="../../index.html">Indice</a></div>
+
+<h2>Simulazioni numeriche</h2>
+
+
+Nel tentativo d'invogliare quanti più visitatori possibili ad approfondire e ad eseguire personalmente le simulazioni presentate nella pagina "<a href="../../fasi/6_cadu/cadu.html" target="_blank">Caduta in mare</a>", ho preparato questa pagina per spiegare in modo molto pratico e senza formalismi:
+<ul style="margin-top:0px">
+<li>la matematica che sta alla base di tali simulazioni;</li>
+<li>i metodi numerici che possono essere usati per effettuare le simulazioni;</li>
+<li>come eseguire le simulazioni direttamente <i>online</i>, senza bisogno d'installare niente nel proprio computer.</li>
+</ul>
+Il fatto di evitare formalismi rende imprecisa la definizione delle entità matematiche che saranno incontrate, ma non inficia in alcun modo la validità e la sostanza dei concetti esposti.<br>
+I visitatori che vorranno approfondire gli argomenti qui affrontati consultando gli innumerevoli siti di matematica, ne trarranno un sicuro beneficio, ma ciò non è richiesto per la comprensione delle simulazioni effettuate nel sito, in quanto le spiegazioni e gli esempi forniti in questa pagina dovrebbero essere sufficienti per avere la base minima indispensabile.<br>
+<br>
+Presentare direttamente il programma che simula la caduta di un motore del DC-9 senza prima spiegare le nozioni matematiche di base sarebbe stata una cosa priva di senso, perché ci si sarebbe ritrovati davanti ad un listato di un programma incomprensibile che, una volta eseguito, produce numeri altrettanto incomprensibili e che non si sa da dove siano saltati fuori.<br>
+Se si avrà la pazienza di leggere e comprendere i pochi concetti di base qui di seguito esposti, si dovrebbe essere in grado di poter giudicare la correttezza del programma e apprezzare la validità del risultato.<br>
+<br>
+
+
+
+<!-- Immagine GDB Online -->
+
+<div style="margin-bottom: 30px; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="gdb.png" style="float:left; padding: 0px 2em 1em 0px" alt="" title="">
+Il sito <a href="https://www.onlinegdb.com/" target="_blank"><i>GDB Online</i></a> è uno tra i tanti che offrono la possibilità di scrivere ed eseguire programmi nel <a href="https://it.wikipedia.org/wiki/C%2B%2B" target="_blank">linguaggio C++</a> direttamente <i>online</i>, senza bisogno d'installare niente nel proprio computer.<br>
+<br>
+Siccome troverete sempre il programma già scritto e pronto per essere eseguito, non è necessario saper scrivere i programmi, ma è comunque indispensabile avere le basi per comprendere il significato delle righe di codice che traducono le equazioni nel linguaggio comprensibile al computer.<br>
+<br>
+Per eseguire i programmi che di volta in volta dovranno essere usati, basta cliccare il pulsante verde "Run"; dopo qualche istante, il programma parte e genera le righe che mostrano il risultato.<br>
+</div>
+
+<br><br>
+
+
+<!-- Immagine Wolfram -->
+
+<div style="margin-bottom: 30px; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="wolfram.png" style="float:left; padding: 0px 2em 1em 0px" alt="" title="">
+<br>
+Poiché questa pagina non è nata con lo scopo d'insegnare la matematica, ma con quello di utilizzarla per risolvere alcuni problemi di fisica (come la caduta libera di un corpo in aria), la risoluzione delle equazioni che incontreremo sarà affidata all'autorevole sito <a href="https://www.wolframalpha.com/" target="_blank"><i>Wolfram Alpha</i></a>.<br>
+<br>
+Sebbene non sia nemmeno ipotizzabile che un sito come quello possa commettere errori su operazioni che, in massima parte, sono di banale risoluzione, bisogna sempre tener presente che in questo sito niente viene preso per buono; tutto deve essere basato su cose dimostrabili e questa pagina non può fare eccezioni. Sarà, quindi, verificato ogni risultato fornito da <i>Wolfram Alpha</i>.<br>
+Non potendo effettuare la verifica dei risultati applicando le regole matematiche (che, come detto, non c'interessano), lo faremo sfruttando procedimenti numerici, cioè algoritmi generici che consentono di calcolare i valori che c'interessano eseguendo operazioni elementari.<br>
+</div>
+
+<br><br>
+
+
+
+<!-- Immagine SpeedCrunch -->
+
+<div style="margin-bottom: 30px; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="speedcrunch.png" style="float:left; padding: 0px 2em 1em 0px" alt="" title="">
+Chi volesse provare ad effettuare qualche calcolo usando le formule presentate in questa pagina, può sfruttare la calcolatrice scientifica <a href="https://heldercorreia.bitbucket.io/speedcrunch/index.html" target="_blank"><i>SpeedCrunch</i></a>, totalmente gratuita, in versione <i>portable</i> e con la localizzazione in italiano.<br>
+</div>
+
+<br><br>
+
+
+
+<!-- ========================================================================================================== -->
+
+
+<p style="margin-left: 5em"><b>INDICE</b></p>
+
+<p id="indice" style="margin-left: 3em">
+<!-- riempito dal JS -->
+</p>
+<br>
+
+<hr>
+
+<br>
+
+<!-- ========================================================================================================== -->
+
+
+<h3 id="operazioni">Operazioni elementari e simbologia</h3>
+
+In una scienza esatta come la matematica ci si aspetterebbe che tutto sia univocamente definito e che le espressioni si scrivano soltanto in un unico modo, ben preciso ed uguale per tutti. Potrà sembrare strano, ma così non è.<br>
+&Egrave; pur vero che sarà impossibile che un matematico possa aver dubbi interpretativi nel leggere un'espressione scritta da un altro matematico, ma noi che matematici non siamo, abbiamo bisogno di definire in modo chiaro il significato della simbologia incontrata nel corso della lettura.<br>
+<br>
+
+<div style="margin-bottom: 1em; display: inline-block; width:100%">
+
+<table style="float:left; margin-right: 1em; font-size: .8em;">
+<tr> <td><b>Operazione</b></td> <td><b>Simbolo</b></td>     <td><b>Esempio</b></td></tr>
+<tr> <td>Somma</td>             <td>+</td>                  <td>3 + 4, a + b</td> </tr>
+<tr> <td>Sottrazione</td>       <td>-</td>                  <td>3 - 4, a - b</td> </tr>
+<tr> <td>Moltiplicazione</td>   <td>omesso o &middot;</td>  <td>3&middot;4, a&middot;b, 3x</td> </tr>
+<tr> <td>Divisione</td>         <td>/</td>                  <td>3 / 4, a / b, 3 / x</td> </tr>
+<tr> <td>Potenza</td>           <td>nessuno</td>            <td>3<sup>4</sup>, a<sup>b</sup>, 3<sup>x</sup></td> </tr>
+</table>
+
+La tabella riepiloga le principali operazioni che troveremo in questa pagina.<br>
+Si nota l'assenza del simbolo della crocetta per indicare la moltiplicazione, in quanto si confonderebbe con la lettera x, largamente usata nelle funzioni (come vedremo).<br>
+</div>
+<br>
+
+Le operazioni hanno precedenze diverse, ciò significa che non necessariamente debbano essere svolte nell'ordine in cui compaiono.<br>
+L'elevamento a potenza ha la precedenza su tutte le altre operazioni, la moltiplicazione e la divisione hanno la stessa precedenza e la hanno sulla somma e sottrazione che hanno uguale precedenza.<br>
+Ad esempio, l'espressione \( 2 + 3 \cdot 4 - 2^3 \) si svolge calcolando \(3 \cdot 4 = 12 \), si somma 2 ottenendo 14 e si sottrae 8 ottenendo 6. Se avessimo voluto calcolare 2 più 3 e moltiplicare il risultato per 4 avremmo dovuto scrivere \( (2 + 3) \cdot 4 - 2^3 = 12\). L'espressione \( 2 + 3 \; (4 - 2^3)\) (notare l'omissione del segno della moltiplicazione) indica che prima dobbiamo calcolare \(4 - 8=-4 \), poi moltiplichiamo per 3 e infine sommiamo 2, ottenendo -10.<br>
+Come ultimo esempio vediamo \( 2 + 3 (4 - 2)^3 \). Iniziamo con l'elevamento a potenza (che ha la precedenza su tutto) \((4-2)^3 = 8\), poi \(3 \cdot 8 = 24\) a cui sommiamo 2 ottenendo 26.<br>
+<br>
+Quando dovremo scrivere le equazioni che descrivono la caduta di un motore del DC-9, faremo largo uso dei <a href="https://it.wikipedia.org/wiki/Vettore_(matematica)" target="_blank">vettori</a>.<br>
+In questa pagina, i vettori sono scritti con il carattere tondo (non corsivo) e in grassetto, ad esempio: \( \mathbf{F} = m \mathbf{a} \), in cui la forza e l'accelerazione sono due vettori, mentre la massa è uno <a href="https://it.wikipedia.org/wiki/Grandezza_scalare" target="_blank">scalare</a>. Il modulo o magnitudine di un vettore è la lunghezza del vettore e si indica con \( \| \mathbf{v} \| \). I <a href="https://it.wikipedia.org/wiki/Versore" target="_blank">versori</a> vengono indicati con \( \hat{\mathbf{v}} \).<br>
+Per conoscere il significato di eventuali altri simboli che potrebbero essere incontrati in questa pagina, si può consultare il lunghissimo elenco presente nella pagina "<a href="https://it.wikipedia.org/wiki/Glossario_della_simbologia_matematica" target="_blank">Glossario della simbologia matematica</a>".<br>
+
+
+<br>
+
+
+
+
+<h3 id="funzioni">Funzioni</h3>
+
+Una funzione è un'espressione matematica che "spiega" (con opportuna simbologia) come calcolare un valore partendo da una variabile che può assumere valori assegnati a piacere.<br>
+<br>
+Un esempio di una funzione può essere: \(f(x)=2x\) (si legge: "effe di ics uguale a due ics"), con la quale vogliamo indicare che c'interessa calcolare il risultato della moltiplicazione per due di un numero qualunque (indicato con \(x\)). Sintassi alternative e totalmente equivalenti sono: \(y = 2x\) o \(y(x) = 2x\), in cui \(y\) viene chiamata variabile dipendente (perché il suo valore dipende da \(x\)) e \(x\) è la variabile indipendente.<br>
+<br>
+
+La variabile \(x\) può rappresentare qualunque grandezza fisica (tempo, massa, quota, ecc.) in base al contesto. Ad esempio, si potrebbe scrivere: \( v(t) = 2 + 3t \) per rappresentare la velocità di un corpo in funzione del tempo \(t\).<br>
+<br>
+
+<div style="margin-bottom: 1em; display: inline-block;">
+
+<table style="float:left; margin-right: 1em; font-size: .8em;">
+<tr> <td>\( \boldsymbol{t} \)</td> <td>\( \boldsymbol{v} \)</td></tr>
+<tr> <td>0</td>     <td>2</td></tr>
+<tr> <td>1</td>     <td>5</td></tr>
+<tr> <td>2</td>     <td>8</td></tr>
+<tr> <td>3</td>     <td>11</td></tr>
+<tr> <td>4</td>     <td>14</td></tr>
+<tr> <td>4,5</td>   <td>15,5</td></tr>
+</table>
+
+La funzione sta ad indicare che inizialmente (\(t=0\)) il corpo sta viaggiando con una velocità di 2 m/s e accelera costantemente di 3 m/s ogni secondo che passa, ha, cioè, un'accelerazione di 3 m/s<sup>2</sup>, quindi dopo 4 s avrà una velocità pari a \( v(4) = 2 + 3 \cdot 4 = 14 \; m/s\).<br>
+
+</div>
+
+<br>
+
+Esplicitare il fatto che \(v\) è funzione di \(t\) usando \(v(t)\) è certamente superfluo, in questo caso, poiché non c'è alcuna possibilità di confondersi; basterebbe scrivere: \( v = 2 + 3t \), ma a volte è utile parametrizzare una funzione usando le lettere al posto dei numeri: \( f(x) = mx + n \), mantenendo l'equazione nella sua forma generica. In questo caso, scrivere \( f(x) = mx + n \) invece di \( y = mx + n \) rende inequivocabile il fatto che la variabile indipendente è \(x\) e non una delle altre due lettere. Siccome quella \(f(x)\) rappresenta l'equazione generica di una retta, nessuno avrebbe dubbi interpretativi, ma ciò potrebbe non essere vero nel caso di equazioni più complesse.<br>
+Quando sarà necessario effettuare qualche calcolo specifico su \(f(x)\), bisognerà sostituire \(m\) e \(n\) con gli opportuni valori che dipendono dal contesto. Ad esempio, se il problema consiste nel trovare una retta avente una pendenza di 30°, scriveremo: \( f(x) = \tan(30°) \cdot x + n \), quindi abbiamo fissato \( m= \tan(30°) \simeq 0,57735 \) (il simbolo \( \simeq \) si legge "circa uguale" o "uguale a circa").<br>
+Se oltre alla pendenza, imponiamo anche la condizione che la retta passi per il punto \( P(0, 3) \) (in cui la prima coordinata è sempre la \(x\), la seconda è sempre la \(y\) e la terza, se presente, è sempre la \(z\)), allora possiamo fissare anche \(n=3\): \( f(x) = \tan(30°) \cdot x + 3 \).<br>
+Se si vuole esprimere l'angolo in <a href="https://it.wikipedia.org/wiki/Radiante" target="_blank">radianti</a> anziché in gradi, basta tener presente la relazione: \(1 \; rad = \pi / 180° \simeq 57,3°\). Quindi avremo: \( f(x) = \tan(\frac{\pi} {6}) \cdot x + 3 \).<br>
+
+<br>
+
+
+
+<h3 id="derivate">Derivata di una funzione</h3>
+
+La derivata di una funzione ci dice quanto varia la funzione punto per punto e si indica con \( f'(x) \) ("effe primo di ics"). &Egrave; usuale anche la notazione \( \text{d}y/ \text{d}x \) ("de ipsilon su de ics") per indicare la derivata di \(y\) in funzione di \(x\) o anche \( \dot y \).<br>
+Trovare la derivata di una funzione significa trovare l'equazione tramite la quale si può calcolare la variazione della funzione in un punto qualunque.<br>
+Dalla precedente tabella, si nota che la variazione di \(v\) è costante per qualunque \(t\) e tale variazione è pari a 3 m/s quando \(t\) varia di 1 s. La derivata, quindi, è pari a 3: \(v'(t) = 3\) (<a href="https://www.wolframalpha.com/input?i=derivative+2%2B3*t" target="_blank">verifica</a>) ed è, quindi, indipendente dal valore di \(t\).<br>
+<br>
+Il concetto di derivata è importante nel nostro contesto perché è legato a ben note grandezze fisiche che descrivono il moto dei corpi. Ad esempio, la derivata della posizione è l'entità della variazione della posizione; se un corpo varia la sua posizione, significa che si sta muovendo, cioè esso è dotato di una certa velocità. Quindi, la variazione della posizione o la derivata della posizione è la velocità.<br>
+Se, a sua volta, anche la velocità varia, significa che il corpo sta accelerando (o decelerando). Quindi la variazione della velocità o la derivata della velocità è l'accelerazione.<br>
+Ciò può essere espresso scrivendo: \( v(t) = p'(t) \) e \( a(t) = v'(t) \); la velocità in funzione del tempo è pari alla variazione della posizione in funzione del tempo e l'accelerazione in funzione del tempo è pari alla variazione della velocità in funzione del tempo.<br>
+Siccome la derivata della posizione è la velocità e la derivata della velocità è l'accelerazione, ne consegue che l'accelerazione è la derivata <u>seconda</u> della posizione: \( a(t) = p''(t) \) o \( a = \ddot p \).<br>
+<br>
+Per fare un esempio, se la posizione di un corpo è esprimibile con la funzione \( p(t) = 4t^2 + 3t + 2 \) (che è un polinomio di secondo grado, cioè una parabola), si può calcolare la posizione di detto corpo in un istante qualunque. Ad esempio, dopo 5 s il corpo si trova a \( p(5) = 4 \cdot 5^2 + 3 \cdot 5 + 2 = 117 \; m \) dall'origine.<br>
+Per calcolare la velocità di quel corpo in un istante qualunque è sufficiente calcolare la derivata di \( p(t) \). <a href="https://www.wolframalpha.com/input?i=derivative+of+4*t%5E2%2B3*t%2B2" target="_blank"><i>Wolfram Alpha</i></a> dà: \( p'(t) = 8t+3 \), quindi la velocità del corpo dopo 5 s è \( v(5) = 8 \cdot 5 + 3 = 43 \; m/s \).<br>
+Derivando \( v(t) \) otteniamo l'accelerazione. <a href="https://www.wolframalpha.com/input?i=derivative+of+8*t%2B3" target="_blank"><i>Wolfram Alpha</i></a> dà: \( v'(t) = 8 \), quindi l'accelerazione è costante per qualunque \(t\) e vale \( 8 \; m/s^2 \). Queste due derivate saranno verificate nel prossimo paragrafo.<br>
+<br>
+
+
+<!-- GRAFICO -->
+<div style="margin-bottom: 30px; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<div id="deri_esempio1" style="width: 600px; height: 400px; float:left; padding-right: 10px;"></div>
+Il grafico aiuta a visualizzare l'andamento dei parametri in funzione del tempo.<br>
+<br>
+Muovendo il puntatore del mouse sopra al grafico, vengono mostrati i valori della posizione e della velocità in un dato istante.<br>
+Si nota che la velocità e la posizione non iniziano da \( 0 \) per \(t=0\), come in effetti risulta chiaro dalle formule.
+</div>
+
+<br>
+
+
+
+														<!-- ====================== -->
+														<!--  DERIVAZIONE NUMERICA  -->
+														<!-- ====================== -->
+
+
+<h3 id="deri_num">Derivazione numerica</h3>
+
+Nel precedente paragrafo abbiamo visto che per calcolare la derivata di una funzione bisogna prima trovare l'equazione che rappresenta la derivata della funzione e tramite questa equazione si calcola la derivata della funzione in un punto a piacere.<br>
+<br>
+La derivazione numerica ci dispensa dalla fatica di applicare le regole di derivazione per trovare l'equazione che rappresenta la derivata di una funzione e ci permette di calcolare il valore della derivata in un punto qualunque disponendo solamente della funzione da derivare.<br>
+<br>
+Iniziamo dal metodo più semplice possibile per verificare se \( p'(t) = 8t+3 \) è veramente la derivata di \( p(t) = 4t^2 + 3t + 2 \). Tenendo presente il concetto di derivata, verifichiamo se la variazione della posizione in un dato istante corrisponde alla velocità, cioè alla derivata di \(p(t)\).<br>
+Siccome abbiamo già calcolato \(p(5)\), calcoliamo un altro valore di \(p(t)\) per \(t\) molto vicino a 5 s; ad esempio \(p(5,1) = 121,34 \; m \). La variazione della posizione è, quindi, \(121,34 - 117 = 4,34 \; m \) in 0,1 s, da cui risulta una velocità di \( 4,34 / 0,1 = 43,4 \; m/s \) che è abbastanza vicino a 43 m/s calcolati con la formula della derivata \( p'(t) = 8t+3 \).<br>
+Riduciamo ancora l'intervallo di tempo: \(p(5,01) = 117,4304 \; m \), ottenendo una velocità di \( (117,4304 - 117) / 0,01 = 43,04 \; m/s \). Sembra proprio che il risultato stia convergendo verso i 43 m/s calcolati con \( p'(t) \).<br>
+Possiamo, dunque, affermare che \( 8t+3 \) è veramente la derivata di \(p(t)\).<br>
+<br>
+L'accuratezza di questo metodo può essere migliorata (a scapito della velocità di calcolo) calcolando due valori di \(p(t)\) simmetrici rispetto a \(t\): \(p(t - \Delta t)\) e \(p(t + \Delta t)\), dove \(\Delta t\) ("delta t") è un tempo piccolo a piacere. La derivata sarà: \( p'(t) \simeq \frac{ p(t + \Delta t) - p(t - \Delta t) } { 2 \cdot \Delta t} \), che è una variante del metodo del rapporto incrementale (visto prima). Ponendo \( \Delta t = 0,1\), abbiamo: \( p'(5) \simeq (p(5,1) - p(4,9)) / 0,2 = 43 \; m/s \); in questo caso, il risultato è esatto, ma è una fortuna che capita molto raramente.<br>
+<br>
+Per quanto semplici, i due procedimenti appena visti sono inefficienti ed instabili, ciò significa che non conviene usarli come normale prassi.<br>
+Un metodo di gran lunga più efficiente ed affidabile è quello dell'estrapolazione polinomiale col <a href="http://www.foo.be/docs-free/Numerical_Recipe_In_C/c5-7.pdf" target="_blank">metodo di Ridders</a>. Il testo è in lingua inglese, ma c'interessa solo il programma presente da pag. 3 del file (pag. 188 del libro).<br>
+<br>
+
+<!-- Derivazione numerica - LISTATO -->
+<div style="margin-bottom: 30px; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="gdb_derinum_list.png" style="float:left; padding-right: 2em" alt="" title="">
+Il programma che consente di vedere all'opera gli ultimi due metodi nominati si trova a <a href="https://www.onlinegdb.com/0Iiy-FoTy" target="_blank">questo link</a>.<br>
+<br>
+I numerosi parametri che compaiono dalla riga 16 serviranno successivamente. La riga 24 può essere modificata per variare il tempo a piacere.<br>
+<br>
+Il programma inizia ad essere eseguito sempre dalla funzione <span style="font-family: monospace"><b>main()</b></span> (riga 105) che a sua volta chiama varie volte la funzione <span style="font-family: monospace"><b>PVA()</b></span> (riga 36) alla quale gli viene passato il tempo per il quale effettuare i calcoli.<br>
+</div>
+
+<br>
+
+La logica di funzionamento del programma è semplice. Siccome è stata fissata (arbitrariamente, solo per fare un esempio) la legge che esprime la posizione di un ipotetico corpo in movimento in funzione del tempo (\( p(t) = 4t^2 + 3t + 2 \)) e abbiamo usato <i>Wolfram Alpha</i> per calcolare sia la derivata prima (velocità) che seconda (accelerazione) di \( p(t) \), tramite il programma vogliamo verificare che <i>Wolfram Alpha</i> non si sia sbagliato.<br>
+Per far questo, stabiliamo che la funzione da derivare è \( 4t^2 + 3t + 2 \) e usiamo il programma per calcolarne la derivata in alcuni punti a piacere tramite i due algoritmi prima citati. Poi usiamo la funzione dataci da <i>Wolfram Alpha</i> \( p'(t) = 8t+3 \) per calcolare il valore della derivata negli stessi punti di prima e confrontiamo i due risultati.<br>
+Una volta appurata la correttezza dell'equazione dataci da <i>Wolfram Alpha</i>, sappiamo che \( p'(t) = 8t+3 \) è veramente la derivata di \(p(t)\) e possiamo usare \(p'(t)\) per verificare se la sua derivata è veramente pari a 8, come calcolato da <i>Wolfram Alpha</i>.<br>
+<br>
+
+<div style="margin-bottom: 1em; display: inline-block; width:100%;">
+
+<textarea rows = "10" cols = "37" name = "Codice per PVA" spellcheck="false" style="float:left; margin-right: 1em;">
+double p= 4*t*t + 3*t + 2; // POS
+double v= 8*t + 3; // VEL
+double a= 8; // ACC
+[...]
+   #if POSVEL == 1 // Derivata di POS
+fun= p; der= v;
+   #elif POSVEL == 2 // Derivata di VEL
+fun= v; der= a;
+[...]
+   #endif
+</textarea>
+
+Questa parte di codice effettua il calcolo della posizione, velocità ed accelerazione in funzione del tempo e assegna il valore della funzione alla variabile <span style="font-family: monospace"><b>fun</b></span> e il valore della sua derivata alla variabile <span style="font-family: monospace"><b>der</b></span>, in base al valore assegnato a <span style="font-family: monospace"><b>POSVEL</b></span> nella riga 12.<br>
+La derivata di <span style="font-family: monospace"><b>fun</b></span> calcolata dal programma usando i procedimenti numerici visti prima sarà considerata esatta per il tempo impostato nella riga 24, mentre il valore memorizzato in <span style="font-family: monospace"><b>der</b></span> (calcolato da <i>Wolfram Alpha</i>) sarà quello da verificare.<br>
+<br>
+Se <span style="font-family: monospace"><b>POSVEL</b></span> vale 1, significa che vogliamo verificare la correttezza della derivata della posizione calcolata da <i>Wolfram Alpha</i>, quindi la funzione è <span style="font-family: monospace"><b>p= 4*t*t + 3*t + 2</b></span> e la sua derivata (da verificare) è <span style="font-family: monospace"><b>v= 8*t + 3</b></span>. L'asterisco è l'operatore matematico della moltiplicazione.<br>
+Se <span style="font-family: monospace"><b>POSVEL</b></span> vale 2, vogliamo verificare la correttezza della derivata della velocità calcolata da <i>Wolfram Alpha</i>, quindi la funzione è <span style="font-family: monospace"><b>v= 8*t + 3</b></span> e la sua derivata (da verificare) è <span style="font-family: monospace"><b>a= 8</b></span>.<br>
+
+</div>
+
+Il programma, quindi, calcola la derivata della funzione tramite i due algoritmi nominati in precedenza e verifica se il risultato è uguale a quello calcolato tramite le formule ottenute da <i>Wolfram Alpha</i>.<br>
+<br>
+Eseguendo il programma così com'è (cliccando su "Run"), verifichiamo la soluzione data da <i>Wolfram Alpha</i> per la derivata di \( p(t)\), cioè verifichiamo se \( p'(t) = 8t+3 \) è giusta.<br>
+<br>
+
+
+<!-- Derivazione numerica - RISULTATO -->
+<div style="margin-bottom: 30px; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="gdb_derinum_risu.png" style="float:left; padding-right: 2em" alt="" title="">
+Possiamo appurare che la derivata di \(p(t)\) è veramente 43 e che \(p(5)\) vale 117, come già calcolato.<br>
+Il numero -2.91323e-13 equivale a -2,91323&middot;10<sup>-13</sup>. Ad esempio, 1.2e-03 equivale a 0,0012.<br>
+<br>
+Adesso dobbiamo verificare se la derivata di \(v(t)\) è veramente 8. Siccome è necessario apportare una piccola modifica al programma, bisogna premere "Fork this" (in alto a sinistra) per crearne una copia modificabile. Ora si può modificare la riga 12 in: <span style="font-family: monospace"><b>#define POSVEL 2</b></span>. Eseguendo il programma, otteniamo proprio 8.<br>
+</div>
+<br>
+Si possono verificare altri punti variando <span style="font-family: monospace"><b>t</b></span> alla riga 24. Abbiamo, comunque, già appurato che le equazioni date da <i>Wolfram Alpha</i> sono giuste.<br>
+
+<br>
+
+
+
+
+														<!-- ======================= -->
+														<!-- EQUAZIONI DIFFERENZIALI -->
+														<!-- ======================= -->
+
+<h3 id="ode">Equazioni differenziali</h3>
+
+Un'equazione differenziale è una funzione che lega una funzione da trovare alla sua derivata: \( y'(x) = f(x, y(x)) \), ad esempio: \(y'(x) = 2x + 3 \; y(x) + 4\), in cui la derivata della funzione \(y(x)\) dipende sia dalla variabile indipendente \(x\) che dalla funzione \(y(x)\) (da trovare).<br>
+<br>
+Come abbiamo visto, nel caso della funzione il legame è tra due numeri (genericamente indicati con \(x\) e \(y\)), il che equivale a dire: fissa \(x\) e calcola il numero \(y\) (fisso, ad esempio, \(x=3\) e calcolo \(2 \cdot 3=6\)).<br>
+Nel caso delle equazioni differenziali (e anche delle derivate), invece, ciò che interessa trovare non è un numero ma un'intera funzione, cioè \( y(x) \). Questa operazione viene detta integrazione ed è l'inverso della derivazione.<br>
+<br>
+Per capire cosa significa in pratica risolvere un'equazione differenziale, facciamo qualche esempio partendo da uno banalissimo. Sfruttiamo la formula vista prima: \( v(t) = 2 + 3t \) che sappiamo già rappresentare un corpo che accelera di 3 m/s<sup>2</sup> partendo da una velocità iniziale pari a 2 m/s.<br>
+L'equazione differenziale è: \( v'(t) = 3 \; m/s^2, v(0) = 2 \; m/s \). Chiediamo l'aiuto a <i>Wolfram Alpha</i> per farci trovare la soluzione che, come detto, consiste nel trovare \(v(t)\), cioè una funzione che ha come derivata 3 e che inizialmente (per \(t=0\)) vale 2: <a href="https://www.wolframalpha.com/input?i=y%27%3D3%2C+y%280%29%3D2" target="_blank">\( y(x)=3x+2 \)</a>, dove la variabile indipendente \(x\), per noi è il tempo \(t\) e la variabile dipendente \( y(x) \), per noi è la velocità \( v(t) \); il risultato è proprio quello che già conoscevamo, cioè la funzione che dà come derivata 3 partendo dal valore iniziale 2 è proprio \( y(x)=3x+2 \) che, nel nostro caso, scriviamo (in modo assolutamente equivalente) come: \( v(t) = 3t + 2\).<br>
+Ciò che abbiamo fatto è che dalla conoscenza dell'accelerazione (la derivata della velocità) e dal valore iniziale della velocità, siamo stati in grado, grazie ad un'equazione differenziale, di trovare la legge che descrive il moto del corpo.<br>
+<br>
+Nell'esempio appena visto, la derivata è semplicemente una costante. Vediamo, allora, un esempio leggermente meno banale, sempre relativo al moto uniformemente accelerato.<br>
+<br>
+Partendo dalla solita formula \( v(t) = 2 + 3t \), invece di trovare la formula per l'accelerazione, adesso vogliamo trovare la formula che esprime la posizione del corpo in funzione del tempo.<br>
+Sapendo che la derivata della posizione è la velocità, impostiamo l'equazione differenziale: \( p'(t) = 2 + 3t, p(0) = 1 \), così scrivendo, indichiamo che inizialmente il corpo ha già percorso 1 m e vogliamo trovare la funzione \( p(t) \), cioè una formula che lega la posizione al tempo. <i>Wolfram Alpha</i> ci dà la soluzione: <a href="https://www.wolframalpha.com/input?i=y%27%3D2%2B3*t%2C+y%280%29%3D1" target="_blank">\( y(t)=3t^2/2+2t+1 \)</a>.<br>
+Siccome abbiamo già appurato che l'equazione \( v(t) = 2 + 3t \) rappresenta un corpo che possiede una velocità iniziale \(v_0 = 2 \; m/s \) e accelera con un'accelerazione \(a = 3 \; m/s^2 \) e siccome abbiamo anche imposto la condizione iniziale che il corpo si trova nella posizione \(p_0 = 1 \; m\), il risultato può essere riscritto nella forma generica più usuale: \( p(t) = \frac{1}{2}at^2 + v_0 t + p_0 \).<br>
+Scorrendo la pagina "<a href="https://www.youmath.it/lezioni/fisica/cinematica/2950-moto-rettilineo-uniformemente-accelerato.html" target="_blank">Moto rettilineo uniformemente accelerato</a>", troviamo proprio la formula ottenuta come risultato dell'equazione differenziale. Siamo, quindi, partiti da una formula che descrive la velocità di un corpo in funzione del tempo e, grazie all'utilizzo delle equazioni differenziali, siamo arrivati a trovare la formula che descrive la posizione dello stesso corpo in funzione del tempo.<br>
+<br>
+Le equazioni differenziali viste fino ad ora erano della forma \( y'(x) = f(x) \), cioè la derivata di \(y(x)\) varia solo in funzione della variabile indipendente \(x\) e non di quella dipendente \(y\) o \(y(x)\). Come ultimo esempio, vediamone uno della forma \( y'(x) = f(x, y(x)) \): \( y' = 2x + 3y \) (forma "abbreviata" di \( y'(x) = 2x + 3 \; y(x) \)).<br>
+
+Per restare nel mondo della fisica, l'equazione potrebbe rappresentare il moto di un corpo dotato di un motore che lo fa accelerare di 2 m/s<sup>2</sup> (\(2x\)) e che si muove su di una superficie il cui attrito diminuisce progressivamente allontanandosi dalla partenza e grazie a tale riduzione il corpo accelera di 3 m/s ogni metro percorso (\(3y\)). In tal caso, l'equazione si scriverebbe: \( v(t) = 2t + 3 \; p(t) \) o \( p'(t) = 2t + 3 \; p(t) \).<br>
+<br>
+
+<!-- GRAFICO -->
+<div style="margin-bottom: 30px; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<div id="gra_equdiff" style="width: 600px; height: 400px; float:left; padding-right: 10px;"></div>
+La soluzione data da <a href="https://www.wolframalpha.com/input?i=y%27%3D2x%2B3y" target="_blank"><i>Wolfram Alpha</i></a> è: \( y = c_1 \text{e}^{3x} - \frac{2}{3} x - \frac{2}{9} \), dove \(c_1\) è un numero qualunque; variandolo a piacere l'equazione differenziale sarà sempre soddisfatta. Adesso troviamo la <a href="https://www.wolframalpha.com/input?i=derivative+c_1*e%5E%283+x%29+-+2%2F3+x+-+2%2F9" target="_blank">derivata</a> del risultato ottenuto: \( y' = 3 c_1 \text{e}^{3x} - \frac{2}{3} \).<br>
+Siccome l'equazione differenziale è: \( y' = 2x + 3y \), verifichiamo che \( y' = 3 c_1 \text{e}^{3x} - \frac{2}{3} = 2x + 3( c_1 \text{e}^{3x} - \frac{2}{3} x - \frac{2}{9}) \)
+, cioè sostituiamo a \(y'\) la derivata appena calcolata e a \(y\) la soluzione dell'equazione differenziale. Otteniamo:
+\( \require{cancel} 3 c_1 \text{e}^{3x} - \frac{2}{3} = \cancel{2x} + 3 c_1 \text{e}^{3x}  \cancel{- \; 2x} - \frac{2}{3} \), \(2x\) si annulla con \(-2x\), quindi il primo e il secondo membro sono identici e l'eguaglianza è soddisfatta. Con ciò abbiamo verificato che \( y = c_1 \text{e}^{3x} - \frac{2}{3} x - \frac{2}{9} \) è la soluzione dell'equazione differenziale \( y' = 2x + 3y \).<br>
+<br>
+Scegliere un valore per \(c_1\): <select id="SelectEquDiff_c1" onchange="Grafico_EquDiff()">
+	<option value="0.1">0,1</option>
+	<option value="0.5">0,5</option>
+	<option value="1"  >1</option>
+	<option value="2"  >2</option>
+</select><br>
+
+</div>
+
+<br>
+
+
+
+
+															<!-- =============== -->
+															<!--  CADUTA LIBERA  -->
+															<!-- =============== -->
+
+
+<h3 id="cadu_libe">Corpo in caduta libera</h3>
+
+Passando all'argomento che c'interessa direttamente, definiamo l'equazione differenziale che descrive il moto di un corpo in caduta libera in presenza di aria.<br>
+<br>
+Un corpo che si muove nell'aria è soggetto alla <a href="https://it.wikipedia.org/wiki/Aerodinamica#Resistenza" target="_blank">resistenza aerodinamica</a> data da \( F_a = \frac{1}{2} \rho v^2 S C_r \) (qui indicata come una generica forza \(F_a\), con il pedice \(a\) per evidenziare che è dovuta all'aria). La densità dell'aria \( \rho \) è variabile, ma per semplificare i calcoli bisogna considerarla costante. Raggruppando tutti i termini costanti in un'unica lettera (per praticità), abbiamo \( k = \frac{1}{2} \rho S C_r \), da cui \( F_a = k v^2 \).<br>
+<br>
+Un corpo in caduta libera è anche soggetto alla forza gravitazionale esercitata dalla Terra.<br>
+In base al <a href="https://it.wikipedia.org/wiki/Principi_della_dinamica#Secondo_principio" target="_blank">secondo principio della dinamica</a>, la forza è uguale alla massa del corpo per l'accelerazione; nel caso dell'accelerazione di gravità, possiamo scrivere: \( F_g = mg \). L'accelerazione di gravità \(g\) varia con la posizione, ma per semplificare i calcoli bisogna considerarla costante.<br>
+<br>
+Se si volesse affrontare il problema in modo rigoroso, bisognerebbe considerare anche la <a href="https://it.wikipedia.org/wiki/Principio_di_Archimede#Condizioni_di_equilibrio_dei_corpi" target="_blank">forza di Archimede</a>. Dal momento che il corpo è immerso nell'aria, esso riceve una spinta verso l'alto (contraria alla forza di gravità) pari al peso dell'aria spostata. Tuttavia, data la bassa densità dell'aria, tale forza è trascurabile rispetto a \(F_g\) e lo diventa anche rispetto ad \(F_a\), una volta che il corpo acquista velocità.<br>
+<br>
+La forza complessiva a cui è soggetto il corpo in caduta è quindi \( F = F_g - F_a \).<br>
+L'equazione differenziale che c'interessa è quindi: \( ma = mg - k v^2 \), che può essere meglio esplicitata tenendo presente che l'accelerazione \(a\) è la derivata della velocità: \( mv' = mg - k v^2 \), da cui risulta chiaro che abbiamo una derivata (\(v'\)) e la sua funzione: \( v'(t) = f(v(t)) = (mg - k \cdot v(t)^2)/m \). Si può notare che \( v'(t) \) non è della forma \( v'(t) = f(t, v(t)) \), ma dipende solo dalla velocità e non dal tempo.<br>
+Dando in pasto l'equazione differenziale a <a href="https://www.wolframalpha.com/input?i2d=true&i=m*D%5Bv%2Ct%5D%3Dm*g+-+k*Power%5Bv%2C2%5D%5C%2844%29v%5C%2840%290%5C%2841%29%3D0" target="_blank"><i>Wolfram Alpha</i></a> otteniamo un risultato che può essere riscritto in modo più organico come:
+
+$$v(t)= \sqrt{ \frac{gm}{k} } \tanh \left( t \sqrt{ \frac{gk}{m} } \right) $$
+
+Adesso che abbiamo la derivata della posizione (cioè la velocità), la possiamo integrare per ottenere la posizione \( p(t) \). <a href="https://www.wolframalpha.com/input?i2d=true&i=D%5Bp%2Ct%5D%3Dsqrt%5C%2840%29g*Divide%5Bm%2Ck%5D%5C%2841%29*tanh%5C%2840%29t*sqrt%5C%2840%29g*Divide%5Bk%2Cm%5D%5C%2841%29%5C%2841%29%5C%2844%29p%5C%2840%290%5C%2841%29%3D0%5C%2844%29p%27%5C%2840%290%5C%2841%29%3D0" target="_blank"><i>Wolfram Alpha</i></a> dà:
+
+$$p(t)= \frac { \sqrt{ \frac{gm}{k} } \log \left( \cosh \left( t \sqrt{ \frac{gk}{m} } \right) \right) } { \sqrt{ \frac{gk}{m} } } \; = \;
+
+\frac{m}{k} \log \left( \cosh \left( t \sqrt{ \frac{gk}{m} } \right) \right)  
+$$
+
+Le due formule rappresentano le leggi matematiche che consentono di descrivere il moto di un corpo in caduta libera avente il coefficiente di resistenza costante e che avviene in un fluido avente densità costante, in presenza di un campo gravitazionale invariabile e in assenza della spinta d'Archimede.<br>
+<br>
+
+
+Anche in questo caso possiamo verificare le due complicate equazioni tramite il programma usato prima per verificare la correttezza delle derivate. L'equazione di partenza è \( v'(t) = (mg - k \cdot v(t)^2)/m \), quindi dobbiamo verificare le due equazioni \(v(t)\) e \(p(t)\) ottenute da <i>Wolfram Alpha</i>.<br>
+<br>
+Riprendiamo il <a href="https://www.onlinegdb.com/0Iiy-FoTy" target="_blank">programma</a> già visto e, dopo aver premuto "Fork this", impostiamo <span style="font-family: monospace"><b>#define PROBLEMA 2</b></span> e <span style="font-family: monospace"><b>#define POSVEL 2</b></span>. Conviene partire da POSVEL = 2 perché \(p(t)\) è stata ottenuta integrando \(v(t)\), a sua volta ottenuta integrando \(v'(t)\), unica equazione certamente esatta. Quindi, prima verifichiamo la correttezza di \(v(t)\); una volta accertata la sua correttezza, verifichiamo la correttezza di \(p(t)\).<br>
+Premiamo "Run". Facendo varie prove, modificando tutti i vari parametri, possiamo solo rilevare microscopiche differenze tra i risultati delle funzioni ottenute da <i>Wolfram Alpha</i> e quelli ottenuti col metodo di Ridders. Quindi \(v(t)\) è senz'altro giusta; passiamo a \(p(t)\).<br>
+<br>
+Modifichiamo la riga 12 in <span style="font-family: monospace"><b>#define POSVEL 1</b></span> e facciamo qualche altra prova di calcolo. Anche in questo caso le differenze riscontrabili sono insignificanti, per cui è giusta anche \(p(t)\).<br>
+<br>
+
+Se si desidera calcolare la velocità direttamente in funzione della posizione (anziché del tempo), è sufficiente sostituire l'accelerazione \(a\) presente nell'equazione differenziale \( ma = mg - k v^2 \) con un'equazione che esprima l'accelerazione in funzione della posizione. Siccome \( a = v / t \), \( t = v / a = \Delta p / \Delta v\), cioè il tempo è uguale alla variazione della posizione in rapporto alla variazione della velocità. Sostituendo \( \Delta \) con \(\text{d}\) per indicare variazioni infinitesime di \(p\) e di \(v\), si può scrivere \( a = v / (\text{d}p / \text{d}v) = v \cdot \text{d}v/\text{d}p \). Quindi l'equazione differenziale diventa: \( mv \cdot \frac{\text{d}v}{\text{d}p} = mg - k v^2 \), in cui tutte le \(v\) sono funzione di \(p\), come chiaramente indicato da \(\text{d}v/\text{d}p\). Usando questa notazione, l'equazione differenziale originaria può essere scritta (per fare un confronto) come \( m \frac{\text{d}v}{\text{d}t} = mg - k v^2 \).<br>
+Sistemando il risultato dato da <a href="https://www.wolframalpha.com/input?i=m*v*dv%2Fdp%3Dm*g-k*v%5E2%2C+v%280%29%3D0" target="_blank"><i>Wolfram Alpha</i></a>, otteniamo:
+
+$$ v(p) = \sqrt{ \frac{gm}{k} (1 - \text{e}^{-2kp/m} )} $$
+
+che consente di calcolare la velocità di caduta in corrispondenza di una quota \(p\) scelta a piacere.<br>
+
+<br>
+Riprendendo l'equazione per il calcolo di \(v(t)\), intuitivamente appare chiaro che la velocità aumenta rapidamente all'inizio della caduta e aumenta sempre più lentamente col passar del tempo, in quanto la resistenza aerodinamica (che frena il corpo) aumenta continuamente in ragione del quadrato della velocità. &Egrave; intuibile, quindi, che se il corpo inizia a cadere da una quota sufficientemente alta, arriverà ad un punto in cui la velocità non aumenta più in modo significativo, tanto da poterla considerare costante; tale velocità viene chiamata velocità terminale o velocità limite ed è calcolabile attraverso l'utilizzo dell'operazione matematica chiamata <a href="https://it.wikipedia.org/wiki/Limite_(matematica)" target="_blank">limite</a>.<br>
+Osservando \( v(t) \), si nota bene che essa varia in funzione di \(t\) attraverso la funzione chiamata <a href="https://mathworld.wolfram.com/HyperbolicTangent.html" target="_blank">tangente iperbolica</a>, il cui grafico mostra che all'aumentare dell'argomento (quello racchiuso tra le due parentesi tonde di \( \tanh() \)) la funzione si avvicina sempre di più a 1. Quindi, col passar del tempo, cioè all'aumentare di \(t\), il valore di \( \tanh ( t \sqrt{ gk / m } ) \) sarà sempre più vicino a 1, arrivando al punto che per \(t\) sufficientemente grande, quel valore sarà praticamente uguale a 1 (sarà 0,99999...). L'espressione si può, dunque, scrivere: \( v(\infty)= \sqrt{ gm /k } \cdot 1 \). Il simbolo \( \infty \) significa "infinito", cioè \( v(\infty) \) indica la velocità raggiunta dopo un tempo infinito o, più realisticamente, molto grande.<br>
+Siccome, per praticità, avevamo posto \( k = \frac{1}{2} \rho S C_r \), la formula per la velocità limite è:
+
+$$v(\infty) = V_l= \sqrt{ \frac{gm}{\frac{1}{2} \rho S C_r} } \; = \; \sqrt{ \frac{2gm}{\rho S C_r} }.$$
+
+In modo del tutto analogo si può ottenere \(V_l\) dall'equazione per \(v(p)\) considerando che l'esponenziale tende a \(0\) per \(p\) che tende ad infinito.<br>
+
+<br>
+Può essere utile, infine, calcolare il tempo impiegato dal corpo per arrivare al suolo. Questo tempo lo si può ottenere dall'equazione \(p(t)\) isolando la variabile indipendente \(t\). Fissiamo \(p(0) = h_0\), dove \( h_0 \) è la quota dalla quale il corpo inizia la caduta.<br>
+I vari passaggi per isolare \(t\) sono:
+
+$$h_0 \frac { k } { m }  =  \log \left( \cosh \left( t \sqrt{ \frac{gk}{m} } \right) \right) \;,\;
+
+\text{e}^{h_0 \frac { k } { m } } =  \cosh \left( t \sqrt{ \frac{gk}{m} } \right) \;,\;
+
+\text{arccosh} \left( \text{e}^{h_0 \frac { k } { m } } \right) = t \sqrt{ \frac{gk}{m} } \;,\;
+
+t = \text{arccosh} \left( \text{e}^{h_0 \frac { k } { m } } \right) / \sqrt{ \frac{gk}{m} }.
+
+$$
+
+
+<div style="margin-bottom: 30px; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<div id="cadulibe" style="width: 700px; height: 700px; float:left; padding-right: 10px;"></div>
+<br>
+Qui si può fare qualche sperimentazione variando alcuni parametri che compaiono nelle formule.<br>
+<br>
+Corpo in caduta: <select id="SelectCorpo" onchange="CaduLibe()">
+	<option value="1">Motore DC-9</option>
+	<option value="2" selected>Persona</option>
+	<option value="3">Pallone da calcio</option>
+	<option value="4">Pallina ping pong</option>
+</select> &rarr; coeff. balistico = <span id="coeff_bali"></span> kg/m<sup>2</sup><br>
+
+Quota iniziale: <select id="SelectQuota" onchange="CaduLibe()">
+	<option value="5000">5000</option>
+	<option value="2000" selected>2000</option>
+	<option value="500">500</option>
+	<option value="100">100</option>
+</select> m<br>
+
+Densità aria: <select id="SelectRho" onchange="CaduLibe()">
+	<option value="0.7">0,7</option>
+	<option value="1" selected>1</option>
+	<option value="1.2">1,2</option>
+</select> kg/m<sup>3</sup><br>
+<br>
+
+<i>S</i> = <span id="cadulibe_S"></span> m<sup>2</sup>, <i>C<sub>r</sub></i> = <span id="cadulibe_Cr"></span>, <i>m</i> = <span id="cadulibe_m"></span> kg, velocità limite = <span id="cadulibe_Vl"></span>.<br>
+Tempo impiegato per arrivare al suolo = <span id="tempo_suolo"></span> s.<br>
+<br>
+La linea arancione tratteggiata rappresenta la velocità limite.<br>
+<br>
+
+Si può appurare che un corpo avente un coefficiente balistico \( CB = m / (C_r \cdot S) \) piccolo viene molto frenato dall'aria e tende a raggiungere rapidamente la velocità limite, mentre un corpo "massiccio" (con \(CB\) grande) risente molto meno della resistenza dell'aria. Ciò si spiega banalmente con il secondo principio della dinamica. Infatti, esprimendo la massa del corpo in funzione di \(CB\), abbiamo: \( m = CB \cdot C_r \cdot S \), da cui \( a = F_a / m = F_a / (CB \cdot C_r \cdot S) \), risultando chiaro che l'accelerazione \(a\) dovuta alla forza aerodinamica \(F_a\) è inversamente proporzionale a \(CB\), quindi, al crescere di \(CB\), l'aria frena sempre di meno il corpo.<br>
+
+</div>
+<br><br>
+
+
+
+<!-- Immagine SpeedCrunch -->
+
+I calcoli possono essere agevolmente svolti anche con la calcolatrice <a href="https://heldercorreia.bitbucket.io/speedcrunch/index.html" target="_blank"><i>SpeedCrunch</i></a>.<br>
+<br>
+
+<div style="margin-bottom: 1em; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="sc.png" style="float:left; padding-right: 1em" alt="" title="">
+Per la caduta di una persona, inserire le seguenti righe, premendo "Invio &#8629;" al termine di ogni riga (per copiarle si può usare copia&incolla):
+	<div style="font-family: monospace; line-height: 1.3;">
+g=9,8<br>
+m=80<br>
+k=,5*,7<br>
+t=7,2<br>
+sqrt(g*m/k)*tanh(t*sqrt(g*k/m))<br>
+	</div>
+I numeri possono anche essere scritti direttamente nella formula, non è obbligatorio assegnare le variabili, ma per la costante <span style="font-family: monospace">k</span> è sicuramente più comodo farlo.<br>
+</div>
+Se si desidera effettuare altri calcoli, è sufficiente riassegnare le variabili da modificare e premere la freccia in alto della tastiera "&#129061;" fino a quando non ricompare la formula <span style="font-family: monospace">sqrt(g*m/k)*tanh(t*sqrt(g*k/m))</span>.<br>
+Si procederà allo stesso modo per \(p(t)\) (le variabili sono già state assegnate, per cui basterà solo scrivere la formula).<br>
+Per \(v(p)\), si può inserire la formula <span style="font-family: monospace">sqrt(g*m/k*(1-exp(-2*k*2000/m)))</span>, dove "2000" è la quota di partenza (modificabile a piacere, purché positiva).<br>
+
+<br>
+
+
+
+
+<h3 id="inte_nume">Integrazione numerica</h3>
+
+Le equazioni trovate nel precedente paragrafo potrebbero essere utili in molti campi della fisica, ma sono inutilizzabili per simulare la caduta di un frammento del DC-9, principalmente perché la densità dell'aria non può essere considerata costante.<br>
+Si potrebbe decidere di sostituire \( \rho \) presente nelle formule (inglobata nella costante \(k\)) con la sua equazione che la lega alla quota, ma non è detto che esista una soluzione per un'equazione differenziale che diventerebbe piuttosto complessa.<br>
+In questi casi si ricorre, molto opportunamente, all'integrazione numerica. Ciò significa risolvere l'equazione differenziale tramite algoritmi generici, validi per qualunque tipo di problema, a prescindere dalla complessità dell'equazione differenziale.<br>
+<br>
+Iniziamo con un esempio pratico che sfrutta le due complicate equazioni \(p(t)\) e \(v(t)\) ottenute analiticamente.<br>
+<br>
+Il codice sorgente che consente di risolvere numericamente (cioè tramite un algoritmo generico) le due equazioni differenziali \( mv' = mg - k v^2 \) e \( p' = v \) si trova a <a href="https://www.onlinegdb.com/3_3VfPoAu" target="_blank">questo link</a>.<br>
+<br>
+Per eseguire il programma basta cliccare sul pulsante verde "Run". Dopo qualche istante, il programma parte e genera alcune righe che mostrano il velocissimo progredire del processo d'integrazione delle due equazioni differenziali.<br>
+
+<br>
+
+<!-- Immagine GDB Online -->
+
+<div style="margin-bottom: 1em; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="gdb_intenum.png" style="float:left; padding-right: 2em" alt="" title="">
+Le righe mostrano:
+<ul style="margin-top: 0px; line-height: 1.5">
+<li>il numero sequenziale del passo d'integrazione;</li>
+<li>t: tempo dall'inizio della simulazione;</li>
+<li>h: quota ed errore rispetto al valore esatto calcolato con \(p(t)\);</li>
+<li>v: velocità di caduta ed errore rispetto al valore esatto calcolato con \(v(t)\);</li>
+<li>a: accelerazione a cui è soggetto il corpo.</li>
+</ul>
+Gli errori vengono mostrati in un formato compatto; ad esempio, 1.3e+01 significa 1,3 &middot; 10<sup>1</sup> che è uguale a 13. Allo stesso modo, -1.9e-03 significa -1,9 &middot; 10<sup>-3</sup> che è uguale a -0,0019.<br>
+Gli errori ci sono perché l'integrazione numerica è un metodo generico che approssima la soluzione analitica, che, invece, è esatta perché ottenuta tramite un procedimento matematico specifico per quella particolare equazione differenziale. L'integrazione numerica, quindi, darà sempre un risultato diverso da quello esatto, ma l'errore può essere ridotto a piacimento agendo in due modi (come vedremo tra poco).<br>
+<br>
+Al termine dell'esecuzione, vengono mostrate alcune informazioni:
+<ul style="margin-top: 0px; line-height: 1.5">
+<li>il tipo d'integratore usato (tra breve ne vedremo il significato);</li>
+<li>gli errori massimi commessi dall'integratore sulla posizione e sulla velocità;</li>
+<li>il tempo di caduta e la velocità limite, entrambi calcolati con le formule viste prima;</li>
+<li>il numero di iterazioni e il numero di volte che è stata chiamata la funzione per il calcolo delle derivate (normalmente questa funzione richiede la maggior parte del tempo di esecuzione del programma).</li>
+</ul>
+</div>
+
+
+Passiamo a vedere velocemente le parti fondamentali del programma.<br>
+<br>
+C'è una parte iniziale in cui vengono definiti tutti i parametri della simulazione; questa è l'unica parte che può essere modificata con i parametri da sperimentare, tutto il resto del programma andrebbe lasciato così com'è.<br>
+<br>
+
+Il cuore del programma è rappresentato dalla funzione che calcola le derivate.<br>
+<br>
+
+<div style="margin-bottom: 1em; display: inline-block; width:100%;">
+
+<textarea rows = "10" cols = "65" name = "Codice per STS" spellcheck="false" style="float:left; margin-right: 1em;">
+struct STS
+{
+   double p, v;
+};
+
+// Calcolo delle derivate
+STS DER(const STS &st)
+{
+   // Forza aerodinamica
+   double Fa= k * st.v * st.v; // Fa = k * v^2
+
+   // Forza dovuta all'accelerazione di gravità
+   double Fg= m * g;
+
+   STS der;
+   der.p= st.v; // Derivata della posizione = velocità
+   der.v= (Fa - Fg) / m; // Derivata della velocità = accelerazione
+
+   return der; // Ritorna p' e v'
+}
+</textarea>
+
+Questa parte di codice mostra la funzione DER() che contiene le due equazioni differenziali da integrare (cioè da risolvere).<br>
+<br>
+Ciò che viene scritto dopo la doppia barra "<span style="font-family: monospace">//</span>" (come "<span style="font-family: monospace">// Calcolo delle derivate</span>") è un commento che il programmatore aggiunge per chiarezza e che viene completamente ignorato dal computer.<br>
+L'oggetto STS si chiama struttura ed è utile per contenere la posizione e la velocità in un'unica variabile (composta da <span style="font-family: monospace"><b>p</b></span> e da <span style="font-family: monospace"><b>v</b></span>).<br>
+Si nota che alla funzione DER gli viene passato lo stato <span style="font-family: monospace"><b>st</b></span> del corpo in caduta (cioè la posizione e la velocità). La funzione calcola le derivate e le restituisce (<span style="font-family: monospace"><b>return der</b></span>) all'interno della struttura <span style="font-family: monospace"><b>der</b></span>.<br>
+Quando, ad esempio, devo conoscere la velocità del corpo, scrivo <span style="font-family: monospace"><b>st.v</b></span> e quando devo assegnare la derivata della velocità, scrivo il valore in <span style="font-family: monospace"><b>der.v</b></span>.<br>
+</div>
+
+Adesso ci vuole un integratore che faccia avanzare lo stato del corpo dalla sua condizione iniziale (quota e velocità fissate a piacere) fino all'istante voluto, per esempio fino a terra. Cioè l'integratore deve propagare lo stato risolvendo le due equazioni differenziali utilizzando il valore delle rispettive derivate.<br>
+L'integratore più banale e intuitivo in assoluto è l'<a href="https://it.wikipedia.org/wiki/Metodo_di_Eulero" target="_blank">integratore di Eulero</a>.<br>
+<br>
+Esso si basa sul fatto che se conosco l'accelerazione \(a\) a cui è soggetto il corpo in caduta in un dato istante, posso calcolare la variazione di velocità \( \Delta v\) dopo un certo lasso di tempo \(\Delta t\) tramite la semplice relazione \( \Delta v = a \cdot \Delta t \). Ad esempio, se il corpo, in un dato istante sta cadendo con \(v = 10 \; m/s\) ed è soggetto ad un'accelerazione \( a= 9 \; m/s^2 \), dopo 0,5 s la velocità sarà incrementata di \( \Delta v = 9 \cdot 0,5 = 4,5 \; m/s \), quindi la velocità dopo \( \Delta t = 0,5 \; s\) sarà \( v + \Delta v = 10 + 4,5 = 14,5 \; m/s\).<br>
+<br>
+Conoscendo \(v = 10 \; m/s\), possiamo calcolare la variazione di posizione (o lo spazio percorso) sempre nel tempo \(\Delta t\) tramite la formula \( \Delta p = v \cdot \Delta t = 10 \cdot 0,5 = 5 \; m \).<br>
+<br>
+Quindi, integrando contemporaneamente la posizione e la velocità abbiamo:
+
+$$\begin{cases}
+p(t + \Delta t) = p(t) + p'(t) \cdot \Delta t = p(t) + v(t) \cdot \Delta t \\
+\\
+v(t + \Delta t) = v(t) + v'(t) \cdot \Delta t = v(t) + a(t) \cdot \Delta t
+\end{cases}
+$$
+
+
+dove \( \Delta t \) è il passo d'integrazione, \( p(t + \Delta t) \) e \( v(t + \Delta t) \) sono le soluzioni delle due equazioni differenziali dopo \( t + \Delta t \) secondi dall'inizio della caduta.<br>
+<br>
+Per far capire al computer quelle due equazioni, si scrive:<br>
+
+<div style="font-family: monospace; text-align: center;">st.p = st.p + dt * der.p</div>
+<div style="font-family: monospace; text-align: center;">st.v = st.v + dt * der.v</div>
+
+in cui l'asterisco indica la moltiplicazione e (ormai dovrebbe essere chiaro) <span style="font-family: monospace"><b>der.p</b></span> è la derivata della posizione (\(v\) all'istante \(t\) o \(v(t)\)) e <span style="font-family: monospace"><b>der.v</b></span> è la derivata della velocità (\(a\) all'istante \(t\) o \(a(t)\)). Le due righe incrementano <span style="font-family: monospace"><b>st.p</b></span> e <span style="font-family: monospace"><b>st.v</b></span> della quantità <span style="font-family: monospace"><b>dt &middot der.p</b></span> e <span style="font-family: monospace"><b>dt &middot der.v</b></span>, rispettivamente.<br>
+Nel programma, quelle due espressioni possono essere scritte nella forma "compatta" <span style="font-family: monospace"><b>st = st + dt * der</b></span> grazie al codice presente dalla riga 35 alla 44 del programma.<br>
+<br>
+I calcoli devono essere iterati fino a quando non si arriva alla condizione voluta, ad esempio fino a quando il corpo non arriva al suolo.<br>
+
+<br>
+
+
+<!-- Grafico EULERO / RK-2 per vari passi d'integrazione -->
+
+<div style="margin-bottom: 30px; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<div id="intenum_eulero" style="width: 700px; height: 700px; float:left; padding-right: 10px;"></div>
+Il grafico mostra la quota e la velocità del corpo in funzione del tempo. Il tratto continuo è usato per i valori calcolati tramite l'integrazione, mentre il tratteggio è usato per i valori calcolati analiticamente (tramite le formule esatte).<br>
+
+&Egrave; possibile scegliere il tipo d'integratore: <select id="SelectEuRK2" onchange="EULERO_RK2()">
+	<option value="1" selected>Eulero</option>
+	<option value="2">RK-2</option>
+</select> (per "RK-2" v. più avanti) e
+
+il passo d'integrazione: <select id="SelectDT" onchange="EULERO_RK2()">
+	<option value="2">2</option>
+	<option value="1" selected>1</option>
+	<option value="0.5">0,5</option>
+	<option value="0.1">0,1</option>
+</select> s.<br>
+<br>
+
+Muovendo il puntatore del mouse sul grafico, possiamo leggere i valori dei vari parametri, mentre cliccando su "Edit chart" (in basso a destra) viene aperta una pagina in cui tali valori vengono mostrati anche in forma tabulare.<br>
+<br>
+Applichiamo le due formule viste prima per capire come funziona l'integratore di Eulero con \( \Delta t = 1 \; s\). Consideriamo solo la posizione, perché per la velocità il procedimento è identico.<br>
+Il processo d'integrazione inizia con \(t=0\), \(p(0)= 2000 \; m\) e \(v(0) = 0\).<br>
+<br>
+Al primo passo d'integrazione, dunque, \(t=0\), da cui: \(p(0 + \Delta t)= p(0) + v(0) \cdot \Delta t \; \Rightarrow \; p(1) = 2000 + 0 \cdot 1 = 2000 \; m\). In modo analogo otteniamo \(v(1) = -9,8 \; m/s\) (come si legge dal grafico). Siamo partiti dallo stato del corpo (posizione e velocità) all'istante \(t=0\) e l'integratore ha fatto avanzare lo stato di un tempo pari a \(\Delta t\).<br>
+<br>
+Al secondo passo, \(t=1 \; s\), da cui: \(p(1 + \Delta t)= p(1) + v(1) \cdot \Delta t \; \Rightarrow \; p(2) = 2000 - 9,8 \cdot 1 = 1990,2 \; m\). Quindi, un'ulteriore applicazione dell'integratore ha fatto avanzare lo stato di un altro passo d'integrazione (\( \Delta t\)).<br>
+<br>
+Si continua sempre in questo modo fino a quando non si verifica la condizione voluta.<br>
+<br>
+Si nota che procedendo con l'integrazione, l'errore tende ad aumentare all'aumentare del tempo.<br>
+</div>
+
+<br>
+
+
+Adesso che dovrebbe essere tutto chiaro, possiamo iniziare a prendere in considerazione l'errore commesso dal programma nel calcolare il risultato delle due equazioni differenziali.<br>
+Gli errori massimi sono circa 15,1 m e 1,94 m/s. &Egrave; forse utile aprire una breve parentesi per sottolineare che nei casi reali gli errori non possono essere calcolati in alcun modo (tutt'al più possono essere stimati), poiché se uno decide di usare l'integrazione numerica per risolvere un'equazione differenziale è ovvio che non ne conosce la soluzione analitica, altrimenti userebbe quella.<br>
+Se gli errori sono accettabili o inaccettabili lo decide il contesto; decidiamo che per noi sono inaccettabili.<br>
+Il modo più semplice per ridurre gli errori è ridurre il passo d'integrazione. Clicchiamo, allora, sul pulsante "Fork this" per creare una copia modificabile del programma e nella riga 15 riduciamo <span style="font-family: monospace"><b>dt</b></span> da 1 s a 0,1 s: <span style="font-family: monospace"><b>dt= .1; // Passo d'integrazione</b></span>.<br>
+Premendo "Run", notiamo che gli errori si sono notevolmente ridotti: 1,4 m e 0,18 m/s, ma il programma ha richiesto un tempo d'esecuzione circa 10 volte più lungo. Possiamo continuare a ridurre il passo d'integrazione, ma il tempo d'esecuzione sarà sempre maggiore e gli errori d'arrotondamento (dovuti al fatto che l'aritmetica del computer ha un numero finito di cifre) aumenteranno fino a diventare significativi.<br>
+<br>
+Un modo più efficiente per ridurre gli errori è aumentare l'ordine dell'integratore, cioè usarne uno che esegue calcoli intermedi all'interno dello stesso passo d'integrazione, dando una soluzione più accurata.<br>
+Per fare una prova, ripristiniamo il <span style="font-family: monospace"><b>dt</b></span> originale: <span style="font-family: monospace"><b>dt= 1; // Passo d'integrazione</b></span> e modifichiamo la riga 24 in: <span style="font-family: monospace"><b>#define TIPO_INTEGRATORE 3</b></span>. Così facendo diciamo al programma di attivare il codice che esegue i calcoli usando l'integratore <a href="https://pier.unirc.eu/note_varie/note/node54.html" target="_blank">Runge-Kutta del 2° ordine</a> (normalmente indicato con "RK-2").<br>
+Eseguito il programma, notiamo un notevole miglioramento rispetto all'integratore di Eulero; gli errori si sono ridotti a 1,1 m e 0,15 m/s e sono inferiori agli errori commessi dall'integratore di Eulero con un passo 1/10 più piccolo. Con un integratore solo appena più complesso, abbiamo ottenuto un risultato notevolmente migliore.<br>
+Anche con RK-2, riducendo il passo d'integrazione si riduce l'errore, ma l'errore decresce molto più rapidamente che non con l'integratore di Eulero.<br>
+<br>
+Incrementiamo ulteriormente l'ordine dell'integratore passando ad un <a href="https://it.wikipedia.org/wiki/Metodi_di_Runge-Kutta#Metodi_espliciti" target="_blank">Runge-Kutta del 4° ordine</a> (normalmente indicato con "RK-4").<br>
+Per usare questo integratore, la riga 24 del programma va modificata in: <span style="font-family: monospace"><b>#define TIPO_INTEGRATORE 4</b></span>.<br>
+Una volta eseguito il programma, notiamo la riduzione veramente significativa degli errori: 0,005 m e 0,0016 m/s. Riducendo il passo d'integrazione a 0,1 s, gli errori diventano praticamente microscopici. Questo tipo d'integratore, in effetti, viene considerato il minimo da prendere in considerazione per la risoluzione dei problemi reali.<br>
+<br>
+Per concludere questa breve carrellata sugli integratori, vale la pena accennare all'esistenza di integratori che forniscono una stima dell'errore e grazie a questa stima, il programmatore può aggiungere il codice per variare automaticamente il passo d'integrazione durante il processo d'integrazione; all'aumentare dell'errore stimato, bisognerà ridurre il passo e viceversa.<br>
+Un esempio è il metodo Fehlberg 4(5) che sfrutta un integratore Runge-Kutta a 6 stadi con la soluzione al 4° ordine (come per RK-4) e la stima dell'errore ottenuta da un Runge-Kutta al 5° ordine; in pratica sono due integratori inglobati in uno, con la differenza che l'integratore è composto da soli 6 stadi, invece di 9 o 10 (o anche più) stadi totali che si avrebbero nel caso di due integratori diversi.<br>
+
+<!-- Sito non più disponibile
+Il codice d'esempio si trova nel sito "<a href="http://www.mymathlib.com/diffeq/embedded_runge_kutta/embedded_fehlberg_4_5.html" target="_blank"><i>Mathematics Source Library</i></a>". Il codice adattato per risolvere le solite due equazioni differenziali si trova <a href="https://www.onlinegdb.com/YgSwKXC22" target="_blank">qui</a>.<br> -->
+<!-- 13-02-2025: modificato in: -->
+Il codice per risolvere le solite due equazioni differenziali si trova <a href="https://www.onlinegdb.com/YgSwKXC22" target="_blank">qui</a>.<br>
+
+Tra i parametri della simulazione, compaiono anche la "tolleranza" e il passo d'integrazione iniziale (righe 13 e 14). Il programma inizia ad usare il passo iniziale e in base alla stima dell'errore calcola il nuovo passo da usare in funzione della tolleranza; riducendola, si riduce il passo e, di conseguenza, l'errore.<br>
+Avviando il programma, notiamo che inizialmente il passo è 1 s e viene mantenuto intorno a quel valore fino a quando l'integratore non si "accorge" che l'accelerazione diminuisce sempre di più. Il passo, quindi, diventa sempre più grande, perché il moto sta diventando, oltre che rettilineo, anche uniforme, tanto che all'approssimarsi della velocità limite, il passo diventa molto grande.<br>
+<br>
+Il fatto di far progredire rapidamente la simulazione ha lo svantaggio di non permetterci di conoscere l'istante esatto in cui il corpo arriva al suolo. Vediamo, infatti, che l'ultima quota prima dell'impatto è 211 m e la prima dopo dell'impatto è -112 m; questi due istanti sono separati da quasi 7 s.<br>
+Nel caso specifico simulato sarebbe semplice determinare con sufficiente precisione il momento dell'impatto, perché (come detto) nella fase terminale il corpo non accelera più, ma se l'accelerazione fosse ancora significativa e variabile, il calcolo diventerebbe troppo grossolano.<br>
+Le strade percorribili sono due: usare un integratore che offre la cosiddetta "uscita densa" o continua oppure ridurre il passo d'integrazione, magari riducendo anche l'ordine dell'integratore.<br>
+<br>
+La prima strada viene seguita in molti casi reali, usando integratori enormemente più complessi di quelli qui presentati. Uno di essi è l'usatissimo Dormand & Prince dell'8° ordine, con passo automatico e uscita densa, il cui codice (nell'arcaico linguaggio fortran) può essere scorso <a href="http://www.unige.ch/~hairer/prog/nonstiff/dop853.f" target="_blank">qui</a>.<br>
+Per la simulazione di un corpo in caduta libera, invece, è sicuramente da preferire la seconda strada. Ad esempio, un RK-2 con passo di 0,1 s o 0,01 s soddisfa ampiamente i nostri requisiti.<br>
+Per fare un paragone, la simulazione del missile presentata nella pagina "<a href="../../scen/mis_ine/mis_ine.html" target="_blank">Abbattimento tramite missili inerti</a>", date le notevoli accelerazioni e variazioni dell'accelerazione in gioco, ha bisogno di un RK-4 con un passo d'integrazione di 1 ms.<br>
+
+<br>
+Una particolarità che può tornare utile è che qualunque integratore può essere usato anche per andare indietro nel tempo; è sufficiente che il passo d'integrazione sia negativo.<br>
+Vediamo un esempio usando il primo programma visto: <a href="https://www.onlinegdb.com/3_3VfPoAu" target="_blank">link</a>. Premiamo "Fork this" per creare una copia modificabile del programma e selezioniamo direttamente l'RK-4, così riduciamo al minimo gli errori; riga 24: <span style="font-family: monospace"><b>#define TIPO_INTEGRATORE 4</b></span>.<br>
+Eseguito il programma con "Run", vediamo che l'ultimo tempo prima dell'impatto è 45 s. Annotiamo gli errori per quella riga: 4,9 &middot 10<sup>-3</sup> m (4,9 mm) e 4,4 &middot 10<sup>-9</sup> m/s (veramente microscopico).<br>
+Calcoliamo tramite le formule i valori esatti, con tutt'e 15 le cifre significative del computer, della quota e della velocità dopo 45 s: 28,6449175114053 m e -47,3286375013243 m/s.<br>
+Copiamo quei valori nello spazio vuoto della riga 76 del programma, assegnandoli allo stato iniziale del corpo: <span style="font-family: monospace"><b>st.p= 28.6449175114053; st.v= -47.3286375013243;</b></span>. Le due assegnazioni si possono copiare da questa pagina tenendo premuto il tasto sinistro del mouse mentre si selezionano quelle istruzioni, poi premere il tasto destro del mouse e cliccare su "Copy" o "Copia". Cliccare nella riga 76, poi premere il tasto destro del mouse e cliccare su "Paste" o "Incolla".<br>
+<br>
+Cambiamo di segno al passo d'integrazione; riga 15: <span style="font-family: monospace"><b>dt= -1; // Passo d'integrazione</b></span> e clicchiamo "Run" per eseguire il programma.<br>
+<br>
+Gli errori tra parentesi e quelli mostrati alla fine sono privi di senso, in quanto il tempo va all'indietro e si parte con una velocità diversa da zero.<br>
+Scorriamo le righe prodotte dal programma fino ad arrivare a -45 s:<br>
+<span style="font-family: monospace">46) t= -45.000  h= 2000.327 ( 2.0e+03)  v=  -0.068764 (-4.7e+01)  a= -9.799979</span><br>
+i valori esatti li conosciamo già: <i>h= 2000 m</i>, <i>v= 0</i> e <i>a= -9,8 m/s<sup>2</sup></i>. Gli errori dell'integrazione all'indietro, in questo caso, sono nettamente superiori rispetto a quelli dell'integrazione in avanti. Riducendo il passo a mezzo secondo o a 1/10 s, gli errori si riducono notevolmente.<br>
+<br>
+Questa prova dell'integrazione all'indietro è anche utile per evidenziare che nei casi reali (dove non si può calcolare il risultato esatto delle equazioni differenziali) non si può stabilire a priori l'errore che sarà commesso dall'integratore e abbiamo appurato che l'errore è molto variabile addirittura cambiando soltanto il verso dell'integrazione.<br>
+Un metodo semi-empirico, ma molto efficace per stimare l'errore commesso dall'integratore, consiste nell'iniziare con un passo ragionevole (in base al tempo d'esecuzione del programma) per poi dimezzarlo o decimarlo ad ogni esecuzione del programma fino a quando la differenza tra due risultati consecutivi non scende al di sotto di un valore accettabile (stabilito dal problema).<br>
+<br>
+
+
+
+
+
+
+<h3 id="caso_reale">Il caso reale</h3>
+
+Arriviamo finalmente alla simulazione del caso reale di un motore del DC-9 che cade in un ambiente realistico, in cui variano sia i parametri ambientali che il coefficiente di resistenza del motore.<br>
+La complessità matematica del fenomeno da simulare rende impossibile l'utilizzo di soluzioni analitiche, quindi l'unica via percorribile è quella dell'integrazione numerica delle equazioni differenziali che dovremo definire.<br>
+<br>
+Questa simulazione differisce notevolmente da quella vista per il corpo in caduta libera, in quanto:
+<ul style="margin-top:0px">
+<li>il motore è dotato di una velocità orizzontale;</li>
+<li>il moto avviene in uno spazio tridimensionale;</li>
+<li>oltre alle forze viste prima, è presente un vento variabile che aggiunge un'ulteriore accelerazione;</li>
+<li>la densità dell'aria (ottenuta da valori misurati) varia in un modo non definibile tramite un'equazione;</li>
+<li>il campo gravitazionale è variabile.</li>
+</ul>
+
+Dal punto di vista dell'esecuzione dei calcoli, il fatto di dover usare <a href="https://it.wikipedia.org/wiki/Vettore_(matematica)" target="_blank">vettori</a> tridimensionali al posto degli <a href="https://it.wikipedia.org/wiki/Grandezza_scalare" target="_blank">scalari</a> non comporta particolari fastidi, in quanto tutti i calcoli vengono semplicemente triplicati. Ad esempio, una somma che prima era tra due grandezze scalari, ora deve essere svolta per ognuna delle tre componenti dei due vettori da sommare; concettualmente non cambia niente. Ai programmi visti finora, bisogna solo aggiungere il codice in grado di gestire i vettori.<br>
+<br>
+Rispetto a prima, è necessario anche scrivere il codice che assegna il vento e la densità dell'aria in funzione della quota a cui si trova il motore.<br>
+La presenza del vento è gestibile molto facilmente, come spiegato nella pagina "<a href="../../fasi/5_fine/fine.html#tas_prua" target="_blank">Ultimi minuti &rarr; Velocità rispetto all'aria e prua</a>". In pratica, la velocità rispetto all'aria (chiamata <abbr title="true airspeed, velocità vera (rispetto all'aria)">TAS</abbr>) è la differenza vettoriale tra la velocità al suolo (<abbr title="ground speed">GS</abbr>) e quella del vento (<abbr title="wind">W</abbr>): \( \mathbf{TAS} = \mathbf{GS} - \mathbf{W} \).<br>
+Il vento viene specificato indicandone la provenienza e l'intensità. Questo significa che se il vento proviene da 250°, il vettore vento ha verso 250 - 180 = 70° perché è questo il verso in cui si muove il vento rispetto al suolo. Quando, però, si tratta di scrivere il programma, è più comodo usare la provenienza del vento (250°) evitando la sottrazione di 180° e la scrittura del codice che fa la sottrazione tra due vettori; in tal caso, la formula diventa: \( \mathbf{TAS} = \mathbf{GS} + \mathbf{W} \), perché \( \mathbf{W} \) è già negativo.<br>
+I calcoli relativi alla resistenza aerodinamica saranno effettuati usando la TAS, mentre la velocità al suolo sarà usata per aggiornare la posizione del motore.<br>
+<br>
+
+Dal momento che abbiamo validato il programma che esegue la simulazione del corpo in caduta libera, non dobbiamo fare altro che trasformare le equazioni tra grandezze scalari in equazioni tra vettori.<br>
+<br>
+L'equazione \( F_a = kv^2\) (dove le grandezze sono esclusivamente scalari), nello spazio tridimensionale diventa: \( \mathbf{F_a} = k \cdot \| \mathbf{v} \| \cdot  \mathbf{v} \), dove i due scalari \(k\) e \( \| \mathbf{v} \| \) (\( \| \mathbf{v} \| = v = \| \mathbf{TAS} \|\)) vengono moltiplicati tra loro e per il vettore velocità, così da ottenere il vettore forza aerodinamica avente la stessa direzione della velocità; poi il verso viene reso contrario scrivendo \( -\mathbf{F_a} \). Se il vento fosse costante, l'espressione appena vista andrebbe bene così com'è, ma siccome il vento è variabile, bisogna riscrivere l'espressione (con una notazione "poco matematica") in questo modo: \( \mathbf{F_a} = k \cdot \| \mathbf{GS} - \mathbf{W} \| \cdot  (\mathbf{GS} - \mathbf{W}) \).<br>
+La forza peso \( F_g = mg \), in forma vettoriale va scritta: \( \mathbf{F_g} = m \mathbf{g} \).<br>
+<br>
+
+Per l'assegnazione del verso ai vettori, useremo la convenzione che l'asse +X punta verso est, l'asse +Y punta verso nord e l'asse -Z punta verso il basso.<br>
+<br>
+
+Le due equazioni differenziali viste per il caso unidimensionale diventano:
+
+$$ \mathbf{\dot{GS}} = (m \mathbf{g} - k \cdot \| \mathbf{GS} - \mathbf{W} \| \cdot  (\mathbf{GS} - \mathbf{W})) / m $$
+$$ \mathbf{\dot{p}} = \mathbf{GS} $$
+
+Da notare che la prima equazione utilizza la velocità rispetto all'aria e fornisce la derivata della velocità rispetto al suolo. Ciò è corretto, in quanto la superficie terrestre è un sistema di riferimento <a href="https://it.wikipedia.org/wiki/Sistema_di_riferimento_inerziale" target="_blank">inerziale</a> (in questo caso), cioè, per fare un esempio, un'ipotetica mongolfiera in volo a quota costante in totale assenza di vento sarebbe immobile rispetto al suolo, in altre parole, la risultante delle accelerazioni è nulla rispetto alla superficie terrestre, quindi l'unica eventuale accelerazione sarebbe dovuta al moto relativo rispetto all'aria.<br>
+<br>
+
+Per introdurre il prossimo argomento, immaginiamo un aereo che si muove di <a href="https://it.wikipedia.org/wiki/Moto_rettilineo#Moto_rettilineo_uniforme" target="_blank">moto rettilineo uniforme</a>. In questo caso, la forza \( \mathbf{F_a} \) è bilanciata dalla spinta \( \mathbf{S} \) dei motori avente la stessa direzione della forza e verso contrario: \( \mathbf{S} = -\mathbf{F_a} = -k \cdot \| \mathbf{GS} - \mathbf{W} \| \cdot  (\mathbf{GS} - \mathbf{W}) \). &Egrave; evidente che se questa condizione di stabilità viene perturbata da una variazione del vento, l'eguaglianza non è più soddisfatta e siccome la forza aerodinamica non è più bilanciata dalla spinta, si produce un'accelerazione. Quindi, una volta che l'aereo si è stabilizzato nel vento, la mera presenza del vento non produce alcuna accelerazione (l'aereo è fermo rispetto al vento), mentre una variazione del vettore vento (direzione e/o velocità) produce un'accelerazione.<br>
+Arriviamo, così, all'argomento che riguarda l'accelerazione laterale esercitata dalla variazione del vento sul motore in caduta.<br>
+<br>
+Al momento dell'abbattimento, il DC-9 stava volando con una prua quasi esattamente a sud (v.  "<a href="../../fasi/5_fine/fine.html#tas_prua" target="_blank">Ultimi minuti &rarr; Velocità rispetto all'aria e prua</a>"). Siccome la prua reale differiva da 180° di circa 1°, al fine di semplificare i calcoli <u>conviene considerare che la prua vera (non magnetica) fosse esattamente pari a 180°</u>, ben sapendo che questa approssimazione produrrà errori del tutto irrilevanti nel calcolo della traiettoria dei motori.<br>
+Ciò premesso, la variazione della componente del vento che investe la fiancata della gondola motore produce un'accelerazione esclusivamente lungo l'asse X (vettore con direzione est-ovest e verso est). Questa accelerazione deve essere calcolata separatamente da quella esercitata lungo gli assi Y e Z, perché i parametri aerodinamici della fiancata della gondola sono del tutto diversi da quelli della parte frontale.<br>
+<br>
+
+
+<!-- Immagine motore in caduta - Piano YZ -->
+
+<div style="margin-bottom: 30px; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="motore-yz.png" style="float:left; padding: 0px 2em 1em 0px" alt="" title="">
+L'immagine mostra il motore in caduta nel piano YZ, come se un ipotetico osservatore stesse rivolgendo lo sguardo ad est.<br>
+Su questo piano si sviluppa la forza aerodinamica \( \mathbf{F_a} \). Una volta scomposta nelle componenti Y e Z, risulta evidente che la componente Z si oppone alla forza peso \( \mathbf{F_p} \) applicata nel baricentro (o centro di gravità) CG rallentando la caduta, mentre la componente Y (con verso +Y) frena il moto verso sud (verso -Y).<br>
+</div>
+
+<!-- Immagine motore in caduta - Piano XY -->
+
+<div style="margin-bottom: 30px; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="motore-xy.png" style="float:left; padding: 0px 2em 0em 0px" alt="" title="">
+Questa, invece, è la vista dall'alto, in cui viene mostrato il piano XY.<br>
+<br>
+La situazione 1 si ha un istante prima del disastro, quando il motore (e l'aereo) è stabilizzato nel vento, cioè è fermo rispetto al vento. In questa situazione, il motore ha una componente \(GS_x\) della velocità al suolo in direzione +X uguale alla componente \(W_x\) del vento, pertanto non si sviluppa alcuna forza lungo l'asse X, poiché il motore non si muove in questa direzione rispetto all'aria, anche se in realtà è presente una piccola componente \(V_x\) di \( \mathbf{V} \) (la TAS) dovuta al fatto che la prua vera non è esattamente uguale a 180°.<br>
+<br>
+Quando il motore inizia a cadere, il vento inizia a variare sia nella direzione che nell'intensità, per cui la componente \(V_x\) non è più nulla e, pertanto, si genera una forza \(F_{a_x}\) con verso contrario a \(V_x\) che frena il moto verso est.<br>
+</div>
+
+<br>
+
+Le componenti \(y\) e \(z\) di \( \mathbf{F_a} \) possono essere calcolate tramite le equazioni:
+
+$$ F_{a_y} = \frac{1}{2} \; \rho \; (GS_y - W_y) \; \| \mathbf{GS} - \mathbf{W} \| \; ( C_{rw}(TAS, T) \cdot A_c + C_{rv} \cdot S_g) $$
+
+$$ F_{a_z} = \frac{1}{2} \; \rho \;  GS_z        \; \| \mathbf{GS} - \mathbf{W} \| \; ( C_{rw}(TAS, T) \cdot A_c + C_{rv} \cdot S_g) $$
+
+in cui, oltre ai parametri già noti, \(C_{rw} \) è il coefficiente di resistenza del motore dovuto al <abbr title="Rotazione dei compressori e delle turbine con motore spento per effetto del flusso d'aria che attraversa il motore in movimento."><i>windmilling</i></abbr> e varia in funzione del numero di mach (quindi della TAS e della temperatura ambiente),<br>
+\(A_c\) è l'area frontale del compressore di bassa pressione (quello direttamente esposto all'aria),<br>
+\(C_{rv}\) è il coefficiente di resistenza dovuto all'attrito viscoso che l'aria sviluppa sulla superficie della gondola motore (è dello stesso tipo di quello sviluppato dall'ala di un aereo),<br>
+\(S_g\) è la superficie della gondola motore (non la sezione frontale, ma la superficie complessiva).<br>
+<br>
+
+La componente \(x\) di \( \mathbf{F_a} \) può essere calcolata con l'equazione:
+
+$$ F_{a_x} = \frac{1}{2} \; \rho \; (GS_x - W_x) \; \| \mathbf{GS} - \mathbf{W} \| \cdot C_{rl} \cdot A_l $$
+
+in cui \(C_{rl}\) e \(A_l\) sono, rispettivamente, il coefficiente di resistenza e la sezione laterale della gondola.<br>
+
+<br>
+&Egrave; utile sottolineare che questo modello matematico del motore simula il motore reale con un'accuratezza di gran lunga superiore a quella ottenibile con il modello usato dai consulenti di parte imputata; si veda, ad esempio, il paragrafo "<a href="../../fasi/6_cadu/cadu.html#neri_giubbo" target="_blank">Caduta in mare &rarr; Traiettoria dei frammenti secondo la consulenza Neri-Giubbolini</a>".<br>
+<br>
+
+Siamo, così arrivati a definire tutto ciò che serve per simulare un motore che cade con l'asse longitudinale esattamente rivolto a sud (-Y) e parallelo alla velocità rispetto all'aria.<br>
+<br>
+
+Sebbene le equazioni differenziali usate in questo paragrafo appaiano diverse da quelle usate per il corpo in caduta libera, in realtà non abbiamo fatto altro che sostituire la velocità rispetto all'aria con la somma vettoriale tra la velocità al suolo e quella del vento, ottenendo sempre la velocità rispetto all'aria. La forma è diversa, ma la sostanza è identica a quella delle equazioni per il corpo in caduta libera.<br>
+Siccome il programma scritto per la caduta libera è stato validato confrontando il risultato con la soluzione analitica (matematicamente esatta), se scriviamo un altro programma per la caduta del motore basandolo su quello per la caduta libera, otteniamo un programma la cui validità è stata già matematicamente dimostrata.<br>
+<br>
+Ecco, dunque, il <a href="https://www.onlinegdb.com/cdj6oq685" target="_blank">link</a> al programma. Esso è composto da una parte iniziale comprendente la definizione dei parametri del motore e il codice necessario per la gestione dei vettori. Segue la funzione <span style="font-family: monospace"><b>PARA()</b></span> che restituisce i parametri ambientali in funzione della quota voluta che <u>deve essere compresa tra 0 e 26000 ft</u>. Per quote superiori a 26000 ft, la funzione restituisce valori privi di senso.<br>
+<br>
+
+<!-- Immagine output programma CASO REALE -->
+
+<div style="vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="gdb_caso-reale.png" style="float:left; padding: 0px 1em 1em 0px" alt="" title="">
+Una volta premuto "Run", il programma produce le righe che mostrano il veloce progredire della simulazione.<br>
+</div>
+
+<div style="line-height: 1.5">
+I valori mostrati sono:
+<ul style="margin-top: 0px">
+<li>numero sequenziale del passo d'integrazione;</li>
+<li>tempo trascorso;</li>
+<li>quota in piedi;</li>
+<li>componenti \(x\), \(y\) e \(z\) della posizione;</li>
+<li>componenti \(x\), \(y\) e \(z\) della velocità al suolo e sua magnitudine;</li>
+<li>componenti \(x\), \(y\) e \(z\) dell'accelerazione e sua magnitudine;</li>
+<li>TAS;</li>
+<li>numero di mach.</li>
+</ul>
+
+L'ultima riga <span style="font-family: monospace">"ORTODROMIA ..."</span> consente di calcolare la latitudine e la longitudine del punto d'impatto conoscendo le coordinate geografiche del motore al momento del disastro.<br>
+Se, ad esempio, ipotizziamo che l'abbattimento sia avvenuto 3,5 s dopo l'ultima risposta del transponder del DC-9, le coordinate iniziali sono 39,7256° N e 13,0273° E (ottenute dalla regressione parabolica spiegata nel paragrafo "<a href="../../fasi/5_fine/fine.html#para_volo" target="_blank">Ultimi minuti &rarr; Parametri di volo prima dell'abbattimento</a>").<br>
+</div>
+
+<br>
+
+<!-- Immagine ORTODROMIA impostazione dati -->
+
+<div style="margin-bottom: 30px; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="orto_dati.png" style="float:left; padding: 0px 2em 1em 0px" alt="" title="">
+Il sito <a href="https://geodesyapps.ga.gov.au/vincenty-direct" target="_blank"><i>Geoscience Australia</i></a> offre la possibilità di effettuare i calcoli che ci servono.<br>
+<br>
+Selezioniamo prima "<i>Coordinate Reference System: <b>Geographic</b></i>", poi "<i>Ellipsoid: <b>WGS84</b></i>" e l'emisfero nord.<br>
+Facciamo, poi, copia&incolla dei vari numeri e premiamo "Submit".<br>
+<br>
+I valori mostrati nell'immagine sono leggermente diversi da quelli ottenuti dall'attuale versione del programma; le piccole differenze dipendono dagli aggiornamenti (d'importanza marginale) apportati al programma (come il calcolo del numero di mach).<br>
+</div>
+
+
+<!-- Immagine ORTODROMIA risultato -->
+
+<div style="vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="orto_risu.png" style="float:left; padding: 0px 2em 1em 0px" alt="" title="">
+Dopo qualche istante, il sito calcola le coordinate del secondo punto ("<i>Point 2</i>") distante 7461,9 m dal "<i>Point 1</i>" e che si trova ad un azimut pari a 166.601811° da questo.<br>
+<br>
+</div>
+
+Abbiamo, così, ottenuto le coordinate del punto d'impatto sul mare del motore.<br>
+<br>
+
+I parametri possono essere variati a piacimento per fare tutte le simulazioni desiderate.<br>
+<br>
+
+<div style="margin-bottom: 1em; display: inline-block; width:100%;">
+
+<textarea wrap="off" rows = "9" cols = "40" name = "Codice stato iniziale" spellcheck="false" style="float:left; margin-right: 1em;">
+// Stato iniziale del motore
+const double gs0= 466.98687690461679 * 1.852/3.6,
+   rotta= Avi2Trig(167.79960430883506),
+   th= -55 * deg2rad; // Picchiata
+STS st= {
+   0, 0, 25926.956176757812 * .3048, // Posizione [m]
+   gs0 * cos(rotta) * cos(th), gs0 * sin(rotta) * cos(th), gs0 * sin(th) // Velocità inerziale [m/s]
+};
+</textarea>
+
+Se, ad esempio, si desidera simulare la caduta con una picchiata iniziale di 55° (come fanno i consulenti di parte imputata), basta sovrascrivere il codice mostrato qui a sinistra a quello originale.<br>
+L'angolo da variare è il "-55" nella riga <span style="font-family: monospace">"th= -55 * deg2rad; // Picchiata"</span>.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<br>
+
+
+<!-- ========================================================================================================== -->
+
+
+<script>
+"use strict";
+
+CreaIndice();
+
+const config= {
+	showLink: true, plotlyServerURL: "https://chart-studio.plotly.com",
+	responsive: true
+};
+
+DeriEsempio_1(); // Grafico POS/VEL
+
+Grafico_EquDiff(); // Grafico equazione differenziale
+
+CaduLibe(); // Caduta libera
+
+
+function DeriEsempio_1()
+{
+	var POS= {
+		type: "scatter", x: [], y: [], name: 'POS',
+		mode: "lines", line: { width: 2, color: '#0000ff' /*, shape: 'spline'*/ }
+	};
+	var VEL= {
+		type: "scatter", x: [], y: [], name: 'VEL',
+		mode: "lines", line: { width: 2, color: '#ff9000' /*, shape: 'spline'*/ },
+		yaxis: 'y2'
+	};
+
+	var idx= 0;
+	for(var t= 0; t <= 10; t += .5) {
+		POS.x[idx]= t; VEL.x[idx]= t;
+		POS.y[idx]= 4*t*t + 3*t + 2;
+		VEL.y[idx]= 8*t + 3;
+		idx++;
+	}
+
+
+	var lay= {
+		separators: ".", showlegend: false,
+		margin: { l:10, t:10, b:10},
+		xaxis: {
+			automargin: true,
+			title: { text: '<b>Tempo</b> [s]' },
+		},				
+		yaxis: {
+			automargin: true,
+			title: '<b>Posizione</b> [m]',
+			titlefont: { color: '#0000ff' },
+			tickfont: { color: '#0000ff' },
+			gridcolor: '#ccccff',
+			range: [0, 450.5]
+		},
+		yaxis2: {
+			automargin: true,
+			title: "<b>Velocità</b> [m/s]",
+			titlefont: { color: '#ff9000' },
+			tickfont: { color: '#ff9000' },
+			gridcolor: '#ffe0cc',
+			overlaying: 'y', side: 'right',
+			range: [0, 85]
+		}
+	};
+
+	Plotly.newPlot('deri_esempio1', [POS, VEL], lay, config);
+}
+
+
+// =============================================================================================
+
+// EQUAZIONE DIFFERENZIALE
+// v = 2t + 3p
+
+function Grafico_EquDiff()
+{
+	var POS= {
+		type: "scatter", x: [], y: [], name: 'POS',
+		mode: "lines", line: { width: 2, color: '#0000ff' /*, shape: 'spline'*/ }
+	};
+	var VEL= {
+		type: "scatter", x: [], y: [], name: 'VEL',
+		mode: "lines", line: { width: 2, color: '#ff9000' /*, shape: 'spline'*/ },
+		yaxis: 'y2'
+	};
+
+	const stp= .05, c1= Number(document.getElementById('SelectEquDiff_c1').value);
+	for(var idx= 0; idx <= 40; idx++) {
+		const t= idx * stp;
+		POS.x[idx]= t; VEL.x[idx]= t;
+		const p= c1 * Math.exp(3*t) - 2/3 * t - 2/9; // p(t)
+		const v= 2 * t + 3 * p; // p'(t)
+		POS.y[idx]= p;
+		VEL.y[idx]= v;
+	}
+
+
+	var lay= {
+		separators: ".", showlegend: false,
+		margin: { l:10, t:10, b:10},
+		xaxis: {
+			automargin: true,
+			title: { text: '<b>Tempo</b> [s]' },
+		},				
+		yaxis: {
+			automargin: true,
+			title: '<b>Posizione</b> [m]',
+			titlefont: { color: '#0000ff' },
+			tickfont: { color: '#0000ff' },
+			gridcolor: '#ccccff',
+			//range: [0, 450.5]
+		},
+		yaxis2: {
+			automargin: true,
+			title: "<b>Velocità</b> [m/s]",
+			titlefont: { color: '#ff9000' },
+			tickfont: { color: '#ff9000' },
+			gridcolor: '#ffe0cc',
+			overlaying: 'y', side: 'right',
+			range: [0, VEL.y[idx-1] * 1.1]
+		}
+	};
+
+	Plotly.newPlot('gra_equdiff', [POS, VEL], lay, config);
+}
+
+
+
+// =============================================================================================
+
+
+function CaduLibe()
+{
+	// Parametri. Unità di misura SI
+
+	var m, // Massa
+		S, // Area
+		Cr; // Coeff. di resistenza
+
+	switch(document.getElementById('SelectCorpo').value) {
+		case '1': // Motore DC-9, massa= 1800 kg, S= 1,77 m^2, Cr= 0,503
+			m= 1800; S= 1.77; Cr= .503; break;
+
+		case '2': // Persona a pancia sotto, massa= 80 kg, S= 0,7 m^2, Cr= 1
+			m= 80; S= .7; Cr= 1; break;
+
+		case '3': // Pallone, circonferenza= 69 cm, massa= 430 g
+			m= .43; S= .69*.69 / 4 / Math.PI; Cr= .35; break;
+
+		case '4': // Pallina ping pong, diametro= 4 cm, massa= 2,7 g
+			m= 2.7e-3; S= Math.PI * .04*.04 / 4; Cr= .45; break;
+	}
+	
+	document.getElementById('cadulibe_S').innerHTML = S.toPrecision(4).replace(/\.?0+$/,"").replace('.', ',');
+	document.getElementById('cadulibe_Cr').innerHTML= Cr.toString().replace('.', ',');
+	document.getElementById('cadulibe_m').innerHTML = m.toString().replace('.', ',');
+	
+	const
+		h0= document.getElementById('SelectQuota').value, // Quota iniziale
+		rho= document.getElementById('SelectRho').value, // Densità dell'aria
+		g= 9.8, // Accelerazione di gravità
+		
+		k= .5 * rho * S * Cr,
+		
+		k1= Math.sqrt(g*m/k), // VEL limite
+		k2= Math.sqrt(g*k/m);
+
+	// Aggiunti i km/h il 28-03-2023
+	document.getElementById('cadulibe_Vl').innerHTML= k1.toFixed(3).replace('.', ',') + ' m/s (' + (k1 * 3.6).toFixed(1).replace('.', ',') + ' km/h)';
+
+	document.getElementById('coeff_bali').innerHTML= (m / (Cr * S)).toFixed(1).replace('.', ',');
+
+	var POS= {
+		type: "scatter", x: [], y: [], name: 'POS',
+		mode: "lines", line: { width: 2, color: '#0000ff' /*, shape: 'spline'*/ }
+	};
+	var VEL= {
+		type: "scatter", x: [], y: [], name: 'VEL',
+		mode: "lines", line: { width: 2, color: '#ff9000' /*, shape: 'spline'*/ },
+		yaxis: 'y2'
+	};
+	var VEL_LIM= { // VEL limite
+		type: "scatter", x: [], y: [], name: 'VEL limite',
+		mode: "lines", line: { width: 3, color: '#ff9000', dash: 'dot' },
+		yaxis: 'y2'
+	};
+
+	var idx= 0;
+	for(var t= 0; ; t += .2) {
+		POS.x[idx]= t; VEL.x[idx]= t;
+		
+		POS.y[idx]= h0 - k1 * Math.log(Math.cosh(t * k2)) / k2;
+		VEL.y[idx]= -k1 * Math.tanh(t * k2);
+		
+		if(POS.y[idx] < 0) break;
+		
+		idx++;
+	}
+
+	VEL_LIM.x[0]= 0; VEL_LIM.x[1]= t;
+	VEL_LIM.y[0]= -k1; VEL_LIM.y[1]= -k1;
+
+	var th= Math.acosh(Math.exp(k/m * h0)) / k2;
+	document.getElementById('tempo_suolo').innerHTML= th.toFixed(3).replace('.', ',');
+
+	var lay= {
+		separators: ".", showlegend: false,
+		margin: { l:10, t:10, b:10},
+		xaxis: {
+			automargin: true,
+			title: { text: '<b>Tempo</b> [s]' },
+		},				
+		yaxis: {
+			automargin: true,
+			title: '<b>Quota</b> [m]',
+			titlefont: { color: '#0000ff' },
+			tickfont: { color: '#0000ff' },
+			gridcolor: '#ccccff',
+			//range: [0, 300.1]
+		},
+		yaxis2: {
+			automargin: true,
+			title: "<b>Velocità</b> [m/s]",
+			titlefont: { color: '#ff9000' },
+			tickfont: { color: '#ff9000' },
+			gridcolor: '#ffe0cc',
+			overlaying: 'y', side: 'right',
+			//range: [0, 70.1]
+		}
+	};
+
+	Plotly.newPlot('cadulibe', [POS, VEL, VEL_LIM], lay, config);
+}
+
+
+
+// ==================================================================================================
+
+
+EULERO_RK2();
+
+function EULERO_RK2()
+{
+	// Parametri della simulazione. Unità di misura SI
+	const
+		h0= 2000, // Quota iniziale
+		g= 9.8, // Accelerazione di gravità
+		rho= 1, // Densità dell'aria
+		m= 80, // Massa
+		S= .7, // Area
+		Cr= 1, // Coeff. di resistenza
+		
+		k= .5 * rho * S * Cr,
+		
+		dt= Number(document.getElementById('SelectDT').value), // Passo d'integrazione
+
+		TIPO_INTEGRATORE= Number(document.getElementById('SelectEuRK2').value); // Tipo d'integratore
+
+	// ============================================================
+
+	// C'tor per STS
+	function STS(p= 0, v= 0)
+	{
+		this.p= p; this.v= v;
+	}
+	
+	
+	// Calcolo delle derivate
+	function DER(st)
+	{
+		// Forza aerodinamica
+		const Fa= k * st.v * st.v; // Fa = k * v^2
+		
+		// Forza dovuta all'accelerazione di gravità
+		const Fg= m * g;
+
+		var der= new STS();
+		der.p= st.v; // Derivata della posizione = velocità
+		der.v= (Fa - Fg) / m; // Derivata della velocità = accelerazione
+		return der;
+	}
+
+
+	// ============================================================
+
+
+	// STATO INIZIALE
+	var st= new STS(h0, 0); // Quota, velocità
+	
+	const k1= Math.sqrt(g*m/k), // Questa è la velocità limite
+		k2= Math.sqrt(g*k/m);
+
+	var PI= { // POS INTEGRATA
+		type: "scatter", x: [], y: [], name: 'P integrata',
+		mode: "lines+markers",
+		line: { width: 1, color: '#0000ff' },
+		marker: { size: 6, color: '#0000ff' }
+	};
+
+	var PV= { // POS ESATTA
+		type: "scatter", x: [], y: [], name: 'P esatta',
+		mode: "lines+markers",
+		line: { width: 3, color: '#8080ff', dash: 'dot' },
+		marker: { size: 6, color: '#8080ff' }
+	};
+
+	var VI= { // VEL INTEGRATA
+		type: "scatter", x: [], y: [], name: 'V integrata',
+		mode: "lines+markers",
+		line: { width: 1, color: '#006600' },
+		marker: { size: 6, color: '#006600' },
+		yaxis: 'y2'
+	};
+
+	var VV= { // VEL ESATTA
+		type: "scatter", x: [], y: [], name: 'V esatta',
+		mode: "lines+markers",
+		line: { width: 3, color: '#009900', dash: 'dot' },
+		marker: { size: 6, color: '#009900' },
+		yaxis: 'y2'
+	};
+
+	var idx= 0;
+
+	for(var t= 0; t <= 4 + dt*.5; t += dt) {
+	
+		// Valori ESATTI della velocità e della quota
+		var v= -k1 * Math.tanh(t * k2);
+		var p= h0 - m/k*Math.log(Math.cosh(t * k2));
+
+		// Calcolo delle derivate di p e di v
+		var der= DER(st); // Eulero
+
+		if(TIPO_INTEGRATORE === 2) { // RK-2
+			var tmp= new STS(st.p + .5 * dt * der.p, st.v + .5 * dt * der.v);
+			der= DER(tmp);
+		}		
+
+		PI.x[idx]= t; PI.y[idx]= st.p;
+		PV.x[idx]= t; PV.y[idx]= p;
+		VI.x[idx]= t; VI.y[idx]= st.v;
+		VV.x[idx]= t; VV.y[idx]= v;
+		idx++;
+		
+		if(st.p < 0) break; // Interrompe quando il corpo arriva al suolo
+
+		// Integrazione numerica per calcolare p e v a t + dt
+		st.p += dt * der.p;
+		st.v += dt * der.v;
+	}
+
+
+	var lay= {
+		separators: ".", showlegend: false,
+		margin: { l:10, t:10, b:10},
+		xaxis: {
+			automargin: true,
+			title: { text: '<b>Tempo</b> [s]' },
+		},				
+		yaxis: {
+			automargin: true,
+			title: '<b>Quota</b> [m]',
+			titlefont: { color: '#0000ff' },
+			tickfont : { color: '#0000ff' },
+			gridcolor: '#e6e6ff',
+		},
+		yaxis2: {
+			automargin: true,
+			title: "<b>Velocità</b> [m/s]",
+			titlefont: { color: '#008000' },
+			tickfont : { color: '#008000' },
+			gridcolor: '#b3ffb3',
+			overlaying: 'y', side: 'right',
+		}
+	};
+
+	Plotly.newPlot('intenum_eulero', [PI, PV, VI, VV], lay, config);
+
+} // FINE EULERO()
+
+
+</script>
+
+
+</body>
+</html>

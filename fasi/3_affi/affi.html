@@ -1,0 +1,1279 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Strage di Ustica">
+	<meta name="keywords" content="ustica,ih870">
+	<title>Strage di Ustica - Fasi del volo</title>
+	<link rel="stylesheet" type="text/css" href="../../stile.css">
+	<script src="../../plotly-latest.min.js"></script>
+	<script src="../../comune.js"></script>
+	<script src="../../crea_indice.js"></script>
+	<style>
+		.click-zoom input[type=checkbox] {
+		  display: none
+		}
+
+		.click-zoom img {
+		  transition: transform 0.25s ease;
+		  cursor: zoom-in
+		}
+
+		.click-zoom input[type=checkbox]:checked~img {
+		  transform: scale(2) translateX(27px) translateY(40px);
+		  cursor: zoom-out
+		}	
+	</style>
+</head>
+
+<body>
+
+
+<div class="indice"><a href="../../index.html">Indice</a></div>
+
+
+<h2>Fasi del volo - Volo in A-14</h2>
+
+<!-- 22-01-2022: revisione generale per sostituire "TF-104G" con "aereo militare" -->
+
+
+<!-- 10-05-2022 Tolto motivo della rev (scritto nel forum), spostato "Affiancamento col caccia" in tf104g.html -->
+
+
+<!-- ========================================================================================================== -->
+
+
+<p style="margin-left: 5em"><b>INDICE</b></p>
+
+<p id="indice" style="margin-left: 3em">
+<!-- riempito dal JS -->
+</p>
+<br>
+
+<hr>
+
+<br>
+
+
+<!-- ========================================================================================================== -->
+
+
+
+<h3 id="sfasa_tempo">Sfasamento temporale tra Ciampino e Poggio Ballone</h3>
+
+La "<a href="https://www.stragi80.it/documenti/gi/perizie/050.pdf" target="_blank">Perizia tecnico scientifica Misiti; parte radaristica 2<sup>a</sup></a>" riporta a pag. 9: "<i>converrà precisare che il ritardo del clock fra Poggio Ballone e Marsala di circa 3'50" (es.21h.
+a Marsala 21h03'50" Poggio Ballone) (da video cassetta AM). Questo ritardo è stato avvalorato dall'analisi sulle registrazioni.</i>" e a fine pag. 12: "[...] <i>è possibile desumere un ritardo di circa 1 min. per il radar di Marsala rispetto al Marconi</i>", quindi la differenza tra Poggio Ballone e Marconi è di circa 2<sup>m</sup>50<sup>s</sup>. Tuttavia, confrontando accuratamente la posizione dei plot nel tabulato del Marconi e di Poggio Ballone si ottiene una differenza di 2<sup>m</sup>43<sup>s</sup>, comunque molto simile a quella indicata nella perizia.<br>
+Siccome non è possibile sapere quale radar riporta i plot con l'orario esatto, <u>tutte le cartine che mostrano i plot ottenuti dal tabulato di Poggio Ballone hanno l'orario "risincronizzato" con quello di Ciampino</u>, ottenuto sottraendo quei 2<sup>m</sup>43<sup>s</sup> dal tabulato di Poggio Ballone.<br>
+<br>
+
+
+
+<h3 id="buco_temporale">Assenza di plot per 3<sup>m</sup>34<sup>s</sup></h3>
+
+<!--  Revisione 2023-04-26  -->
+
+Appare utile mettere in evidenza che il tabulato di Poggio Ballone scaricabile da <a href="https://www.stragi80.it/tracciato/" target="_blank">STRAGI80.it</a> non riporta alcun plot dalle 18:30:19 alle 18:33:52 (3<sup>m</sup>34<sup>s</sup>); orari che, sincronizzati con Ciampino, corrispondono rispettivamente alle 18:27:35 e alle 18:31:10. Osservando la cartina di Poggio Ballone nel paragrafo "Descrizione degli eventi" (v. oltre), è ben evidente a cosa corrisponde questo "buco" temporale.<br>
+Nel tabulato "originale" (quello consegnato all'A.G.) questo "vuoto" inizia alle 18:30:18,0 e termina alle 18:33:53,5 (v. qui di seguito) per una durata di 3<sup>m</sup>35,5<sup>s</sup> (per tutti i dettagli, v. "<a href="../../lc/datirad/datirad.html#crcPB" target="_blank">Dati radaristici pervenuti all'A.G. &rarr; Poggio Ballone</a>").<br>
+
+<!--  FINE 2023-04-26  -->
+
+Considerando che tutti gli altri plot sono riportati nel tabulato di Poggio Ballone con una distanza temporale massima di 7 secondi (la media è 0,87 s tra due plot consecutivi), è evidente che quel vuoto di 214 secondi è estremamente "strano" (per usare un eufemismo).<br>
+Ugualmente "strano" è l'orario centrale di quel vuoto temporale: 18:29:23 (orario di Ciampino). Muovendo il puntatore del mouse sulla cartina "Marconi 3" più sotto, vediamo che quel plot rosso tutto spostato verso l'aereo militare è delle 18:29:11, molto vicino, quindi, all'orario centrale del "buco".<br>
+<br>
+
+
+<!-- Revisione 14-03-2022 -->
+
+Il cap. Pongiluppi, all'epoca comandante dell'Ufficio Operazioni del sito radar di Poggio Ballone, riferisce
+(v. "<a href="http://cristianopi.altervista.org/straus/v3f102_WP000877_001.pdf" target="_blank">WP000877_001.DOC</a>" <i><sup><abbr title="Procura della Repubblica di Roma, VOL. III - FASC. 102 - PAG. 20827 - 20829, DATA 03.10.95, TRIBUNALE ROMA UFFICIO ISTRUZIONE: RESO  DA  PONGILUPPI  DANTE,  GIA'  GENERALIZZATO  IN ATTI, DINNANZI AL G.I. DR. PRIORE.">fonte</abbr></sup></i> a circa metà pag. 2):<br>
+
+<div class="cita">
+NON HO NOTATO NELLA RIDUZIONE DATI ALCUN BUCO DI ORARIO; SE LI AVESSI
+NOTATI, MI SAREI CHIESTO IL PERCHE' E LO AVREI CHIESTO ALL'UFFICIALE TECNICO E
+AL M.I.O., GIACCHE' SE C'E' MANCATA RIDUZIONE C'E' MANCATA REGISTRAZIONE. SE SI
+EFFETTUA LA RIDUZIONE DATI IL PROGRAMMA NON REGISTRA. NON HO NOTATO BUCHI DI
+ORARIO NELLA RIDUZIONE DATI DEL 27.06.80.<br>
+PRENDO VISIONE DELLA TRACK HISTORY DEL 27.06.80 ED <u>IN RELAZIONE AL BUCO DI
+ORARIO TRA LE 18,30,180/Z E LE 18,33,535/Z NON RICORDO DI AVERLO NOTATO NE'
+QUANDO HO EFFETTUATO LA TRASPOSIZIONE SU CARTINA NEL 1980 NE' QUANDO MI E' STATO
+ORDINATO DALL'UFFICIO DA CUI DIPENDEVO NEL 1990</u>, CIOE' L'ITAV. IL BUCO ORARIO
+PUO' DETERMINARSI O DA UNA INTERRUZIONE DEL RECORDING O DAL MALFUNZIONAMENTO
+DELL'APPARATO STESSO O DA UNA SOSTITUZIONE DEL NASTRO.<br>
+</div>
+
+La riduzione dati consisteva nello stampare su carta ciò che una postazione radar registrava su nastro.<br>
+I dati registrati erano composti da due tabulati:
+<ul style="margin-top: 0px">
+<li><abbr title="Track History Recording">THR</abbr>, tabulato contenente la posizione e altre informazioni relative alle tracce in un dato orario;</li>
+<li><abbr title="Consolle Data Recording">CDR</abbr>, tabulato contenente la sequenza delle operazioni effettuate dai radaristi sulla consolle radar (ad esempio, inizializzazione, aggiornamento e cancellazione di una traccia).</li>
+</ul>
+
+Ciò che riferisce Pongiluppi, dunque, è che mentre scorre i vari plot della THR e li riporta sulla cartina, non nota alcun "buco di orario".<br>
+<br>
+
+<div style="margin-bottom: 30px; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="le157.png" style="float:left; padding-right: 30px;" alt="" title="">
+L'immagine mostra i plot relativi a varie tracce intorno all'IH870, riportata come LE157. L'attenzione di Pongiluppi, quindi, era quasi esclusivamente rivolta alla traccia LE157.<br>
+<br>
+Il tabulato consegnato all'<abbr title="Autorità Giudiziaria">A.G.</abbr> mostra un aereo di linea (l'IH870) sparire improvvisamente (inizio del buco temporale).<br>
+Se Pongiluppi avesse usato la stessa riduzione dati consegnata all'A.G. (con il buco temporale), risulta impossibile pensare che non si sarebbe accorto dell'improvvisa ed ingiustificabile scomparsa della traccia esaminata. Molto verosimilmente, accortosi di una tale stranezza, avrebbe esaminato anche altre tracce, arrivando certamente ad accorgersi che mancavano più di tre minuti di registrazione.<br>
+<br>
+Appare probabile, quindi, che la riduzione dati sia stata consegnata incompleta all'A.G.
+</div>
+
+
+
+
+<!-- FINE 14-03-2022 -->
+
+
+<!-- 18-05-2022 -->
+
+Il fatto anomalo del "buco" temporale viene confermato dal programmatore presso il sito radar di Poggio Ballone.<br>
+Nonostante il fatto che l'<abbr title="Autorità Giudiziaria">A.G.</abbr> ritenga che il teste abbia "reso dichiarazioni palesemente reticenti" (v. "<a href="http://cristianopi.altervista.org/straus/v1f306_WP002066_001.pdf" target="_blank">WP002066_001.DOC</a>" <i><sup><abbr title="Procura della Repubblica di Roma, VOL. I - FASC. 306 - PAG. 70344 - 70350, SCHEDA TESTE NR. 46: STASIO FAUSTO - INCARICO ALL'EPOCA: PROGRAMMATORE. ALLEG. A RELAZIONE TRASMESSA CON FG. NR. 230855/866 DATATA 09.12.97 (UI 2019).">fonte</abbr></sup></i> inizio pag. 1), il maresciallo Stasio dichiara molto apertamente (v. pag. 3):<br>
+
+<div class="cita">
+NOTO CHE ESISTE UN "SALTO" NELLA REGISTRAZIONE TRA LE ORE 18,30,180 E LE ORE
+18,33,535 SENZA CHE SULLA RIDUZIONE DATI COMPAIA ALCUN DIAGNOSTICO; PER
+DIAGNOSTICO INTENDO UN MESSAGGIO CHE DICE CHE IN QUEL TRATTO IL NASTRO ABBIA
+TROVATO DIFFICOLTA' O NON RIESCE A LEGGERE NULLA, CIOE' <u>NON E' ASSOLUTAMENTE NORMALE</u>: AD ESEMPIO POTREBBE ESSERCI STATO UN MESSAGGIO TIPO "ZERO LENGHT
+RECORD". ANCHE NELL'IPOTESI CHE CI SIA UN CALO DI TENSIONE CHE DETERMINEREBBE UN
+FERMO DEL SISTEMA CI SAREBBE COMUNQUE UN DIAGNOSTICO.
+</div>
+
+Se a questo si aggiunge il risultato ottenuto dall'analisi statistica presentata nel paragrafo "<a href="../../lc/mig/mig.html#ana_plot_conse" target="_blank">Presenza del MiG-23 &rarr; Analisi plot consecutivi Poggio Ballone</a>", non può esserci alcun dubbio sull'intenzionalità di far scomparire quelle righe dai tabulati.<br>
+
+<!-- FINE 18-05-2022 -->
+
+<br>
+
+
+<h3 id="traffi_villa">Traffico a Villafranca</h3>
+
+Il tabulato radar di Poggio Ballone mostra fin dalle primissime righe uno strano traffico militare con SIF2 = 7777.<br>
+<br>
+<div style="margin-bottom: 30px; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="7777_anima.gif" style="float:left; padding-right: 30px;" alt="" title="">
+Quest'animazione (molto velocizzata) mostra un aereo militare che arriva da sud-est a velocità sostenuta (circa 500 kn rispetto al suolo) e si dirige inizialmente verso il radiofaro di Gazoldo. Poi sembra andare verso l'aeroporto di Villafranca arrivando fino all'altro radiofaro per poi ritornare su Gazoldo.<br>
+Se la velocità non fosse sempre così elevata, potrebbe sembrare una sorta d'addestramento, ma il particolare codice di modo 2 pari a 7777 (plot a forma di cerchio) e l'elevata velocità rendono inverosimile l'ipotesi di un volo d'addestramento.<br>
+<br>
+Dopo qualche minuto d'assenza di plot, inizia la traccia LE011 (quadratini verdi) che nel tabulato di Poggio Ballone si presenta senza alcun codice SIF (come se l'aereo avesse il transponder in standby). Questa traccia, a prima vista, sembra compatibile con il TF-104G di ritorno dall'addestramento a Villafranca, per orario, direzione e velocità, ma dall'analisi più approfondita presentata nella pagina "<a href="../../lc/mig/mig.html" target="_blank">Presenza del MiG-23</a>", <u>si può escludere con certezza quasi assoluta che la traccia LE011 possa riferirsi ad un TF-104G</u>, anche se questo è in contrasto con la ricostruzione fatta dai periti d'ufficio (v. "<a href="https://www.stragi80.it/documenti/gi/perizie/087.pdf" target="_blank">Perizia radaristica Dalle Mese ed altri - 16.06.97</a>" a fine pag. 10).<br>
+<br>
+La scala è rappresentata dalle crocette 10 x 10 nm (miglia nautiche) disegnate ogni 0,5° in longitudine e in latitudine.<br>
+La distanza tra il radiofaro di Gazoldo e il TACAN di Villafranca (dischetto verde) è 17,8 nm o 33 km.
+</div>
+
+
+
+<h3 id="descri_eve">Descrizione degli eventi</h3>
+
+Le due cartine seguenti mostrano i percorsi di alcuni aerei ricavati dai tabulati radar di Ciampino e di Poggio Ballone.<br>
+<br>
+
+<!-- 10-05-2022 -->
+<!-- FINE 10-05-2022 -->
+
+
+<!-- Cartine di Ciampino e Poggio Ballone con AEREO MILITARE, 1133 e 1136 -->
+<!-- P:\PRG_VC2019\USTICA - Radar\  blocco  "###  Fasi del volo - Affiancamento con il caccia  ###" -->
+<div style="margin-bottom: 30px; vertical-align: top; display: inline-block;">
+<div id="roma" style="width: 30%; height: 600px; display: inline-block; float:left;"></div>
+<div id="poggio" style="width: 25%; height: 600px; display: inline-block; float:left; padding-right: 2em;"></div>
+
+La scala delle cartine è rappresentata dalle crocette 10 x 10 nm disegnate ogni 0,5° in longitudine e in latitudine. I cerchi relativi a VORTAC, VOR/DME, NDB e TACAN rappresentano le <a href="../../defi/radio/radio.html" target="_blank">radioassistenze</a> (il segmento Villafranca - Bologna non rappresenta un'aerovia; è indicato solo come "guida" per la traccia LE011).<br>
+L'etichetta informativa che compare posizionando il puntatore del mouse sopra ai plot mostra:
+<ul style= "margin: 0px">
+<li>per Ciampino: orario UTC (o zulu), codice impostato nel <a href="../../defi/radar/radar.html#apparati_velivoli" target="_blank">transponder</a> (1133: IH779, 1136: IH870, 4200 e 5400: aereo militare), <a href="../../defi/altro/altro.html#livello_volo" target="_blank">livello di volo</a>, radar che ha ricevuto il plot (SSR: radar secondario, PR: radar primario, SPI: l'aereo si sta identificando su richiesta del controllore), qualità del plot (da 0 a 15), latitudine, longitudine, distanza e azimut dal radar Marconi;</li>
+<li>per Poggio Ballone: orario UTC (risincronizzato con Ciampino), TKN, velocità (nodi), direzione, SIF1, SIF2, SIF3 e qualità del plot (7 è il massimo).</li>
+</ul>
+<br>
+
+<!--  Revisione 2023-10-02  -->
+Per informazioni dettagliate sul significato della qualità dei plot si veda la pagina "<a href="../../defi/radar/radar.html#qua_plot" target="_blank">RADAR e SIF &rarr; Qualità dei plot</a>".<br>
+<!--  FINE  2023-10-02  -->
+
+<br>
+I plot di dimensioni maggiorate sono quelli con "SPI" per Ciampino e con SIF2 = 7777 per Poggio Ballone.<br>
+<br>
+I plot di Poggio Ballone sono visualizzati con colore diverso in base all'identificativo TKN. I tre plot con SIF1 = 73 sono di colore rosso.<br>
+<br>
+
+<!-- 14-05-2022 -->
+Le tre aree di colore verde rappresentano le "zone di lavoro" di Gavorrano, Scansano e Siena (nominate da alcuni testi) e sono definite nel documento 
+
+"<a href="http://cristianopi.altervista.org/straus/v1f102_WP001503_001.pdf" target="_blank">WP001503_001.DOC</a>" <i><sup><abbr title="Procura della Repubblica di Roma, VOL. I - FASC. 102 - PAG. 25431 - 25438, ANN. 6 ALLA RELAZIONE ALLEGATA AL FG. AD9/100/0925/G53-1/6 DEL 01.04.93 (UI 1496 ESTRATTO DA &laquo;ISTRUZIONI  PERMANENTI  INTERNE&raquo; DEL COMANDO AEROPORTO GROSSETO - SEZIONE CONTROLLO T.A. - 2^ EDIZIONE CON AGGIORNAMENTI AL 15.01.80">fonte</abbr></sup></i>.
+
+<!-- FINE 14-05-2022 -->
+
+</div>
+<br>
+
+Particolare menzione meritano alcuni plot presenti nel tabulato dell'estrattore 3:
+<ul style="margin: 0px">
+<li>significativa presenza di plot di solo primario (di colore nero) non associabili a nessuno dei tre aerei noti, in quanto sono già presenti altri plot nello stesso orario che si trovano in posizioni differenti;</li>
+<li>presenza di tre plot (due di primario e uno di primario e secondario) intorno alle 18:29 tra la rotta dell'aereo militare e quella dell'IH870, in sequenza tale da mostrare un aereo che si muove dall'IH870 verso l'aereo militare.</li>
+<!-- 26-06-2022: tolta senza fare una revisione (fatto irrilevante per la comprensione degli eventi; è il pilota del 4200 che commuta in 52 poi in 54)
+<li>presenza di un plot alle 18:32:31 appartenente all'aereo militare (come sequenza temporale), ma con transponder 5200, diverso da 4200 e 5400 usati dal caccia.</li>
+-->
+</ul>
+<br>
+
+
+<!-- 16-05-2022 -->
+Analizzando i plot presenti nel tabulato di Poggio Ballone con tutti i loro dati e con il giusto spirito critico, prescindendo, quindi, dalla frettolosa ricostruzione fatta dai periti d'ufficio, si può solo affermare che la traccia LE011 (la parte iniziale della traccia ricostruita dai periti) mostra un aereo che proviene da Villafranca e va in direzione di Bologna (notare la particolare rotta basata su NDB) per poi virare verso Firenze.<br>
+<!-- FINE 16-05-2022 -->
+
+&Egrave; da sottolineare che la traccia LE011 non fornisce alcun elemento per poter essere associata con certezza ad uno o due aerei militari, in quanto il tabulato non riporta alcuna risposta ai radar secondari (il transponder sembra tenuto in standby). Si può solo asserire che è associabile ad un jet (data la velocità) che sta facendo qualcosa a bassa velocità nei pressi dell'aeroporto di Villafranca e poi accelera.<br>
+<br>
+Poco prima che la traccia LE011 finisca (tra Bologna e Firenze), inizia la AA464, certamente militare (risponde alle interrogazioni di modo 2 dei radar secondari militari); la prima viaggia intorno ai 450 kn, mentre la seconda sta inizialmente correndo ad oltre 530 kn per poi rallentare, come se dovesse raggiungere LE011 ed entrarci in formazione. Quindi, contrariamente a quanto asserito dai periti, i due aerei inizialmente non volano in formazione.<br>
+
+<!-- 22-05-2022: eliminato ragionamento su SIF2 = 7777 e SIF3 = 4200 già descritto su "transponder" e "AWACS" -->
+<br>
+Intorno alle 18:21, l'IH870 è circa 17 nm più a sud, nei pressi del VORTAC di Firenze, ad una quota troppo bassa per essere rilevato dai radar di Ciampino (sta mantenendo il livello di volo 190, circa 19000 ft), ma abbiamo le <a href="http://cristianopi.altervista.org/straus/v1f2_WP000172_001.pdf" target="_blank">comunicazioni <abbr title="Terra/Bordo/Terra">TBT</abbr></a> <i><sup><abbr title="Procura della Repubblica di Roma, VOL. I - FASC. 2, DA PAG. 361 A PAG. 367. TRASCRIZIONE DELLE COMUNICAZIONI RADIOTELEFONICHE INTERCORSE TRA IL CENTRO DI CONTROLLO REGIONALE DI ROMA E IL VOLO IH-870 DEL GIORNO 27.06.80.">fonte</abbr></sup></i>.<br>
+
+<!-- FINE 22-05-2022 -->
+
+Anche l'IH779 è nei pressi di Firenze, ma, siccome è decollato da Bergamo, sta provenendo dal VOR di Parma (aerovia UA-14) e sta mantenendo il livello 250.<br>
+<br>
+Una volta passato Firenze, l'aereo militare AA464 si dirige, inizialmente, verso il TACAN di Grosseto (rappresentato dal cerchietto verde), attraversando l’asse dell’aerovia A-14 nel tratto Firenze - Bolsena una trentina di secondi dopo che è passato l’IH779.<br>
+Si vede chiaramente che l'aereo militare continua a volare esattamente verso il TACAN di Grosseto per tre minuti e mezzo, poi inizia a volare quasi in parallelo all’A-14.<br>
+In questo momento (sono circa le 18:27), i due voli Itavia si trovano a 3 o 4 nm l'uno dall'altro (in allontanamento) e l'IH870 si trova 3500 ft più in basso dell'altro e sta salendo.<br>
+<br>
+Alle 18:27:30 (orario risincronizzato con Ciampino), l'operatore radar di Poggio Ballone cambia la traccia AA464 in LL464 (LL è l'identificativo di Poggio Ballone). Si veda l'<a href="https://www.stragi80.it/documenti/processo/trascrizioni/26.09.01.PDF" target="_blank">esame</a> dell'allora <abbr title="Track Production Officer, responsabile per la presentazione della situazione aerea.">T.P.O.</abbr> Lauretani da fine pag. 164.<br>
+<br>
+La rotta dell'aereo militare tende ad avvicinarsi lentamente all’asse dell’aerovia, arrivando a circa 8 nm dall'IH870, che serpeggia nel tentativo di seguire la <a href="../../defi/altro/altro.html#radiale" target="_blank">radiale</a> 153 in allontanamento dal VOR di Firenze, che ha problemi di funzionamento.<br>
+L'aereo militare vola quasi parallelo al DC-9 per tre minuti e mezzo, per un tratto lungo circa 28 nm. Poi vira circa 25 gradi a destra e mantiene la rotta per 1 minuto per poi virare ancora a destra verso Grosseto ed eseguire la procedura d’avvicinamento e l’atterraggio.<br>
+<br>
+
+
+
+<!-- 16-08-2022 -->
+
+<div style="margin-bottom: 30px; display: inline-block; width:100%;">
+<img src="aa464_rotta.png" style="float:left; padding-right: 30px;" alt="" title="">
+
+<!-- "p:\prg_vc2019\ustica - radar\wxmappe\MapGra.cpp"  blocco  "// Interpolazione LAT / LON  -  DECL = -2.65"  ->  "// AA464 volo parallelo A-14 usa PIA TACAN -  ## SELENIA 2 ##" -->
+
+La cartina evidenzia che AA464 (plot azzurri) mantiene il tratto quasi parallelo all'A-14 seguendo una prestabilita radiale del TACAN di Piacenza. Si può notare, infatti, che la linea gialla passa quasi esattamente al centro del dischetto verde "PIA" (il TACAN di Piacenza, appunto).<br>
+Quella linea gialla forma un angolo pari a 145° con il nord vero o geografico (cioè non magnetico) e rappresenterebbe la radiale seguita da AA464 se il TACAN fosse esattamente allineato al nord vero. Il pilota di AA464, quindi, ha impostato nello strumento sul cruscotto una radiale prestabilita o comunicatagli in volo che potrebbe differire da 145° di qualche grado in più o in meno.<br>
+<br>
+La linea gialla è stata ottenuta facendo ricorso ai preziosi strumenti della <a href="https://it.wikipedia.org/wiki/Regressione_lineare" target="_blank">regressione</a> ed <a href="https://it.wikipedia.org/wiki/Estrapolazione" target="_blank">estrapolazione</a> lineare, tramite i quali è possibile calcolare la migliore retta passante per i plot voluti (latitudine e longitudine) ed estendere tale retta (estrapolazione) all'esterno dei plot usati per calcolare la regressione.<br>
+Il riquadro su sfondo azzurro è un ingrandimento (ruotato) che evidenzia l'ottimo risultato della regressione (i plot sono vicinissimi alla retta gialla).<br>
+<br>
+AA464 intercetta la radiale a circa 106 nm dal TACAN e la mantiene fino a circa 134 nm.
+</div>
+
+<br>
+<!-- I grafici seguenti possono aiutare a visualizzare la fase del volo quasi in parallelo.<br>   Revisione 19-08-2025    -->
+
+<!-- FINE 16-08-2022 -->
+
+
+
+<div class="rev">  <!-- Revisione 19-08-2025 -->
+
+La virata a destra di circa 25 gradi, di cui s'è detto, è stata eseguita da AA464 a seguito di una lamentela segnalata da un controllore di Roma Radar al collega di Grosseto (v. "WP000162_001.DOC"
+<i><sup><abbr title="Procura della Repubblica di Roma, VOL. III - FASC. 153 - PAG. 29643, CONVERSAZIONE DELLE ORE 18,30/Z INTERCORSA TRA ROMA ED X, REGISTRATA SULLA PIZZA VI - TRA CIAMPINO E TORRE DI GROSSETO. A PAG. 29644 COPIA DELLA CARTA CROCIERA ICAO NELLA PARTE DI INTERESSE. ALLEGATO AD ESAME TESTIMONIALE RESO DA COLONNELLI P. IN DATA 10.02.97 (UI 161).">fonte</abbr></sup></i>, riportato integralmente):
+
+<div class="cita">
+CANALE 15 - CASS. VI/11 LATO B<br>
+<br>
+H. 18,30/Z:<br>
+ROMA - SI?<br>
+X - (INC. PER SOVRAP. VOCI)<br>
+ROMA - SENTI, RIMETTI DENTRO LA TUA MISSIONE, PERCHE' STA USCENDO DALLE ZONE IO C'HO GENTE CHE SALE LI'<br>
+X - SI?<br>
+ROMA - SI<br>
+X - GLIELO DICO<br>
+ROMA - CIAO<br>
+X - (VERSO L'INTERNO: (INC.) CI INFORMA CHE STATE USCENDO DALLA ZONA DELTA; ..<br>
+X1 - RIPETERE IL MESSAGGIO (INC.);<br>
+X - ROMA CI INFORMA CHE STATE USCENDO DALLA ZONA DELTA, CI SONO VELIVOLI CHE SALGONO E SCENDONO IN QUELLA POSIZIONE;<br>
+X1 - NEGATIVO, 25 MIGLIA SULLA RADIALE 045;<br>
+X - RICEVUTO).. PRONTO? ..PRONTO?<br>
+</div>
+
+
+Il pilota X1 riferisce che non sta uscendo dalla zona D, ma la sua immediata virata a destra lascia dedurre che, in realtà, il pilota era consapevole di trovarsi in una posizione quantomeno dubbia, altrimenti non avrebbe eseguito con tanta prontezza la virata per rientrare nella zona autorizzata.<br>
+<br>
+Utilizzando i tabulati radar e una carta aeronautica, si può stabilire la posizione di AA464 rispetto alla zona D.<br>
+<br>
+
+
+<!-- Cartina BBQ per zona D  CTR Grosseto-->
+
+<div style="margin-bottom: 1em; vertical-align: top; display: inline-block; width:100%;">
+<img src="bbq-zonaD.jpg" style="float:left; padding: 0px 1em 1em 0px" alt="" title="">
+Questa è una piccola parte del foglio F7 della Carta di Navigazione <abbr title="bassa e bassissima quota">BBQ</abbr> pubblicata dall'<abbr title="Aeronautica Militare">A.M.</abbr> con informazioni aeronautiche dell'ottobre '97.<br>
+<br>
+Si notano l'asse dell'aerovia A-14 e il confine est della <a href="https://it.wikipedia.org/wiki/Zona_di_controllo" target="_blank">CTR</a> di Grosseto, che all'epoca era suddivisa in quattro zone: A, B, C e D; quest'ultima era la zona più a est, dove è transitato AA464.<br>
+<br>
+La carta è in scala 1:500000 e il confine della zona D è tracciato a 37 mm dall'asse dell'A-14, corrispondenti a 10 nm.
+</div>
+
+
+Siccome i controllori di Roma Radar normalmente visualizzavano sullo schermo i dati provenienti dall'estrattore 1 del radar Marconi (v. "<a href="https://www.stragi80.it/documenti/processo/sentenza/motivazioni/parte1.pdf" target="_blank">Motivazioni - Parte 1<sup>a</sup></a>", seconda metà di pag. 148), per capire il motivo della lamentela dobbiamo esaminare il tabulato relativo a tale estrattore.<br>
+<br>
+
+<!-- Cartina BBQ per zona D  CTR Grosseto-->
+
+<div style="margin-bottom: 1em; vertical-align: top; display: inline-block; width:100%;">
+<img src="zonaD.png" style="float:left; padding: 0px 1em 1em 0px" alt="" title="">
+Qui vediamo riprodotto il limite est della zona D e i plot che venivano osservati dal controllore di Roma.<br>
+<br>
+Si nota bene che, in effetti, i plot fuoriescono dalla zona D e questo fa allarmare il controllore di Roma, anche perché questi sta vedendo il disordinato serpeggiare dei due aerei Itavia, notando, soprattutto, che l'IH870 sta volando più ad ovest dell'asse dell'aerovia.<br>
+<br>
+&Egrave; anche mostrato il punto in cui si trova il pilota nel momento della comunicazione con Grosseto.
+</div>
+
+
+Sebbene lo scopo di questo paragrafo non sia evidenziare anomalie o dubbi sulla pianificata missione d'addestramento MIX 433, lo stranissimo comportamento di AA464 è certamente un ulteriore elemento che avvalora l'ipotesi di sostituzione della missione d'addestramento con una missione operativa (v. "<a href="../../lc/tf104g/tf104g.html#dubbi_mix433" target="_blank">I due F-104 &rarr; Dubbi sulla MIX 433</a>").<br>
+<br>
+
+Per avere informazioni accurate sul comportamento tenuto da AA464 in relazione ai due voli Itavia è conveniente sostituire la posizione rilevata dai radar di Roma con quella del percorso che meglio approssima i plot in un dato intervallo di tempo. Ciò ha il duplice vantaggio di consentire il calcolo della posizione con continuità (anziché a scatti di 5/6 secondi) e, soprattutto, di annullare le fluttuazioni dei plot dovute agli errori strumentali del radar (soprattutto all'errore in azimut).<br>
+La disponibilità di un metodo che fornisca la posizione di un aereo in un istante scelto a piacere (all'interno di un dato intervallo temporale) consente anche il calcolo della velocità rispetto al suolo con notevole accuratezza. Infatti, calcolando la posizione dell'aereo in due istanti separati da qualche decimo di secondo, la velocità dell'aereo rispetto al suolo si calcola semplicemente dividendo la distanza tra le due posizioni per il tempo che le separa.<br>
+<br>
+
+
+<!-- Mappa regressione AA464 -->
+
+<div style="margin-bottom: 1em; vertical-align: top; display: inline-block; width:100%;">
+<img src="regAA464.png" style="float:left; padding: 0px 1em 1em 0px" alt="" title="">
+Qui vediamo il risultato delle due regressioni sull'azimut e sulla distanza di AA464 dal TACAN di Piacenza (PIA), risultato rappresentato dalla curva gialla passante molto vicino ai plot di AA464.<br>
+I plot di solo primario (neri) sono ignorati per il calcolo della regressione.<br>
+<br>
+I dati di partenza sono l'azimut e la distanza dei plot dal radar Selenia presenti nel tabulato dell'estrattore 4, da cui si ricavano latitudine e longitudine dei plot e da queste coordinate si ricavano l'azimut e la distanza da PIA in un dato istante.<br>
+</div>
+
+
+<!-- Mappa regressione IH870 -->
+
+<div style="margin-bottom: 1em; vertical-align: top; display: inline-block; width:100%;">
+<img src="regIH870.png" style="float:left; padding: 0px 1em 1em 0px" alt="" title="">
+Questo, invece, è il risultato delle due regressioni sull'azimut e sulla distanza dell'IH870 dal radar Selenia.<br>
+Anche in questo caso, i plot di solo primario sono ignorati ed è stato ignorato anche il plot evidenziato.<br>
+<br>
+La freccia indica il punto in cui l'IH870 inizia la salita dal livello di volo 230 al 290 (due o tre secondi prima delle 18:29).<br>
+La linea tratteggiata collega i due plot aventi lo stesso orario; si nota il perfetto sincronismo di AA464 nell'affiancare l'IH870.
+</div>
+
+
+Dalle quattro regressioni appena descritte si possono ricavare molte informazioni, alcune delle quali consentono di evidenziare la chiara intenzione di AA464 di affiancare l'IH870 portandosi alla distanza minima possibile, arrivando al limite estremo della zona D, tanto da mettere in agitazione il controllore di Roma Radar.<br>
+<br>
+
+
+<!-- AZIMUT / DISTANZA AA464-IH870 -->
+
+<div style="margin-bottom: 2em; vertical-align: top; display: inline-block; width:100%;">
+<div id="affi-azm_dst" style="width: 700px; height: 450px; float:left; padding-right: 1em;"></div>
+Ecco il grafico maggiormente significativo in questo contesto, poiché può essere ritenuto la rappresentazione matematica di tutto l'interesse mostrato da AA464 per sincronizzarsi perfettamente all'IH870, avvicinandosi a lui il più possibile, evitando, al tempo stesso, di uscire dalla zona in cui è autorizzato a volare (la zona D della CTR di Grosseto).<br>
+<br>
+La curva blu, infatti, indica di quanti gradi AA464 è più "avanti" dell'IH870 durante l'affiancamento. Un valore negativo indica che AA464 è "dietro" all'IH870, mentre il valore pari a zero (raggiunto circa alle 18:29:40) indica che AA464 ha il DC-9 esattamente alla sua sinistra, cioè il pilota dell'aereo militare deve girare la testa esattamente di 90° a sinistra per osservare l'IH870. Si veda anche la mappa seguente, per maggior chiarezza.<br>
+<br>
+La curva arancione è la distanza tra i due aerei. Si può appurare che la distanza minima scende fino a circa 8,1 nm (15 km).
+</div>
+
+
+<!-- Mappa regressione AA464 RUOTATA -->
+
+<div style="margin-bottom: 1em; vertical-align: top; display: inline-block; width:100%;">
+<img src="regAA464_ruotata.png" style="float:left; padding: 0px 1em 1em 0px" alt="" title="">
+Questa mappa è la stessa vista prima (Selenia 4), ma ruotata per mostrare meglio il significato del grafico con tratto blu appena visto.<br>
+<br>
+Vediamo inizialmente che AA464 è "dietro" al DC-9 di circa 16,5° (notare il valore negativo nel grafico), poi questo angolo si riduce fino ad annullarsi e il grafico s'interrompe quando AA464 deve virare a destra per ottemperare alla lamentela del controllore di Roma Radar.<br>
+<br>
+In realtà, quell'angolo ("Anticipo AA464") è calcolato in modo molto più complesso di quanto mostrato schematicamente dall'immagine, poiché è richiesto l'utilizzo della prua di AA464. Infatti, il pilota si rende conto di essere al traverso dell'IH870 quando questo si trova 90° a sinistra rispetto all'asse longitudinale dell'aereo, cioè rispetto alla prua. Se c'è vento con la componente al traverso di forte intensità, la prua e la rotta differiscono in modo significativo.<br>
+Una volta calcolata la prua di AA464 (chiamiamola <i>HDG<sub>464</sub></i>) e calcolato l'azimut dell'IH870 rispetto ad AA464 (chiamiamolo <i>AZM</i>) abbiamo: <i>Anticipo_AA464 = HDG<sub>464</sub> - 90° - AZM</i>.
+</div>
+
+
+Cominciamo con il calcolo della prua partendo dal dato che si ottiene direttamente da una delle due regressioni fatte per AA464: l'azimut rispetto al TACAN di Piacenza (PIA).<br>
+Questo azimut (che è rispetto al nord vero) veniva mantenuto da AA464 seguendo una specifica <a href="../../defi/altro/altro.html#radiale" target="_blank">radiale</a> di PIA, grazie alle indicazioni fornite da un apposito strumento (ad esempio un <a href="https://en.wikipedia.org/wiki/Horizontal_situation_indicator" target="_blank">HSI</a>) regolato sulla radiale voluta.<br>
+<br>
+
+
+<!-- PIA RDL -->
+
+<div style="margin-bottom: 2em; vertical-align: top; display: inline-block; width:100%;">
+<div id="affi-pia_rdl" style="width: 700px; height: 450px; float:left; padding-right: 1em;"></div>
+Il grafico mostra l'azimut di AA464 rispetto a PIA e consente d'ipotizzare che la radiale impostata da AA464 non doveva essere troppo distante da 145°; poteva differire da quel valore di qualche grado in più o in meno (dipende dalla declinazione magnetica impostata nel TACAN).<br>
+<br>
+Il grafico presenta due assi orizzontali; quello in alto indica il tempo trascorso, espresso in secondi, dal 1° plot usato per la regressione (18:27:09). Questo tempo è ricavato dal campo "TEMPO" presente nei tabulati radar di Roma ed è un contatore ad alta risoluzione che avanza di 1 unità ogni 80 ms (0,08 secondi). L'utilizzo di questo tempo al posto dell'orario UTC (avente una risoluzione ben più bassa) consente di calcolare la regressione con accuratezza notevolmente migliore.<br>
+<br>
+I punti blu "sparpagliati" sono gli azimut da interpolare, la curva è il risultato della regressione e i punti di colore arancione rappresentano la differenza tra i punti interpolati e quelli da interpolare.
+</div>
+
+
+Quella appena vista è la rotta seguita da AA464 nel tratto quasi parallelo all'A-14, ma, come detto, a noi interessa la prua.<br>
+L'effetto che ha il vento sulla differenza tra la rotta e la prua può essere meglio compreso consultando la pagina "<a href="http://www.e-ser.eu/Aeronautica/nav01.htm" target="_blank">Triangolo del vento - soluzione grafica</a>".<br>
+<br>
+Per il calcolo della prua, dunque, abbiamo bisogno di conoscere il vento. A tale scopo può essere utilizzato il <a href="../meteo.html#in_rotta" target="_blank">modello meteo</a>, ma è necessario conoscere la quota tenuta da AA464.<br>
+Non si hanno valori certi di questa quota, ma si può ritenere valido il valore pianificato per la missione d'addestramento (v. "<a href="http://cristianopi.altervista.org/straus/v1f57_WP017684_001.pdf" target="_blank">WP017684_001.DOC</a>"
+<i><sup><abbr title="Procura della Repubblica di Roma, VOL. I - FASC. 57 - PAG. 13880 - 13887 ALLEGATO 3 AL RAPPORTO DEI C.C. IN DATA 07.04.92 COPIE DEI REGISTRI DI VOLO DEL 20^ GRUPPO (NOTA 1), DEL 4^ STORMO (NOTA 2) E DELLA 604^ SQUADRIGLIA COLLEGAMENTI DI GROSSETO (NOTA 3) N.B. I REGISTRI SONO RIPORTATI SOLO NELLA PARTE RELATIVA AL 27.06.80.">fonte</abbr></sup></i> a pag. 4):<br>
+
+<div class="cita" style="white-space: pre">DATA: 27.06.80
+TIPO VELIVOLO E MATRICOLA MILITARE: TF104G - 54230
+ORA E AEROPORTO
+PARTENZA: GROSSETO - 19,40
+ARRIVO:   GROSSETO - 20,50
+CONDIZIONI METEOROLOGICHE DI VOLO: VMC 50 - IMC REALE 20
+DURATA TOTALE DEL VOLO: 70
+<b>QUOTA: MT. 270</b>
+SCOPO DEL VOLO: INT. 8
+EQUIPAGGIO
+GRADO E CATEGORIA: CAP.      - P
+                   SOTTOTEN. - P
+COGNOME E NOME: BERGAMINI GIOVANNI
+                MORETTI
+MANSIONI A BORDO: 1 P
+                  PDC
+</div>
+
+Con i parametri ambientali di quella sera, il <a href="../../defi/altro/altro.html#livello_volo" target="_blank">livello di volo</a> 270 corrispondeva a circa 27300/27400 ft sul livello del mare.<br>
+Il vento presente a quella quota lungo la rotta percorsa da AA464 in quel dato orario può essere stimato con sufficiente accuratezza tramite il modello meteo.<br>
+<br>
+
+<!-- VENTO AA464 -->
+
+<div style="margin-bottom: 2em; vertical-align: top; display: inline-block; width:100%;">
+<div id="affi-vento_AA464" style="width: 700px; height: 450px; float:left; padding-right: 1em;"></div>
+Il grafico mostra l'intensità e la direzione del vento nella posizione e orario in cui s'è trovato AA464.<br>
+<br>
+Si nota la direzione da ovest praticamente costante, mentre l'intensità aumenta di circa 10 kn andando verso sud.
+</div>
+
+
+Dalla velocità rispetto al suolo e dal vento si ricava la velocità rispetto all'aria e la prua. Per il dettaglio dei calcoli si può vedere "<a href="http://www.e-ser.eu/Aeronautica/nav02.htm" target="_blank">Triangolo del vento - soluzione analitica</a>" o "<a href="../5_fine/fine.html#tas_prua" target="_blank">Velocità rispetto all'aria e prua</a>".<br>
+<br>
+
+
+<!-- GS AA464 e IH870 / HDG_AA464 -->
+
+<div style="margin-bottom: 2em; vertical-align: top; display: inline-block; width:100%;">
+<div id="affi-gs_hdg" style="width: 700px; height: 450px; float:left; padding-right: 1em;"></div>
+Qui vediamo i vari parametri d'interesse.<br>
+Vengono mostrate le velocità al suolo (GS) e la velocità rispetto all'aria (TAS) dalle quali si ricava la prua.<br>
+Si nota che andando verso sud, la prua viene corretta a destra (cioè controvento) di oltre 1° (sicuramente ad opera dell'autopilota), dal momento che il vento aumenta d'intensità.<br>
+<br>
+Il grafico inizia con AA464 che sta già correndo a circa 507 kn rispetto al suolo, cioè circa 55 kn in più dell'IH870. Tuttavia continua ad accelerare.<br>
+L'andamento di TAS<sub>464</sub> (velocità rispetto all'aria di AA464) evidenzia che il pilota aveva dato potenza al motore per accelerare e sbrigarsi ad affiancare l'IH870. Poi, una volta ridotto il "ritardo" (v. grafico "Anticipo AA464"), il pilota riduce motore. Appare molto significativo il fatto che tale riduzione di motore avviene 10/20 secondi prima delle 18:28:55, orario in cui si nota la "migrazione" di plot dai due voli Itavia ad AA464 (v. cartine ad inizio paragrafo), come se AA464 stesse stabilizzando la velocità per agevolare l'entrata in formazione dell'aereo che abbandona i due voli Itavia.<br>
+Risulta molto difficile ignorare la concreta possibilità che questo aereo fosse effettivamente presente.<br>
+</div>
+
+
+Alla luce di quanto oggettivamente dimostrato, è ben evidente il maniacale interesse di AA464 per volare in perfetto sincronismo con l'IH870 accostandosi il più possibile a questo.<br>
+Se a ciò aggiungiamo i fatti descritti nella pagina "<a href="../../lc/tf104g/tf104g.html" target="_blank">I due F-104</a>" e il "misterioso" buco temporale presente nel tabulato di Poggio Ballone proprio in corrispondenza degli eventi qui descritti, la ricostruzione fatta dai periti d'ufficio secondo cui AA464 ha svolto una missione d'addestramento risulta fuori da ogni logica e in contrasto con i fatti, concreti e dimostrati.<br>
+
+
+
+</div>  <!-- FINE 19-08-2025 -->
+
+<br>
+
+
+
+<h3 id="traccia_aa041">Traccia AA041</h3>
+
+Qualche considerazione a parte la merita la traccia AA041 che appare nel momento in cui l'aereo LL464 vira a destra verso Grosseto.<br>
+Se la traccia rappresentasse realmente un aereo, questo sarebbe un caccia supersonico che abbandona la formazione con LL464 a circa mach 1,4 a quota medio-bassa (probabilmente intorno ai 5000 ft). Aggiungendo che anche questa traccia ha SIF2 = 7777, AA041 rivestirebbe grande interesse per la comprensione dei fatti accaduti in quella zona.<br>
+<br>
+L'Autorità Giudiziaria prende per buona la ricostruzione dei periti d'ufficio basata sul lavoro fatto da un gruppo di tecnici dell'<abbr title="Ispettorato delle Telecomunicazioni ed Assistenza al Volo">ITAV</abbr> coordinati dall'allora col. Gaudio.<br>
+Il risultato è che la traccia AA041 viene liquidata come un errore dell'operatore radar. Si veda la già citata "<a href="https://www.stragi80.it/documenti/gi/perizie/087.pdf" target="_blank">Perizia radaristica Dalle Mese ed altri - 16.06.97</a>" a pag. 174:<br>
+"<i>Si può notare che la traccia </i>[quella &laquo;<i>della coppia F104</i>&raquo;, ndr]<i> appare regolare senza particolari elementi di rilievo se non per il suo proseguimento fin sopra il mare.
+Questo fatto, del resto evidenziato anche da Poggio Ballone, è certamente indicativo di come si è svolto l’atterraggio: uno dei due F104 è atterrato
+immediatamente, mentre il secondo ha effettuato una virata sul mare per poi entrare e atterrare a Grosseto.<br>
+Si può inoltre notare che non vi è nessuna registrazione di tracce che possano far pensare ad uno sdoppiamento del volo, <u>dimostrando</u> così che la
+traccia AA041 registrata a Poggio Ballone, è stata generata, come già detto da una errata azione dell’operatore di sito.</i>".<br>
+A parte i fortissimi dubbi che insorgono nel ritenere possibile che un caccia possa atterrare in una direzione e l'altro nella direzione opposta dopo aver eseguito la procedura d'avvicinamento strumentale (fatto estremamente pericoloso e, pertanto, assolutamente insolito), la "dimostrazione" dei periti appare molto labile, in quanto sembra derivare da un assunto estremamente dubbio e da ciò che si può leggere nel documento "<a href="https://www.stragi80.it/documenti/gi/Titolo2b.pdf" target="_blank">TITOLO 2 - L’istruttoria dal 27 luglio 90 al 31 dicembre 97.</a>" a pag. 44 (paragrafo "Traccia AA041"). La dimostrazione, quindi, si comporrebbe di tre elementi:
+<ol>
+<li>la regolarità della traccia "<i>della coppia F104</i>" che non mostra sdoppiamenti;</li>
+<li>le "<i>considerazioni analoghe a quelle già fatte sulla AA457/LL457</i>" riguardanti l'errata velocità calcolata dal sistema;</li>
+<li>"<i>per quanto riguarda il codice di modo 2, elemento che dovrebbe qualificarla come militare, si dice che esso è dovuto alla breve distanza dal sito ed al fenomeno del &laquo;trascinamento&raquo;</i>" (v. sempre "TITOLO 2" a pag. 44).</li>
+</ol>
+Da tali labili elementi scaturiscono le seguenti osservazioni:
+<ol>
+<li>resta un mistero come sia possibile "dimostrare" che uno sdoppiamento della traccia LL464 non sia uno sdoppiamento scrivendo che la traccia LL464 non mostra sdoppiamenti, dato che lo sdoppiamento è proprio costituito dalla AA041;</li>
+<li>mentre nel caso della AA457 la velocità è di ben 1280 kn, nel caso della AA041 la velocità è di "appena" 922 kn, quindi non impossibile per un caccia;</li>
+<li>il fenomeno del "trascinamento" è un modo molto sbrigativo per liquidare il SIF2 = 7777, con tutta l'importanza che avrebbe quel particolare codice.</li>
+</ol>
+
+Non risulta molto chiaro, dunque, il criterio secondo il quale quelle poche frasi dei periti d'ufficio possano costituire una dimostrazione. Non c'è da meravigliarsi se tra i commenti dell'Autorità Giudiziaria si può leggere al termine del documento "<a href="https://www.stragi80.it/documenti/gi/perizie/087.pdf" target="_blank">Capitolo LXXXVII - Perizia radaristica Dalle Mese ed altri - 16.06.97</a>":<br>
+
+<div class="cita">
+
+Essa <span style="font-family: sans-serif">[<i>la perizia Dalle Mese, ndr</i>]</span> non andrà immune da critiche, ma stabilisce molteplici punti fermi che resisteranno ad ogni critica.<br>
+Certo la critica più forte proviene da parti imputate nella consulenza Giubbolini. Consulenza che sottopone la perizia a un fuoco pesantissimo di
+argomentazioni. Molte delle conclusioni dei periti d’ufficio restano in piedi, alcune s’indeboliscono, altre sembrano cadere.
+
+</div>
+
+Desta, inoltre, una certa perplessità il fatto che tutte le tracce aventi una velocità superiore agli 800 kn (quindi anche la AA041) vengano attribuite dal gruppo di lavoro dell'ITAV ad errori dell'operatore e tutti i codici 7777 di modo 2 ad errori del sistema. A fronte di questo lavoro, il giudice Priore, rivolgendosi a Gaudio durante il suo <a href="http://cristianopi.altervista.org/straus/v3f132_WP000931_001.pdf" target="_blank">esame testimoniale</a>
+<i><sup><abbr title="Procura della Repubblica di Roma, VOL. III - FASC. 132 - PAG.  26424 - 26557, TRASCRIZIONE DELL'ESAME TESTIMONIALE RESO DA GAUDIO FRANCESCO IN DATA 10.07.96. (A CURA DEL PERITO TRASCRITTORE MARIA GRAZIA MARINI).">fonte</abbr></sup></i>, ebbe a dire (v. pag. 22):
+
+<div class="cita">
+
+[...] IL RISULTATO DI QUESTO LAVORO E' STATO QUELLO DI AFFERMARE CHE NESSUNA DI QUESTE TRACCE, CHE POTEVANO SEMBRARE
+MILITARI, EFFETTIVAMENTE DENOTANO LA PRESENZA DI AEREI MILITARI; LEI SE NE RENDE
+CONTO? E' QUESTO IL LAVORO, VOI AVETE FATTO QUESTO LAVORO, AVETE DETTO: "TUTTE
+QUESTE TRACCE CHE UNA PERSONA POCA ESPERTA PUO' RITENERE SIANO MILITARI, SONO
+ASSOLUTAMENTE NON MILITARI, O PERCHE' NON ESISTONO, O PERCHE' SONO STATI
+COMPIUTI DEGLI ERRORI, O PERCHE' E' AVVENUTO L'EFFETTO TRASCINAMENTO..."...
+
+</div>
+
+<!-- Revisione 04-11-2023 -->
+
+Cercando di ragionare in modo indipendente da quanto finora riportato, si può osservare che la traccia nasce senza alcun codice SIF. Poi, i tre plot successivi presentano il SIF2 = 7777, lasciando legittimamente ipotizzare che il radar secondario abbia ricevuto la risposta dal transponder dell'aereo e che quindi la traccia stia effettivamente rappresentando un aereo e non scaturisca da un errore dell'operatore. L'errore dell'operatore potrebbe riguardare il non preciso posizionamento della <i>ball tab</i> che fa generare al sistema una velocità più alta di quella realmente posseduta dall'aereo, ma ciò non ha niente a che vedere né con la presunta assenza dell'aereo né con il presunto errore di sistema che avrebbe generato il SIF2 = 7777.<br>
+<br>
+Nel caso di un errore di posizionamento della <i>ball tab</i>, la traccia AA041 può essere associata sia ad un caccia, sia ad un qualunque altro aereo. Una possibile identità di questo aereo viene ipotizzata nel paragrafo "PD-808 e LG461 &rarr; 1c) Provenienza PD-808 - Ipotesi n° 3" (v. più avanti).<br>
+
+<!-- FINE 04-11-2023 -->
+
+<br>
+In merito alla ricezione di alcuni plot con SIF2 = 7777, avrebbe potuto essere utile l'imputato di reato connesso Lauretani (nominato prima), interrogato più come consulente che come imputato. Purtroppo, alla domanda del Presidente su questo argomento (v. verso la fine di pag. 72 della <a href="https://www.stragi80.it/documenti/processo/trascrizioni/26.09.01.PDF" target="_blank">trascrizione</a>), il Lauretani non ricorda bene; gli sembra che i codici SIF rimanessero fissi anche dopo la cessata ricezione della risposta del transponder. Ad ogni modo, resta il fatto che almeno una risposta SIF2 = 7777 deve essere stata ricevuta dal radar secondario di Poggio Ballone, altrimenti non sarebbe comparso nemmeno un plot con quel SIF2.<br>
+
+<!-- 16-05-2022 -->
+
+Ciò è confermato dall'allora magg. Petroni, coordinatore ITAV che, interrogato da Priore, riferisce (v. <a href="http://cristianopi.altervista.org/straus/v3f131_WP000912_001.pdf" target="_blank">WP000912_001.DOC</a>
+<i><sup><abbr title="Procura della Repubblica di Roma, VOL. III - FASC. 131 - PAG. 26314 - 26386, TRASCRIZIONE DELL'ESAME TESTIMONIALE RESO DA PETRONI GISBERTO IN DATA 09.07.96. (A CURA DEL PERITO TRASCRITTORE GRILLIN MARA). A PAG. 26387 BUSTA CONTENENTE BOBINA CON REGISTRAZIONE SUDDETTO ESAME.">fonte</abbr></sup></i> a pag. 2):
+
+<div class="cita">
+[...] POSSIAMO VEDERE CHE QUESTA TRACCIA ALFA-ALFA 041, INIZIALIZZATA ALLE 18 34'28'' SENZA IFF, PRENDE ALLE 18 34'40''
+UN CODICE DI MODE 2 7777. E SOLO QUESTA BATTUTA PRENDE IL CODICE, NEL SENSO CHE SOLO IN QUESTA BATTUTA IL COMPUTER REALMENTE LEGGE UN CODICE IFF. PER TUTTO IL RESTO SONO DELLE BATTUTE IN DEGRADO, IL CHE SIGNIFICA CHE NON C'E' PIU' UN AGGIORNAMENTO DI QUESTO CODICE. OSSIA IL DATO CHE ACQUISITO IL COMPUTER IN QUESTA BATTUTA, SE LO PORTA FINO AD ARRIVARE A QUALITA' 0. PERO' NON LEGGE PIU' QUESTO CODICE, L'HA LETTO SOLO UNA VOLTA, L'HA LETTO SOLO IN QUESTA BATTUTA QUI.
+</div>
+
+<!-- Revisione 04-11-2023 -->
+
+Questa traccia, quindi, è ben lungi dall'essere un errore di sistema e dell'operatore. Essa può rappresentare un caccia o altro tipo d'aereo che esce dalla formazione con LL464, a quota molto bassa per dileguarsi tra le colline a sud della Toscana.<br>
+Questo aereo potrebbe essere lo stesso che pochi minuti prima (alle 18:29 circa) ha abbandonato l'IH870 per entrare in formazione con LL464 (v. "<a href="../../lc/mig/mig.html#ana_vel" target="_blank">Presenza del MiG-23 &rarr; Analisi della velocità di volo</a>").<br>
+
+
+<!-- FINE 16-05-2022 -->
+
+<br>
+
+<!--  Revisione 2023-04-26  -->
+
+<!--  Tuttavia, l'errore dell'operatore, già menzionato, riguardante il non preciso posizionamento della <i>ball tab</i> non può essere categoricamente escluso. &Egrave;, quindi, possibile che la velocità di AA041 fosse, in realtà, più bassa di quella presente nel tabulato.<br>
+Il paragrafo "1c) Provenienza PD-808 - Ipotesi n° 3" del seguente capitolo prende in considerazione questa possibilità.<br>  -->
+
+<!--  FINE 2023-04-26  -->
+
+<!-- FINE 04-11-2023 -->
+
+
+
+<!-- Revisione 08-08-2022 -->
+
+
+<h3 id="pd808_lg461">PD-808 e LG461</h3>
+
+Tra i vari aerei militari in volo durante il transito dell'IH870 nei cieli della Toscana, un <a href="https://it.wikipedia.org/wiki/Piaggio-Douglas_PD-808" target="_blank">PD-808</a> riveste particolare interesse.<br>
+<br>
+Si può apprenderne l'interesse da parte dell'<abbr title="Autorità Giudiziaria">A.G.</abbr> a partire da pag. 582 dell'estratto "<a href="https://www.stragi80.it/documenti/gi/Titolo2a.pdf" target="_blank">TITOLO 2 - L’istruttoria dal 27 luglio 90 al 31 dicembre 97.</a>" dell'<a href="https://www.stragi80.it/doc/la-sentenza-ordinanza-del-g-i/" target="_blank">Ordinanza di rinvio a giudizio - Sentenza istruttoria di proscioglimento</a> pronunciata dal Giudice Istruttore Rosario Priore.<br>
+La "presa in carico" di questo volo da parte dell'A.G. si conclude, in pratica, con un nulla di fatto, poiché si perviene solamente ad un'ipotesi sulla possibile rotta seguita dall'aereo (v. più avanti). Cerchiamo, allora, di mettere insieme qualche elemento oggettivo in più che consenta di circostanziare meglio questo volo.<br>
+<br>
+
+Partiamo dal documento 
+"<a href="http://cristianopi.altervista.org/straus/v1f20_WP015714_002.pdf" target="_blank">WP015714_002.DOC</a>" <i><sup><abbr title="Procura della Repubblica di Roma, VOL. I - FASC. 20 PAG. 5270 - 5274, DATA DOCUMENTO 22.03.91, DA REPARTO OPERATIVO C.C. ROMA A TRIBUNALE ROMA UFFICIO ISTRUZIONE: RAPPORTO RELATIVO ALLA TRASMISSIONE ELENCO NOMINATIVI DEI COMPONENTI GLI EQUIPAGGI DEGLI AA/MM IN VOLO LA SERA DEL 27.06.80. IN ALLEGATO ALLA NOTA 2 L'ELENCO TRASMESSO FORNITO DALLO SMA.">fonte</abbr></sup></i>
+
+contenente le informazioni sul volo:<br>
+
+<div class="cita">
+1. PD-808 (14^ STORMO PRATICA DI MARE)<br>
+<br>
+- DECOLLATO DA PISA ALLE 20.15/L;<br>
+- ATTERRATO A PRATICA DI MARE ALLE 21.05/L;<br>
+<br>
+A. TEN. COL. SPAMPINATO WALTER (CAPO EQUIPAGGIO)<br>
+B. CAP. OCONE GIAN PAOLO (PILOTA)<br>
+C. M.LLO COLELLA VINCENZO<br>
+D. M.LLO SGRULLETTA MARIO<br>
+E. M.LLO TUFFARI GIOVANNI<br>
+</div>
+
+L'orario di decollo deve essere corretto in "19,15/L", come riportato nel documento 
+"<a href="http://cristianopi.altervista.org/straus/v1f304_WP001831_001.pdf" target="_blank">WP001831_001.DOC</a>" <i><sup><abbr title="Procura della Repubblica di Roma, VOL. I - FASC. 304 - PAG. 69669 - 69670, DATA 20.11.97, DA SMA GRUPPO LAVORO USTICA A TRIBUNALE ROMA G.I. DR. PRIORE: PROT. NR. SMA-0/6832. NOTA CON CUI SI INVIANO DOCUMENTI CONTENENTI INFORMAZIONI SUL PD808 OPERANTE IN A.M. NEL 1980, IN ESITO A RICHIESTA G.I. DR. PRIORE DATATA 06.11.97. ALLEGATI CONSULTABILI DA UI 1832 A UI 1836.">fonte</abbr></sup></i>:<br>
+
+<div class="cita">
+- L'ORARIO DI DECOLLO DEL PD 808 <b>RM</b> DA PISA, CONTRARIAMENTE A QUANTO RIPORTATO
+IN PRECEDENTI DOCUMENTI PRODOTTI DALLO SMA E NELLO STESSO FOGLIO A RIFERIMENTO
+(20,15/L), COME GIA' ANTICIPATO PER LE VIE BREVI, <u>DEVE ESSERE CORRETTO IN 19,15/L</u>,
+COME RISULTA DALLA COPIA DELLA "PARTE 1 - RAPPORTO DI VOLO" DEL
+VELIVOLO PD 808 MM 62017 DEL 14^ STORMO - <u>8^ GRUPPO</u> RELATIVO AL GIORNO 27.06.80, POSTA IN ALLEGATO "C".
+</div>
+
+Con la prima comunicazione, lo <abbr title="Stato maggiore dell'Aeronautica">SMA</abbr> riferisce che l'aereo appartiene al 14° Stormo, senza specificare il gruppo. La seconda comunicazione aggiunge che si tratta di un PD-808 per radiomisure e che quindi appartiene all'8° Gruppo.<br>
+
+<!-- 22-06-2023 -->
+
+Siccome al 14° Stormo apparteneva, oltre che l'8° Gruppo "Radiomisure", anche il 71° Gruppo preposto alla guerra elettronica (v. <a href="https://it.wikipedia.org/wiki/14%C2%BA_Stormo#Ricostituzione" target="_blank">Wikipedia</a> e 
+"<a href="http://cristianopi.altervista.org/straus/v3f89_WP000233_001.pdf" target="_blank">WP000233_001.DOC</a>" <i><sup><abbr title="Procura della Repubblica di Roma, VOL. III - FASC. 89 - PAG. 18990, DATA 25.01.95, DIREZIONE CENTRALE POLIZIA PREVENZIONE: RESE DA COLELLA VINCENZO, NATO L'01.01.48 A S. SALVATORE TELESINO (BN) ED IVI RESIDENTE VIA CADORNA 11; IN VOLO LA SERA DEL 27.06.80 A BORDO DI PD808 DECOLLATO DA PISA AD ORE 20,15 ED ATTERRATO A PRATICA DI MARE AD ORE 21,05. ALLEGATO AL RAPPORTO 224/B/733/DIV.3^(N) DATATO 28.02.95 (UI 232).">fonte</abbr></sup></i>), si potrebbe ipotizzare che oltre alla svista dell'orario di decollo, potrebbe esserci stata anche la svista di aver confuso un PD-808RM con un PD-808GE.<br>
+
+<!-- FINE 22-06-2023 -->
+
+
+Sulla base di questa possibilità, non escludibile a priori, nel seguito si cerca di:
+<ol style="margin-top: 0px; padding-bottom: 1em">
+<li>stimare la posizione del PD-808 in una fascia oraria significativa in relazione al passaggio dell'IH870;</li>
+<li>appurare quali siti radar avrebbe potuto ingannare un PD-808GE dalla sua posizione stimata;</li>
+<li>verificare se dai tabulati radar risulta attuata una qualche forma di disturbo o inganno ai radar.</li>
+</ol>
+
+
+
+<!-- =========================================================================================================== -->
+
+<h3 style="margin-left:2em">1) Rotta e posizione</h3>
+<br>
+
+<div style="margin-bottom: 30px; display: inline-block; width:100%;">
+<img src="pd808_rotta.png" style="float:left; padding-right: 30px;" alt="" title="">
+Il cap. pilota Ocone riferisce a Priore la rotta seguita al ritorno (v. "<a href="http://cristianopi.altervista.org/straus/v3f15_WP002588_001.pdf" target="_blank">WP002588_001.DOC</a>" <i><sup><abbr title="Procura della Repubblica di Roma, VOL. III - FASC. 15 PAG. 3659 - 3660, DATA DOCUMENTO 11.04.91, TRIBUNALE ROMA UFFICIO ISTRUZIONE: RESO DA OCONE GIAMPAOLO N. BENEVENTO IL 13.08.51 [...], DINANZI G.I. DR. ROSARIO PRIORE.">fonte</abbr></sup></i>):<br>
+
+<div class="cita">
+A D.R.: DOPO FIRENZE PER RAGGIUNGERE PRATICA DI MARE ABBIAMO SEGUITO L'AEREOVIA
+CIVILE CHE PASSA PER BOLSENA, CHE MI SEMBRA SI CHIAMI AMBRA14. DOPO BOLSENA CI
+SIAMO PORTATI SU CAMPAGNANO, DA DOVE NON RICORDO SE SIAMO STATI PORTATI
+VETTORATI DAL RADAR, DIRETTAMENTE SU PRATICA O SE ABBIAMO FATTO AVVICINAMENTO SULL'AEROPORTO DI CIAMPINO. 
+</div>
+
+Tuttavia, analizzando attentamente i quattro tabulati radar di Roma, non risulta presente alcuna traccia avente la rotta descritta da Ocone.<br>
+L'immagine riporta in rosa, a titolo d'esempio, la rotta del piccolo Fokker 28 del volo IH779 Bergamo - Ciampino che viene rilevato fino a 500 ft da entrambi i radar di Fiumicino e sia dal radar primario che dal secondario. &Egrave;, quindi, una certezza assoluta che il PD-808 sarebbe stato rilevato dai due radar, se avesse seguito veramente la rotta descritta da Ocone.<br>
+<br>
+Egli, inoltre, afferma: "<i>MI E' RIMASTO IMPRESSO IL VOLO DA ME COMPIUTO IL 27, PERCHE' AL RITORNO A CASA, HO SENTITO DALLA TELEVISIONE DELL'INCIDENTE DI USTICA.</i>". I suoi ricordi, dunque, sembrano particolarmente vividi. Sembra anche ricordare molto bene tutto ciò che riguarda l'intero volo (a parte la fase finale), fatto 11 anni prima (il verbale è dell'11.04.91).<br>
+<br>
+Appare, quindi, strano che una rotta di ritorno descritta con dovizia di particolari, in realtà non risulti volata, tanto che l'A.G. riesce a collegare il volo di ritorno soltanto ad una stranissima rotta situata ad una ventina di miglia dalla costa laziale (v. più avanti).<br>
+<br>
+Gli altri membri dell'equipaggio non sono d'aiuto per la ricostruzione del volo, poiché hanno ricordi molto vaghi o del tutto assenti; l'unico ad ostentare una buona memoria è Ocone.<br>
+<br>
+Alcuni membri dell'equipaggio riferiscono a Priore che lo scopo del volo consisteva nel verificare il funzionamento della radioassistenza militare di Firenze, rappresentato dal dischetto viola "FRZ" (in alto a sinistra) nella cartina (v. il già citato "<a href="https://www.stragi80.it/documenti/gi/Titolo2a.pdf" target="_blank">TITOLO 2</a>" a pag. 583).<br>
+</div>
+
+
+<br>
+La rotta descritta da Ocone è quella più ovvia per un aereo che deve verificare il funzionamento della radioassistenza di Firenze e che fa ritorno a Pratica di Mare, tuttavia, <u>è una certezza</u> che il PD-808 ha inspiegabilmente seguito un'altra rotta, nonostante la sicurezza espositiva del pilota Ocone.<br>
+Tale notevole stranezza, unita a quella dell'errore sull'orario di decollo, sembra rendere legittimo iniziare a porsi qualche dubbio in merito alla reale missione svolta dal PD-808.<br>
+<br>
+
+Questa stranezza insospettisce anche l'A.G. che chiede delucidazioni ad un'apposita commissione ITAV in merito ai motivi che potrebbero aver determinato l'assenza del volo nei tabulati radar della <abbr title="Difesa Aerea">D.A.</abbr> (v. "<a href="http://cristianopi.altervista.org/straus/v1f306_WP002014_001.pdf" target="_blank">WP002014_001.DOC</a>" <i><sup><abbr title="Procura della Repubblica di Roma, VOL. I - FASC. 306 - PAG. 70137 - 70140, DATA 03.12.97, RELAZIONE DELLA COMM.NE ITAV ISTITUITA CON L'INCARICO DI ACCERTARE LE RAGIONI PER CUI IL VELIVOLO PD808 IN VOLO LA SERA DEL 27.06.80 TRA LE 20,15/L E LE 21,05/L, DA PISA A PRATICA DI MARE, NON APPARE SUI DATI DEI RADAR MILIARI DELLA D.A. TRASMESSO CON FG. ITAV/115/2940/G53-1/6 DATATO 04.12.97 (UI 2014).">fonte</abbr></sup></i>).<br>
+Tra le varie possibili cause, viene citata anche la presenza della <i>Free Plot Area</i> (largamente trattata nella pagina "<a href="../../lc/tf104g/tf104g.html#FPA" target="_blank">I due F-104 &rarr; Free Plot Area</a>" e completamente ignorata dall'A.G.), ed è proprio questo il banale ed ovvio motivo per cui un aereo che decolla da Pisa (ampiamente all'interno della FPA) non viene né inizializzato né tracciato dalla D.A.<br>
+Sebbene, dunque, sia ovvio che il PD-808 non compaia nei tabulati della D.A., non è affatto ovvio che questo non compaia sui radar di Roma, almeno per ciò che riguarda la rotta descritta dal cap. Ocone.<br>
+<br>
+In realtà, questo misterioso volo è presente sui tabulati di Roma ed ha percorso proprio la rotta individuata dall'A.G. La conferma la si ha dalla trascrizione della "Bobina nr. I - Registrazioni T.B.T. Roma Ciampino (CRAV)" (v. "<a href="../../note.html" target="_blank">Note introduttive</a> &rarr; Principali fonti d'informazione").<br>
+
+<br>
+<div style="margin-bottom: 30px; display: inline-block; width:100%;">
+<div style="width: 600px; height: 350px; overflow-y: scroll; float:left; margin-right: 30px;">
+<img src="pd808_tbt.png" alt="" title="">
+</div>
+Questo è un estratto della trascrizione con evidenziate alcune informazioni utili. La trascrizione riporta questo volo come "Flight Jet 56", "Flyjet 56" e "Flyjack 56" (evidentemente l'audio non è dei migliori).<br>
+<br>
+La prima cosa che si può apprendere è che il volo Flyjet 56 è in contatto con Roma <a href="https://it.wikipedia.org/wiki/Centro_informazioni_volo" target="_blank">Informazioni</a> e non con Roma Radar o Roma Controllo (come i normali voli di linea).<br>
+<br>
+Alle 18:42 arriva la conferma che si tratta proprio di un PD-808 a bassissima quota diretto a Pratica di Mare. Il fatto di mantenere 1500 ft indica che si tratta di un volo <a href="https://it.wikipedia.org/wiki/Regole_del_volo_a_vista" target="_blank">VFR</a>.<br> Nonostante la già bassissima quota, il controllore gli richiede di scendere ulteriormente (per non interferire col traffico da e per Fiumicino) e il PD-808 scende a 500 ft.<br>
+<br>
+Flyjet 56, dopo aver riportato i punti BRAVO e DELTA al controllore (rendendo evidente che sta scendendo proprio lungo l'aerovia A-1), alle 18:51 riporta "20 nm inbound al campo", cioè si trova a 20 nm da Pratica in avvicinamento.
+</div>
+
+
+<br><br>
+
+<div style="margin-bottom: 30px; display: inline-block; width:100%;">
+<img src="pd808.png" style="float:left; padding-right: 30px;" alt="" title="">
+La rotta mostrata dalla cartina risulta pienamente compatibile con le comunicazioni <abbr title="Terra/Bordo/Terra">T/B/T</abbr> appena viste.<br>
+<br>
+Priore scrive: "<i>Il volo potrebbe corrispondere alla serie di plots primari evidenziati sia dal radar Marconi che dal radar Selenia, corrispondente ad un velivolo che dal centro del Tirreno compie una manovra di avvicinamento alla costa laziale, all’altezza di Pratica di Mare.</i>" (v. "<a href="https://www.stragi80.it/documenti/gi/Titolo2a.pdf" target="_blank">TITOLO 2 - L’istruttoria dal 27 luglio 90 al 31 dicembre 97.</a>" a fine pag. 583).<br>
+<br>
+I plot iniziali sono ricevuti solamente dal radar Selenia, mentre i plot dalle 18:43 in poi sono ricevuti quasi esclusivamente dal Marconi.<br>
+<br>
+Si può notare che il PD-808 si tiene inizialmente al limite estremo dell'aerovia A-1 (circa 4 nm dal suo asse), poi scarroccia sempre più verso ovest, arrivando a 7,5 nm dall'asse. Lungo questo tratto, l'aereo viaggia a circa 276 kn rispetto al suolo, poi vira verso la costa avvicinandosi a Pratica di Mare, riducendo la velocità.<br>
+La quota, evidentemente, è bassissima (i radar a poca distanza lo rilevano in modo molto discontinuo) ed è, quindi, compatibile con i 1000/500 ft riferiti nelle T/B/T.<br>
+<br>
+Dunque, si può affermare con certezza che la rotta mostrata in quest'immagine corrisponde senz'altro alla rotta seguita dal PD-808 Flyjet 56. Se poi era un RM od un GE, non è in alcun modo possibile stabilirlo oggettivamente.<br>
+</div>
+
+<br>
+
+Adesso che conosciamo la rotta realmente seguìta dal PD-808, si può cercare d'ipotizzarne la provenienza. Data l'assenza di elementi oggettivi in tal senso, le ipotesi verosimili sono almeno due:
+<ol style="margin-top: 0px">
+<li>il PD-808 sta mantenendo quota e velocità perché proviene da una zona vicino alla costa, quindi può volare a quota molto bassa;</li>
+<li>il PD-808 si trovava a quota maggiore perché proveniente dalla zona di Firenze.</li>
+</ol>
+
+<!--  Revisione 2023-04-24  -->
+Da queste due ipotesi, scaturiscono le tre possibili rotte illustrate qui di seguito.
+<!--  FINE 2023-04-24  -->
+
+<br>
+
+
+<h3 style="margin-left:3em">1a) Provenienza PD-808 - Ipotesi n° 1</h3>
+
+Nella precedente cartina, si nota piuttosto bene che la rotta è composta da un segmento iniziale (formato soltanto da 4 o 5 plot, tutti rilevati dal Selenia), seguìto da una lieve virata a sinistra e da un lungo tratto lentamente divergente dall'A-1.<br>
+<br>
+
+<div style="margin-bottom: 30px; display: inline-block; width:100%;">
+<img src="pd808_ipo1.png" style="float:left; padding-right: 30px;" alt="" title="">
+
+<!-- "p:\prg_vc2019\ustica - radar\wxmappe\MapGra.cpp"  blocco  "// Interpolazione LAT / LON  -  DECL = -2.65" -->
+
+La stessa tecnica usata per il caccia AA464 (individuazione della radiale del TACAN di Piacenza) può essere applicata anche a questo aereo, pervenendo al calcolo della migliore retta passante per i plot voluti (latitudine e longitudine). Estendendo tale retta, si può ipotizzare la posizione dell'aereo prima di quei plot.<br>
+<br>
+Il primo segmento di rotta è quello verde, raffigurante la possibile provenienza del PD-808 prima di essere rilevato dal Selenia.<br>
+Sono presenti anche i plot in azzurro relativi al caccia AA464/LL464/LG403 (v. il paragrafo "Descrizione degli eventi").<br>
+La crocetta arancione situata nei pressi del punto MEDAL rappresenta la posizione del PD-808 alle 18:39:44 (primo plot rilevato dal Selenia).<br>
+I tre cerchi concentrici consentono di stimare la possibile posizione dell'aereo 10 minuti prima, cioè intorno alle 18:30 (orario molto significativo, in base a quanto visto nei precedenti paragrafi), ipotizzando un volo svolto con velocità media pari a 280, 300 e 320 nodi (rispetto al suolo), quindi con l'aereo che mantiene una quota molto bassa. La velocità di 280 kn è circa la stessa tenuta lungo il tratto quasi parallelo all'A-1 (276 kn).<br>
+<br>
+Sebbene sia ovvio che non può esserci alcuna certezza sulla reale posizione del PD-808 prima delle 18:39:44, è ragionevole ipotizzare che l'aereo potesse trovarsi, intorno alle 18:30, nei pressi di Grosseto. Ipotesi tanto più sensata se si considera che il comandante non è voluto passare per Bolsena (per motivi del tutto ignoti e non facilmente ipotizzabili).<br>
+<br>
+Per ciò che concerne il secondo segmento (quello giallo), risulterebbe dalla cartina che l'aereo possa aver usato il TACAN dell'Elba in allontanamento per mantenere quel lungo tratto rettilineo (circa 47 nm o 87 km). Qualche dubbio sulla ricezione del TACAN, evidentemente, può esserci, data la bassissima quota tenuta dall'aereo. Tuttavia, il TACAN si trova ad una quota di 402 m (1319 ft), come risulta dalla pubblicazione "Elementi base per la costruzione delle BRA" relativa alla <a href="https://www.enac.gov.it/aeroporti/infrastrutture-aeroportuali/ostacoli-e-pericoli-per-la-navigazione-aerea/verifica-preliminare/dati-tecnici/radioassistenze" target="_blank">Toscana</a> (per il significato di <abbr title="Building Restricted Area">BRA</abbr>, comunque irrilevante in questo contesto, v. il sito dell'<a href="https://www.enac.gov.it/node/35279" target="_blank">Ente Nazionale per l'Aviazione Civile</a>) e l'aereo inizia a seguirne la radiale ad una distanza di circa 70 nm ad una quota di 1500 ft, per cui la ricezione non è impossibile, almeno per la prima parte di questo segmento di rotta.<br>
+<br>
+Ad ogni modo, a prescindere dal dettaglio (senz'altro marginale) sull'utilizzo del TACAN dell'Elba, ciò che risulta rilevante è la possibilità che il PD-808 possa provenire dai dintorni di Grosseto, rendendo la rotta seguita ancora più strana della già insolita rotta Firenze - Elba - A1 che avrebbe potuto essere seguita in alternativa all'ovvia rotta Firenze - Bolsena - Campagnano - vettoramento radar.
+</div>
+
+
+
+
+<h3 style="margin-left:3em">1b) Provenienza PD-808 - Ipotesi n° 2</h3>
+
+La modalità piuttosto atipica di questo PD-808 di volare al limite dell'aerovia A-1 è molto simile a quella della misteriosa traccia LG461 presente nel tabulato di Poggio Ballone, come mostrato dalla seguente cartina.<br>
+<br>
+
+
+<div style="margin-bottom: 30px; display: inline-block;">
+<img src="pd808_ipo2.png" style="float:left; padding-right: 30px;" alt="" title="">
+Si nota che, inizialmente, LG461 vira a destra (verso sud), mantenendosi, per un breve tratto, al limite estremo dell'A-14. Questo breve tratto di volo è molto simile a quello tenuto dal PD-808 quando vola quasi parallelamente all'A-1. Ciò potrebbe indurre a pensare che LG461 possa essere Flyjet 56.<br>
+Facendo qualche calcolo, si può verificare se il PD-808 possa aver percorso in 14<sup>m</sup>23<sup>s</sup> la distanza di 103,1 nm che separa l'ultimo plot associato a LG461 dal primo plot associato a Flyjet 56. Per far questo, bisogna tener presente che la posizione di LG461 è ricavata dal tabulato di Poggio Ballone, mentre quella del PD-808 è ricavata dal radar Selenia, quindi ci può essere un errore fino a circa 1 nm. Per l'orario, l'errore non dovrebbe superare i 2 s (una volta risincronizzato Poggio Ballone con Ciampino, come spiegato ad inizio pagina).<br>
+<br>
+Calcolando 103,1 / (14 / 60 + 23 / 3600) otteniamo 430 kn, che è la velocità media al suolo da tenere. Non è una velocità molto elevata, ma tutto dipende dalla quota di volo.<br>
+Alcune caratteristiche prestazionali dell'aereo le possiamo acquisire dal documento "<a href="http://cristianopi.altervista.org/straus/v1f304_WP001834_001.pdf" target="_blank">PD 808/G.E. - SISTEMA ITALIANO PER L'ADDESTRAMENTO REALE ALLA G.E.</a>" <i><sup><abbr title="Procura della Repubblica di Roma, VOL. I - FASC. 304 - PAG.  69673 - 68703, A.M. IV REPARTO: MANUALE SUL PD808/G.E. - SISTEMA ITALIANO PER L'ADDESTRAMENTO REALE ALLA G.E. - EDIZ. MARZO 1972 - A CURA DEL TEN. COL. PIL. GIANLUIGI ELIA. ALLEGATO 'A' AL FG. SMA/40/3276 DATATO 20.11.97 (UI 1833).">fonte</abbr></sup></i>, che si riferisce alla versione GE, ma considerando che la cellula è identica a quella della versione RM, si può ritenere che le prestazioni delle due versioni possano essere molto simili o uguali tra loro.<br>
+A pag. 5 iniziamo a leggere: "<i>- VELOCITA': DA 82 A 425 KTS <a href="https://it.wikipedia.org/wiki/Velocit%C3%A0_indicata" target="_blank">IAS</a> (MAX MACH: 0,84)</i>", ma i 425 KIAS sono certamente frutto di un errore (è un valore sicuramente raggiungibile da un caccia, ma non da un aereo di questa categoria); il valore reale (340 KIAS) lo si legge alla pagina successiva (v. sotto).<br>
+A pag. 6 ci sono alcuni dati riferiti alle operazioni a <abbr title="quota bassissima">Q/BB</abbr>, tra cui c'è la velocità ottima di 275 kn, che è proprio la velocità tenuta dal PD-808 lungo il tratto parallelo all'A-1, a conferma della perfetta compatibilità della rotta volata da Flyjet 56 con un PD-808GE.<br>
+Arrivando a fine pagina, troviamo il dato che più c'interessa (in questo contesto): "<i>A Q/BB SI COPRONO, ALLA <u>MASSIMA IAS (340 KTS)</u>, CIRCA 550 NM.</i>"; questa è la velocità indicata dall'anemometro (IAS) che non deve mai essere superata. La velocità rispetto all'aria realmente tenuta dall'aereo (<a href="https://it.wikipedia.org/wiki/Velocit%C3%A0_reale" target="_blank">TAS</a>) dipende dalla quota di volo.<br>
+La quota del PD-808 lungo questo ipotetico percorso non poteva essere inferiore all'<abbr title="Off Route Obstruction Clearance Altitude (quota minima fuori dalle aerovie)">OROCA</abbr> e la possiamo ricavare dalla cartina su <a href="https://skyvector.com/?ll=43.284536876065275,11.308959972913874&chart=301&zoom=4" target="_blank">SkyVector</a> (sono quei numeri scritti come "4<sup>3</sup>", "6<sup>4</sup>", ecc.). Osservando la cartina, si può ipotizzare che l'aereo mantenesse almeno 4500 ft.<br>
+Facendo, finalmente, tutti i calcoli, includendo il vento stimato lungo la rotta, si ottiene che alla massima IAS di 340 kn, la velocità media rispetto al suolo è pari a 384 kn, molto inferiore ai 430 kn richiesti, per cui il tempo di volo supera 16 minuti. Dobbiamo, allora, aumentare la quota, tenendo presente, al tempo stesso, che poi l'aereo deve scendere fino a 1500 ft.<br>
+<br>
+
+<!--  Simulazione: \USTICA - Radar\Simulazione aereo\CalcMeteo.cpp  "void PROVA_CalcMeteo(void)"  blocco "// Calcolo TAS, CAS, MACH lungo una ROTTA qualunque"  -->
+Da una serie di simulazioni, risulta che salendo al livello di volo 165 (poco più di 16600 ft, con le condizioni meteo di quella sera) e riducendo la IAS al valore più realistico di 330 kn (di solito si evita di volare alla massima velocità ammessa), la velocità media rispetto al suolo è pari a 431 kn, equivalente ad una velocità all'aria di 443 KTAS o mach 0,7.<br>
+Le ulteriori caratteristiche prestazionali presenti nelle pubblicazioni <i>Jane's</i> e riportate da <a href="https://en.wikipedia.org/wiki/Piaggio_PD.808#Specifications_(PD.808)" target="_blank">Wikipedia</a>, riferite alla versione con motori Viper Mk526 (come da pubblicazione <abbr title="Aeronautica Militare">A.M.</abbr>), fanno ritenere quelle velocità senz'altro possibili.<br>
+</div>
+
+<br>
+La possibilità che LG461 possa essere Flyjet 56 è anche supportata dal fatto che LG461 scompare improvvisamente dal radar quando si trova circa 14 km a sud dell'aeroporto di Peretola, mentre sta tenendo 387 kn, per cui un ipotetico atterraggio a Peretola sembra del tutto improbabile, anche perché è evidente che l'aereo sta mantenendo l'asse dell'aerovia A-14, senza compiere manovre di alcun tipo.<br>
+Siccome il tabulato di <abbr title="Poggio Ballone">P.B.</abbr> riporta la traccia inizialmente come remota e l'identificativo LG viene assegnato dal sito di Mortara, se ne deduce che è solo Mortara a tracciare LG461, mentre P.B. ne è disinteressato, almeno fino a quando la traccia non si confonde col DC-9 Itavia, momento in cui LG461 viene associata (in modo certamente errato) all'IH870 e diventa locale per P.B.<br>
+Consideriamo, inoltre, che la traccia, prima che sia associata all'IH870, scompare quando dista 140 nm (259 km) dal radar di Mortara. Data la notevole distanza, questo aereo deve volare ad una quota abbastanza alta; siccome l'IH870 al livello 190 viene rilevato dal radar Marconi e LG461 no, se ne deduce che quest'ultimo sta volando ad una quota inferiore a quella dell'IH870 e/o è un aereo più piccolo di un DC-9-15. Tale deduzione contribuisce a rendere verosimile il mantenimento di una quota compatibile con il livello di volo 165 calcolato in precedenza.<br>
+<br>
+Anche il profilo della velocità al suolo contribuisce a rafforzare la compatibilità di LG461 con Flyjet 56. Si può, infatti, notare che LG461 tiene una velocità intorno ai 300 kn (secondo quanto risulta dal tabulato di P.B.) al momento di virare a destra per immettersi nell'A-14, poi accelera gradualmente fino a 387 kn, velocità che mantiene fino alla scomparsa dal radar (scomparsa che avviene non appena l'IH870 lascia il livello di volo 190 per salire al 230).<br>
+<br>
+
+
+
+
+<!--  Revisione 2023-04-24  -->
+
+<h3 style="margin-left:3em">1c) Provenienza PD-808 - Ipotesi n° 3</h3>
+
+Anche questa ipotesi prende in considerazione la possibilità che Flyjet 56 possa essere LG461, ma, in questo caso, Flyjet 56/LG461 sarebbe l'aereo che dall'IH870 passa velocemente ad AA464 alle 18:29 (v. cartina "Marconi 3" nel precedente paragrafo "<a href="#descri_eve" target="_blank">Descrizione degli eventi</a>"), poi, alle 18:31:45, LG461 abbandona AA464 (che nel frattempo è diventato LL464) e compare come AA041.<br>
+<br>
+L'assegnazione di AA041 a Flyjet 56 richiede l'accettazione del fatto (non dimostrabile) che l'operatore radar possa aver posizionato la <i>ball tab</i> in modo impreciso sul plot di AA041; da tale imprecisione è scaturita l'elevata velocità (errata) riportata nel tabulato (circa 920 kn).<br>
+<br>
+La traccia LG461 viene inizializzata dal sito radar di Mortara alle 18:15 circa, quando l'aereo si trova a 36 nm dal VORTAC di Firenze e a 50 nm dal VOR/DME di Genova (e ad 86 nm da Mortara), lungo l'aerovia B-25 Genova - Firenze.<br>
+<br>
+
+<div style="margin-bottom: 30px; display: inline-block;">
+<img src="pd808_ipo3_test.png" style="float:left; padding-right: 30px;" alt="" title="">
+&Egrave; possibile che Flyjet 56 possa aver orbitato il VORTAC di Firenze, per verificarne l'efficienza (questa era la missione ufficiale, ma cos'abbia fatto realmente nessuno può dirlo), tenendosi a circa 35 nm da questo e, una volta intercettata la radiale che segna la mezzeria della B-25 l'abbia seguita per dirigersi verso il VORTAC. Oppure, potrebbe aver orbitato il VORTAC a distanza minore di 35 nm, poi s'è allontanato lungo la radiale che forma la B-25 e ha fatto l'inversione di rotta per riavvicinarsi al VORTAC.<br>
+<br>
+L'immagine mostra un esempio di come vengono testate le radioassistenze.<br>
+Questo è un Piaggio P-180 dell'ENAV (da molti anni usato al posto del PD-808RM) che testa il VOR/DME di Forlì, ma la procedura è uguale per tutti i VOR, DME, TACAN e NDB.<br>
+Vediamo che l'aereo compie varie orbite ed effettua alcuni allontanamenti per poi ritornare sulla radioassistenza. Flyjet 56 può aver fatto una cosa simile intorno al VORTAC di Firenze.
+</div>
+
+<br>
+
+
+<div style="margin-bottom: 30px; display: inline-block;">
+<img src="pd808_ipo3.png" style="float:left; padding-right: 30px;" alt="" title="">
+Qui si vede AA041 ricevuto da Poggio Ballone per due giri d'antenna; entrambi i plot hanno qualità 7 (il massimo). I plot successivi, quelli all'interno del rettangolo giallo, iniziano a scadere di qualità; nel sistema NADGE, questo indica che il radar non riceve più l'eco dell'aereo, ma il software continua a presentare la traccia fino a quando la qualità scade a zero.<br>
+<br>
+In base all'ipotesi qui esaminata, Flyjet 56 deve percorrere la rotta mostrata (circa 56 nm) in 7<sup>m</sup>47<sup>s</sup>, quindi la velocità al suolo media è circa 430 kn.<br>
+<br>
+<!--  Simulazione: \USTICA - Radar\Simulazione aereo\CalcMeteo.cpp  "void PROVA_CalcMeteo(void)"  blocco "// Calcolo TAS, CAS, MACH lungo una ROTTA qualunque"  -->
+Eseguendo alcune simulazioni come fatto nel precedente paragrafo, un possibile profilo di discesa potrebbe prevedere il PD-808 al livello di volo iniziale 225 (circa 22800 ft) e una IAS iniziale di 340 kn (corrispondente a mach 0,785). Con questi parametri, l'aereo ha compiuto la rotta mostrata in 7<sup>m</sup>52<sup>s</sup>, con una velocità al suolo media di 425 kn. Considerando l'incertezza sugli orari e sulla posizione, questi parametri risultano compatibili con i valori nominali prima citati.<br>
+Quindi, l'ipotesi che LG461 e AA041 possano essere riconducibili a Flyjet 56 risulta plausibile.
+</div>
+
+<!--  FINE 2023-04-24  -->
+
+
+
+
+<!-- =========================================================================================================== -->
+
+<h3 style="margin-left:2em">2) Siti radar attaccabili</h3>
+
+Tra gli elementi che contribuiscono a mettere in dubbio il fatto che il PD-808 fosse della versione RM, rendendo lecito ipotizzare che, in realtà, si potesse trattare delle versione GE, ci sono anche le dichiarazioni rese da Colella in data 25.01.95 davanti a personale della <abbr title="Direzione Centrale della Polizia di Prevenzione">D.C.P.P.</abbr>, su delega di Priore (v. 
+"<a href="http://cristianopi.altervista.org/straus/v3f89_WP000233_001.pdf" target="_blank">WP000233_001.DOC</a>" <i><sup><abbr title="Procura della Repubblica di Roma, VOL. III - FASC. 89 - PAG. 18990, DATA 25.01.95, DIREZIONE CENTRALE POLIZIA PREVENZIONE: RESE DA COLELLA VINCENZO, NATO L'01.01.48 A S. SALVATORE TELESINO (BN) ED IVI RESIDENTE VIA CADORNA 11; IN VOLO LA SERA DEL 27.06.80 A BORDO DI PD808 DECOLLATO DA PISA AD ORE 20,15 ED ATTERRATO A PRATICA DI MARE AD ORE 21,05. ALLEGATO AL RAPPORTO 224/B/733/DIV.3^(N) DATATO 28.02.95 (UI 232).">fonte</abbr></sup></i>):<br>
+
+<div class="cita">
+A D.R.: NELL'80, PRESTAVO SERVIZIO PRESSO IL 14^ STORMO DI PRATICA DI MARE COL GRADO DI M.LLO COME ASSISTENTE TECNICO DI VOLO.<br>
+A D.R.: IL MIO SERVIZIO SI ESPLICAVA A BORDO DI AEREI DEL TIPO PD808<b>GE</b>.<br>
+A D.R.: AL 14^ ST. APPARTENEVANO 2 GRUPPI, L'8^ CHE ERA RADIO MISURE, ED <u>IL 71^, AL QUALE IO APPARTENEVO, PREPOSTO ALLA GUERRA ELETTRONICA (GE)</u>.
+</div>
+
+Il vice questore aggiunto dr. Eufemia trasmette a Priore il verbale di <abbr title="sommarie informazioni testimoniali">S.I.T.</abbr> del Colella comunicando che "<i>IL TESTE NON HA FORNITO ELEMENTI DI INTERESSE PER L'INCHIESTA.</i>" (v. 
+"<a href="http://cristianopi.altervista.org/straus/v3f89_WP000232_001.pdf" target="_blank">WP000232_001.DOC</a>" <i><sup><abbr title="Procura della Repubblica di Roma, VOL. III - FASC. 89 - PAG. 18989, DATA 28.02.95 DA DIREZIONE CENTRALE POLIZIA PREVENZIONE A TRIBUNALE ROMA UFFICIO ISTRUZIONE: PROT. NR. 224/B/733/DIV.3^(N). RAPPORTO SULL'ESCUSSIONE DI COLELLA VINCENZO, IN VOLO LA SERA DEL 27.06.80 A BORDO DI PD808 DECOLLATO DA PISA ALLE ORE 20,15 ED ATTERRATO A PRATICA DI MARE ALLE ORE 21,05. IN ALLEGATO VERBALE DI S.I.T. DEL PREDETTO COLELLA RESE IL 25.01.95 (UI 233).">fonte</abbr></sup></i>).<br>
+Priore sembra dello stesso avviso, limitandosi a prendere atto che "<i>Il maresciallo Vincenzo Colella, indicato dal collega Sgrulletta quale membro dell’equipaggio del PD808, non ricorda se era in volo quella sera del 27 giugno 80, ma neanche lo esclude. (v. esame Colella Vincenzo, PG 25.01.95).</i>" (v. "<a href="https://www.stragi80.it/documenti/gi/Titolo2a.pdf" target="_blank">TITOLO 2 - L’istruttoria dal 27 luglio 90 al 31 dicembre 97.</a>" a circa metà pag. 583).<br>
+<br>
+
+Cioè l'A.G. sembra non ravvisare niente di strano in merito alla presenza a bordo di un PD-808<b>RM</b> di un militare in forza al 71° Gruppo "Guerra elettronica" che opera (ovviamente) a bordo dei PD-808<b>GE</b>.<br>
+<br>
+Pur essendo vero che Sgrulletta riferisce che Colella era a bordo del PD-808 come "specialista polivalente", è anche vero che Colella dichiara, senza possibilità di fraintendimento, che il suo servizio si esplicava a bordo dei PD-808GE e non fa cenno alcuno alla possibilità che potesse anche avere mansioni a bordo dei PD-808RM, così come Sgrulletta, a sua volta, dichiara (v. 
+"<a href="http://cristianopi.altervista.org/straus/v3f15_WP002589_001.pdf" target="_blank">WP002589_001.DOC</a>" <i><sup><abbr title="Procura della Repubblica di Roma, VOL. III - FASC. 15 PAG. 3661, DATA DOCUMENTO 11.04.91, TRIBUNALE ROMA UFFICIO ISTRUZIONE: RESO  DA  SGRULLETTA  MARIO,  N.  POLI  (ROMA) IL 03.11.46, [...]; DINANZI G.I. DR. PRIORE.">fonte</abbr></sup></i>):<br>
+
+<div class="cita">
+A D.R.: NON CONOSCO LA CONFORMAZIONE DEI PD808 EQUIPAGGIATO PER LE CONTRO MISURE
+O  GE (GUERRA ELETTRONICA), PERCHE' IO, NON ESSENDO OPERATORE GE, NON HO  MOTIVO
+DI SALIRE A BORDO DI QUEI VEICOLI.                                              
+</div>
+
+cioè, un operatore delle radiomisure (Sgrulletta) non ha alcun motivo di salire a bordo di un PD-808 preposto alla guerra elettronica. Insomma, risulta chiaro che ognuno sta al suo posto e che non è possibile scambiarsi i ruoli alla bisogna.<br>
+<br>
+
+Alla serie fin troppo lunga di stranezze che caratterizzano questo volo, appartiene anche quella relativa alle differenti modalità adottate per raccogliere le testimonianze dell'equipaggio: i quattro membri che all'epoca erano in forza all'8° Gruppo "Radiomisure" del 14° Stormo sono stati sentiti da Priore ad aprile del 1991, mentre l'unico membro appartenente al 71° Gruppo "Guerra elettronica" è stato sentito (come già detto) dalla D.C.P.P. quattro anni dopo, a febbraio del '95, pur essendo anch'egli presente nell'elenco consegnato a Priore dallo <abbr title="Stato maggiore dell'Aeronautica">SMA</abbr> a marzo del '91.<br>
+<br><br>
+
+
+Ciò che conta, comunque, è che se quell'aereo fosse stato un PD-808GE, si sarebbe trovato in un'ottima posizione per attuare inganni radar contro Poggio Ballone e Roma.<br>
+Le modalità d'attuazione di tali inganni possono essere ipotizzate leggendo il già citato documento "<a href="http://cristianopi.altervista.org/straus/v1f304_WP001834_001.pdf" target="_blank">PD 808/G.E. - SISTEMA ITALIANO PER L'ADDESTRAMENTO REALE ALLA G.E.</a>" <i><sup><abbr title="Procura della Repubblica di Roma, VOL. I - FASC. 304 - PAG.  69673 - 68703, A.M. IV REPARTO: MANUALE  SUL PD808/G.E. - SISTEMA ITALIANO PER L'ADDESTRAMENTO REALE ALLA G.E. - EDIZ. MARZO 1972 - A CURA DEL TEN. COL. PIL. GIANLUIGI ELIA. ALLEGATO 'A' AL FG. SMA/40/3276 DATATO 20.11.97 (UI 1833).">fonte</abbr></sup></i>, pubblicato dal IV Reparto dell'<abbr title="Aeronautica Militare">A.M.</abbr> nel marzo del '72. A pag. 3, il manuale descrive la capacità di disturbo dei radar:<br>
+
+<div class="cita">
+INNANZITUTTO  SI E' VOLUTO DISTURBARE PIU' RADAR CONTEMPORANEAMENTE  (UNA  NAVE,
+PER  ESEMPIO,  DISPONE  DI  PIU' RADAR  OPERANTI  SIMULTANEAMENTE  SU  FREQUENZE
+DIVERSE!)  E SI E' PENSATO DI QUINTUPLICARE L'APPARATO  DISTURBATORE  RENDENDOLO
+IDONEO  AD EMETTERE, IN MANIERA INDIPENDENTE, IN 5 BANDE DIVERSE (<u>L, S, C,  X  E J</u>). LA BANDA J E' IN VIA DI REALIZZAZIONE.
+</div>
+
+a pag. 10 viene riportata, tra le varie caratteristiche, la corrispondenza tra frequenza e banda:
+
+<div class="cita" style="white-space: pre;">PARAMETRO         BANDA L         BANDA S          BANDA C          BANDA X
+FREQUENZA:     DA 1 A 2 GHz     DA 2 A 4 GHz     DA 4 A 8 GHz     DA 8 A 12 GHz
+</div>
+A conferma del campo di frequenza in cui il disturbo è attuabile, a pag. 8 è presente la descrizione del modello dell'intercettatore radar multibanda (ELT/RMB-5): "<i>L'APPARATO E' IN GRADO DI RICEVERE I SEGNALI RF COMPRESI NELLA BANDA <u>1-12 GHz</u> E DI FORNIRNE FREQUENZA E RILEVAMENTO.</i>", confermando, quindi, che non è possibile scendere al di sotto di 1 GHz.<br>
+<br>
+Scorrendo l'Ordinanza-Sentenza, si può trovare il tipo di apparati radar all'epoca installati in vari centri della D.A. (v. "<a href="https://www.stragi80.it/documenti/gi/Titolo2a.pdf" target="_blank">TITOLO 2 - L’istruttoria dal 27 luglio 90 al 31 dicembre 97.</a>" a partire da pag. 5).<br>
+Si può, così, appurare che il tipo di radar comunemente usato per la sorveglianza era l'AN/FPS-88 o la sua arcaica prima versione AN/FPS-8. Per Poggio Ballone, <a href="https://it.wikipedia.org/wiki/121%C2%AA_Squadriglia_radar_remota#Equipaggiamenti" target="_blank">Wikipedia</a> indica proprio l'AN/FPS-88 (pur senza fonte).<br>
+Nella pagina "<a href="https://nuke.fas.org/guide/usa/airdef/searching_the_skies.htm" target="_blank"><i>Searching the Skies: The Legacy of the United States Cold War Defense Radar Program</i></a>", si può leggere: "<i>General Electric produced this updated version of the AN/FPS-8 radar in the late1960s. The AN/FPS-88 operated in the <u>L-band at 1280 to 1380 MHz</u> and featured some ECM capability.</i>", quindi un PD-808GE avrebbe certamente potuto disturbare il radar di Poggio Ballone.<br>
+<br>
+Per ciò che riguarda i due radar del <abbr title="Traffico Aereo (civile)">T.A.</abbr> ubicati a Fiumicino, possiamo fare riferimento al documento "<a href="https://www.stragi80.it/documenti/gi/perizie/008.pdf" target="_blank">Capitolo VIII - Relazione degli ausiliari Giaccari ed altri - 05.02.90.</a>", nel quale a pag. 4 leggiamo le frequenze di lavoro: 585-610 MHz per il Marconi e 1250-1350 MHz per il Selenia. Risulta evidente che il PD-808GE non poteva disturbare il radar Marconi, ampiamente al di sotto di 1 GHz.
+<br>
+In definitiva, quindi, un PD-808GE era in grado di disturbare soltanto due dei tre radar ubicati nei suoi dintorni.<br>
+<br>
+Il fatto che il Marconi era indenne da un potenziale inganno del PD-808GE rende la verifica piuttosto semplice, in quanto basta confrontare tra loro i due tabulati dei radar di Fiumicino per verificare se si evidenziano differenze tali da giustificare l'ipotesi d'inganno.<br>
+Ebbene, confrontando attentamente le tracce su di una cartina, non si notano differenze significative in tal senso.<br>
+Ciò, è bene sottolinearlo, non consente di escludere che il radar di Poggio Ballone non sia stato soggetto ad inganno, perché il confronto con il Marconi (indenne dai disturbi) può essere fatto soltanto con un altro radar nelle sue immediate vicinanze (il Selenia) e non con un radar distante quasi 160 km.<br>
+<br>
+In conclusione, quindi, il ruolo di quell'ipotetico PD-808GE non sembra palesarsi. Se di GE si trattava, probabilmente era presente in zona solo per attivarsi in caso di necessità.<br>
+
+
+<!-- FINE 08-08-2022 -->
+
+
+
+<!-- ========================================================================================================== -->
+
+
+<script>
+"use strict";
+
+CreaIndice();
+
+
+layout.mapbox.style= "basic";
+//layout.mapbox.style= "streets"; // Orografia e strade
+Plotly.setPlotConfig({
+	mapboxAccessToken: 'pk.eyJ1IjoiY3Jpc3RpYW5vcGkiLCJhIjoiY2pycXl1N3piMXAzODQzbnRtZzd4NzBlbiJ9.QugZVJkXpGrSJpoz_ghJqQ'
+});
+
+
+Plotly.d3.csv('rafari.csv', function(err, rows) {
+	// ID,T,LAT,LON
+	var ID= unpack(rows, 'ID');
+	var T= unpack(rows, 'T');
+	var lat= unpack(rows, 'LAT');
+	var lon= unpack(rows, 'LON');
+	var n= ID.length;
+	for(var i= 0; i < n; i++) {
+		// T: 0= VOR/DME, 1= VORTAC, 2= VOR, 3= NDB, 4= TACAN
+		// MLG: VOR/DME o TACAN
+		switch(T[i]) {
+		case '0': VORDME.text.push(ID[i]); VORDME.lat.push(lat[i]); VORDME.lon.push(lon[i]); break;
+		case '1': VORTAC.text.push(ID[i]); VORTAC.lat.push(lat[i]); VORTAC.lon.push(lon[i]); break;
+		case '2': VOR.text.push(ID[i])   ; VOR.lat.push(lat[i])   ; VOR.lon.push(lon[i])   ; break;
+		case '3': NDB.text.push(ID[i])   ; NDB.lat.push(lat[i])   ; NDB.lon.push(lon[i])   ; break;
+		case '4': TACAN.text.push(ID[i]) ; TACAN.lat.push(lat[i]) ; TACAN.lon.push(lon[i]) ; break;
+		}
+	}
+
+	Plotly.d3.csv('grid.csv', function(err, rows) {
+
+		GRID.lat= unpack(rows, 'lat'); GRID.lon= unpack(rows, 'lon');
+
+		Plotly.d3.csv('zone_lavoro.csv', function(err, rows) { // Zone di lavoro
+
+			var ZLAV= {
+				type:'scattermapbox', name: 'Zone lav.', hoverinfo: "text",
+				mode: 'lines', line: { width: 2, color: 'green' },
+				lat: unpack(rows, 'lat'), lon: unpack(rows, 'lon'), text: unpack(rows, 'nome')
+			};
+
+			data= [GRID, AYW, VORTAC, VORDME, VOR, NDB, TACAN, PUNTI, RADAR, ZLAV];
+
+			CaricaPunti(); // Carica tracciati radar
+		});
+	});
+});
+
+
+function CaricaPunti()
+{
+	var data_poggio= [...data];
+	var lay_poggio= Object.assign({}, layout);
+	
+	// ROMA
+	
+	Plotly.d3.csv("mar3.csv", function(err, rows) {
+
+		var PLOT= {
+			type:'scattermapbox', name: 'Plot',
+			text: unpack(rows, 'UTC'), hoverinfo: "text",
+			lat: unpack(rows, 'lat'), lon: unpack(rows, 'lon'),
+			mode: 'markers', marker: { size: [], color: [] }
+		};
+		// UTC,ID,lat,lon,FL,d,faz,Q,SSR
+		var ID= unpack(rows, 'ID');
+		var FL= unpack(rows, 'FL');
+		var dst= unpack(rows, 'd'); var faz= unpack(rows, 'faz');
+		var QUA= unpack(rows, 'Q'); var SSR= unpack(rows, 'SSR');
+		for(var i= 0; i < ID.length; i++) {
+			PLOT.text[i] += ", " + ID[i] +
+				'<br>FL' + FL[i] + ', ' + SSR[i] + ', Q: ' + QUA[i] +
+				'<br>lat: ' + PLOT.lat[i] + ', lon: ' + PLOT.lon[i] + 
+				'<br>d: ' + dst[i] + ', a: ' + faz[i]
+			var col= '#000000';
+			switch(ID[i]) {
+				case '1133': col= '#0000ff'; break;
+				case '1136': col= '#ff0000'; break;
+				case '5200': col= '#800080'; break;
+				case '4200':
+				case '5400': col= '#cc7a00'; break;
+			}
+			PLOT.marker.color[i]= col;
+			// SPI più grandi
+			if(SSR[i].search('SPI') === -1) PLOT.marker.size[i]= 5; else PLOT.marker.size[i]= 7;
+		}
+
+		data.push(PLOT);
+
+		var nota= {
+			showarrow: false,
+			xref: 'paper', x: .95, xanchor: 'right',
+			yref: 'paper',	y: .95, yanchor: 'bottom',
+			text: '<b>Marconi 3</b>', font: { size: 16, color: '#cc6600' }
+		};
+		layout.annotations= [nota]; layout.mapbox.zoom= 7.2; layout.mapbox.center.lat= 43.3; layout.mapbox.center.lon= 11.7;
+
+		Plotly.plot('roma', data, layout, {responsive: true, displayModeBar: false});
+	});
+
+
+	// POGGIO BALLONE ("P:\PRG_VC2019\USTICA - Radar\"  blocco  "###  Fasi del volo - Affiancamento con il caccia  ###")
+	
+	Plotly.d3.csv("poggio.csv", function(err, rows) {
+
+		var PLOT= {
+			type:'scattermapbox', name: 'radar',
+			text: unpack(rows, 'UTC'), hoverinfo: "text",
+			lat: unpack(rows, 'lat'), lon: unpack(rows, 'lon'),
+			mode: 'markers', marker: { size: [], color: [] }
+		};
+		// UTC,IDalfa,lat,lon,spd,hdg,alt,SIF2,SIF3,QUA      alt è sempre 0
+		var ID= unpack(rows, 'IDalfa');
+		var spd= unpack(rows, 'spd'), hdg= unpack(rows, 'hdg'), alt= unpack(rows, 'alt');
+		var SIF1= unpack(rows, 'SIF1'), SIF2= unpack(rows, 'SIF2'), SIF3= unpack(rows, 'SIF3');
+		var QUA= unpack(rows, 'QUA');
+		for(var i= 0; i < ID.length; i++) {
+			PLOT.text[i] += ", " + ID[i] +
+			'<br>v: ' + spd[i] + ', hdg: ' + hdg[i] + ', alt: ' + alt[i] +
+			'<br>S1: ' + SIF1[i] + ', S2: ' + SIF2[i] + ', S3: ' + SIF3[i] + ', Q: ' + QUA[i] +
+			'<br>lat: ' + PLOT.lat[i] + ', lon: ' + PLOT.lon[i];
+
+			if(SIF2[i] === '7777') PLOT.marker.size[i]= 7; else PLOT.marker.size[i]= 5;
+			
+			var col= 'black';
+			if(SIF1[i] === '73') col= 'red';
+			else switch(ID[i]) {
+				case 'LE011': col= '#0000ff'; break;
+				case 'AA464': col= '#009999'; break;
+				case 'LL464': col= '#ff66ff'; break;
+				case 'LG403': col= '#006600'; break;
+			}
+			PLOT.marker.color[i]= col;
+		}
+
+		data_poggio.push(PLOT);
+
+		var nota= {
+			showarrow: false,
+			xref: 'paper', x: .95, xanchor: 'right',
+			yref: 'paper',	y: .95, yanchor: 'bottom',
+			text: '<b>Poggio Ballone</b>', font: { size: 16, color: '#cc6600' }
+		};
+
+		lay_poggio.showlegend= false; lay_poggio.annotations= [nota];
+		lay_poggio.mapbox.zoom= 6.7; lay_poggio.mapbox.center.lat= 44; lay_poggio.mapbox.center.lon= 11.5;
+
+		Plotly.plot('poggio', data_poggio, lay_poggio, {responsive: true, displayModeBar: false});
+	});
+}
+
+
+
+
+// ============================================================================================================================
+
+
+var config= {
+	showLink: true, plotlyServerURL: "https://chart-studio.plotly.com",
+	responsive: true
+};
+
+
+// Regressione PIA RDL
+
+// "P:\PRG_VC2019\USTICA - Radar\main.cpp"  blocco  "// INTERPOLAZIONE varie rotte    ####  SITO WEB  ####"  ->  "// Salva file "pia_rdl.csv"  ## WEB ##"
+Plotly.d3.csv('affi-pia_rdl.csv', function(err, rows) {
+
+	// utc,t80,a_pia,a_int
+	var utc= unpack(rows, 'utc');
+	var t80= unpack(rows, 't80');
+	
+	var A_PIA= {
+		type: "scatter", name: 'AZM PIA', hoverinfo: "text",
+		mode: "markers", marker: {color: '#0000ff', size: 5},
+		x: utc, y: unpack(rows, 'a_pia'), text: []
+	};
+
+	var A_INT= {
+		type: "scatter", name: 'AZM INT', hoverinfo: "text",
+		mode: "markers+lines",
+		line: {color: '#0000ff', width: 2, shape: 'spline'},
+		marker: {color: '#0000ff', size: 5},
+		x: utc, y: unpack(rows, 'a_int'), text: []
+	};
+
+	var ERR= {
+		type: "scatter", name: 'Errore', hoverinfo: "text",
+		mode: "markers", marker: {color: '#ff9000', size: 4},
+		x: t80, y: [], text: [],
+		xaxis: 'x2', yaxis: 'y2'
+	};
+
+	for(var i= 0; i < utc.length; i++) {
+		ERR.y.push(A_INT.y[i] - A_PIA.y[i]);
+		var t= utc[i].slice(-8);
+		
+		A_PIA.text[i]= t + ", " + t80[i] + "<br>" + A_PIA.y[i];
+		A_INT.text[i]= t + ", " + t80[i] + "<br>" + A_INT.y[i];
+		ERR.text[i]= ERR.y[i].toFixed(3);
+	}
+
+	var layout = {
+		showlegend: true, separators: ',',
+		margin: { t:30, b:30, r: 0, l: 70 },
+		xaxis: {
+			type: 'date',
+			spikemode: 'across'
+		},
+		xaxis2: {
+			overlaying: 'x',
+			side: 'top', spikemode: 'across'
+		},
+		yaxis: {
+			automargin: true,
+			title: '<b>Azimut PIA</b> [gradi veri]',
+			titlefont: { color: '#0000ff' }, tickfont: { color: '#0000ff' }
+		},
+		yaxis2: {
+			automargin: true,
+			title: '<b>Errore interpolazione</b> [gradi]',
+			titlefont: { color: '#ff9000' }, tickfont: { color: '#ff9000' },
+			gridcolor: '#ccffcc',
+			overlaying: 'y',
+			side: 'right'
+		}
+	};
+
+	Plotly.react('affi-pia_rdl', [A_PIA, A_INT, ERR], layout, config);
+});
+
+
+// ============================================================================================================================
+
+// AA464 e IH870
+
+// "P:\PRG_VC2019\USTICA - Radar\main.cpp"  blocco  "// METEO AA464 lungo il tratto interpolato"
+Plotly.d3.csv('affi-gs_wnd.csv', function(err, rows) {
+
+	// utc,gs464,gs870,tas464,hdg464,azm,d870,DRCT,SKNT
+	var utc= unpack(rows, 'utc');
+	
+	// GS / TAS464 / HDG ------------------------------------------------------------------------------
+	var GS464= {
+		type: "scatter", name: 'GS<sub>464</sub>', hoverinfo: "text",
+		mode: "lines", line: {color: '#0000ff', width: 2, shape: 'spline'},
+		x: utc, y: unpack(rows, 'gs464'), text: []
+	};
+
+	var GS870= {
+		type: "scatter", name: 'GS<sub>870</sub>', hoverinfo: "text",
+		line: {color: '#0000ff', width: 2, shape: 'spline', dash: 'dash'},
+		x: utc, y: unpack(rows, 'gs870'), text: []
+	};
+
+	var TAS464= {
+		type: "scatter", name: 'TAS<sub>464</sub>', hoverinfo: "text",
+		line: {color: '#0000ff', width: 2, shape: 'spline', dash: 'dashdot'},
+		x: utc, y: unpack(rows, 'tas464'), text: []
+	};
+
+	var HDG= {
+		type: "scatter", name: 'HDG', hoverinfo: "text",
+		line: {color: '#ff9000', width: 2, shape: 'spline'},
+		x: utc , y: unpack(rows, 'hdg464'), text: [],
+		yaxis: 'y2'
+	};
+
+	for(var i= 0; i < utc.length; i++) {
+		var t= utc[i].slice(-8);
+		
+		GS464.text[i]= t + "<br>GS<sub>464</sub>: " + GS464.y[i];
+		GS870.text[i]= t + "<br>GS<sub>870</sub>: " + GS870.y[i];
+		TAS464.text[i]= t + "<br>TAS<sub>464</sub>: " + TAS464.y[i];
+		HDG.text[i]= t + "<br>HDG<sub>464</sub>: " + HDG.y[i];
+	}
+
+	var lay1= {
+		showlegend: true, separators: ',',
+		margin: { l:10, t:20, b:30},
+		xaxis: {
+			type: 'date' //,spikemode: 'across'
+		},
+		yaxis: {
+			automargin: true,
+			title: '<b>Velocità</b> [kn]',
+			titlefont: { color: '#0000ff' }, tickfont: { color: '#0000ff' }
+		},
+		yaxis2: {
+			automargin: true,
+			title: '<b>Prua AA464</b>',
+			titlefont: { color: '#ff9000' }, tickfont: { color: '#ff9000' },
+			gridcolor: '#ccffcc',
+			overlaying: 'y',
+			side: 'right'
+		}
+	};
+
+	Plotly.react('affi-gs_hdg', [GS464, GS870, TAS464, HDG], lay1, config);
+
+
+	// VENTO AA464 ------------------------------------------------------------------------------
+	
+	// DRCT,SKNT
+	var DRCT= {
+		type: "scatter", name: 'Dir',
+		mode: "lines", line: {color: '#0000ff', width: 2, shape: 'spline'},
+		x: utc, y: unpack(rows, 'DRCT'),
+	};
+
+	var SKNT= {
+		type: "scatter", name: 'Vel',
+		line: {color: '#009900', width: 2, shape: 'spline'},
+		x: utc , y: unpack(rows, 'SKNT'),
+		yaxis: 'y2'
+	};
+
+	var lay2= {
+		showlegend: false, separators: ',',
+		margin: { l:10, t:20, b:30},
+		xaxis: {
+			type: 'date'
+		},
+		yaxis: {
+			automargin: true,
+			title: '<b>Direzione</b> [gradi veri]',
+			titlefont: { color: '#0000ff' }, tickfont: { color: '#0000ff' }
+		},
+		yaxis2: {
+			automargin: true,
+			title: '<b>Velocità</b> [kn]',
+			titlefont: { color: '#009900' }, tickfont: { color: '#009900' },
+			gridcolor: '#ccffcc',
+			overlaying: 'y',
+			side: 'right'
+		}
+	};
+
+	Plotly.react('affi-vento_AA464', [DRCT, SKNT], lay2, config);
+
+
+	// AZIMUT e DST AA464/IH870  ------------------------------------------------------------------------------
+	
+	// azm,d870
+	var AZM= { // azm = HDG_AA464 - 90 - FAZ[AA464 -> IH870]
+		type: "scatter", name: 'AZM',
+		mode: "lines", line: {color: '#0000ff', width: 2, shape: 'spline'},
+		x: utc, y: unpack(rows, 'azm'),
+	};
+
+	var DST= {
+		type: "scatter", name: 'DST',
+		line: {color: '#ff9000', width: 2, shape: 'spline'},
+		x: utc , y: unpack(rows, 'd870'),
+		yaxis: 'y2'
+	};
+
+	var lay3= {
+		showlegend: false, separators: ',',
+		margin: { l:10, t:20, b:30},
+		xaxis: {
+			type: 'date'
+		},
+		yaxis: {
+			automargin: true,
+			title: '<b>Anticipo AA464</b> [gradi]',
+			titlefont: { color: '#0000ff' }
+		},
+		yaxis2: {
+			automargin: true,
+			title: '<b>Distanza da IH870</b> [nm]',
+			titlefont: { color: '#ff9000' }, tickfont: { color: '#ff9000' },
+			gridcolor: '#ccffcc',
+			overlaying: 'y',
+			side: 'right'
+		}
+	};
+
+	Plotly.react('affi-azm_dst', [AZM, DST], lay3, config);
+	
+});
+
+
+</script>
+
+
+</body>
+</html>

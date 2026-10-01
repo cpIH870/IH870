@@ -1,0 +1,1217 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Strage di Ustica">
+	<meta name="keywords" content="ustica,ih870">
+	<title>Strage di Ustica - Fasi del volo</title>
+	<link rel="stylesheet" type="text/css" href="../../stile.css">
+	<script src="../../plotly-latest.min.js"></script>
+	<script src="../../comune.js"></script>
+	<style>
+	table, td {
+		border-spacing: 0px;
+		border-collapse: collapse;
+		border: 1px solid #999999;
+		text-align: center;
+		overflow: hidden;
+	}
+	td {
+		padding: .1em .5em .1em .5em;
+	}
+	</style>
+</head>
+
+<body>
+
+<div class="indice"><a href="../../index.html">Indice</a></div>
+
+<h2>Fasi del volo - Ultimi minuti</h2>
+
+
+In questa pagina sono analizzati i tabulati radar per stabilire i parametri di volo del DC-9 durante gli ultimi 3<sup>m</sup>20<sup>s</sup> di volo, fino all'ultima risposta del transponder e da qui andando avanti per altri 2<sup>m</sup>55<sup>s</sup>, fino a quando scompare dal radar anche l’ultimo frammento del DC-9.<br>
+
+<!-- ========================================================================================================== -->
+
+
+<h3>Parametri di volo prima dell'abbattimento</h3>
+
+I seguenti due tracciati mostrano la traiettoria seguita dal DC-9 così come rilevata dai due estrattori riportati nelle figure:<br>
+<br>
+
+<div style="margin-bottom: 30px; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="mar3.png" style="float:left; padding-right: 30px;" alt="" title="">
+<img src="sel2.png" style="float:left; padding-right: 30px;" alt="" title="">
+Gli elementi visualizzati sono:<br>
+<ul style="margin-top: 0px">
+<li>plot ricevuti dai radar primario e secondario (rosso) e dal solo primario (nero);</li>
+<li>croce 10 x 10 nm centrata sulle coordinate 40 N, 13 E;</li>
+<li>due crocette grigie che rappresentano i punti in cui sono stati rinvenuti i motori (in basso a sinistra) e il registratore dei dati di volo (FDR). Le loro coordinate sono:
+motori: 39° 41,8’ N,  13° 2,44’ E (<a href="https://www.youtube.com/watch?v=pkfY0yE3CpU" target="_blank">Immersioni recupero DC-9 ITAVIA - Filmato N°2</a>), FDR: 39° 42’ 39” N, 13° 03’ 01” E (<a href="https://www.stragi80.it/documenti/gi/perizie/048.pdf" target="_blank">Perizia tecnico-scientifica Misiti ed altri - 23.07.94</a>, pagg. 18 e 26);</li>
+<li>rettangolo rosso che rappresenta l’area di ritrovamento dei relitti sommersi (<a href="http://www.stragi80.it/documenti/gi/perizie/001-007.pdf" target="_blank">TITOLO 3 - Le Perizie</a>, pag. 90);</li>
+
+<!-- INIZIO revisione 24-04-2021, 28-04-2021 -->
+
+<!-- 29-01-2022: adattato per nuova revisione togliendo "ulteriormente migliorata rispetto alla versione precedente" che può generare confusione -->
+<li>linea rossa per la traiettoria che meglio approssima i plot. Siccome l’intensità del vento è variabile, la linea rossa non è una retta, ma una parabola. L'interpolazione è basata sul contatore ad alta risoluzione presente nei tabulati radar (campo "TEMPO"); ciò consente di misurare il tempo con una risoluzione di 80 ms anziché 1 s. La distanza mostrata dall'interpolazione è 25,8 nm.
+</li>
+</ul>
+
+</div>
+
+
+
+<div style="margin-bottom: .5em; vertical-align: top; position:relative; display: inline-block; width:100%;">
+
+<table style="box-sizing: border-box; vertical-align: bottom; position:relative; display: inline-table; float:left; margin:5px 20px 20px 0px; table-layout: fixed;">
+
+<tr>
+	<td rowspan=2 style="text-align: center"><b>UTC</b></td>
+	<td colspan=3 style="text-align: center"><b>Marconi 3</b></td>
+	<td colspan=3 style="text-align: center"><b>Selenia 2</b></td>
+</tr>
+<tr>
+	<td style="text-align: center"><b>RNG</b> [nm]</td>
+	<td style="text-align: center"><b>TRK</b> [°]</td>
+	<td style="text-align: center"><b>GS</b> [kn]</td>
+	<td style="text-align: center"><b>RNG</b> [nm]</td>
+	<td style="text-align: center"><b>TRK</b> [°]</td>
+	<td style="text-align: center"><b>GS</b> [kn]</td>
+</tr>
+<tr><td>18:56:25</td> <td>103,4</td> <td>166,5</td> <td>460,9</td> <td>103,5</td> <td>169,5</td> <td>462,8</td> </tr>
+<tr><td>18:56:45</td> <td>106,0</td> <td>166,7</td> <td>461,5</td> <td>106,0</td> <td>169,3</td> <td>463,2</td> </tr>
+<tr><td>18:57:05</td> <td>108,5</td> <td>166,8</td> <td>462,2</td> <td>108,6</td> <td>169,1</td> <td>463,5</td> </tr>
+<tr><td>18:57:25</td> <td>111,1</td> <td>166,9</td> <td>462,8</td> <td>111,2</td> <td>168,8</td> <td>463,8</td> </tr>
+<tr><td>18:57:45</td> <td>113,6</td> <td>167,1</td> <td>463,4</td> <td>113,7</td> <td>168,5</td> <td>464,1</td> </tr>
+<tr><td>18:58:05</td> <td>116,2</td> <td>167,2</td> <td>464,0</td> <td>116,3</td> <td>168,2</td> <td>464,4</td> </tr>
+<tr><td>18:58:25</td> <td>118,8</td> <td>167,3</td> <td>464,6</td> <td>118,9</td> <td>167,8</td> <td>464,8</td> </tr>
+<tr><td>18:58:45</td> <td>121,4</td> <td>167,4</td> <td>465,2</td> <td>121,5</td> <td>167,4</td> <td>465,1</td> </tr>
+<tr><td>18:59:05</td> <td>123,9</td> <td>167,6</td> <td>465,8</td> <td>124,0</td> <td>167,0</td> <td>465,5</td> </tr>
+<tr><td>18:59:25</td> <td>126,5</td> <td>167,7</td> <td>466,4</td> <td>126,6</td> <td>166,5</td> <td>466,0</td> </tr>
+<tr><td>18:59:45</td> <td>129,1</td> <td>167,8</td> <td>467,0</td> <td>129,2</td> <td>166,0</td> <td>466,4</td> </tr>
+
+</table>
+
+<!-- 18-02-2022: vedere anche "\USTICA - Radar\Simulazione aereo\CalcMeteo.cpp"  blocco  "// Calcolo TAS, CAS, MACH lungo l'interpolazione"  -->
+
+La tabella è l'equivalente numerico dei due precedenti tracciati e
+
+<!-- 29-01-2022: adattato per nuova revisione togliendo "è stata aggiornata rispetto alla precedente versione" che può generare confusione -->
+considera uno sfasamento dei plot di 2,65° W, come spiegato nella pagina "<a href="../../defi/decli/decli.html" target="_blank">Allineamento radar Ciampino</a>".<br>
+
+<br>
+Grazie all'interpolazione, è possibile calcolare la <a href="https://www.navigazione-aerea.com/6-direzioni-e-orientamento/" target="_blank">rotta</a> istantanea dell'aereo rispetto al nord vero (TRK) e la velocità istantanea rispetto al suolo (GS). La tabella riporta anche la distanza interpolata dell'aereo dal radar (RNG).<br>
+In base all'interpolazione ottenuta per l'estrattore 3, il DC-9 sta tenendo una rotta di 167/168° e una velocità al suolo che aumenta procedendo verso sud. Ciò è perfettamente coerente con il fatto che a sud di Roma la velocità del vento diminuisce andando verso sud.<br>
+<br>
+Il radar Selenia appare, invece, poco attendibile, in quanto la rotta al suolo diminuisce di ben 3,5° andando verso sud (anziché aumentare), ma anche lui dà una velocità al suolo in aumento, come il Marconi.<br>
+<br>
+E' utile sottolineare che durante questa fase, il DC-9 vola in senso esattamente radiale rispetto alle antenne dei radar di Ciampino (in particolare, rispetto a quella del Marconi), esponendo, così, quasi la minima superficie riflettente possibile.<br>
+
+</div>
+<!-- FINE revisione 28-04-2021 -->
+
+
+<!-- ========================================================================================================== -->
+
+
+<h3>Velocità rispetto all'aria e prua</h3>
+
+Le colonne TRK rappresentano, come detto, la rotta dell'aereo rispetto al nord vero (non magnetico). La carta aeronautica ONC G-2 del 1981 riporta le isogone per l'anno 1980 (un'isogona è una linea che congiunge i punti sulla superficie terrestre aventi la medesima <a href="https://www.mondogeo.com/2019/02/07/la-declinazione-magnetica-in-italia/" target="_blank">declinazione magnetica</a>). La zona dell'abbattimento del DC-9 si trova tra l'isogona 1° W e 0°, ma è più vicino all'isogona 0°; si può ritenere, quindi, che la declinazione magnetica fosse poco meno di 0,5° W.<br>
+<br>
+Consultando la pagina "<a href="../../fasi/meteo.html" target="_blank">Meteo lungo la rotta</a>", si può avere una stima sufficientemente accurata della velocità e direzione del vento al momento dell'abbattimento: 95,3 kn da 250,5° rispetto al nord vero.<br>
+
+<div style="margin-top: 1em; margin-bottom: 30px; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="trivento.png" style="float:left; padding-right: 30px;" alt="" title="">
+L'immagine mostra come calcolare la velocità tenuta dall'aereo rispetto all'aria (chiamata <abbr title="true airspeed">TAS</abbr>) tramite il cosiddetto triangolo del vento. Per i calcoli si può usare il sito <a href="https://www.geogebra.org/calculator" target="_blank"><i>GeoGebra</i></a> o la trigonometria di base.<br>
+<br>
+Il vettore verde rappresenta la velocità rispetto al suolo (GS della tabella), quello blu rappresenta il vento, mentre quello rosso è la TAS.<br>
+
+Gli angoli definiti in trigonometria hanno l'origine diversa da quelli usati in aviazione, per cui bisogna fare le necessarie conversioni. Ad esempio, la rotta di 167,8° deve essere convertita in 90 - 167,8 = -77,8° o 282,2°.<br>
+
+<br>
+Volendo usare la trigonometria elementare, si può procedere scomponendo i vettori nelle loro componenti <i>x</i> e <i>y</i> per poi sommarle (nel nostro caso, l'asse +X rappresenta l'est e l'asse -Y rappresenta il sud):<br>
+
+GS<sub>x</sub> = 467,0 &middot; cos(-77,8) = 98,69 kn, GS<sub>y</sub> = 467,0 &middot; sen(-77,8) = -456,45 kn<br>
+
+Per l'angolo formato dal vento, bisogna avere l'accortezza di usare la direzione opposta di 19,5°, cioè 199,5° (il fatto di esprimere la direzione del vento indicando da dove soffia anziché in che direzione va può generare confusione):<br>
+W<sub>x</sub> = 95,3 &middot; cos(199,5) = -89,83 kn, W<sub>y</sub> = 95,3 &middot; sen(199,5) = -31,81 kn.<br>
+
+Sommiamo le componenti <i>x</i> e <i>y</i> per ottenere la velocità rispetto all'aria: TAS<sub>x</sub> = 98,69 - 89,83 = 8,86 kn, TAS<sub>y</sub> = -456,45 - 31,81 = -488,26 kn.<br>
+Dal teorema di Pitagora abbiamo: TAS<sup>2</sup> = TAS<sub>x</sub><sup>2</sup> + TAS<sub>y</sub><sup>2</sup>, da cui <b>TAS = 488,34 kn</b>.<br>
+Per la prua, infine, abbiamo: <b>prua =</b> 90 - arctg(TAS<sub>y</sub> / TAS<sub>x</sub>) = <b>178,96°</b> rispetto al nord vero.
+
+</div>
+
+
+Se dalla prua vera ottenuta dai calcoli sottraiamo la declinazione magnetica (vista in precedenza), otteniamo la prua magnetica: 178,96 - (-0,5) = 179,46° (0,5° W equivalgono a -0,5°).<br>
+
+
+Quindi l'aereo nella sua ultima fase della crociera aveva sicuramente l'autopilota impostato per mantenere una prua (magnetica) di 180° (cioè esattamente verso sud). Normalmente, durante la crociera non s'imposta una prua, ma si segue una specifica radiale di una radioassistenza, però, siccome la radioassistenza di Ponza aveva solo il DME funzionante, l'IH870 non aveva alcuna guida strumentale, per cui il comandante ha semplicemente impostato la prua a sud, poi c'avrebbe pensato il controllore a dare un'altra prua per far restare l'aereo all'interno dell'aerovia, almeno fino alla stabile ricezione del VOR di Punta Raisi.<br>
+<br>
+Tutto ciò è in ottimo accordo con quanto affermato nella "<a href="http://www.stragi80.it/documenti/gi/perizie/036.pdf" target="_blank">Consulenza tecnica Bazzocchi ed altri - 18.07.92</a>", pag. 9, dalla quale risulta che gli strumenti recuperati indicavano una prua di 180°. Questo costituisce un ottimo riscontro in merito all'attendibilità delle due interpolazioni relative alla rotta e velocità dell'aereo e alla direzione e velocità del vento.<br>
+<br>
+Dalla stessa consulenza si ottiene un dato utile per giustificare una TAS di quasi 490 kn, esageratamente elevata per un DC-9-15 ad una quota così bassa. Tuttavia l'EPR di 1,96 è piuttosto elevato per la fase di crociera (probabilmente 1,96 corrispondeva alla potenza massima continuativa nelle condizioni meteo del momento). Evidentemente il comandante stava cercando di recuperare l'enorme ritardo accumulato durante la giornata.<br>
+<br>
+
+Come ulteriore elemento di conferma dell'attendibilità di tutte le interpolazioni prima citate, è disponibile il documento "<a href="http://www.stragi80.it/documenti/gi/perizie/001-007.pdf" target="_blank">TITOLO 3 - Le Perizie</a>", il quale, a pag. 65, riporta: "<i>Velocità massima di crociera a 25.000ft (7620m.) <b>488Kts</b> (903km/h)</i>" che è proprio la velocità di crociera (TAS) calcolata in precedenza.<br>
+
+<br>
+
+
+<!-- FINE revisione 24-04-2021 -->
+
+
+<!-- ========================================================================================================== -->
+
+
+<h3>Abbattimento e caduta in mare</h3>
+
+L'estrattore 3 del radar Marconi colloca l'ultima risposta del transponder del DC-9 a 17 km a nord del punto CONDOR, 130 km a sud di Ponza, 114 km a nord di Ustica, nonché a 330 km dal punto in cui è stato ritrovato il MiG-23 a Castelsilano.<br>
+<br>
+Segue un’animazione dei plot a velocità normale ottenuta dall’estrattore 3, usato sia per la sua maggiore sensibilità, sia per coerenza con il tracciato presente nella pagina <a href="https://www.stragi80.it/tracciato/" target="_blank">STRAGI80.it - Il tracciato</a>: <br>
+<br>
+
+<div style="margin-bottom: 30px; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="anima.gif" style="float:left; padding-right: 30px;" alt="" title="">
+Le due croci centrate sui motori (in basso a sinistra) e sull’FDR sono da 1 x 1 nm e servono per avere un’idea delle distanze.<br>
+</div>
+
+
+Ciò che mostra il radar Marconi è un aereo che scompare in un giro d’antenna dopo l’ultima risposta del transponder delle 18:59:45 e al suo posto compare una nuvola di frammenti che ritorna molti echi mentre si muove verso est, sospinta dal fortissimo vento da ovest (un centinaio di nodi). Tra tutti quei plot, alcuni potrebbero essere ritornati dall'aereo ancora strutturalmente integro, ma siccome il transponder non funziona più, non è possibile determinare se e quali plot del radar primario (colore nero) rappresentano l'aereo.<br>
+<br>
+
+
+
+<!-- INIZIO revisione 20-12-2020 -->
+
+
+
+Un tentativo in tal senso è stato fatto dal professor Galati e dagli ingegneri Giaccari e Pardini (questi ultimi due dipendenti della Selenia SpA) con la loro dettagliatissima <a href="https://www.stragi80.it/documenti/gi/perizie/008.pdf" target="_blank">relazione</a>.<br>
+<br>
+
+<div style="margin-bottom: 30px; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="fig18.png" style="float:left; padding-right: 30px;" alt="" title="">
+Questo grafico, pubblicato a pag. 13 del PDF, riporta la distanza dei plot dall'antenna del radar Marconi in funzione del tempo. L'istante iniziale corrisponde alle 18:59:45.<br>
+Nel grafico vengono individuate due traiettorie. Al punto <i>k</i> a pag. 25, gli autori scrivono: "[...] <i>l’associazione più probabile tra traiettorie e oggetti, appare attribuire la traiettoria 2 alla parte principale del relitto del DC9 I-Tigi e la traiettoria 1 a suoi frammenti.</i> [...]".<br>
+</div>
+
+
+
+<div style="margin-bottom: 30px; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="traie.png" style="float:left; padding-right: 30px;" alt="" title="">
+Dando una collocazione spaziale (latitudine e longitudine) ai punti individuati nella fig. 18 della relazione, è possibile disegnare una traiettoria che passa per quei punti.<br>
+Il numero delle possibili traiettorie è infinito; il disegno ne mostra una (UPT: ultimo punto transponder).<br>
+</div>
+
+
+Gli autori della relazione, molto opportunamente, aggiungono, sempre al punto <i>k</i>: "[...] <i>Tale attribuzione richiede una convalida in base a valutazioni di carattere aeronautico analisi del relitto etc.,</i> [...]". Una "convalida aeronautica" è d'obbligo; infatti, una semplice verifica rende subito impossibile il fatto che l'aereo abbia potuto seguire la traiettoria 2.<br>
+Consideriamo, ad esempio, i primi due punti indicati nella fig. 18: il 2b e il 3. La distanza tra quei due punti è 5,2 nm. Il radar Marconi riceve il plot 2b alle 18:59:57 e il plot 3 alle 19:00:02 (estrattore 3), ciò significa che il DC-9 avrebbe impiegato 5 s per andare dal 2b al 3. Se il percorso fosse stato in linea retta, la velocità sarebbe stata pari a 5,2 / 5 x 3600 = 3744 kn = 6934 km/h (!). Se il percorso non fosse stato in linea retta, è chiaro che la velocità avrebbe dovuto essere ancora più grande.<br>
+Analogo calcolo può essere fatto per i punti 9b e 12. Distanza = 5,83 nm, 9b: 19:00:36, 12: 19:00:52, tempo = 16 s, velocità = 5,83 / 16 x 3600 = 1312 kn = 2167 km/h; del tutto impossibile anche in questo caso.<br>
+<br>
+
+<!-- Revisione del 30-07-2021. Calcoli nel blocco "ROTAZIONE punti 2b e 3 e calcolo distanza" -->
+
+Tuttavia, sappiamo bene che le coordinate polari (distanza e azimut) relative ai bersagli rilevati dai radar sono soggette ad errori di vario tipo.<br>
+Siccome la distanza tra i punti 2b e 3 è troppo alta per essere percorsa da un qualunque velivolo in soli 5 s, si può prendere in considerazione l'errore azimutale del radar per avvicinare i due punti, riducendo, così, la velocità necessaria per andare da un punto all'altro in quei 5 s.<br>
+<br>
+Sfruttando il risultato ottenuto dall'analisi riportata nella pagina "<a href="../6_cadu/cadu.html#scarti_azm" target="_blank">Caduta in mare</a>", abbiamo che l'incertezza azimutale del radar Marconi alla distanza di circa 130 nm è pari a &plusmn;0,8° con una confidenza del 99,7%.<br>
+<br>
+Per verificare, quindi, la plausibilità dell'ipotesi che il DC-9 (o ciò che ne è rimasto) possa aver seguito il percorso dal punto 2b al punto 3, si può ruotare il punto 2b di 0,8° in senso antiorario per avvicinarlo al punto 3 e il punto 3 in senso orario per avvicinarlo al punto 2b. Fatti tutti i calcoli, la distanza passa da 5,2 nm a 1,6 nm.<br>
+Sfruttando, inoltre, il temporizzatore ad alta risoluzione (campo "TEMPO" nei tabulati), si ha che la distanza temporale tra i punti 2b e 3 è di 5,6 s (1 giro d'antenna).<br>
+Calcolando, finalmente, la velocità necessaria per andare dal punto 2b al punto 3 in linea retta, otteniamo: 1,6 / 5,6 x 3600 = 1029 kn = 1905 km/h, una velocità ancora estremamente elevata per essere possibile.<br>
+
+<!-- FINE Revisione del 30-07-2021 -->
+
+
+<br>
+Si può, quindi, concludere che il DC-9 <u>certamente</u> non ha seguito una traiettoria passante per quei punti.<br>
+<br>
+Informazioni più utili possono essere ottenute dall'<a href="https://it.wikipedia.org/wiki/Azimut" target="_blank">azimut</a> dei plot in funzione del tempo (la figura del link mostra l'osservatore, che nel nostro caso rappresenta l'antenna del radar e la stella che rappresenta l'aereo o l'oggetto che ritorna l'eco).<br>
+<br>
+
+<div style="margin-bottom: 30px; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="dst,azm.png" style="float:left; padding-right: 30px;" alt="" title="">
+Il grafico è simile a quello della fig. 18, ma qui viene riportato anche l'azimut dei plot.<br>
+<br>
+La linea tratteggiata blu è quella che meglio approssima l'evoluzione dell'azimut in funzione del tempo.<br>
+Risulta chiaramente che a sinistra della linea tratteggiata rossa, l'azimut è molto disperso intorno alla linea blu, mentre a destra della linea verticale rossa, l'azimut ha una dispersione significativamente inferiore.
+</div>
+
+<br>
+L'analisi del grafico richiede l'introduzione del <a href="https://it.wikipedia.org/wiki/Coefficiente_balistico" target="_blank">coefficiente balistico</a> (CB). Gli oggetti con CB elevato cadono più velocemente, poiché sono frenati dall'aria in misura minore degli oggetti con CB inferiore.<br>
+Risulta evidente, quindi, che fino alle 19:01 circa, il radar <u>potrebbe</u> ancora mostrare il DC-9 che sta ancora in aria, insieme a molti frammenti di fusoliera o altri oggetti (plot dal n° 1 al 13 e 13b, entrambi battuti alle 19:00:58), mentre dopo delle 19:01 (cioè a partire dal plot n° 15 battuto alle 19:01:09), l'aereo e gli altri oggetti con CB elevato non sono più visibili (perché a quota troppo bassa o già precipitati in mare) e rimangono solo i frammenti con CB molto piccolo che vengono sospinti verso est dal fortissimo vento in quota.<br>
+<br>
+
+
+
+<!-- FINE revisione 20-12-2020 -->
+
+
+
+
+
+<!-- ========================================================================================================== -->
+
+
+<!-- Revisione 15-02-2022 -->
+
+
+<h3>Identificazione dei plot</h3>
+
+In questo paragrafo si cercherà di stabilire quali plot sono compatibili con i frammenti del DC-9 e quali, invece, devono essere ritenuti plot spuri (falsi plot derivanti da disturbi al radar) o appartenenti ad altri aerei presenti in zona.<br>
+<br>
+
+
+<!-- Revisione 26-02-2022 -->
+
+Questa nuova revisione pubblicata a breve distanza temporale dalla precedente è principalmente formale. Serve, infatti ad aggiornare la caratterizzazione dei plot tramite un metodo statistico rigoroso (e decisamente più complesso) anziché semi-empirico come quello usato nella precedente revisione.<br>
+Le parti revisionate riguardano solamente i valori statistici; non è, pertanto, necessario identificarle con l'usuale barra verticale, in quanto facilmente individuabili.<br>
+<br>
+Il maggior potere discriminante di questo nuovo metodo consente di spostare i plot 7 e 8b da "dubbi" a "neutri", cioè diventano plot che possono rappresentare con elevata confidenza indifferentemente un frammento o un falso plot o un aereo.<br>
+<br>
+La tecnica usata è quella dell'<a href="https://wikipredia.net/it/Tolerance_interval" target="_blank">intervallo di tolleranza</a>.<br>
+Il programma che elabora i plot calcola l'intervallo di tolleranza che "assicura" con una confidenza del 95% la copertura di circa il 98,65% degli errori in azimut del radar. Quel 98,65% si ottiene dal rapporto 36,5 / 37; siccome i campioni sono 37 (v. il grafico degli errori in azimut nella pagina "<a href="../6_cadu/cadu.html" target="_blank">Caduta in mare</a>"), la copertura del 98,648648...% consente di poter ritenere con una "sicurezza" del 95% che nemmeno 1 plot cade al di fuori dell'intervallo calcolato.<br>
+Chi volesse fare qualche prova, può usare la pagina <a href="http://statpages.org/tolintvl.html" target="_blank"><i>Tolerance Intervals for Normal Distribution</i></a>, scrivendo i seguenti valori nelle caselle, partendo dall'alto: 37, 0, .2668, 95, 98.648648. I valori presenti nelle due caselle "<i>lies within the interval from</i>" rappresentano i gradi a destra e a sinistra del plot in cui questo potrebbe in realtà trovarsi a causa dell'errore azimutale del radar Marconi. Quindi l'intervallo è ampio 0,8307 x 2 = 1,66°, corrispondenti a poco meno di 7 km, alla distanza dei plot dal radar.<br>
+
+<!-- FINE Revisione 26-02-2022  modificate anche altre parti non evidenziate, ma di poco conto -->
+
+
+<br>
+Ciò che segue si basa su quanto dimostrato nelle pagine "<a href="../../lc/planata/planata.html" target="_blank">La lunga planata</a>" e 
+"<a href="../6_cadu/cadu.html" target="_blank">Caduta in mare</a>" e cioè che il DC-9, dopo aver perso il troncone della semiala sinistra, ha iniziato a perdere quota velocemente mantenendo quasi costante la rotta finale, impattando la superficie del mare nei pressi della zona di ritrovamento dei motori.<br>
+<br>
+Una volta avvenuto l'evento catastrofico, il DC-9 ha iniziato subito a perdere pezzi. Questi frammenti hanno subìto la forza del vento da ovest che li ha sospinti verso est accelerandoli nella direzione del vento tanto più velocemente quanto più piccolo era il <abbr title="coefficiente balistico">CB</abbr> del frammento. Ad esempio, un cuscino di gommapiuma viene accelerato dal vento molto di più del carrello portavivande del DC-9.<br>
+La massima velocità orizzontale nella direzione del vento di un frammento rispetto al suolo è ovviamente pari alla velocità del vento. Frammenti con CB molto piccolo vengono accelerati dal vento molto velocemente, raggiungendo altrettanto velocemente una velocità rispetto al suolo pari a quella del vento. Viceversa, frammenti con CB molto grande vengono accelerati lentamente dal vento e potrebbero non raggiungere mai la sua velocità prima d'impattare il mare.<br>
+L'analisi qui presentata si basa proprio su questo fatto e può essere così riassunta:
+<ul style="margin-top: 0px">
+<li>un plot "troppo" ad est rispetto a dove dovrebbe trovarsi un frammento solo sospinto dal vento non può essere un frammento del DC-9, può, invece, essere o un aereo o un falso plot, uno dei tanti falsi plot che si trovano in quella fascia di distanza dal radar (si vedano le due immagini alla fine della pagina "<a href="../../scen/mis_ine/mis_ine.html" target="_blank">Abbattimento tramite missili inerti</a>");</li>
+<li>un plot compreso tra la rotta del DC-9 e il punto in cui dovrebbe trovarsi un frammento del DC-9 e non troppo ad ovest di questo punto può senz'altro rappresentare un frammento avente un CB medio-alto;</li>
+<li>un plot "troppo" ad ovest rispetto alla rotta del DC-9 non può essere un frammento del DC-9, poiché il vento traslerebbe il frammento verso est, non verso ovest.</li>
+</ul>
+Le frasi "troppo ad est" e "troppo ad ovest" sono tecnicamente prive di senso, quindi quel "troppo" deve essere quantificato numericamente. Per farlo, si può sfruttare l'analisi presentata nella pagina "<a href="../6_cadu/cadu.html" target="_blank">Caduta in mare</a>" in merito all'incertezza sull'azimut dei plot rilevati dal radar Marconi, dalla quale risulta una deviazione standard degli scarti pari a &sigma; = 0,2668°. Questo primo dato tornerà utile in seguito.<br>
+<br>
+Osservando la seguente cartina, si nota che i plot iniziano a comparire più a sud del punto rosso "UPT" che rappresenta l'ultima risposta del transponder (UPT, ultimo punto transponder) dell'IH870. Infatti iniziano a comparire all'altezza del punto rosso più grande "UPT + 3 s".<br>
+La cartina ha la particolarità di essere ruotata di 18° in senso orario (lo si nota riducendo la scala con la rotellina del mouse) con lo scopo di poter ragionare meglio sulla sequenzialità dei plot (la cartina può essere ruotata muovendo il mouse a destra e a sinistra mentre si tiene premuto il tasto destro). La griglia è infatti allineata con la direzione media del vento presente tra 22000 e 26000 ft di quota (freccia verde), pari a 252° rispetto al nord vero (non magnetico). La velocità media del vento è pari a 90,8 kn.<br>
+
+<br>
+
+<!-- CARTINA NUMERO PLOT -->
+<div style="margin-bottom: 30px; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<div id="numerazione_plot" style="width: 50%; height: 300px; float:left; padding-right: 30px;"></div>
+
+<b>Scegliere un plot</b>: <select id="SelectPlot" onchange="PlotOnChange(this.selectedIndex)"></select><br>
+
+Mostra plot (v. fine tabella):<br>
+<span style="padding-left: 1em"></span> <input type="checkbox" id="CB_neutri"  checked onchange="MostraPlotOnChange()"> frammenti o falsi plot o aerei<br>
+<span style="padding-left: 1em"></span> <input type="checkbox" id="CB_incompa" checked onchange="MostraPlotOnChange()"> incompatibili con frammenti<br>
+<span style="padding-left: 1em"></span> <input type="checkbox" id="CB_dubbi"   checked onchange="MostraPlotOnChange()"> dubbi<br>
+
+<br>
+La linea rossa rappresenta la rotta (interpolata) seguita dall'IH870 negli ultimi secondi di volo.<br>
+<br>
+La griglia è centrata sul punto lungo la rotta dell'IH870 al tempo UPT + 3 s, momento in cui sembra avvenuto l'evento catastrofico (a giudicare dalla comparsa dei frammenti). La scala dell'asse X è graduata in giri d'antenna ovvero 1 divisione è ampia <i>90,8 / 3600 x 5,57 = 0,14 nm</i> (5,57 s è il periodo medio di rotazione dell'antenna del radar Marconi), mentre 1 divisione dell'asse Y è ampia il doppio dell'incertezza sulla distanza di un plot dal radar al 99,7% di confidenza e cioè 0,12 nm (questo per evitare che la griglia sia eccessivamente fitta).<br>
+<br>
+La freccia verde rappresenta la direzione media del vento tra 22000 e 26000 ft al momento del disastro.<br>
+<br>
+Il segmento blu rappresenta l'intervallo di tolleranza già descritto ad inizio paragrafo.<br>
+</div>
+
+
+La cartina può essere usata come segue.<br>
+Partendo dal punto in cui è avvenuto il disastro e sapendo che 1 giro d'antenna dura in media 5,57 s, il frammento numero <i>N</i> può al massimo arrivare ad una distanza nella direzione del vento espressa in miglia nautiche pari a <i>90,8 / 3600 x N x 5,57</i>. Ad esempio, il plot 12, per rappresentare un frammento del DC-9 può al massimo trovarsi a <i>90,8 / 3600 x 12 x 5,57 = 1,69 nm</i> dalla linea verticale più a sinistra. Lo stesso calcolo, leggermente più accurato, può essere fatto sostituendo a <i>12 x 5,57</i> il reale tempo trascorso dall'abbattimento, cioè 63,8 s. Il plot si trova, invece, oltre 3 nm più ad est della massima distanza possibile per un frammento del DC-9 sospinto dal vento alla velocità media di 90,8 kn e rilevato 63,8 s dopo dell'abbattimento.<br>
+Quella distanza di 3 nm da sola non basta per determinare se quel plot è un frammento o altro, in quanto il radar riporta l'azimut con un certo errore, per cui una distanza di 3 nm potrebbe rientrare nel normale errore in azimut.<br>
+Una prima indicazione la dà il segmento blu centrato sul plot selezionato. Infatti, continuando con l'esempio del plot 12, muovendo il puntatore del mouse sulla griglia, apparirà l'etichetta con "N: 12" che è la linea verticale lungo la quale può al massimo arrivare dopo 63,84 s un frammento che si stacca dal DC-9 mentre questo precipita lungo la linea verticale più marcata "X: 0.00". La distanza tra la linea verticale "N: 12" e l'estremo più a sinistra del segmento blu relativo al plot 12 è molto grande. Questo significa che per affermare che il plot 12 rappresenti un frammento del DC-9, dovremmo anche accettare un errore azimutale enorme del radar. Quanto enorme? Ce lo dice la seguente tabella. Per quel plot, la colonna <i>&Delta;azm</i> riporta 1,337 e la colonna <i>C</i> riporta 0,000141; ciò significa che la distanza azimutale tra il plot 12 e la linea verticale "N: 12" è 1,337°. Ampliare l'errore azimutale fino a 1,337° significa portare la confidenza dal 95% al <i>100 - 0,000141 = 99,999859%</i>.<br>
+Il valore nella colonna <i>C</i> indica la confidenza che si ha nel ritenere che il plot possa appartenere ad un frammento del DC-9.<br>
+Valori piccoli di <i>C</i> tendono ad indicare plot incompatibili con frammenti del DC-9, mentre valori elevati indicano una sempre maggiore compatibilità del plot con un frammento.<br>
+Normalmente, si inizia ad avere una sufficiente evidenza statistica per valori inferiori al 10% o superiori al 90%, ma per avere una solida evidenza statistica sulla caratterizzazione dei plot, conviene considerare soglie del 5% e 95%:
+<ul style="margin-top: 0px">
+<li><i>C</i> < 5% &rarr; plot incompatibile con un frammento del DC-9, può essere o un falso plot o un aereo;</li>
+<li><i>C</i> > 95% &rarr; plot compatibile con un frammento del DC-9, può essere un frammento o un falso plot o un aereo;</li>
+<li>5% &le; <i>C</i> &le; 95% &rarr; plot dubbio, non esiste sufficiente evidenza statistica per farlo rientrare in una categoria ben definibile.</li>
+</ul>
+
+
+<div style="display: inline-block; width:100%;">
+
+<div id="tabella" style="cursor: pointer; display: inline-table; float: left; margin:5px 20px 20px 0px; table-layout: fixed;"></div>
+
+La tabella riepiloga i plot battuti dal radar Marconi (estrattore 3) a partire da UPT (cliccando in un punto qualunque di una riga, viene selezionato il plot corrispondente anche nella cartina). Si fa notare che i plot 9 e 26 sono esattamente sovrapposti.<br>
+<br>
+<b>ID</b>: identificativo o nome del plot.<br>
+<b>UTC</b>: orario riportato nel tabulato dell'estrattore n° 3.<br>
+<b>t<sub>ec</sub></b>: tempo trascorso dall'evento catastrofico (usato il campo "TEMPO" dei tabulati con risoluzione di 80 ms o 8 centesimi di secondo).<br>
+<b>DST</b>: distanza in miglia nautiche del plot dall'antenna.<br>
+<b>AZM</b>: azimut del plot rilevato dal radar Marconi corretto per lo sfasamento (v. pagina "<a href="../../defi/decli/decli.html" target="_blank">Allineamento radar Marconi e Selenia</a>").<br>
+<b>Lat</b> e <b>Lon</b>: coordinate del plot.<br>
+<b>&Delta;azm</b>: differenza tra l'azimut atteso per il plot e l'azimut rilevato dal radar (valori positivi indicano plot più ad est del punto atteso).<br>
+<b>C</b>: confidenza percentuale che si ha nell'affermare che il plot è compatibile con un frammento del DC-9.<br>
+Valori come 0 e 100% non esistono in statistica inferenziale, ma nella tabella compaiono ugualmente vari "100" solo per effetto dell'arrotondamento a 3 cifre significative. Ad esempio, <i>C</i> per il plot 28 è 99,9999999994387.<br>
+Il numero 6,82&middot;10<sup>-8</sup> equivale a 0,0000000682.<br>
+<br>
+
+Dopo aver visto l'esempio del plot 12, vediamo un altro esempio con <i>&Delta;azm</i> negativo: il plot 7.<br>
+In base alla classificazione vista prima, possiamo dedurre che questo plot non è "sospetto", nel senso che può rappresentare indifferentemente un frammento, un aereo o un falso plot. Vediamo, infatti, che la linea verticale "N: 7" rientra ampiamente nell'intervallo di confidenza per quel plot, tanto da poter ritenere che l'oggetto rappresentato da quel plot possa trovarsi indifferentemente a destra o a sinistra della rotta del DC-9.<br>
+<br>
+Vediamo come ultimo esempio il plot 4. Questo è più ad est della linea in cui ci si aspetterebbe di trovare un frammento sospinto dal vento dopo 19,24 s, ma la differenza tra la posizione attesa e quella battuta dal radar è talmente piccola che il plot si discosta soltanto di 0,165° dalla posizione attesa, fatto evidenziato da <i>C</i> pari a "100". In altri termini, l'incertezza sull'azimut ci consente di ritenere senz'altro possibile che la posizione reale del plot sia compresa tra la rotta del DC-9 e la linea "N: 4". Può essere utile precisare che se il frammento rappresentato dal plot 4 fosse realmente in quella posizione (errore in azimut pari a zero), quel plot non sarebbe in alcun modo attribuibile ad un frammento del DC-9.<br>
+<br>
+Abbiamo, finalmente, tutti gli elementi necessari per caratterizzare i plot.<br>
+
+<br>
+<b>Plot che possono rappresentare indifferentemente un frammento, un aereo o un falso plot</b>: 2, 3, 4, 6, 7, 8b, 15, 16, 17, 18, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31.<br>
+Si noti che l'elenco è in ottimo accordo con quanto risulta già evidente dal grafico "Azimut / Distanza" del paragrafo precedente, cioè che i plot dal 15 in poi sono in gran parte frammenti con CB abbastanza piccolo che quindi vengono sospinti molto ad est dal vento restando in quota per parecchio tempo.<br>
+<br>
+<b>Plot incompatibili con frammenti</b>, attribuibili con alta probabilità a falsi plot o altri aerei: 1, 2b, 5, 9, 9b, 10, 11, 12.<br>
+<br>
+<b>Plot dubbi</b>: 8, 13, 13b, 19. La confidenza nel ritenere il plot 13 un frammento è comunque molto alta.<br>
+
+</div> <!-- FINE TABELLA -->
+
+
+Escludendo con l'apposita casella di spunta di fianco alla cartina i plot "frammenti o falsi plot o aerei" (facendo colorare di grigio chiaro i corrispondenti puntini, così da mettere in risalto gli altri due tipi di plot rimasti neri), nei restanti plot si potrebbero intravedere due traiettorie rappresentanti apparentemente una rotta, ma in realtà non sembra possibile collegare la spaziatura temporale dei plot con la loro spaziatura geografica, in quanto alcuni calcoli dànno velocità di un ipotetico aereo che interseca la rotta del DC-9 dai 130 kn ai 360 kn; poco probabili, considerando anche il forte vento da ovest.<br>
+Questo, ovviamente, non significa che alcuni dei plot incompatibili con i frammenti non possano rappresentare altri aerei, anzi, sarebbe quasi impossibile che questi plot fossero realmente tutti falsi plot, in particolare i quattro ad ovest della rotta del DC-9.<br>
+<br>
+
+
+<script>
+"use strict";
+
+var UPT_3= {
+	type:'scattermapbox', name: 'Abbattimento', hoverinfo: 'text',
+	lat: [39.7275], lon: [13.0268], text:['UPT + 3 s'],
+	mode: 'markers', marker: { size: 8, color: '#ff0000' }
+};
+
+
+// "\USTICA - Radar\main.cpp"   blocco   "Crea file "numerazione_plot.csv""
+// C < 5% : plot incompatibili con frammenti
+var incompa= ('1,2b,5,9b,9a,10,11,12').split(',');
+
+// C > 95% : plot che possono rappresentare indifferentemente un frammento, un aereo o un falso plot
+var neutri= ('2a,3,4,6,7,8a,15,16,17,18,20,21,22,23,24,25,26,27,28,29,30,31').split(',');
+
+// Plot dubbi
+var dubbi= ('8b,13b,13a,19').split(',');
+
+
+
+function MostraPlotOnChange()
+{
+	const neu= document.getElementById("CB_neutri").checked;
+	const inco= document.getElementById("CB_incompa").checked;
+	const dub= document.getElementById("CB_dubbi").checked;
+	
+	const col_grigio= '#bbbbbb';
+	
+	for(var i= 1; i < plt.length; i++) { // Parte da dopo UPT
+		var col= '#000000';
+
+		if(neutri.find(element => element === plt[i]) !== undefined) if(neu === false) col= col_grigio;
+		if(incompa.find(element => element === plt[i]) !== undefined) if(inco === false) col= col_grigio;
+		if(dubbi.find(element => element === plt[i]) !== undefined) if(dub === false) col= col_grigio;
+
+		NUM.marker.color[i]= col;
+	}
+
+
+	NUMERAZIONE_PLOT(document.getElementById("SelectPlot").selectedIndex);
+}
+
+
+// ==================================================================================================================
+
+
+var NUM= {
+	type:'scattermapbox', name: 'Plot', hoverinfo: 'text',
+	lat: [], lon: [], text:[],
+	mode: 'markers', marker: { size: 6, color: [] }
+};
+var plt, i1la, i1lo, i2la, i2lo;
+
+
+Plotly.d3.csv('numerazione_plot.csv', function(err, rows) {
+		
+	// n,UTC,t80,D,azm,lat,lon,i1la,i1lo,i2la,i2lo,z,p
+	plt= unpack(rows, 'n'); // Numerazione plot
+	var t80= unpack(rows, 't80'); // t [80 ms]
+	var UTC= unpack(rows, 'UTC');
+	var dst= unpack(rows, 'D'), azm= unpack(rows, 'azm');
+	var sig= unpack(rows, 'z'), pro= unpack(rows, 'p');
+	NUM.lat= unpack(rows, 'lat'); NUM.lon= unpack(rows, 'lon');
+	for(var i= 0; i < plt.length; i++) {
+		NUM.text[i]= plt[i] + ', ' + UTC[i] + ', t: ' + t80[i] + '<br>' +
+		  'lat: ' + NUM.lat[i] + ', lon: ' + NUM.lon[i];
+		NUM.marker.color[i]= '#000000';
+	}
+	NUM.marker.color[0]= '#ff0000';
+
+
+	// Aggiunge i plot al dropdown
+	var sel= document.getElementById("SelectPlot");
+	sel.innerText = null; // Ripulisce tutti gli elementi
+	for(let idx in plt) {
+		var opt= new Option(plt[idx], plt[idx]);
+		sel.options[sel.options.length]= opt;
+	}		
+
+
+	// Incertezze 95% dei plot (lat/lon a est e ovest del plot nominale)
+	i1la= unpack(rows, 'i1la'); i1lo= unpack(rows, 'i1lo');
+	i2la= unpack(rows, 'i2la'); i2lo= unpack(rows, 'i2lo');
+
+
+	// -------------------------------------------------------------------------------------------------------------
+	// TABELLA con l'elenco dei plot
+	
+	var head_str= 'ID,UTC,t<sub>ec</sub>,DST,AZM,Lat,Lon,&Delta;azm,C'.split(',');
+
+	var table= document.createElement('TABLE');
+
+	// Intestazione
+	var head= table.createTHead(), row= head.insertRow();
+	for(var j= 0; j < head_str.length; j++) {
+		var cell= row.insertCell(); cell.innerHTML= '<b>' + head_str[j] + '</b>';
+		cell.style.textAlign= 'center';
+	}
+
+	// Aggiunge le righe con i dati
+	for(var i= 0; i < plt.length; i++) {
+		row= table.insertRow();
+		
+		// Cliccando su una riga seleziona il plot corrispondente
+		var createClickHandler= function(row) {
+			return function() {
+				document.getElementById("SelectPlot").selectedIndex= row.rowIndex - 1;
+				NUMERAZIONE_PLOT(row.rowIndex - 1);
+			};
+		};
+		row.onclick= createClickHandler(row);
+		
+		var cols= [plt[i], UTC[i], t80[i], dst[i], azm[i], NUM.lat[i], NUM.lon[i], sig[i], pro[i]];
+		for(var j= 0; j < cols.length; j++) {
+			var cell= row.insertCell(); cell.innerHTML= cols[j].replace('.', ',');
+			if(j === 2 || j === 7) cell.style.textAlign= 'right';
+		}
+	}  
+	document.getElementById("tabella").appendChild(table);
+
+	
+	// -------------------------------------------------------------------------------------------------------------
+
+
+	NUMERAZIONE_PLOT(document.getElementById("SelectPlot").selectedIndex);
+	
+	MostraPlotOnChange();
+});
+
+
+var sel_last= 0;
+
+// Selezionato un PLOT
+function PlotOnChange(idx)
+{	
+	NUMERAZIONE_PLOT(idx);
+}
+
+
+var lay= {
+	margin: { l:0, r:0, t:0, b:0},
+	hovermode: 'closest', showlegend: false,
+	legend: { },
+	mapbox: {
+		style: 'carto-positron',
+		center: { lat: 39.719, lon: 13.044 },
+		// 1435 punti, MEDIE: SKNT= 90.8, DRCT= 252.0
+		zoom: 11.6, bearing: 252 - 270, pitch: 0 // Ruota la cartina secondo il vento
+	}
+};
+
+
+function NUMERAZIONE_PLOT(plot_idx)
+{
+	var righe= document.getElementById("tabella").getElementsByTagName("tr");
+	if(sel_last) righe[sel_last].style.backgroundColor= '';
+	righe[plot_idx + 1].style.backgroundColor= 'cornsilk';
+	sel_last= plot_idx + 1;
+
+		
+	var INCE= {
+		type:'scattermapbox', name: 'Incertezza', //hoverinfo: 'text',
+		lat: [i1la[plot_idx], NUM.lat[plot_idx], i2la[plot_idx]],
+		lon: [i1lo[plot_idx], NUM.lon[plot_idx], i2lo[plot_idx]],
+		mode: 'lines', line: { width: .5, color: '#0000ff' }
+	};
+
+/*
+	var TRAIE= {
+		type:'scattermapbox', name: 'Traiettoria', hoverinfo: 'text',
+		lat: [], lon: [], text:[],
+		mode: 'lines', line: { width: 2, color: '#0000ff' }
+	};
+	const ID= [4, 6, 8, 13];
+	for(var i= 0; i < ID.length; i++) {
+		for(var j= 0; j < plt.length; j++) {
+			if(plt[j] == ID[i]) {
+				TRAIE.lat.push(NUM.lat[j]);
+				TRAIE.lon.push(NUM.lon[j]);
+				break;
+			}
+		}
+	}
+*/
+
+	// LAT/LON INTERPOLATA
+	Plotly.d3.csv('lat_lon-inte.csv', function(err, rows) {
+		var LAT_LON= {
+			type:'scattermapbox', name: 'Plot interpolati',
+			text: unpack(rows, 'UTC'), hoverinfo: 'text',
+			lat: unpack(rows, 'lat'), lon: unpack(rows, 'lon'),
+			mode: 'lines', line: { width: 1, color: '#ff0000' }
+		};
+		for(var i= 0; i < LAT_LON.text.length; i++) LAT_LON.text[i] += "<br>lat: " + LAT_LON.lat[i] + ', lon: ' + LAT_LON.lon[i];
+
+
+		// GRIGLIA VENTO
+		Plotly.d3.csv('griglia_vento.csv', function(err, rows) {
+			var GR= {
+				type:'scattermapbox', name: 'Scala',
+				text: unpack(rows, 'x'), hoverinfo: 'text',
+				lat: unpack(rows, 'lat'), lon: unpack(rows, 'lon'),
+				mode: 'lines', line: { width: 1, color: '#c0c0c0' }
+			};
+			var dy= unpack(rows, 'y'), giri= unpack(rows, 'giri');
+
+			const Dt_evento= 3; // Secondi dopo UPT in cui è avvenuto l'evento catastrofico
+			const T= 5.569655; // Periodo di rotazione antenna
+			
+			for(var i= 0; i < dy.length; i++) {
+				var t= (giri[i] * T - Dt_evento).toFixed(2); if(GR.text[i] === '0.00') t= 0;
+				GR.text[i]= "X: " + GR.text[i] + ", Y: " + dy[i] +
+					"<br>N: " + giri[i] + ', t: ' + t +
+					"<br>lat: " + GR.lat[i] + ', lon: ' + GR.lon[i];
+			}
+
+			// ASSE Y
+			var GR_Y= {
+				type:'scattermapbox', name: 'Asse Y', hoverinfo: 'text',
+				mode: 'lines', line: { width: 1, color: '#777777' },
+				lat: [], lon: [], text: []
+			};
+			for(var i= dy.length - 1; i > 0; i--) { // Toglie le linee da GR e le mette in GR_Y
+				var lat= GR.lat.pop(), lon= GR.lon.pop(), txt= GR.text.pop();
+				if(lat === 'null') break;
+				GR_Y.lat.push(lat); GR_Y.lon.push(lon); GR_Y.text.push(txt);
+			}
+
+
+			// FRECCIA del vento
+			// 1435 punti, MEDIE: SKNT= 90.8, DRCT= 252.0
+			var VENTO= { // "\USTICA - Radar\Simulazione aereo\CalcMeteo.cpp"  blocco  "Vento nei plot dei frammenti DC-9"
+				type:'scattermapbox', name: 'Vento', hoverinfo: 'name',
+				lat: [39.6900, 39.6941, 39.6940, 39.6923, 39.6941],
+				lon: [13.0000, 13.0164, 13.0121, 13.0128, 13.0164],
+				mode: 'lines', line: { width: 2, color: '#00aa00' }
+			};
+
+
+			// Motori: https://www.youtube.com/watch?v=pkfY0yE3CpU
+			// flight data recorder: 39°42’39”, 13°03’01” [Perizia tecnico-scientifica Misiti ed altri - 23.07.94, pagg. 18 e 26]
+			var RECU= {
+				type:'scattermapbox', name: 'Sommersi', hoverinfo: 'text',
+				lat: [39+41.8/60, 39+42/60+39/3600],
+				lon: [13+2.44/60, 13+ 3/60+ 1/3600],
+				text:[ 'Motore DX', 'FDR' ],
+				mode: 'markers', marker: { size: 6, color: '#ff00ff' }
+			};
+			
+			
+			Plotly.newPlot('numerazione_plot', [UPT_3, VENTO, RECU, GR, GR_Y, INCE, NUM, LAT_LON], lay, {responsive: true, displayModeBar: false});
+		});
+	});
+} // FINE "NUMERAZIONE_PLOT"
+
+</script>
+
+
+
+
+
+
+<!-- CARTINA e GRAFICO per comportamento FRAMMENTI in funzione del COEFFICIENTE BALISTICO -->
+
+A conclusione del paragrafo, seguono una cartina e un grafico che consentono di osservare il comportamento dei frammenti in base al loro CB.<br>
+<br>
+Contrariamente a quanto fatto per la griglia presente nelle cartine (costruita in base alla direzione e velocità medie del vento), la posizione dei frammenti viene calcolata usando il modello matematico delle condizioni meteo presenti in una data posizione e in un dato orario (viene usata una simulazione simile a quella fatta per la caduta dei motori presente nella pagina "<a href="../6_cadu/cadu.html" target="_blank">Caduta in mare</a>").<br>
+<br>
+
+<div style="margin-bottom: 30px; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<div id="cartina_cb" style="width: 500px; height: 290px; float:left; padding-right: 30px;"></div>
+La cartina mostra la traiettoria seguita da alcuni ipotetici frammenti aventi un dato CB.<br>
+<br>
+L'etichetta che compare muovendo il mouse sopra ai puntini è organizzata come segue:
+	<table style="font-size: .8em;">
+	<tr><td>Coeff. balistico [kg/m<sup>2</sup>]</td><td>Tempo dall'abbattimento [s]</td><td>Quota slm [ft]</td></tr>
+	<tr><td>Distanza dalla linea verticale "X: 0.00" [m]</td><td>Distanza al suolo dal punto dell'abbattimento [m]</tr>
+	<tr><td>Velocità orizzontale [kn]</td><td>Velocità verticale [km/h]</td><td></td></tr>
+	<tr><td>Direzione vento [° nord vero]</td><td>Velocità vento [kn]</td><td></td></tr>
+	</table>
+<br>
+
+Ingrandendo la zona nei pressi dell'origine, si può appurare quanto detto in precedenza; cioè i frammenti con CB basso vengono accelerati molto velocemente dal vento e raggiungono altrettanto velocemente una velocità al suolo pari a quella del vento. Ad esempio, il frammento con il piccolissimo CB = 0,5 kg/m<sup>2</sup> raggiunge la velocità del vento (nella stessa direzione del vento) dopo appena 2 s dal distacco dalla fusoliera.<br>
+Sapendo che <i>CB = m / (C<sub>r</sub> &middot; A)</i>, si potrebbe fare l'esempio di un passeggero che precipita dopo essere stato espulso dalla fusoliera durante la decompressione. Poniamo la massa <i>m</i> pari a 80 kg, l'area <i>A</i> esposta all'aria durante la caduta pari a circa 0,7 m<sup>2</sup> e il coefficiente di resistenza <i>C<sub>r</sub></i> normalmente viene assunto pari a 1 nel caso di caduta a pancia sotto (con il corpo orizzontale); ne deriva CB = 114 kg/m<sup>2</sup>. Dato il calcolo approssimativo, possiamo usare CB = 100 kg/m<sup>2</sup> (presente nella cartina). Risulta una velocità d'impatto con il mare di circa 150 km/h, dopo essere stato traslato verso est di circa 3,6 km.<br>
+
+
+</div>
+
+<!-- Profilo VERTICALE -->
+<div style="margin-bottom: 30px; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<div id="profilo_vert_cb" style="width: 500px; height: 400px; float:left; padding-right: 30px;"></div>
+<br>
+Questo è il profilo verticale degli stessi frammenti di prima.<br>
+<br>
+Al di sotto dei 15000 ft i puntini si diradano perché vengono mostrati ogni 2 s.<br>
+<br>
+L'asse X (quello orizzontale) mostra la distanza del frammento dalla linea verticale "X: 0.00".
+</div>
+
+Questi due grafici tornano utili anche per fare le opportune considerazioni sull'attendibilità della posizione di rinvenimento dei relitti di superficie, argomento trattato nel paragrafo che segue.<br>
+<br>
+
+<script>
+"use strict";
+
+// Questo blocco "vede" lay definito nell'altro blocco
+
+// LAT/LON INTERPOLATA
+Plotly.d3.csv('lat_lon-inte.csv', function(err, rows) {
+
+	var LAT_LON= {
+		type:'scattermapbox', name: 'Plot interpolati',
+		text: unpack(rows, 'UTC'), hoverinfo: 'text',
+		lat: unpack(rows, 'lat'), lon: unpack(rows, 'lon'),
+		mode: 'lines', line: { width: 1, color: '#ff0000' }
+	};
+	for(var i= 0; i < LAT_LON.text.length; i++) LAT_LON.text[i] += "<br>lat: " + LAT_LON.lat[i] + ', lon: ' + LAT_LON.lon[i];
+
+
+	// GRIGLIA VENTO
+	Plotly.d3.csv('griglia_vento.csv', function(err, rows) {
+		var GR= {
+			type:'scattermapbox', name: 'Scala',
+			text: unpack(rows, 'x'), hoverinfo: 'text',
+			lat: unpack(rows, 'lat'), lon: unpack(rows, 'lon'),
+			mode: 'lines', line: { width: 1, color: '#c0c0c0' }
+		};
+		var dy= unpack(rows, 'y'), giri= unpack(rows, 'giri');
+
+		const Dt_evento= 3; // Secondi dopo UPT in cui è avvenuto l'evento catastrofico
+		const T= 5.569655; // Periodo di rotazione antenna
+		
+		for(var i= 0; i < dy.length; i++)
+			GR.text[i]= "X: " + GR.text[i] + ", Y: " + dy[i] +
+				"<br>N: " + giri[i] + ', t: ' + (giri[i] * T - Dt_evento).toFixed(2) +
+				"<br>lat: " + GR.lat[i] + ', lon: ' + GR.lon[i];
+
+
+		// Motori: https://www.youtube.com/watch?v=pkfY0yE3CpU
+		// flight data recorder: 39°42’39”, 13°03’01” [Perizia tecnico-scientifica Misiti ed altri - 23.07.94, pagg. 18 e 26]
+		var RECU= {
+			type:'scattermapbox', name: 'Sommersi', hoverinfo: 'text',
+			lat: [39+41.8/60, 39+42/60+39/3600],
+			lon: [13+2.44/60, 13+ 3/60+ 1/3600],
+			text:[ 'Motore DX', 'FDR' ],
+			mode: 'markers', marker: { size: 6, color: '#ff00ff' }
+		};
+		
+		
+		Plotly.d3.csv('cartina_cb.csv', function(err, rows) {
+		
+			// cb,t,h,dv,d,GSori,GSvert,lat,lon
+			var t = unpack(rows, 't');
+			var h = unpack(rows, 'h');
+			var dv= unpack(rows, 'dv');
+			var d = unpack(rows, 'd');
+			var GS= unpack(rows, 'GS'), Vv= unpack(rows, 'Vv');
+			var Wd= unpack(rows, 'Wd'), Wv= unpack(rows, 'Wv');
+
+			var CB= { 
+				type:'scattermapbox', name: 'CB', hoverinfo: 'text',
+				lat: unpack(rows, 'lat'), lon: unpack(rows, 'lon'), text: unpack(rows, 'cb'),
+				mode: 'markers', marker: { size: 4, color: '#0000ff' }
+			};
+				
+			for(var i= 0; i < t.length; i++)
+				CB.text[i]= "CB: " + CB.text[i] + ", t: " + t[i] + ", h: " + h[i] +
+				"<br>Dv: " + dv[i] + ", D: " + d[i] +
+				"<br>GS: " + GS[i] + ", Vv: " + Vv[i] +
+				"<br>Wd: " + Wd[i] + ", Wv: " + Wv[i];
+
+
+			var lay= {
+				margin: { l:0, r:0, t:0, b:0},
+				hovermode: 'closest', showlegend: false,
+				legend: { },
+				mapbox: {
+					style: 'carto-positron',
+					center: { lat: 39.724, lon: 13.084 },
+					// 1435 punti, MEDIE: SKNT= 90.8, DRCT= 252.0
+					zoom: 11.6, bearing: 252 - 270, pitch: 0 // Ruota la cartina secondo il vento
+				}
+			};
+
+			Plotly.newPlot('cartina_cb', [UPT_3, RECU, GR, LAT_LON, CB], lay, {responsive: true, displayModeBar: false});
+			
+			
+			
+			// ----------------------------------------------------------------------------------
+			// Profilo verticale
+
+			var VERT= {
+				type: "scatter", name: 'Direzione',
+				hoverinfo: 'text', text: CB.text,
+				mode: "markers", marker: {color: '#0000ff', size: 3},
+				y: h, x: dv
+			};
+
+			var lay2= {
+				//width: 600, height: 700,
+				showlegend: false, separators: '.', hovermode: 'closest',
+				margin: { l:10, t:20, b:40, r:20},
+				xaxis : {
+					title: '<b>Distanza Y griglia</b> [m]',
+					tickformat: 'f'
+				},
+				yaxis: {
+					automargin: true,
+					title: '<b>Altitudine slm</b> [ft]',
+					tickformat: 'f'
+				}
+			};
+
+			var config= {
+				showLink: true, plotlyServerURL: "https://chart-studio.plotly.com",
+				responsive: true
+			};
+
+			Plotly.newPlot('profilo_vert_cb', [VERT], lay2, config);
+
+		});
+	});
+});
+
+</script>
+
+
+<!-- ---------------------------------------------------------------------------------------- -->
+
+
+
+<!-- FINE revisione 15-02-2022 -->
+
+
+<!-- ========================================================================================================== -->
+
+
+<h3>Relitti in superficie</h3>
+
+<!-- Revisione 29-01-2022 -->
+
+La seguente cartina mostra la posizione dei relitti in relazione alla rotta seguita dal DC-9 (ottenuta dall'estrattore 3).<br>
+<br>
+&Egrave; possibile scegliere le coordinate dei rinvenimenti in superficie tra due fonti d'informazione: 
+
+
+<ol style="margin-top: 0px">
+
+<div class="rev"> <!-- Revisione 06-09-2022 -->
+
+<li>"Procura della Repubblica di Roma", lo specifico documento è riportato tra parentesi quadre nell'etichetta che compare posizionando il puntatore del mouse sopra ai rinvenimenti; l'etichetta riporta anche il giorno e l'orario del rinvenimento nel formato "<i>gghhmm</i>", in alcuni casi è presente anche una B che sta ad indicare che l'orario è estivo (i documenti sono scaricabili in un unico <a href="http://cristianopi.altervista.org/straus/rinvenimenti.zip" target="_blank">archivio zip</a>, 187 KiB);</li>
+
+</div> <!-- Fine 06-09-2022 -->
+
+<li>"<a href="https://www.stragi80.it/documenti/gi/Titolo1.pdf" target="_blank">TITOLO 1 - Le attività istruttorie fino al luglio 90</a>", pagg. 12 e 13.</li>
+</ol>
+
+
+
+&Egrave;, inoltre, possibile scegliere se mostrare i plot dell'IH870 con o senza correzione in azimut, anche se nella pagina "<a href="../../defi/decli/decli.html" target="_blank">Allineamento radar Ciampino</a>" è ampiamente spiegato che la necessità di una correzione compresa tra 2,6 e 2,8° W è una certezza, almeno alla distanza dal radar che aveva il DC-9 negli ultimi minuti di volo.<br>
+
+<br>
+</div>
+
+
+<!-- Cartina RELITTI -->
+<div style="margin-bottom: 30px; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<div id="relitti" style="width: 50%; height: 700px; float:left; padding-right: 30px;"></div>
+
+<!-- Revisione 29-01-2022 -->
+
+<b>Documenti di riferimento</b>: 
+<select id="SelectDoc" onchange="DocOnChange(this.selectedIndex)">
+	<option value="proc_roma" selected>Procura Roma</option>
+	<option value="titolo1">Titolo 1</option>
+</select>
+
+<br>
+
+<p><b>Plot IH870 con correzione di -2,65°</b></span> <input type="checkbox" id="CheckSfasa" checked onchange="SfasaOnChange()"></p>
+
+
+
+
+Elementi mostrati:
+<ul style="margin-top: 0px;">
+<li><span style="color: red"><b>rosso</span></b>: plot DC-9 con risposta almeno del radar secondario;</li>
+<li><span style="color: black"><b>nero</span></b>: plot ricevuti dal solo radar primario;</li>
+<li><span style="color: blue"><b>blu</span></b>: rinvenimenti in superficie;</li>
+<li><span style="color: #ff00ff"><b>viola</span></b>: relitti sommersi;</li>
+<li><span style="color: #777777"><b>grigio</span></b>: punti di riporto d'aerovia.</li>
+</ul>
+Muovendo il puntatore del mouse sopra ai punti, vengono mostrate varie informazioni.<br>
+L'etichetta che appare per i plot del radar è organizzata come segue:
+	<table style="font-size: .8em;">
+	<tr><td>UTC</td><td>Transponder</td><td>Estrattore</td></tr>
+	<tr><td>Livello di volo</td><td>SSR: secondario, PR: primario</td><td>Qualità (0-15)</td></tr>
+	<tr><td>Latitudine</td><td>Longitudine</td><td></td></tr>
+	<tr><td>Distanza dal radar</td><td>Azimut dal radar</td><td></td></tr>
+	</table>
+
+<!-- INIZIO revisione 24-04-2021 -->
+<br>
+
+La linea rossa è quella già vista ad inizio pagina. L'estremità più a sud è indicata come "<abbr title="Ultimo Punto Transponder">UPT</abbr> + 5.6 s". Il DC-9 è stato abbattuto nel periodo di tempo compreso tra l'ultima risposta del transponder (18:59:45) e il successivo giro d'antenna del radar, cioè dopo 5,6 s (radar Marconi).
+	
+<!-- FINE revisione 24-04-2021 -->
+	
+</div>
+
+<br>
+
+<!-- Revisione 29-01-2022 -->
+
+In merito alle coordinate dei relitti in superficie riportate nel "TITOLO 1", sono necessarie alcune precisazioni:
+
+<!-- FINE Revisione 29-01-2022 -->
+
+
+<ol style="margin-top: 0px; margin-bottom: 0px">
+<li>le coordinate vengono riportate nel PDF come se fossero in gradi e decimali (con il punto decimale), mentre in realtà si evince che sono in gradi e minuti d'arco dal fatto che le due cifre decimali sono sempre inferiori a 60;</li>
+<li>la coordinata est del relitto n° 2 ("21.55E") è errata. Dall'<a href="http://www.stragi80.it/documenti/processo/trascrizioni/07.03.01.PDF" target="_blank">esame del col. Lippolis</a>, sentito come teste il 7/3/2001, a pag. 38 della trascrizione risulta: "<i>Alle 07:15 Bravo hanno trovato, in 39 e 49, 12 e 55, una macchia oleosa con materiale che viene a galla</i>" ("7:15 Bravo" indica l'orario locale estivo, v. "<a href="../../note.html" target="_blank">Orario</a>"). La cartina, quindi, mostra il relitto in posizione 39° 49' N, 12° 55' E;</li>
+<li>la coordinata est del relitto n° 3 è quasi certamente errata: "12.05E" colloca il relitto a 90 km dal punto del disastro (probabilmente il valore giusto dovrebbe essere 13° 5' E). Tuttavia, la cartina mostra il relitto nella posizione data nel PDF;</li>
+<li>un'utile precisazione sul relitto n° 6 "cono di coda DC9" (ritrovato a circa 31 km a sud-est dal punto del disastro) la fornisce sempre il col. Lippolis definendolo "conetto di coda" (v. pag. 14 dell'esame del 7/3/2001), fugando ogni dubbio sul fatto che questo relitto possa comprendere anche gli impennaggi di coda; è chiaro, invece, che si tratta solo della piccola copertura terminale della coda.
+</ol>
+<br>
+
+
+<!-- Revisione 29-01-2022 -->
+
+Alcune considerazioni di buon senso conducono ad esprimere forti dubbi sull'esattezza delle coordinate riportate nei vari documenti di riferimento.<br>
+<br>
+Un esempio per tutti è costituito dal giubbotto di Alberto Bosco riportato nel "TITOLO 1" in questo modo: "<i>13. stessa posizione circa del nr.11 </i>["<i>39.47N-12.52E</i>", ndr]<i> nave Orsa rinviene at ore 19.30 un giubbotto appartenente at Bosco Alberto;"</i> e nel documento "<a href="http://cristianopi.altervista.org/straus/v1f5_WP000439_001.pdf" target="_blank">WP000439_001.DOC</a>" 
+<i><sup><abbr title="Procura della Repubblica di Roma, VOL. I - FASC. 5, PAG. 1136, DATA DOCUMENTO 07.07.80, NAVE ORSA: RELAZIONE CRONOLOGICA DEGLI AVVENIMENTI RELATIVI OPERAZIONI DI SOCCORSO DC9 ITAVIA.">fonte</abbr></sup></i>
+
+in quest'altro modo: <i>"282030B - RECUPERATO, SU INDICAZIONE DELL'ELICOTTERO 7-33 DI BORDO ED INDICATO COME EVENTUALE SALMA, UN GIUBBOTTO DI PELLE MARRONE RISULTATO APPARTENERE AL SIG. BOSCO ALBERTO. POSIZIONE 39 GRADI 36'N 013 GRADI 01'E."</i>.<br>
+Lo stesso oggetto viene riportato con orario e coordinate differenti.<br>
+Si potrebbe pensare che l'orario indicato nel "TITOLO 1" sia UTC od orario locale estivo (19:30B), mentre in realtà sembrerebbe espresso in tempo solare (19:30A), data la specifica indicazione "20:30B" presente nel documento "WP000439_001.DOC". Pur non essendo una cosa particolarmente critica, è comunque indice di una certa trascuratezza.<br>
+Ben più grave è la differenza nelle coordinate, poiché lo stesso oggetto viene collocato in due punti distanti tra loro ben 13 nm (24 km).<br>
+<br>
+Se si prendono come riferimento le crocette 10 x 10 nm, è evidente l'immensità dell'area all'interno della quale un aereo semi-distrutto avrebbe sparpagliato tutti quei relitti (oltre 10 000 km<sup>2</sup>), volando in lungo e in largo per molti minuti dopo l'evento catastrofico.<br>
+Certo, il forte vento in quota ha contribuito ad allontanare i relitti verso est, ma se si volessero veramente prendere per buone quelle coordinate dei rinvenimenti dovremmo obbligatoriamente ipotizzare che il DC-9 sia tornato indietro verso nord di una ventina di chilometri (pezzo di flap destro), sia arrivato 66 km a sud del disastro e se si volesse includere anche la bambola, dovremmo ipotizzare anche un volo controvento di una cinquantina di chilometri verso ovest.<br>
+Insomma, lo sforzo di fantasia necessario per prendere per buone quelle coordinate è veramente eccessivo.<br>
+
+<!-- FINE Revisione 29-01-2022 -->
+
+<br>
+
+
+<!-- ========================================================================================================== -->
+
+<!-- Revisione del 07-07-2021 -->
+
+<h3>Presenza di un altro aereo</h3>
+
+Alcuni periti e consulenti sostengono che durante gli ultimi minuti di vita del DC-9 e per alcuni secondi dopo l'abbattimento, l'IH870 fosse affiancato da un caccia o altro aereo (si veda, ad esempio "<a href="https://www.stragi80.it/documenti/gi/perizie/067.pdf" target="_blank">Capitolo LXVII - Consulenza radaristica Algostino ed altri - 23.11.94.</a>", pag. 22).<br>
+Tale affermazione può essere verificata come già descritto nella pagina "<a href="../../lc/mig/mig.html" target="_blank">Presenza del MiG-23 &rarr; Analisi della velocità di volo</a>", alla quale si rimanda per tutte le spiegazioni del metodo di analisi usato.<br>
+<br>
+
+<div style="margin-bottom: 30px; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="pre_caccia_gs-ks.png" style="float:left; padding-right: 30px;" alt="" title="">
+Il grafico è relativo alla velocità al suolo tenuta dal DC-9 negli ultimi minuti di vita (prima dell'abbattimento) ed è stata calcolata sfruttando solo i due estrattori del radar Marconi di Ciampino (il radar Selenia non è utilizzabile a causa della presenza di traffico interferente sulla pista 25 di Fiumicino, v. oltre).<br>
+<br>
+In effetti, è visibile un peggioramento del parametro KS che inizia poco dopo le 18:55 e termina alle 18:57 circa. Ciò sta ad indicare un'interferenza subìta dal segnale radar di ritorno dal DC-9. Tuttavia, i valori di KS non sono sufficientemente e stabilmente bassi da rendere evidente la presenza di un altro aereo nella stessa cella di risoluzione del radar occupata dal DC-9; si veda, per confronto, il grafico relativo all'aereo militare presente nella pagina indicata in precedenza, dal quale risulta estremamente evidente la presenza di un aereo interferente.<br>
+</div>
+
+
+
+Al fine di comprendere la causa che può aver generato quei particolari valori di KS (né molto bassi né normali), è utile confrontare il grafico appena visto con uno relativo ad un altro aereo che presenta un andamento simile di KS.<br>
+<br>
+<div style="margin-bottom: 30px; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="pre_caccia_1141_gs-ks.png" style="float:left; padding-right: 30px;" alt="" title="">
+Questo grafico è relativo ad un aereo con transponder 1141 che scende verso sud lungo l'aerovia UA-14 al livello 330.<br>
+I valori di KS dalle 19:21 alle 19:22 sono simili a quelli dell'IH870 dalle 18:55 alle 18:57 circa.
+</div>
+
+
+<div style="margin-bottom: 30px; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="pre_caccia_1141.png" style="float:left; padding-right: 30px;" alt="" title="">
+Questa è la situazione rilevata dall'estrattore 3 del radar Marconi durante il periodo dell'interferenza all'1141 (19:21 - 19:22).<br>
+I due segmenti viola hanno origine nell'antenna del Marconi e servono per individuare più facilmente il traffico che può interferire con l'1141.<br>
+<br>
+Gli unici due aerei che possono interferire con l'1141 sono quelli con transponder 1143 e 5357.<br>
+<br>
+L'1143 sta scendendo di quota da 4600 a 3100 ft (sta eseguendo l'avvicinamento finale per la pista 16L di Fiumicino sulla quale atterra alle 19:25).<br>
+La separazione azimutale rispetto all'antenna del radar Marconi tra questo aereo e l'1141 è pari a 5,37° alle 19:21:05 e sale a 7,28° alle 19:22:00.<br>
+<br>
+Il 5357 sta andando verso Firenze al livello 350.<br>
+La separazione azimutale con l'1141 passa da 4,13° alle 19:21:05 a 9,15° alle 19:22:00.
+</div>
+
+
+Ora possiamo passare ad analizzare la situazione in cui si trova l'IH870.<br>
+Osservando il grafico "Velocità al suolo / KS" relativo all'IH870, l'inizio del periodo d'interferenza può essere fissato alle 18:55:36 e la fine alle 18:57:04.<br>
+<br>
+
+<div style="margin-bottom: 30px; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="pre_caccia_int.png" style="float:left; padding-right: 30px;" alt="" title="">
+Questi sono i plot dalle 18:55:20 alle 18:57:04 ottenuti dall'estrattore 3 del radar Marconi.<br>
+Si nota che all'interno delle due linee viola (che formano un angolo ampio 1,33°) non è presente alcun traffico frapposto tra l'antenna del radar Marconi e il DC-9.<br>
+<br>
+Nell'intervallo di tempo mostrato, è presente il seguente traffico:
+<ul style="margin: 0px">
+<li>due aerei in avvicinamento finale per la pista 34R di Fiumicino (transponder 1234 e 1134);</li>
+<li>un aereo sotto vettoramento radar (transponder 0225) che sta arrivando sulla verticale di Pratica di Mare per virare a destra ed atterrare a Fiumicino;</li>
+<li>un aereo da poco decollato dalla pista 25 con transponder 5355;</li>
+<li>il famoso Air Malta KM153 (transponder 1235) che sta correndo all'impazzata verso la radioassistenza di Ponza a quasi 590 kn rispetto al suolo, grazie alla forte componente in coda del fortissimo vento presente ad alta quota (i radiosondaggi per Fiumicino indicano velocità del vento fino a 200 kn da ovest in alta quota);</li>
+<li>volo Beatours KT881 (transponder 0226) in allontanamento da Ponza ad appena 375 kn rispetto al suolo (la velocità è così bassa, evidentemente, per il motivo inverso a quello del KM153);</li>
+<li>alcuni plot di solo primario (colore nero).</li>
+</ul>
+<br>
+
+Tutto questo traffico si trova ad un azimut dall'antenna del radar Marconi ben lontano da quello del DC-9 e la distanza angolare tra i plot relativi al DC-9 e quelli relativi agli altri aerei è sempre maggiore dell'ampiezza del fascio radar a -3 dB (che è pari a circa 2°).
+In particolare:
+<ul style="margin: 0px">
+<li>i due voli 1134 e 1234 si trovano a più di 20° dal DC-9;</li>
+<li>tra i plot di solo primario (colore nero), il più vicino al DC-9 è separato da 15,12°;</li>
+<li>il KM153 ha una separazione minima di 16,7° dal DC-9;</li>
+<li>il KT881 ha una separazione minima di 9,05°.</li>
+</ul>
+<br>
+Quindi, la separazione azimutale minima tra l'IH870 e l'altro traffico (KT881) è circa doppia di quella rilevata per l'1141.<br>
+</div>
+
+
+<div style="margin-bottom: 30px; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="pre_caccia_int_fiume.png" style="float:left; padding-right: 30px;" alt="" title="">
+Una vista dettagliata del traffico presente a Fiumicino permette di escludere definitivamente qualunque tipo d'interferenza sui plot del radar Marconi, la cui antenna è completamente sgombra da traffico interferente.<br>
+<br>
+Situazione diversa per il radar Selenia, che quindi non può essere utilizzato per quest'analisi.
+</div>
+
+
+Sembra, allora, perfettamente lecito dedurre che tutti gli aerei visibili al radar Marconi non possono interferire con i ritorni radar del DC-9, poiché la separazione azimutale è molto grande. Pertanto, la fonte d'interferenza con l'IH870 deve essere costituita da un aereo che non compare tra i plot presenti nei tabulati.<br>
+<br>
+
+L'unica spiegazione plausibile sembrerebbe individuabile nella presenza di un piccolo aereo in coda (o quasi) al DC-9 a distanza tale da non essere né tanto vicino al DC-9 da rientrare nella sua cella radar né troppo distante da generare plot distinti da quelli del DC-9.<br>
+<br>
+
+<div style="margin-bottom: 30px; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="cella_ris.png" style="float:left; padding-right: 30px;" alt="" title="">
+Arrivati a questo punto, è indispensabile quantificare le dimensioni della cella di risoluzione radar. Nessuno può farlo meglio degli stessi Galati, Giaccari e Pardini. A pag. 8 del documento già indicato, è riportata testualmente la definizione di cui abbiamo bisogno: "<i>Si definisce <u>convenzionalmente</u> cella di risoluzione una figura spaziale costituita da un segmento di corona circolare (v. Fig.4 </i>[riportata qui a sinistra, ndr]<i>), la cui dimensione radiale è pari allo spazio corrispondente alla durata dell’impulso e la cui dimensione angolare è pari alla larghezza nominale del fascio d’antenna.</i>".<br>
+La dimensione <u>reale</u> della cella di risoluzione, tuttavia, è ben maggiore della dimensione teorica ed è riportata a pag. 11 del PDF.<br>
+<br>
+In definitiva, i periti riportano la dimensione reale della cella di risoluzione in distanza del radar Marconi in fig. 18 a pag. 13: 0,16 nm, pari a circa 300 m.<br>
+A pag. 19, infine, essi riportano un ulteriore dato utile per questo tipo di analisi: "<i>Pertanto possiamo dire che per il radar Marconi (e non per il Selenia) la dimensione radiale, cioè lungo la distanza dal radar, della “<u>zona di interferenza</u>” tra due oggetti si allunga al valore di circa 1,09NM, indipendentemente della durata dell’impulso. Questo fenomeno deve essere attentamente considerato quando si hanno più detezioni “vicine” o comunque più oggetti, vicini, anche quando non diano luogo a detezioni separate.</i>".
+</div>
+
+
+Unendo ciò che risulta dall'analisi presentata in questa pagina a ciò che viene affermato dai periti, otteniamo:
+<ol style="margin: 0px">
+<li>il KS troppo basso per escludere qualsiasi interferenza nei ritorni radar del DC-9 implica che un aereo si trova all'interno della "zona d'interferenza" del DC-9;</li>
+<li>il KS troppo alto per affermare che un aereo è presente all'interno della stessa cella di risoluzione del DC-9 implica che un aereo si trova all'esterno della cella di risoluzione del DC-9.</li>
+</ol>
+<br>
+
+
+Risulta, quindi, probabile la presenza di un piccolo aereo (verosimilmente un caccia) che dalle 18:55:36 alle 18:57:04 circa si trovava in coda al DC-9 ad una distanza che poteva essere compresa tra 400/500 m e 2 km. Dopo delle 18:57, questo piccolo aereo si è allontanato dal DC-9 in modalità tale da non ritornare alcun plot, ad esempio, abbassandosi di quota.<br>
+<br>
+&Egrave; importante sottolineare che l'orario si riferisce ad un intervallo di tempo in cui l'ipotetico caccia si trovava ad una quota tale da ritornare l'eco (seppur debole) all'antenna del radar. Se il caccia avesse seguito il DC-9 volando al di sotto dell'orizzonte radar, non avrebbe creato alcun tipo d'interferenza e il grafico "Velocità al suolo / KS" non avrebbe presentato anomalie sul KS.<br>
+Ad esempio, dal diagramma di copertura del radar Marconi S264H (quello che era presente a Fiumicino), per un'installazione di tipo <i>flat site</i> (come quella a Fiumicino) e per un bersaglio avente un'area equivalente pari a 10 m<sup>2</sup>, si ricava una quota minima di copertura a 90 nm dall'antenna pari a circa 11000 / 13000 ft. Ebbene, se l'ipotetico caccia avesse volato a quote intorno ai 10000 ft (ma, probabilmente, anche fino a 15000 ft, data la piccola area equivalente), non sarebbe stato possibile rilevare alcuna anomalia nei plot di ritorno dal DC-9.<br>
+&Egrave;, quindi, evidente che il caccia può aver iniziato ad accompagnare il DC-9 molto prima delle 18:55, ma se lo ha fatto, volava sicuramente ad una quota molto inferiore a quella tenuta dal DC-9. Poi, passando dai dati oggettivi alle ipotesi, il caccia potrebbe essere salito di quota, ad esempio, per ricevere bene una comunicazione via radio da una stazione di terra. Oppure, tenendo presente che siamo proprio nell'orario in cui il DC-9 riporta il punto ALFA al controllore ("20.56.00 =IH870= E' SULL'ALFA LA 870"), è possibile che il caccia, sentendo il riporto di posizione, si sia alzato per verificarlo tramite il TACAN di Ponza (se il caccia era della NATO). Nel frattempo, siamo arrivati ad un paio di minuti dall'abbattimento e il caccia si allontana dal DC-9 ritornando sotto l'orizzonte radar, per poi, forse, comparire da un'altra parte.<br>
+
+
+
+<!-- ========================================================================================================== -->
+
+
+<script>
+"use strict";
+
+
+layout.mapbox.style= "carto-positron"; layout.showlegend= false;
+layout.mapbox.zoom= 8.2; layout.mapbox.center.lat= 39.6; layout.mapbox.center.lon= 12.8;
+
+
+//document.getElementById("SelectDoc").value= "proc_roma";DocOnChange(0); // Setta utilizzo doc Procura Roma
+DocOnChange(document.getElementById("SelectDoc").selectedIndex);
+
+
+function SfasaOnChange(chk)
+{
+	DocOnChange(document.getElementById("SelectDoc").selectedIndex);
+}
+
+
+// Selezionato un documento di riferimento per i relitti in superficie
+function DocOnChange(idx)
+{
+	Plotly.d3.csv('grid.csv', function(err, rows) {
+
+		GRID.lat= unpack(rows, 'lat'); GRID.lon= unpack(rows, 'lon');
+
+		// Motori: https://www.youtube.com/watch?v=pkfY0yE3CpU
+		// flight data recorder: 39°42’39”, 13°03’01” [Perizia tecnico-scientifica Misiti ed altri - 23.07.94, pagg. 18 e 26]
+		var RECU= { 
+			type:'scattermapbox', name: 'Sommersi', hoverinfo: 'text',
+			lat: [39+41.8/60, 39+42/60+39/3600],
+			lon: [13+2.44/60, 13+ 3/60+ 1/3600],
+			text:[ 'Motori', 'FDR' ],
+			mode: 'markers', marker: { size: 6, color: '#ff00ff' }
+		};
+
+
+		// Area di delimitazione dei relitti. Perizia Blasi e altri, parte seconda, pag. 24
+		var la1= 39 + 41.25 / 60, la2= 39 + 43.91 / 60, lo1= 13 + 1.1 / 60, lo2= 13 + 4.5 / 60;
+		var AREA= {
+			type:'scattermapbox', name: 'Area relitti sommersi',
+			lat: [la1, la2, la2, la1, la1],
+			lon: [lo2, lo2, lo1, lo1, lo2],
+			mode: 'lines', line: { width: 1, color: '#ff00ff' }
+		};
+
+		PUNTI.marker.color= '#777777';
+
+		data= [GRID, PUNTI, RECU, AREA];
+
+		CaricaPunti(idx);
+	});
+	
+}
+
+
+function CaricaPunti(idx)
+{
+	const SfasaAttivo= document.getElementById("CheckSfasa").checked;
+
+	var nome_file= "mar3.csv";
+	if(SfasaAttivo === false) nome_file= "mar3_nocorr.csv"; // DECL = 0
+	
+
+	Plotly.d3.csv(nome_file, function(err, rows) {
+
+		var PLOT= {
+			type:'scattermapbox', name: 'Plot',
+			text: unpack(rows, 'UTC'), hoverinfo: "text",
+			lat: unpack(rows, 'lat'), lon: unpack(rows, 'lon'),
+			mode: 'markers', marker: { size: 5, color: [] }
+		};
+		// UTC,ID,lat,lon,FL,estra,d,faz,Q,SSR
+		var ID= unpack(rows, 'ID');
+		var FL= unpack(rows, 'FL');
+		var estra= unpack(rows, 'estra');
+		var dst= unpack(rows, 'd'); var faz= unpack(rows, 'faz');
+		var QUA= unpack(rows, 'Q'); var SSR= unpack(rows, 'SSR');
+		for(var i= 0; i < PLOT.text.length; i++) {
+			PLOT.text[i] += ", " + ID[i] + ', e' + estra[i] +
+				'<br>FL' + FL[i] + ', ' + SSR[i] + ', Q: ' + QUA[i] +
+				'<br>lat: ' + PLOT.lat[i] + ', lon: ' + PLOT.lon[i] + 
+				'<br>d: ' + dst[i] + ', a: ' + faz[i]
+			if(ID[i] !== '1133') {
+				var col= '#000000'; if(ID[i] === '1136') col= '#ff0000';
+				PLOT.marker.color[i]= col;
+			}
+		}
+
+		data.push(PLOT);
+
+
+		// USARE "main.cpp" blocco "ABBATTIMENTO - Distanza radiale in funzione del TEMPO"
+		Plotly.d3.csv('lat_lon-inte.csv', function(err, rows) { // Punti ottenuti convertendo DST/AZM interpolati in LAT/LON
+			var LAT_LON= {
+				type:'scattermapbox', name: 'Plot interpolati',
+				text: unpack(rows, 'UTC'), hoverinfo: "text",
+				lat: unpack(rows, 'lat'), lon: unpack(rows, 'lon'),
+				mode: 'lines', line: { width: 1, color: '#ff0000' }
+			};
+			dst= unpack(rows, 'dst'); faz= unpack(rows, 'azm');
+			for(var i= 0; i < LAT_LON.text.length; i++)
+				LAT_LON.text[i] += "<br>lat: " + LAT_LON.lat[i] + ', lon: ' + LAT_LON.lon[i] +
+				                   "<br>d: " + dst[i] + ', a: ' + faz[i];
+			
+			if(SfasaAttivo === true) data.push(LAT_LON);
+
+
+			if(idx === 0) { // Documenti Procura Roma
+
+				// WP000441_001,281000,3933,1301,7 salme entro un raggio 5 nm dal centro
+				var CERCHIO5= { // Usare "USTICA - Radar\main.cpp" blocco "Calcolo coordinate MOTORE SX - Cerchio 500 m intorno al MOTORE DX"
+					type:'scattermapbox', hoverinfo: 'text', text: 'Raggio 5 nm',
+					lat: [39.6334, 39.6321, 39.6284, 39.6222, 39.6139, 39.6036, 39.5917, 39.5785, 39.5644, 39.55, 39.5355, 39.5214, 39.5083, 39.4964, 39.4861, 39.4778, 39.4716, 39.4679, 39.4666, 39.4679, 39.4716, 39.4778, 39.4861, 39.4964, 39.5083, 39.5214, 39.5355, 39.55, 39.5644, 39.5785, 39.5917, 39.6036, 39.6139, 39.6222, 39.6284, 39.6321, 39.6334],
+					lon: [13.0167, 13.0354, 13.0536, 13.0706, 13.086, 13.0993, 13.11, 13.1179, 13.1228, 13.1244, 13.1227, 13.1179, 13.1099, 13.0991, 13.0859, 13.0705, 13.0535, 13.0354, 13.0167, 12.998, 12.9799, 12.9629, 12.9475, 12.9342, 12.9234, 12.9155, 12.9106, 12.9089, 12.9105, 12.9154, 12.9233, 12.9341, 12.9474, 12.9627, 12.9798, 12.9979, 13.0167],
+					mode: 'lines', line: { width: 1, color: 'blue' }
+				};
+				data.push(CERCHIO5);
+
+				// WP000441_001,290500-292030, ## Fascia ampia 5 nm su congiungente punti 3937N 1305E 3903N 1310E ##, Relitti vari; principalmente pezzi di arredamento interno aereo
+				var FASCIA5= { // Usare "USTICA - Radar\main.cpp" blocco "Calcolo coordinate MOTORE SX - Cerchio 500 m intorno al MOTORE DX"
+					type:'scattermapbox', hoverinfo: 'text', text: 'Fascia ampia 5 nm',
+					lat: [39.6119, 39.0452, 39.0547, 39.6214, 39.6119],
+					lon: [13.0298, 13.1135, 13.2198, 13.1369, 13.0298],
+					mode: 'lines', line: { width: 1, color: 'blue' }
+				};
+				//FASCIA5.lat.push(null, 39 + 37/60, 39 +  3/60); FASCIA5.lon.push(null, 13 +  5/60, 13 + 10/60); // MEZZERIA
+				data.push(FASCIA5);
+
+			
+				Plotly.d3.csv('rinv-proc_roma.csv', function(err, rows) {
+					// DOC,Orario,Lat,Lon,Descrizione
+					var doc= unpack(rows, 'DOC'), ora= unpack(rows, 'Orario');
+					RINVE.lat= unpack(rows, 'Lat'); RINVE.lon= unpack(rows, 'Lon'); RINVE.text= unpack(rows, 'Descrizione');
+					var n= RINVE.lat.length;
+					for(var i= 0; i < n; i++) {
+						RINVE.lat[i]= Math.trunc(RINVE.lat[i] / 100) + (RINVE.lat[i] % 100) / 60;
+						RINVE.lon[i]= Math.trunc(RINVE.lon[i] / 100) + (RINVE.lon[i] % 100) / 60;
+						RINVE.text[i]= ora[i] + " - " + RINVE.text[i] + "<br>[" + doc[i] + "]";
+					}
+					
+					data.push(RINVE);
+					
+					Plotly.newPlot('relitti', data, layout, {responsive: true, displayModeBar: false});
+				});
+			
+			} else { // TITOLO 1
+
+				Plotly.d3.csv('rinvenimenti.csv', function(err, rows) {
+					
+					RINVE.lat= unpack(rows, 'lat'); RINVE.lon= unpack(rows, 'lon'); RINVE.text= unpack(rows, 'descr');
+					var n= RINVE.lat.length;
+					for(var i= 0; i < n; i++) {
+						RINVE.lat[i]= Math.trunc(RINVE.lat[i] / 100) + (RINVE.lat[i] % 100) / 60;
+						RINVE.lon[i]= Math.trunc(RINVE.lon[i] / 100) + (RINVE.lon[i] % 100) / 60;
+						RINVE.text[i]= i + 2 + ') ' + RINVE.text[i];
+					}
+					
+					data.push(RINVE);
+
+					Plotly.newPlot('relitti', data, layout, {responsive: true, displayModeBar: false});
+				});
+			}			
+			
+		});
+	});
+}
+
+</script>
+
+
+</body>
+</html>

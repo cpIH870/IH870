@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>	
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Strage di Ustica">
+	<meta name="keywords" content="ustica,ih870">
+	<title>Strage di Ustica - Cartina complessiva</title>
+	<link rel="stylesheet" type="text/css" href="../stile.css">
+	<script src="../plotly-latest.min.js"></script>
+	<script src="../comune.js"></script>
+</head>
+<body>
+
+<div class="indice"><a href="../index.html">Indice</a></div>
+
+<h2>Fasi del volo - Cartina complessiva</h2>
+
+<div class="rev"> <!-- 22-01-2022 -->
+La cartina mostra i tracciati dei voli <abbr title="DC-9 Itavia Bologna - Palermo">IH870</abbr> (rosso), <abbr title="F-28 Itavia Bergamo - Ciampino">IH779</abbr> (blu), del caccia che li affianca (marrone) e del famigerato <abbr title="B-707 Air Malta Londra - Luqa">KM153</abbr> (viola).<br>
+</div>
+I plot sono uniti da segmenti gialli per dargli una sequenza temporale e sono ottenuti da tutti gli estrattori dei radar di Ciampino, ci sono, cioè, quattro tracce per ogni aereo.<br>
+Al fine di disegnare nelle giuste coordinate geografiche i plot presenti nei tabulati, il loro azimut è ruotato di 2,65° in senso antiorario (v. "<a href="../defi/decli/decli.html" target="_blank">Allineamento radar Ciampino</a>").<br>
+Le crocette da 10 x 10 nm (miglia nautiche) sono riportate ogni 0,5° gradi in latitudine e longitudine.<br> 
+
+<br>
+
+<div id="mappa" style="height: 900px" ></div>
+
+
+<script>
+"use strict";
+
+AYW.lat.shift(); AYW.lon.shift(); // Toglie linea VIL-BOA
+
+Plotly.d3.csv('rafari.csv', function(err, rows) {
+	// ID,T,LAT,LON
+	var ID= unpack(rows, 'ID');
+	var T= unpack(rows, 'T');
+	var lat= unpack(rows, 'LAT');
+	var lon= unpack(rows, 'LON');
+	var n= ID.length;
+	for(var i= 0; i < n; i++) {
+		// T: 0= VOR/DME, 1= VORTAC, 2= VOR, 3= NDB, 4= TACAN
+		// MLG: VOR/DME o TACAN
+		switch(T[i]) {
+		case '0': VORDME.text.push(ID[i]); VORDME.lat.push(lat[i]); VORDME.lon.push(lon[i]); break;
+		case '1': VORTAC.text.push(ID[i]); VORTAC.lat.push(lat[i]); VORTAC.lon.push(lon[i]); break;
+		case '2': VOR.text.push(ID[i])   ; VOR.lat.push(lat[i])   ; VOR.lon.push(lon[i])   ; break;
+		case '3': NDB.text.push(ID[i])   ; NDB.lat.push(lat[i])   ; NDB.lon.push(lon[i])   ; break;
+		case '4': TACAN.text.push(ID[i]) ; TACAN.lat.push(lat[i]) ; TACAN.lon.push(lon[i]) ; break;
+		}
+	}
+
+	AYW.lat.push('null'); AYW.lon.push('null');
+	AYW.lat.push(43.77); AYW.lon.push(7.255); // NIZ
+	AYW.lat.push(42.5736); AYW.lon.push(9.47483); // BTA
+	AYW.lat.push(42.0333 ); AYW.lon.push(11.4); // MEDAL
+	
+	AYW.lat.push('null'); AYW.lon.push('null');
+	AYW.lat.push(44.4233); AYW.lon.push(9.0833); // GEN
+	AYW.lat.push(42.7307); AYW.lon.push(10.3967); // ELB
+	AYW.lat.push(40.9119); AYW.lon.push(12.9575); // PNZ
+	AYW.lat.push(38.7559); AYW.lon.push(16.3691); // CDC
+
+	Plotly.d3.csv('grid.csv', function(err, rows) {
+
+		GRID.lat= unpack(rows, 'lat'); GRID.lon= unpack(rows, 'lon'); GRID.line.color= '#999999';
+
+		data= [GRID, AYW, VORTAC, VORDME, VOR, NDB, TACAN, PUNTI, RADAR];
+
+		CaricaPunti(); // Carica tracciati radar
+	});
+});
+
+
+// Creare 'trk.csv'  con  "P:\PRG_VC2019\USTICA - Radar\main.cpp"  blocco  "// Crea il file per la CARTINA COMPLESSIVA    ###  WEB  ###"
+function CaricaPunti()
+{
+	Plotly.d3.csv('trk.csv', function(err, rows) {
+		// UTC,ID,col,rdr,lat,lon,FL,SSR
+		var trk= {
+			type:'scattermapbox', name: 'Plot',
+			text: unpack(rows, 'UTC'), hoverinfo: "text",
+			lat: unpack(rows, 'lat'),
+			lon: unpack(rows, 'lon'),
+			mode: 'markers+lines', marker: { size: 4, color: unpack(rows, 'col') },
+			line: { width: 2, color: 'yellow' }
+		};
+		var ID= unpack(rows, 'ID');
+		var rdr= unpack(rows, 'rdr');
+		var FL= unpack(rows, 'FL');
+		var SSR= unpack(rows, 'SSR');
+		for(var j= 0; j < FL.length; j++) trk.text[j] += ", " + ID[j] + ", e" + rdr[j] +
+			"<br>FL" + FL[j] + ', ' + SSR[j] +
+			'<br>lat: ' + trk.lat[j] + ', lon: ' + trk.lon[j]
+
+		data.push(trk);
+
+		layout.mapbox.style= "open-street-map"; layout.mapbox.zoom= 6.5;
+
+		layout.legend= {
+			x: 0.99, y: .99,
+			xanchor: 'right', yanchor: 'top',
+			bgcolor: 'rgba(255,255,255, .7)',
+			bordercolor: 'black',
+			borderwidth: 1
+		};
+
+
+/* Aggiunge un punto arbitrario
+var PUNTO= {
+	type:'scattermapbox', mode: 'markers', marker: { size: 8, color: '#0000ff' },
+	lat: [42.8396], lon: [11.8881]
+}; data.push(PUNTO);
+*/
+
+		Plotly.plot('mappa', data, layout, {responsive: true, displayModeBar: false});
+	});
+}
+
+</script>
+
+</body>
+</html>

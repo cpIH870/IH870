@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Strage di Ustica">
+	<meta name="keywords" content="ustica,ih870">
+	<title>Strage di Ustica - Termini e sigle</title>
+	<link rel="stylesheet" type="text/css" href="../../stile.css">
+	<style>
+	.indice {
+		margin-left: 2em
+	}
+	</style>
+</head>
+
+<body>
+
+<br>
+<h2 style="text-align: left; margin-left: 4em; margin-bottom: .5em">Indice</h2>
+<a class="indice" href="#adiz"><b>ADIZ</b></a><br>
+<a class="indice" href="#inte_estra"><b>Interpolazione/estrapolazione</b></a><br>
+<a class="indice" href="#livello_volo"><b>Livello di volo</b></a><br>
+<a class="indice" href="#radiale"><b>Radiale di una radioassistenza</b></a><br>
+<a class="indice" href="#transponder"><b>Transponder</b></a><br>
+<a class="indice" href="#unimisu"><b>Unità di misura</b></a><br>
+
+<br>
+<hr>
+<br>
+
+
+<span id="adiz"></span><h2>ADIZ</h2>
+
+L'<a href="https://it.wikipedia.org/wiki/Zona_di_identificazione_di_difesa_aerea" target="_blank">ADIZ</a> italiano (soppresso ormai da molti anni) era una zona dello spazio aereo delimitata a sud dal segmento che congiunge Ancona con Firenze, spingendosi al largo della costa adriatica, fino al confine dello spazio aereo Italia / ex Jugoslavia. Poi andava da Firenze verso nord-ovest salendo fino a circa Cremona e da lì a nord fino a Sondrio e al confine con la Svizzera.<br>
+<br>
+Gli aerei che intendevano entrare nell'ADIZ dovevano rispettare particolari procedure d'identificazione al fine di consentire alla difesa aerea una migliore discriminazione del traffico aereo (ad esempio, dieci minuti prima dell'orario stimato d'ingresso, bisognava avvisare l'ente competente per zona).<br>
+<br>
+<div style="margin-bottom: 10px; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="adiz.png" style="float:left; padding-right: 20px;" alt="" title="">
+La cartina evidenzia i confini dell'ADIZ italiano nel 1981.<br>
+<br>
+Il cerchio rosso indica la posizione del TACAN di Villafranca (una <a href="../radio/radio.html" target="_blank">radioassistenza</a> militare).
+</div>
+<br>
+<br>
+Ai fini della strage di Ustica, riveste un certo interesse il fatto che il TACAN di Villafranca (situato all'interno dell'ADIZ) fosse inoperativo già da una settimana (v. "<a href="https://www.stragi80.it/documenti/ricostruzioni/mem99_pc.pdf" target="_blank">Memoria Gamberini, Marini, Di Maria - 19 maggio 1999</a>" pag. 23).<br>
+
+
+
+<br>
+<hr>
+<br>
+<!-- ===================================================================================== -->
+
+<!-- INIZIO revisione 21-04-2021 -->
+
+
+<span id="inte_estra"></span><h2>Interpolazione/estrapolazione</h2>
+
+Lo scopo di questo paragrafo è descrivere in modo sufficientemente chiaro e semplice come vengono ottenuti i parametri atmosferici nominati in questo sito. Saranno, pertanto, evitati termini rigorosi di difficile comprensione in favore di termini più semplici, anche se un po' più approssimativi.<br>
+<br>
+In termini informali e ai fini degli argomenti trattati in questo sito, l'interpolazione può essere definita come un procedimento matematico che consente di stimare il valore di una variabile tra almeno due punti noti ottenuti sperimentalmente. Ad esempio, se si conosce la temperatura atmosferica a 1 km di quota e a 2 km di quota, tramite l'interpolazione è possibile avere una stima della temperatura per una qualunque quota compresa tra 1 e 2 km.<br>
+Tramite l'estrapolazione, invece, si può stimare il valore di una variabile all'esterno dei punti noti. Continuando con l'esempio di prima, l'estrapolazione consente di stimare la temperatura al di sotto di 1 km di quota o al di sopra di 2 km.<br>
+<br>
+Queste due tecniche vengono impiegate per molteplici scopi in questo sito: calcolo della rotta e velocità degli aerei, evoluzione dell'azimut dei detriti del DC-9 dopo l'abbattimento, stima dei parametri meteorologici.<br>
+<br>
+In questo paragrafo verrà tralasciata la banale interpolazione di una variabile in funzione dell'altra, in quanto non presenta alcuna particolarità ed è ampiamente trattata in termini rigorosi in moltissimi siti web.<br>
+Lo scopo di questo paragrafo, invece, è spiegare la particolare tecnica d'interpolazione ed estrapolazione usata per stimare i parametri meteo lungo la rotta del volo IH870.<br>
+<br>
+Il punto di partenza per il calcolo della posizione dell'IH870 è rappresentato dal tabulato radar di Ciampino, estrattore n° 3, dal quale si ricava la latitudine, la longitudine e il livello di volo del DC-9 in funzione dell'orario. Mentre il punto di partenza per la stima dei parametri meteo è rappresentato dai radiosondaggi storici archiviati nel sito <a href="http://weather.uwyo.edu/upperair/sounding.html" target="_blank"><i>University of Wyoming</i></a> per le stazioni meteo di Ajaccio, Brindisi, Fiumicino, Milano, Trapani e Udine.<br>
+Per quasi tutte le stazioni sono disponibili 4 radiosondaggi: ore 0 e 12 del 27 e del 28 giugno; per la stazione meteo di Trapani sono disponibili soltanto 2 radiosondaggi: uno per le 12 del 27 giugno e l'altro per le 12 del 28 giugno.<br>
+I radiosondaggi vengono pubblicati come mostra l'esempio seguente:<pre>
+-----------------------------------------------------------------------------
+   PRES   HGHT   TEMP   DWPT   RELH   MIXR   DRCT   SKNT   THTA   THTE   THTV
+    hPa     m      C      C      %    g/kg    deg   knot     K      K      K 
+-----------------------------------------------------------------------------
+ 1011.0     10   19.0   12.0     64   8.78    340     13  291.2  316.4  292.8
+ 1000.0     95   17.8   11.8     68   8.76    330     15  290.9  316.0  292.5
+ [omissis]
+  310.0   9175  -38.9  -70.9      2   0.01    250    140  327.3  327.4  327.4
+  300.0   9400  -39.9                         250    143  329.0         329.0
+  250.0  10630  -45.3                         250    134  338.6         338.6
+</pre>
+Il significato di alcune colonne è evidente, ma per i dettagli si faccia riferimento a "<a href="http://weather.uwyo.edu/upperair/columns.html" target="_blank"><i>Description of Sounding Columns</i></a>".<br>
+Le colonne che tornano utili per gli argomenti trattati in questo sito sono: PRES, HGHT, TEMP, MIXR, DRCT e SKNT. Da questi valori vengono anche ricavate l'umidità relativa (che è riportata in tabella come RELH) e la densità dell'aria, accuratamente calcolata tenendo conto del vapore acqueo in essa contenuto.<br>
+Dando uno sguardo alla tabella, ci si rende subito conto che è necessario usare l'interpolazione per stimare i valori tra i punti noti e l'estrapolazione per stimare MIXR al di sopra dell'ultimo punto noto (310 hPa nel caso d'esempio), anche se sarebbe più corretto parlare di regressione esponenziale.<br>
+<br>
+Tutto ciò premesso, il problema consiste nello stimare il valore dei suddetti parametri in un dato punto nello spazio e ad una data ora. La risoluzione del problema si basa su di un'idea molto semplice:<br>
+<ol>
+<li>da ognuno dei radiosondaggi si ricava un profilo verticale continuo tramite una <a href="https://it.wikipedia.org/wiki/Interpolazione_spline" target="_blank"><i>spline cubica</i></a> (tra le moltissime possibilità, la più indicata è la spline Akima per le sue caratteristiche di stabilità in presenza di repentine variazioni dei parametri); per MIXR, come detto, è anche necessaria una regressione esponenziale (usata la tecnica dei minimi quadrati);</li>
+<li>dai 2 o 4 rilievi temporali disponibili per ogni stazione meteo, tramite la spline di Akima si ricava il valore di ogni parametro per l'orario voluto, compreso tra le 12 del 27 giugno e le 0 del 28 giugno; per Trapani (con 2 soli rilievi temporali) si può solo procedere con un'interpolazione lineare;</li>
+<li>l'ultimo passo consiste nel combinare tutti i valori dello stesso parametro ottenuto da tutte le stazioni meteo (dando ad ogni stazione un peso o importanza in base alla distanza dal punto voluto) per stimarne il valore in una data posizione (quota, latitudine e longitudine).</li>
+</ol>
+Supponiamo di voler calcolare la quota sul livello del mare corrispondente al livello di volo 290.<br>
+La prima cosa da fare è calcolare la pressione presente nell'atmosfera standard (o aria tipo) a 29000 ft. Si può usare uno dei moltissimi siti che permettono di fare semplici calcoli: "<a href="https://www.digitaldutch.com/atmoscalc/index.htm" target="_blank"><i>1976 Standard Atmosphere Calculator</i></a>" o direttamente la formula presentata nella pagina in lingua inglese di <a href="https://en.wikipedia.org/wiki/Barometric_formula#Pressure_equations" target="_blank">Wikipedia</a> (la prima); sostituendo i valori numerici a tutte le costanti, si ottiene:<br>
+<p style="text-align: center"><i>p = 1013,25 x [(288,15 - H<sub>pres</sub> x 0,3048 x 0,0065) / 288,15]<sup>5,2558</sup></i></p>
+Per l'altitudine di pressione H<sub>pres</sub> = 29000 ft si ottiene p = 314,86 hPa (ci sono piccole differenze tra il sito e la formula dovute a piccole differenze tra le costanti usate). Ciò significa che l'autopilota fa variare la quota dell'aereo sul livello del mare per mantenere costante la pressione atmosferica esterna all'aereo pari a 314,86 hPa.<br>
+Questo è il valore di pressione da usare per interpolare tutti gli altri parametri. Anziché calcolare i parametri in funzione di PRES, è anche possibile calcolarli in funzione di HGHT; si può usare la soluzione più idonea al problema da risolvere.<br>
+<br>
+I valori ottenuti con questo procedimento non possono essere presi come valori assolutamente certi, in quanto derivano da un'interpolazione. L'attendibilità di questo procedimento non deve essere valutata in senso assoluto, ma deve essere valutata prendendo in considerazione le condizioni meteo presenti nella zona interessata dai calcoli ad un dato orario; se i parametri variano in modo non troppo brusco, il procedimento dà risultati attendibili, mentre se la variazione è molto rapida (per esempio a causa di un ciclone presente nell'area d'interesse), il procedimento è scarsamente affidabile.<br>
+Fortunatamente, le carte meteo relative al bacino del Mediterraneo mostrano una situazione molto tranquilla, soprattutto per l'assenza di cicloni; c'è vento forte, ma la variazione di velocità è molto lineare nel senso della latitudine ed è praticamente costante nel senso della longitudine; ciò vale anche per la pressione e la temperatura. Pertanto, si può ritenere che il procedimento adottato darà risultati attendibili.<br>
+
+
+<br>
+<hr>
+<br>
+
+<!-- ===================================================================================== -->
+
+<span id="livello_volo"></span><h2>Livello di volo</h2>
+
+Gli aerei di linea dispongono di due tipi di altimetro: barometrico e radio.<br>
+<br>
+Il radioaltimetro mostra la distanza (in piedi) dell'aereo dal terreno che sta sorvolando. Quello del DC-9 arriva ad un massimo di 2500 ft ed è pertanto utilizzato obbligatoriamente solo durante la fase di avvicinamento finale.<br>
+<br>
+L'altimetro barometrico, invece, viene usato in tutte le fasi del volo.<br>
+In questo tipo d'altimetro, i piloti impostano una data pressione di riferimento nelle apposite finestrelle e l'altimetro segna la quota alla quale si trova l'aereo rispetto alla pressione impostata dai piloti. Le finestrelle, di solito, sono due: una mostra la pressione impostata in centinaia di Pascal (o millibar) e l'altra in pollici di mercurio (inHg).<br>
+La regolazione di questa pressione di riferimento è abbastanza articolata e non interessa la nostra trattazione. E' sufficiente sapere che se i piloti impostano il valore della pressione atmosferica presente al livello del mare (valore comunicato dai controllori d'area o di torre), la quota indicata dall'altimetro è quella sul livello del mare, mentre impostando un particolare valore di pressione, pari a 1013,25 hPa o 29,92 inHg, la quota indicata dall'altimetro divisa per cento si chiama livello di volo (abbreviato in FL). Questa quota è di fondamentale importanza, in quanto viene usata in tutta la fase di crociera per mantenere la separazione verticale tra i vari aerei.<br>
+<br>
+<div style="margin-bottom: 10px; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="alt.png" style="float:left; padding-right: 20px;" alt="" title="">
+Esempio di altimetro simile a quello del DC-9 regolato sulla superficie isobarica standard (1013 mb). Questa è la regolazione mantenuta durante il volo in crociera.<br>
+In basso a sinistra è presente il pomello "BARO" tramite il quale il pilota varia all'unisono i valori presenti nelle due finestrelle.
+</div>
+
+<div style="margin-bottom: 30px; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="fl.png" style="float:left; padding-right: 20px;" alt="" title="">
+L'immagine mostra la differenza tra altitudine e livello di volo.<br>
+<br>
+Durante la fase di crociera, l'autopilota fa variare in continuazione la quota dell'aereo rispetto al livello del mare in modo tale da farlo volare seguendo la linea rossa, che rappresenta una superficie isobarica (punti in cui la pressione atmosferica è costante).<br>
+<br>
+Se supponiamo che l'aereo stia volando a FL290 (come il DC-9 Itavia nella prima fase della crociera), la linea rossa più in alto indica una pressione atmosferica pari a 314,86 hPa, che corrisponde, appunto, ad una quota di 29000 ft (8839 m) in aria tipo (atmosfera fittizia per la quale sono tarati gli altimetri).<br>
+Procedendo nel suo volo, l'aereo, andando verso destra, sale di quota per mantenere costante la pressione atmosferica di volo (cioè il livello di volo). Normalmente, durante la crociera a livello di volo costante, l'aereo sale o scende molto lentamente rispetto al livello medio del mare, ma quando si attraversano aree cicloniche caratterizzate da pressioni particolarmente basse, la velocità verticale dell'aereo può arrivare a decine di piedi al minuto (anche 100 ft/min), tuttavia sono comunque velocità verticali piccolissime e impercettibili, anche da parte dei piloti.
+</div>
+
+
+
+<br>
+<hr>
+<br>
+<!-- ===================================================================================== -->
+
+<span id="radiale"></span><h2>Radiale di una radioassistenza</h2>
+
+La radiale è una semiretta immaginaria che ha origine da un VOR o da un TACAN. La radiale 0 o 360 è diretta verso il nord magnetico, la radiale 90 verso est, 180 verso sud e 270 verso ovest. In realtà, l'allineamento dello 0 con il nord magnetico avviene molto saltuariamente, ogni 5/10 anni, per cui l'allineamento è solo approssimativo (questo, comunque, non costituisce alcun problema per il mantenimento della giusta rotta, in quanto i piloti devono limitarsi ad impostare le radiali indicate sulle carte).<br>
+I piloti possono seguire la giusta rotta sia allontanandosi da una radioassistenza che avvicinandosi. Per fare questo, viene impostata la radiale da seguire su uno strumento chiamato <a href="https://it.wikipedia.org/wiki/Indicatore_della_situazione_orizzontale" target="_blank">HSI</a> e l'autopilota fa virare l'aereo per intercettare e mantenere la radiale impostata.<br>
+<br>
+
+<div style="margin-bottom: 30px; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="radiale.png" style="float:left; padding-right: 20px;" alt="" title="">
+L'immagine mostra una cartina aeronautica nella quale si vedono le radiali delle varie radioassistenze che formano l'asse delle aerovie.<br>
+Ad esempio, un aereo che vola lungo l'A-14 (indicata con la "U" di "upper" perché la cartina riguarda lo spazio aereo superiore, cioè al di sopra del livello di volo 245) verso sud nel tratto Firenze - Bolsena imposta 153 nell'HSI sintonizzato su FRZ (115,2 MHz) e imposta la stessa frequenza anche in un altro strumento chiamato <a href="https://it.wikipedia.org/wiki/Strumentazione_di_bordo#RMI_(Radio_Magnetic_Indicator)" target="_blank">RMI</a>. Nell'RMI viene, inoltre, già impostata la frequenza del VOR di Bolsena. Così facendo, non appena questo viene ricevuto, i due indici dell'RMI si sovrappongono indicando il perfetto mantenimento dell'asse dell'aerovia; un indice punta verso FRZ (in coda) e l'altro verso BOL (in prua).<br>
+A circa metà strada, il pilota cambia la frequenza dell'HSI sintonizzandolo su BOL, lasciando sempre 153 (333 - 180).
+</div>
+<br>
+Nel caso in cui le radioassistenze non funzionino, tutto ciò non viene fatto e i piloti si limitano ad impostare una prua sull'autopilota che non funziona più in modalità navigazione (mantenendo una radiale), ma in modalità mantenimento prua. E' ovvio che in presenza di vento, l'aereo non vola più al centro dell'aerovia e se il vento è variabile, l'aereo serpeggia disordinatamente senza sapere dove si trova esattamente. In tal caso, i controllori radar hanno un aumento del carico di lavoro, poiché sono loro a dover assegnare la prua agli aerei per farli stare all'interno delle aerovie.<br>
+
+
+<br>
+<hr>
+<br>
+<!-- ===================================================================================== -->
+
+<span id="transponder"></span><h2>Transponder</h2>
+
+A bordo di quasi tutti gli aerei civili e militari è presente un dispositivo chiamato transponder che serve per identificare univocamente l'aereo sullo schermo dei controllori radar.<br>
+
+<h3>Principio di funzionamento</h3>
+Il controllore chiede al pilota di impostare un dato codice composto da 4 cifre. Il pilota ruota la manopola del modo di funzionamento del transponder in posizione "Standby", inibendo la trasmissione del codice e imposta le cifre richieste nel pannello del transponder. Infine, la manopola viene portata nella posizione di normale funzionamento.<br>
+A questo punto, ogni volta che un qualunque radar secondario interroga il transponder di un aereo, quest'ultimo trasmette il suo codice identificativo.<br>
+Siccome il fascio del radar è molto stretto (pochi gradi), l'interrogazione è molto direttiva, mentre la risposta del transponder dell'aereo è omnidirezionale, quindi può essere ricevuta anche da un radar secondario che non ha interrogato alcun aereo o che ha interrogato un altro aereo in tutt'altra direzione. Ci sono anche altri tipi di problemi e false risposte che vengono parzialmente risolti da appositi filtri.<br>
+<br>
+Quando il controllore ha bisogno di identificare un aereo in modo inequivocabile e, soprattutto, quando è presente altro traffico nelle immediate vicinanze dell'aereo, viene richiesto ai piloti di identificarsi; in risposta, uno dei piloti preme il pulsante "IDENT" posto sul pannello del transponder (gli F-104 avevano un deviatore a levetta "<abbr title="Indication of Position">I/P</abbr>" situato nel pannello "IFF"). Così facendo, l'aereo trasmette un particolare impulso chiamato <abbr title="Special Position Indicator">SPI</abbr> che mette in evidenza il plot dell'aereo sullo schermo radar del controllore cambiandogli simbolo e rendendolo più grande e luminoso. Il transponder, ad ogni pressione dell'IDENT, normalmente aggiunge l'impulso SPI per 4 interrogazioni consecutive del radar secondario (4 giri d'antenna).<br>
+<br>
+<br>
+Ai fini della strage di Ustica, è di particolare importanza capire il significato di alcuni codici e come questi vengono impostati.<br>
+
+<h3>Aerei civili</h3>
+Il pilota dispone di 4 piccole manopole per impostare le 4 cifre (soluzione adottata tipicamente per i piccoli aerei dell'aviazione generale) o di 2 manopole composte da un pomello centrale per impostare una cifra e da una ghiera esterna per impostare l'altra cifra (soluzione adottata negli aerei di linea). Le 4 cifre possono andare da 0 a 7, sono, quindi, disponibili 4096 codici da 0000 a 7777.<br>
+Qualora il volo sia soggetto al controllo del traffico aereo (come tutti i voli di linea), il codice da inserire viene sempre comunicato dal controllore. Negli altri casi, i piloti inseriscono un particolare codice predefinito, che varia da stato a stato.<br>
+
+<h3>Aerei militari</h3>
+Gli aerei militari hanno un transponder più complesso di quello degli aerei civili.<br>
+
+
+<div class="rev"> <!-- 22-01-2022 -->
+
+Grazie al sito <a href="https://www.starfighters.it/manuali-tecnica/" target="_blank">Starfighters.it</a> è possibile conoscere l'esatto funzionamento del transponder montato sul TF-104G che era in dotazione all'AMI. Tra i molti documenti di grande interesse, infatti, è presente anche il manuale di volo del TF-104G: <a href="https://www.starfighters.it/pdf/AER_F-104.pdf" target="_blank">AER. 1F-104(T)GM-1 – Flight Manual – TF-104G-M (01-12-1996)</a>, nel quale a pag. 124 inizia il paragrafo "<i>IFF SYSTEM</i>".<br>
+Nella seconda colonna di pag. 127 si legge: "<i>Mode 2 code shall not be changed during flight: <u>selection is carried out on the ground only</u></i>", cioè il codice che viene trasmesso dal modo 2 del transponder può essere variato solo a terra, non in volo; fatto peraltro riportato anche negli allegati alla <a href="http://www.stragi80.it/documenti/sma/allegati_sma.pdf" target="_blank">relazione Pisano</a> a pag. 14 del pdf. Si precisa che i codici trasmessi dal transponder in modo 1 e 3/A possono essere variati dal pilota durante il volo.<br>
+<br>
+L'impossibilità di cambiare in volo il codice di modo 2 è di particolare interesse in relazione al tabulato radar di Poggio Ballone (scaricabile da 
+<a href="https://www.stragi80.it/tracciato/" target="_blank">STRAGI80.it</a>).<br>
+I periti d'ufficio, infatti, associano a due TF-104G di ritorno dalla missione a Villafranca (v. "<a href="../../fasi/3_affi/affi.html" target="_blank">Affiancamento con il caccia</a>") alcuni plot con SIF di modo 2 uguale a 7777 che, in base al manuale di volo, poteva essere impostato solo a terra.<br>
+
+<br>
+Il documento <a href="https://maritime.org/doc/pdf/et4.pdf" target="_blank">Electronics Technician - Volume 4—Radar Systems - NAVEDTRA 14089</a> e la sua <a href="http://electronicstechnician.tpub.com/14089/css/Figure-3-2-Aims-Mark-Xii-Iff-Interrogations-And-Replies-45.htm" target="_blank">versione online</a> indica con assoluta chiarezza il significato del codice 7777: "<i>A 7777 reply code is assigned to interceptors on active air defense missions</i>" (il codice 7777 è assegnato agli intercettori in missioni di difesa aerea attiva).<br>
+Un'ulteriore conferma viene dall'"<a href="https://www.faa.gov/air_traffic/publications/atpubs/aim_html/chap4_section_1.html" target="_blank"><i>Aeronautical Information Manual</i></a>" pubblicato dalla <i>Federal Aviation Administration</i>: "<i>Under no circumstances should a pilot of a civil aircraft operate the transponder on Code 7777. <u>This code is reserved for military interceptor operations</u>.</i>".<br>
+Sebbene entrambi i documenti facciano riferimento al modo 3/A (non al modo 2), è possibile che lo stesso codice 7777 venga usato in modo 2 ogniqualvolta risulti prudente o necessario evitare che i controllori del traffico aereo civile (che ricevono solo i modi 3/A e C) vengano inutilmente o inopportunamente allertati per ciò che sta accadendo in ambito militare.<br>
+<br>
+Il documento "<a href="https://www.globalsecurity.org/military/library/policy/usmc/mcwp/3-22/ch3.pdf" target="_blank">GlobalSecurity.org - CHAPTER 3. AIR DEFENSE</a>" spiega molto dettagliatamente il significato di "<i>active air defense</i>". Usando le prime frasi riportate nel documento, si può riassumere che la difesa aerea attiva consiste nell'usare gli aerei disponibili, l'armamento preposto per la difesa aerea e la guerra elettronica per raggiungere l'obiettivo. La difesa aerea attiva può anche impiegare un armamento non abitualmente usato nell'attività di difesa aerea.<br>
+</div>
+
+<br>
+<hr>
+<br>
+<!-- ===================================================================================== -->
+
+<span id="unimisu"></span><h2>Unità di misura</h2>
+
+Molte delle grandezze riportate nelle varie pagine di questo sito sono espresse con le unità di misura originali (ad esempio, le miglia nautiche per i tabulati radar e i piedi per le quote degli aerei).<br>
+Il fattore di conversione da miglia nautiche (nm) a chilometri è 1,852; 1 nm = 1,852 km.<br>
+Il fattore di conversione da piedi (ft) a metri è 0,3048; 1 ft = 0,3048 m.<br>
+<br>
+Da queste unità di base vengono derivate altre unità di misura.<br>
+La velocità orizzontale di un aereo, ad esempio, viene espressa in nodi (kn), corrispondenti a miglia nautiche percorse in un'ora; quindi il fattore di conversione tra nodi e chilometri all'ora è sempre 1,852: 1 kn = 1,852 km/h.<br>
+Un'altra unità derivata è il gradiente di salita o di discesa degli aerei che può essere espresso sia in gradi che in percentuale, ma più spesso si usa l'unità ft/nm, cioè si esprime la perdita o il guadagno di quota espressa in ft per ogni miglio nautico che l'aereo percorre. Se, ad esempio, un aereo sta scendendo con un gradiente di 350 ft/nm, significa che ogni 1852 m percorsi in orizzontale perde 106,68 m di quota e cioè sta scendendo con una pendenza pari a 106,68 / 1852 x 100 = 5,76%; calcolando, invece, l'arcotangente di 106,68 / 1852, otteniamo un angolo di discesa pari a circa 3,3 gradi.<br>
+Un'altra unità di misura comunemente usata in aviazione è il ft/min per esprimere la velocità verticale di un aereo (positiva se sale, negativa se scende). Se, ad esempio, un aereo sale a 2000 ft/min, significa semplicemente che guadagna 609,6 m di quota ogni minuto.<br>
+<br>
+La pressione atmosferica (usata per conoscere la quota attraverso la lettura dell'altimetro barometrico) veniva espressa in millibar (mb), unità di misura non più usata, in quanto non appartenente al sistema internazionale di unità di misura (SI). Da molti anni la pressione atmosferica viene espressa in centinaia di Pascal (hPa), comunque esattamente corrispondente al millibar.<br>
+
+<br>
+<hr>
+<br>
+
+
+</body>
+</html>

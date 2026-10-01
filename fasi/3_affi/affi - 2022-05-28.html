@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Strage di Ustica">
+	<meta name="keywords" content="ustica,ih870">
+	<title>Strage di Ustica - Fasi del volo</title>
+	<link rel="stylesheet" type="text/css" href="../../stile.css">
+	<script src="../../plotly-latest.min.js"></script>
+	<script src="../../comune.js"></script>
+</head>
+
+<body>
+
+<h2>Fasi del volo - Affiancamento con il caccia</h2>
+
+<!-- 22-01-2022: revisione generale per sostituire "TF-104G" con "aereo militare" -->
+
+
+
+<div class="rev"> <!-- 10-05-2022 Tolto motivo della rev (scritto nel forum), spostato "Affiancamento col caccia" in tf104g.html -->
+<br>
+</div>
+
+
+
+<h3>Sfasamento temporale tra Ciampino e Poggio Ballone</h3>
+
+La "<a href="https://www.stragi80.it/documenti/gi/perizie/050.pdf" target="_blank">Perizia tecnico scientifica Misiti; parte radaristica 2<sup>a</sup></a>" riporta a pag. 9: "<i>converrà precisare che il ritardo del clock fra Poggio Ballone e Marsala di circa 3'50" (es.21h.
+a Marsala 21h03'50" Poggio Ballone) (da video cassetta AM). Questo ritardo è stato avvalorato dall'analisi sulle registrazioni.</i>" e a fine pag. 12: "[...] <i>è possibile desumere un ritardo di circa 1 min. per il radar di Marsala rispetto al Marconi</i>", quindi la differenza tra Poggio Ballone e Marconi è di circa 2<sup>m</sup>50<sup>s</sup>. Tuttavia, confrontando accuratamente la posizione dei plot nel tabulato del Marconi e di Poggio Ballone si ottiene una differenza di 2<sup>m</sup>43<sup>s</sup>, comunque molto simile a quella indicata nella perizia.<br>
+Siccome non è possibile sapere quale radar riporta i plot con l'orario esatto, le cartine che mostrano i plot ottenuti dal tabulato di Poggio Ballone hanno l'orario "risincronizzato" con quello di Ciampino, ottenuto sottraendo quei 2<sup>m</sup>43<sup>s</sup> al tabulato di Poggio Ballone.<br>
+<br>
+
+
+
+<h3>Assenza di plot per 3<sup>m</sup>34<sup>s</sup></h3>
+
+Appare utile mettere in evidenza che il tabulato di Poggio Ballone non riporta alcun plot dalle 18:30:19 alle 18:33:52 (3<sup>m</sup>34<sup>s</sup>); orari che, sincronizzati con Ciampino, corrispondono rispettivamente alle 18:27:35 e alle 18:31:10. Osservando la cartina di Poggio Ballone nel paragrafo "Descrizione degli eventi", è ben evidente a cosa corrisponde questo "buco" temporale.<br>
+Considerando che tutti gli altri plot sono riportati nel tabulato di Poggio Ballone con una distanza temporale massima di 7 secondi (la media è 0,87 s tra due plot consecutivi), è evidente che quel vuoto di 214 secondi è estremamente "strano" (per usare un eufemismo).<br>
+Ugualmente "strano" è l'orario centrale di quel vuoto temporale: 18:29:23 (orario di Ciampino). Muovendo il puntatore del mouse sulla cartina "Marconi 3" più sotto, vediamo che quel plot rosso tutto spostato verso il caccia è delle 18:29:11, molto vicino, quindi, all'orario centrale del "buco".<br>
+<br>
+
+<div class="rev"> <!-- 18-05-2022 -->
+
+Questo fatto anomalo viene confermato dal programmatore presso il sito radar di Poggio Ballone.<br>
+Nonostante il fatto che l'A.G. ritenga che il teste abbia "reso dichiarazioni palesemente reticenti" (v. "<a href="https://onedrive.live.com/view.aspx?cid=e4faa9a8329658e2&page=view&resid=E4FAA9A8329658E2!137616&parId=E4FAA9A8329658E2!137162&authkey=!ALEwFSGkzryhRFw&app=Word" target="_blank">WP002066_001.DOC</a>" <i><sup><abbr title="Procura della Repubblica di Roma, VOL. I - FASC. 306 - PAG. 70344 - 70350, SCHEDA TESTE NR. 46: STASIO FAUSTO - INCARICO ALL'EPOCA: PROGRAMMATORE. ALLEG. A RELAZIONE TRASMESSA CON FG. NR. 230855/866 DATATA 09.12.97 (UI 2019).">fonte</abbr></sup></i> inizio pag. 1), il maresciallo Stasio dichiara molto apertamente (v. pag. 3):<br>
+
+<div style="font-family: 'Courier New', Courier, monospace">
+<br>
+NOTO CHE ESISTE UN "SALTO" NELLA REGISTRAZIONE TRA LE ORE 18,30,180 E LE ORE
+18,33,535 SENZA CHE SULLA RIDUZIONE DATI COMPAIA ALCUN DIAGNOSTICO; PER
+DIAGNOSTICO INTENDO UN MESSAGGIO CHE DICE CHE IN QUEL TRATTO IL NASTRO ABBIA
+TROVATO DIFFICOLTA' O NON RIESCE A LEGGERE NULLA, CIOE' <u>NON E' ASSOLUTAMENTE NORMALE</u>: AD ESEMPIO POTREBBE ESSERCI STATO UN MESSAGGIO TIPO "ZERO LENGHT
+RECORD". ANCHE NELL'IPOTESI CHE CI SIA UN CALO DI TENSIONE CHE DETERMINEREBBE UN
+FERMO DEL SISTEMA CI SAREBBE COMUNQUE UN DIAGNOSTICO.
+</div>
+<br>
+
+Se a questo si aggiunge il risultato ottenuto dall'analisi statistica presentata a fine pagina "<a href="../../lc/mig/mig.html" target="_blank">Presenza del MiG-23</a>" &rarr; "Analisi plot consecutivi Poggio Ballone", non può esserci alcun dubbio sull'intenzionalità di far scomparire dai tabulati quelle righe.<br>
+
+
+</div> <!-- FINE 18-05-2022 -->
+
+<br>
+
+
+<h3>Traffico a Villafranca</h3>
+
+Il tabulato radar di Poggio Ballone mostra fin dalle primissime righe uno strano traffico militare con SIF2 = 7777.<br>
+<br>
+<div style="margin-bottom: 30px; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="7777_anima.gif" style="float:left; padding-right: 30px;" alt="" title="">
+Quest'animazione (molto velocizzata) mostra un aereo militare che arriva da sud-est a velocità sostenuta (circa 500 kn rispetto al suolo) e si dirige inizialmente verso il radiofaro di Gazoldo. Poi sembra andare verso l'aeroporto di Villafranca arrivando fino all'altro radiofaro per poi ritornare su Gazoldo.<br>
+Se la velocità non fosse sempre così elevata, potrebbe sembrare una sorta d'addestramento, ma il particolare codice di modo 2 pari a 7777 (plot a forma di cerchio) e l'elevata velocità rendono inverosimile l'ipotesi di un volo d'addestramento.<br>
+<br>
+Dopo qualche minuto d'assenza di plot, inizia la traccia LE011 (quadratini verdi) che nel tabulato di Poggio Ballone si presenta senza alcun codice SIF (come se l'aereo avesse il transponder in standby). Questa traccia, a prima vista, sembra compatibile con il TF-104G di ritorno dall'addestramento a Villafranca, per orario, direzione e velocità, ma dall'analisi più approfondita presentata nella pagina "<a href="../../lc/mig/mig.html" target="_blank">Presenza del MiG-23</a>", <u>si può escludere con certezza quasi assoluta che la traccia LE011 possa riferirsi ad un TF-104G</u>, anche se questo è in contrasto con la ricostruzione fatta dai periti d'ufficio (v. "<a href="https://www.stragi80.it/documenti/gi/perizie/087.pdf" target="_blank">Perizia radaristica Dalle Mese ed altri - 16.06.97</a>" a fine pag. 10).<br>
+<br>
+La scala è rappresentata dalle crocette 10 x 10 nm (miglia nautiche) disegnate ogni 0,5° in longitudine e in latitudine.<br>
+La distanza tra il radiofaro di Gazoldo e il TACAN di Villafranca (dischetto verde) è 17,8 nm o 33 km.
+</div>
+
+
+
+<h3>Descrizione degli eventi</h3>
+
+Le due cartine seguenti mostrano i percorsi di alcuni aerei ricavati dai tabulati radar di Ciampino e di Poggio Ballone.<br>
+
+<div class="rev"> <!-- 10-05-2022 -->
+<br>
+</div> <!-- FINE 10-05-2022 -->
+
+
+
+<!-- Cartine di Ciampino e Poggio Ballone con AEREO MILITARE, 1133 e 1136 -->
+<!-- P:\PRG_VC2019\USTICA - Radar\web blocco  "###  Fasi del volo - Affiancamento con il caccia  ###" -->
+<div style="margin-bottom: 30px; vertical-align: top; display: inline-block;">
+<div id="roma" style="width: 30%; height: 600px; display: inline-block; float:left;"></div>
+<div id="poggio" style="width: 25%; height: 600px; display: inline-block; float:left; padding-right: 2em;"></div>
+
+La scala delle cartine è rappresentata dalle crocette 10 x 10 nm disegnate ogni 0,5° in longitudine e in latitudine. I cerchi relativi a VORTAC, VOR/DME, NDB e TACAN rappresentano le <a href="../../defi/radio/radio.html" target="_blank">radioassistenze</a> (il segmento Villafranca - Bologna non rappresenta un'aerovia; è indicato solo come "guida" per la traccia LE011).<br>
+L'etichetta informativa che compare posizionando il puntatore del mouse sopra ai plot mostra:
+<ul style= "margin: 0px">
+<li>per Ciampino: orario UTC (o zulu), codice impostato nel <a href="../../defi/altro/altro.html#transponder" target="_blank">transponder</a> (1133: IH779, 1136: IH870, 4200 e 5400: aereo militare), <a href="../../defi/altro/altro.html#livello_volo" target="_blank">livello di volo</a>, radar che ha ricevuto il plot (SSR: radar secondario, PR: radar primario, SPI: l'aereo si sta identificando su richiesta del controllore), livello del segnale (da 0 a 15), latitudine, longitudine, distanza e azimut dal radar Marconi;</li>
+<li>per Poggio Ballone: orario UTC (risincronizzato con Ciampino), TKN, velocità (nodi), direzione, SIF1, SIF2, SIF3 e qualità del segnale (7 è il massimo).</li>
+</ul>
+<br>
+I plot di dimensioni maggiorate sono quelli con "SPI" per Ciampino e con SIF2 = 7777 per Poggio Ballone.<br>
+<br>
+I plot di Poggio Ballone sono visualizzati con colore diverso in base all'identificativo TKN. I tre plot con SIF1 = 73 sono di colore rosso.<br>
+<br>
+
+<div class="rev"> <!-- 14-05-2022 -->
+Le tre aree di colore verde rappresentano le "zone di lavoro" di Gavorrano, Scansano e Siena (nominate da alcuni testi) e sono definite nel documento 
+
+"<a href="https://onedrive.live.com/view.aspx?cid=e4faa9a8329658e2&page=view&resid=E4FAA9A8329658E2!125741&parId=E4FAA9A8329658E2!125525&authkey=!ALEwFSGkzryhRFw&app=Word" target="_blank">WP001503_001.DOC</a>" <i><sup><abbr title="Procura della Repubblica di Roma, VOL. I - FASC. 102 - PAG. 25431 - 25438, ANN. 6 ALLA RELAZIONE ALLEGATA AL FG. AD9/100/0925/G53-1/6 DEL 01.04.93 (UI 1496 ESTRATTO DA &laquo;ISTRUZIONI  PERMANENTI  INTERNE&raquo; DEL COMANDO AEROPORTO GROSSETO - SEZIONE CONTROLLO T.A. - 2^ EDIZIONE CON AGGIORNAMENTI AL 15.01.80">fonte</abbr></sup></i>.
+
+</div> <!-- FINE 14-05-2022 -->
+
+</div>
+<br>
+
+Particolare menzione meritano alcuni plot presenti nel tabulato dell'estrattore 3:
+<ul style="margin: 0px">
+<li>significativa presenza di plot di solo primario (di colore nero) non associabili a nessuno dei tre aerei noti, in quanto sono già presenti altri plot nello stesso orario che si trovano in posizioni differenti;</li>
+<li>presenza di tre plot (due di primario e uno di primario e secondario) intorno alle 18:29 tra la rotta dell'aereo militare e quella dell'IH870, in sequenza tale da mostrare un aereo che si muove dall'IH870 verso l'aereo militare;</li>
+<li>presenza di un plot alle 18:32:31 appartenente all'aereo militare (come sequenza temporale), ma con transponder 5200, diverso da 4200 e 5400 usati dal caccia.</li>
+</ul>
+<br>
+
+
+<div class="rev"> <!-- 16-05-2022 -->
+
+Analizzando i plot presenti nel tabulato di Poggio Ballone con tutti i loro dati e con il giusto spirito critico, prescindendo, quindi, dalla frettolosa ricostruzione fatta dai periti d'ufficio, si può solo affermare che la traccia LE011 (la parte iniziale della traccia ricostruita dai periti) mostra un aereo che proviene da Villafranca e va in direzione di Bologna (notare la particolare rotta basata su NDB) per poi virare verso Firenze.<br>
+
+</div> <!-- FINE 16-05-2022 -->
+
+&Egrave; da sottolineare che la traccia LE011 non fornisce alcun elemento per poter essere associata con certezza ad uno o due aerei militari, in quanto il tabulato non riporta alcuna risposta ai radar secondari (il transponder sembra tenuto in standby). Si può solo asserire che è associabile ad un jet (data la velocità) che sta facendo qualcosa a bassa velocità nei pressi dell'aeroporto di Villafranca e poi accelera.<br>
+<br>
+Poco prima che la traccia LE011 finisca (tra Bologna e Firenze), inizia la AA464, certamente militare (risponde alle interrogazioni di modo 2 dei radar secondari militari); la prima viaggia intorno ai 450 kn, mentre la seconda sta inizialmente correndo ad oltre 530 kn per poi rallentare, come se dovesse raggiungere LE011 ed entrarci in formazione. Quindi, contrariamente a quanto asserito dai periti, i due aerei inizialmente non volano in formazione.<br>
+
+<div class="rev"> <!-- 22-05-2022: eliminato ragionamento su SIF2 = 7777 e SIF3 = 4200 già descritto su "transponder" e "AWACS" -->
+<br>
+
+Intorno alle 18:21, l'IH870 è circa 17 nm più a sud, nei pressi del VORTAC di Firenze, ad una quota troppo bassa per essere rilevato dai radar di Ciampino (sta mantenendo il livello di volo 190, circa 19000 ft), ma abbiamo le <a href="https://onedrive.live.com/view.aspx?cid=e4faa9a8329658e2&page=view&resid=E4FAA9A8329658E2!118134&parId=E4FAA9A8329658E2!117398&authkey=!ALEwFSGkzryhRFw&app=Word" target="_blank">comunicazioni <abbr title="Terra/Bordo/Terra">TBT</abbr></a> <i><sup><abbr title="Procura della Repubblica di Roma, VOL. I - FASC. 2, DA PAG. 361 A PAG. 367. TRASCRIZIONE DELLE COMUNICAZIONI RADIOTELEFONICHE INTERCORSE TRA IL CENTRO DI CONTROLLO REGIONALE DI ROMA E IL VOLO IH-870 DEL GIORNO 27.06.80.">fonte</abbr></sup></i>.<br>
+
+</div> <!-- FINE 22-05-2022 -->
+
+Anche l'IH779 è nei pressi di Firenze, ma, siccome è decollato da Bergamo, sta provenendo dal VOR di Parma (aerovia UA-14) e sta mantenendo il livello 250.<br>
+<br>
+Una volta passato Firenze, l'aereo militare AA464 si dirige, inizialmente, verso il TACAN di Grosseto (rappresentato dal cerchietto verde), attraversando l’asse dell’aerovia A-14 nel tratto Firenze - Bolsena una trentina di secondi dopo che è passato l’IH779.<br>
+Si vede chiaramente che l'aereo militare continua a volare esattamente verso il TACAN di Grosseto per tre minuti e mezzo, poi inizia a volare quasi in parallelo all’A-14.<br>
+In questo momento (sono circa le 18:27), i due voli Itavia si trovano a 3 o 4 nm l'uno dall'altro (in allontanamento) e l'IH870 si trova 3500 ft più in basso dell'altro e sta salendo.<br>
+<br>
+Alle 18:27:30 (orario risincronizzato con Ciampino), l'operatore radar di Poggio Ballone cambia la traccia AA464 in LL464 (LL è l'identificativo di Poggio Ballone). Si veda l'<a href="http://www.stragi80.it/documenti/processo/trascrizioni/26.09.01.PDF" target="_blank">esame</a> dell'allora <abbr title="Track Production Officer">T.P.O.</abbr> Lauretani da fine pag. 164.<br>
+<br>
+La rotta dell'aereo militare tende ad avvicinarsi lentamente all’asse dell’aerovia, arrivando a circa 8 nm dall'IH870, che serpeggia nel tentativo di seguire la <a href="../../defi/altro/altro.html#radiale" target="_blank">radiale</a> 153 in allontanamento dal VORTAC di Firenze, che ha problemi di funzionamento.<br>
+L'aereo militare vola quasi parallelo al DC-9 per tre minuti e mezzo, per un tratto lungo circa 28 nm. Poi vira circa 25 gradi a destra e mantiene la rotta per 1 minuto per poi virare ancora a destra verso Grosseto ed eseguire la procedura d’avvicinamento e l’atterraggio.<br>
+<br>
+Il grafici seguenti possono aiutare a visualizzare quanto appena detto.<br>
+<br>
+
+<div style="margin-bottom: 30px; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="dst_azm.png" style="float:left; padding-right: 30px;" alt="" title="">
+Il grafico mostra la distanza e l’<a href="https://it.wikipedia.org/wiki/Azimut" target="_blank">azimut</a> dell’IH870 rispetto all'aereo militare.<br>
+Le due linee rosse verticali rappresentano la fase di volo quasi parallelo all'A-14.<br>
+La linea tratteggiata rossa rappresenta un azimut di 55° ed è l’azimut di un ipotetico bersaglio che si trova esattamente a sinistra del caccia (i piloti devono girare la testa a sinistra per guardare quel bersaglio). I 55° derivano dal fatto che, dai tracciati radar, la rotta seguita dal caccia durante il volo parallelo risulta pari a 145°; l’azimut di un bersaglio esattamente a sinistra è 145° - 90° = 55°.</div>
+
+Si può osservare che all'inizio del volo parallelo all'aerovia, il caccia ha una velocità più elevata del DC-9 (l'azimut si riduce velocemente) per sbrigarsi ad arrivargli al traverso. Poi, con manovra da manuale, rallenta per mantenere il DC-9 una decina di gradi in avanti, tenendolo bene sotto controllo.<br>
+Questa posizione relativa viene mantenuta per circa 1 minuto (o poco meno), poi il caccia si allontana e rientra alla base.<br>
+<br>
+
+<div style="margin-bottom: 10px; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="vel4200_1136.png" style="float:left; padding-right: 30px;" alt="" title="">
+Questo grafico esplicita la velocità rispetto al suolo dei due aerei.<br>
+Alle 18:28, l'IH870 livella al 230 ed inizia a mantenere la velocità di crociera di 450 kn. Dopo appena 30 secondi, alle 18:29, inizia la salita al livello finale di crociera (il 290).<br>
+Ben maggiore è la velocità tenuta dal caccia, che arriva a quasi 530 kn per affrettarsi ad affiancare il DC-9. Una volta portatosi quasi al traverso del DC-9, il caccia rallenta vistosamente perdendo 50 kn in circa 35 s.<br>
+La nuova velocità di circa 470 kn viene mantenuta per qualche decina di secondi, poi il caccia vira a destra verso il TACAN di Grosseto per eseguire l'avvicinamento e l'atterraggio.
+</div>
+<br>
+
+
+
+<h3>Traccia AA041</h3>
+
+Qualche considerazione a parte la merita la traccia AA041 che appare nel momento in cui l'aereo LL464 vira a destra verso Grosseto.<br>
+Se la traccia rappresentasse realmente un aereo, questo sarebbe un caccia supersonico che abbandona la formazione con LL464 a circa mach 1,4 a quota medio-bassa (probabilmente intorno ai 5000 ft). Aggiungendo che anche questa traccia ha SIF2 = 7777, AA041 rivestirebbe grande interesse per la comprensione dei fatti accaduti in quella zona.<br>
+<br>
+L'Autorità Giudiziaria prende per buona la ricostruzione dei periti d'ufficio basata sul lavoro fatto da un gruppo di tecnici dell'<abbr title="Ispettorato delle Telecomunicazioni ed Assistenza al Volo">ITAV</abbr> coordinati dall'allora col. Gaudio.<br>
+Il risultato è che la traccia AA041 viene liquidata come un errore dell'operatore radar. Si veda la già citata "<a href="https://www.stragi80.it/documenti/gi/perizie/087.pdf" target="_blank">Perizia radaristica Dalle Mese ed altri - 16.06.97</a>" a pag. 174:<br>
+"<i>Si può notare che la traccia </i>[quella &laquo;<i>della coppia F104</i>&raquo;, ndr]<i> appare regolare senza particolari elementi di rilievo se non per il suo proseguimento fin sopra il mare.
+Questo fatto, del resto evidenziato anche da Poggio Ballone, è certamente indicativo di come si è svolto l’atterraggio: uno dei due F104 è atterrato
+immediatamente, mentre il secondo ha effettuato una virata sul mare per poi entrare e atterrare a Grosseto.<br>
+Si può inoltre notare che non vi è nessuna registrazione di tracce che possano far pensare ad uno sdoppiamento del volo, <u>dimostrando</u> così che la
+traccia AA041 registrata a Poggio Ballone, è stata generata, come già detto da una errata azione dell’operatore di sito.</i>".<br>
+A parte i fortissimi dubbi che insorgono nel ritenere possibile che un caccia possa atterrare in una direzione e l'altro nella direzione opposta dopo aver eseguito la procedura d'avvicinamento strumentale (fatto estremamente pericoloso e, pertanto, assolutamente insolito), la "dimostrazione" dei periti appare molto labile, in quanto sembra derivare da un assunto estremamente dubbio e da ciò che si può leggere nel documento "<a href="https://www.stragi80.it/documenti/gi/Titolo2b.pdf" target="_blank">TITOLO 2 - L’istruttoria dal 27 luglio 90 al 31 dicembre 97.</a>" a pag. 44 (paragrafo "Traccia AA041"). La dimostrazione, quindi, si comporrebbe di tre elementi:
+<ol>
+<li>la regolarità della traccia "<i>della coppia F104</i>" che non mostra sdoppiamenti;</li>
+<li>le "<i>considerazioni analoghe a quelle già fatte sulla AA457/LL457</i>" riguardanti l'errata velocità calcolata dal sistema;</li>
+<li>"<i>per quanto riguarda il codice di modo 2, elemento che dovrebbe qualificarla come militare, si dice che esso è dovuto alla breve distanza dal sito ed al fenomeno del &laquo;trascinamento&raquo;</i>" (v. sempre "TITOLO 2" a pag. 44).</li>
+</ol>
+Da tali labili elementi scaturiscono le seguenti osservazioni:
+<ol>
+<li>resta un mistero come sia possibile "dimostrare" che uno sdoppiamento della traccia LL464 non sia uno sdoppiamento scrivendo che la traccia LL464 non mostra sdoppiamenti, dato che lo sdoppiamento è proprio costituito dalla AA041;</li>
+<li>mentre nel caso della AA457 la velocità è di ben 1296 kn, nel caso della AA041 la velocità è di "appena" 935 kn, quindi non impossibile per un caccia;</li>
+<li>il fenomeno del "trascinamento" è un modo molto sbrigativo per liquidare il SIF2 = 7777, con tutta l'importanza che avrebbe quel particolare codice.</li>
+</ol>
+
+Non risulta molto chiaro, dunque, il criterio secondo il quale quelle poche frasi dei periti d'ufficio possano costituire una dimostrazione. Non c'è da meravigliarsi se tra i commenti dell'Autorità Giudiziaria si può leggere al termine del documento "<a href="https://www.stragi80.it/documenti/gi/perizie/087.pdf" target="_blank">Capitolo LXXXVII - Perizia radaristica Dalle Mese ed altri - 16.06.97</a>":<br>
+"<i>Essa </i>[la perizia Dalle Mese, ndr]<i> non andrà immune da critiche, ma stabilisce molteplici punti fermi che resisteranno ad ogni critica.<br>
+Certo la critica più forte proviene da parti imputate nella consulenza Giubbolini. Consulenza che sottopone la perizia a un fuoco pesantissimo di
+argomentazioni. Molte delle conclusioni dei periti d’ufficio restano in piedi, alcune s’indeboliscono, altre sembrano cadere.</i>".<br>
+<br>
+Desta, inoltre, una certa perplessità il fatto che tutte le tracce aventi una velocità superiore agli 800 kn (quindi anche la AA041) vengano attribuite dal gruppo di lavoro dell'ITAV ad errori dell'operatore e tutti i codici 7777 di modo 2 ad errori del sistema. A fronte di questo lavoro, il giudice Priore, rivolgendosi a Gaudio durante il suo <a href="https://onedrive.live.com/view.aspx?cid=e4faa9a8329658e2&page=view&resid=E4FAA9A8329658E2!141101&parId=E4FAA9A8329658E2!139725&authkey=!ALEwFSGkzryhRFw&app=Word" target="_blank">esame testimoniale</a>
+
+<i><sup><abbr title="Procura della Repubblica di Roma, VOL. III - FASC. 132 - PAG.  26424 - 26557, TRASCRIZIONE DELL'ESAME TESTIMONIALE RESO DA GAUDIO FRANCESCO IN DATA 10.07.96. (A CURA DEL PERITO TRASCRITTORE MARIA GRAZIA MARINI).">fonte</abbr></sup></i>
+
+, ebbe a dire (v. pag. 22): "<i>il risultato di questo lavoro è stato quello di affermare che nessuna di queste tracce, che potevano sembrare militari, effettivamente denotano la presenza di aerei militari; lei se ne rende conto? &Egrave; questo il lavoro, voi avete fatto questo lavoro, avete detto: &laquo;tutte queste tracce che una persona poca esperta può ritenere siano militari, sono assolutamente non militari, o perché non esistono, o perché sono stati compiuti degli errori, o perché è avvenuto l'effetto trascinamento&raquo;...</i>".<br>
+<br>
+Cercando di ragionare in modo indipendente da quanto finora riportato, si può osservare che la traccia nasce senza alcun codice SIF. Poi, i tre plot successivi presentano il SIF2 = 7777, lasciando legittimamente ipotizzare che il radar secondario abbia ricevuto la risposta dal transponder del caccia e che quindi la traccia stia effettivamente rappresentando un caccia e non scaturisca da un errore dell'operatore. L'errore dell'operatore potrebbe riguardare il non preciso posizionamento della <i>ball tab</i> che fa generare al sistema una velocità più alta di quella realmente posseduta dall'aereo, ma ciò non ha niente a che vedere con la presunta assenza dell'aereo e il SIF2 = 7777.<br>
+A tal riguardo, avrebbe potuto essere utile l'imputato di reato connesso Lauretani (nominato prima), interrogato più come consulente che come imputato. Purtroppo, alla domanda del Presidente su questo argomento (v. verso la fine di pag. 72 della <a href="http://www.stragi80.it/documenti/processo/trascrizioni/26.09.01.PDF" target="_blank">trascrizione</a>), il Lauretani non ricorda bene; gli sembra che i codici SIF rimanessero fissi anche dopo la cessata ricezione della risposta del transponder. Ad ogni modo, resta il fatto che almeno una risposta SIF2 = 7777 deve essere stata ricevuta dal radar secondario di Poggio Ballone, altrimenti non sarebbe comparso nemmeno un plot con quel SIF2.<br>
+
+<div class="rev"> <!-- 16-05-2022 -->
+
+Ciò è confermato dall'allora magg. Petroni, coordinatore ITAV che, interrogato da Priore, riferisce (v. <a href="https://onedrive.live.com/view.aspx?cid=e4faa9a8329658e2&page=view&resid=E4FAA9A8329658E2!141089&parId=E4FAA9A8329658E2!139723&authkey=!ALEwFSGkzryhRFw&app=Word" target="_blank">WP000912_001.DOC</a>
+<i><sup><abbr title="Procura della Repubblica di Roma, VOL. III - FASC. 131 - PAG. 26314 - 26386, TRASCRIZIONE DELL'ESAME TESTIMONIALE RESO DA PETRONI GISBERTO IN DATA 09.07.96. (A CURA DEL PERITO TRASCRITTORE GRILLIN MARA). A PAG. 26387 BUSTA CONTENENTE BOBINA CON REGISTRAZIONE SUDDETTO ESAME.">fonte</abbr></sup></i> a pag. 2):
+
+<div style="font-family: 'Courier New', Courier, monospace">
+<br>
+[...] POSSIAMO VEDERE CHE QUESTA TRACCIA ALFA-ALFA 041, INIZIALIZZATA ALLE 18 34'28'' SENZA IFF, PRENDE ALLE 18 34'40''
+UN CODICE DI MODE 2 7777. E SOLO QUESTA BATTUTA PRENDE IL CODICE, NEL SENSO CHE SOLO IN QUESTA BATTUTA IL COMPUTER REALMENTE LEGGE UN CODICE IFF. PER TUTTO IL RESTO SONO DELLE BATTUTE IN DEGRADO, IL CHE SIGNIFICA CHE NON C'E' PIU' UN AGGIORNAMENTO DI QUESTO CODICE. OSSIA IL DATO CHE ACQUISITO IL COMPUTER IN QUESTA BATTUTA, SE LO PORTA FINO AD ARRIVARE A QUALITA' 0. PERO' NON LEGGE PIU' QUESTO CODICE, L'HA LETTO SOLO UNA VOLTA, L'HA LETTO SOLO IN QUESTA BATTUTA QUI.
+</div>
+<br>
+
+Questa traccia, quindi, è ben lungi dall'essere un errore di sistema e dell'operatore. Essa rappresenta un caccia che esce dalla formazione con LL464, a quota molto bassa e a velocità molto alta per dileguarsi tra le colline a sud della Toscana.<br>
+Questo caccia potrebbe essere lo stesso che pochi minuti prima (alle 18:29 circa) ha abbandonato l'IH870 per entrare in formazione con LL464 (v. "<a href="../../lc/mig/mig.html" target="_blank">Presenza del MiG-23</a>" &rarr; "Analisi della velocità di volo").<br>
+
+</div> <!-- FINE 16-05-2022 -->
+
+<!-- ========================================================================================================== -->
+
+
+<script>
+"use strict";
+
+layout.mapbox.style= "basic";
+//layout.mapbox.style= "streets"; // Orografia e strade
+Plotly.setPlotConfig({
+	mapboxAccessToken: 'pk.eyJ1IjoiY3Jpc3RpYW5vcGkiLCJhIjoiY2pycXl1N3piMXAzODQzbnRtZzd4NzBlbiJ9.QugZVJkXpGrSJpoz_ghJqQ'
+});
+
+
+Plotly.d3.csv('rafari.csv', function(err, rows) {
+	// ID,T,LAT,LON
+	var ID= unpack(rows, 'ID');
+	var T= unpack(rows, 'T');
+	var lat= unpack(rows, 'LAT');
+	var lon= unpack(rows, 'LON');
+	var n= ID.length;
+	for(var i= 0; i < n; i++) {
+		// T: 0= VOR/DME, 1= VORTAC, 2= VOR, 3= NDB, 4= TACAN
+		// MLG: VOR/DME o TACAN
+		switch(T[i]) {
+		case '0': VORDME.text.push(ID[i]); VORDME.lat.push(lat[i]); VORDME.lon.push(lon[i]); break;
+		case '1': VORTAC.text.push(ID[i]); VORTAC.lat.push(lat[i]); VORTAC.lon.push(lon[i]); break;
+		case '2': VOR.text.push(ID[i])   ; VOR.lat.push(lat[i])   ; VOR.lon.push(lon[i])   ; break;
+		case '3': NDB.text.push(ID[i])   ; NDB.lat.push(lat[i])   ; NDB.lon.push(lon[i])   ; break;
+		case '4': TACAN.text.push(ID[i]) ; TACAN.lat.push(lat[i]) ; TACAN.lon.push(lon[i]) ; break;
+		}
+	}
+
+	Plotly.d3.csv('grid.csv', function(err, rows) {
+
+		GRID.lat= unpack(rows, 'lat'); GRID.lon= unpack(rows, 'lon');
+
+		Plotly.d3.csv('zone_lavoro.csv', function(err, rows) { // Zone di lavoro
+
+			var ZLAV= {
+				type:'scattermapbox', name: 'Zone lav.', hoverinfo: "text",
+				mode: 'lines', line: { width: 2, color: 'green' },
+				lat: unpack(rows, 'lat'), lon: unpack(rows, 'lon'), text: unpack(rows, 'nome')
+			};
+
+			data= [GRID, AYW, VORTAC, VORDME, VOR, NDB, TACAN, PUNTI, RADAR, ZLAV];
+
+			CaricaPunti(); // Carica tracciati radar
+		});
+	});
+});
+
+
+function CaricaPunti()
+{
+	var data_poggio= [...data];
+	var lay_poggio= Object.assign({}, layout);
+	
+	// ROMA
+	
+	Plotly.d3.csv("mar3.csv", function(err, rows) {
+
+		var PLOT= {
+			type:'scattermapbox', name: 'Plot',
+			text: unpack(rows, 'UTC'), hoverinfo: "text",
+			lat: unpack(rows, 'lat'), lon: unpack(rows, 'lon'),
+			mode: 'markers', marker: { size: [], color: [] }
+		};
+		// UTC,ID,lat,lon,FL,d,faz,Q,SSR
+		var ID= unpack(rows, 'ID');
+		var FL= unpack(rows, 'FL');
+		var dst= unpack(rows, 'd'); var faz= unpack(rows, 'faz');
+		var QUA= unpack(rows, 'Q'); var SSR= unpack(rows, 'SSR');
+		for(var i= 0; i < ID.length; i++) {
+			PLOT.text[i] += ", " + ID[i] +
+				'<br>FL' + FL[i] + ', ' + SSR[i] + ', Q: ' + QUA[i] +
+				'<br>lat: ' + PLOT.lat[i] + ', lon: ' + PLOT.lon[i] + 
+				'<br>d: ' + dst[i] + ', a: ' + faz[i]
+			var col= '#000000';
+			switch(ID[i]) {
+				case '1133': col= '#0000ff'; break;
+				case '1136': col= '#ff0000'; break;
+				case '5200': col= '#800080'; break;
+				case '4200':
+				case '5400': col= '#cc7a00'; break;
+			}
+			PLOT.marker.color[i]= col;
+			// SPI più grandi
+			if(SSR[i].search('SPI') === -1) PLOT.marker.size[i]= 5; else PLOT.marker.size[i]= 7;
+		}
+
+		data.push(PLOT);
+
+		var nota= {
+			showarrow: false,
+			xref: 'paper', x: .95, xanchor: 'right',
+			yref: 'paper',	y: .95, yanchor: 'bottom',
+			text: '<b>Marconi 3</b>', font: { size: 16, color: '#cc6600' }
+		};
+		layout.annotations= [nota]; layout.mapbox.zoom= 7.2; layout.mapbox.center.lat= 43.3; layout.mapbox.center.lon= 11.7;
+
+		Plotly.plot('roma', data, layout, {responsive: true, displayModeBar: false});
+	});
+
+
+	// POGGIO BALLONE (P:\PRG_VC2019\USTICA - Radar\web  blocco  "###  Fasi del volo - Affiancamento con il caccia  ###")
+	
+	Plotly.d3.csv("poggio.csv", function(err, rows) {
+
+		var PLOT= {
+			type:'scattermapbox', name: 'radar',
+			text: unpack(rows, 'UTC'), hoverinfo: "text",
+			lat: unpack(rows, 'lat'), lon: unpack(rows, 'lon'),
+//			mode: 'markers', marker: { size: [], color: 'blue' }
+			mode: 'markers', marker: { size: [], color: [] }
+		};
+		// UTC,IDalfa,lat,lon,spd,hdg,alt,SIF2,SIF3,QUA      alt è sempre 0
+		var ID= unpack(rows, 'IDalfa');
+		var spd= unpack(rows, 'spd'), hdg= unpack(rows, 'hdg'), alt= unpack(rows, 'alt');
+		var SIF1= unpack(rows, 'SIF1'), SIF2= unpack(rows, 'SIF2'), SIF3= unpack(rows, 'SIF3');
+		var QUA= unpack(rows, 'QUA');
+		for(var i= 0; i < ID.length; i++) {
+			PLOT.text[i] += ", " + ID[i] +
+			'<br>v: ' + spd[i] + ', hdg: ' + hdg[i] + ', alt: ' + alt[i] +
+			'<br>S1: ' + SIF1[i] + ', S2: ' + SIF2[i] + ', S3: ' + SIF3[i] + ', Q: ' + QUA[i];
+			if(SIF2[i] === '7777') PLOT.marker.size[i]= 7; else PLOT.marker.size[i]= 5;
+			
+			var col= 'black';
+			if(SIF1[i] === '73') col= 'red';
+			else switch(ID[i]) {
+				case 'LE011': col= '#0000ff'; break;
+				case 'AA464': col= '#009999'; break;
+				case 'LL464': col= '#ff66ff'; break;
+				case 'LG403': col= '#006600'; break;
+			}
+			PLOT.marker.color[i]= col;
+		}
+
+		data_poggio.push(PLOT);
+
+		var nota= {
+			showarrow: false,
+			xref: 'paper', x: .95, xanchor: 'right',
+			yref: 'paper',	y: .95, yanchor: 'bottom',
+			text: '<b>Poggio Ballone</b>', font: { size: 16, color: '#cc6600' }
+		};
+
+		lay_poggio.showlegend= false; lay_poggio.annotations= [nota];
+		lay_poggio.mapbox.zoom= 6.7; lay_poggio.mapbox.center.lat= 44; lay_poggio.mapbox.center.lon= 11.5;
+
+		Plotly.plot('poggio', data_poggio, lay_poggio, {responsive: true, displayModeBar: false});
+	});
+}
+
+</script>
+
+
+</body>
+</html>

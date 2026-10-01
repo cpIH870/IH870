@@ -1,0 +1,1549 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Strage di Ustica">
+	<meta name="keywords" content="ustica,ih870">
+	<title>Strage di Ustica - Scenari</title>
+	<link rel="stylesheet" type="text/css" href="../../stile.css">
+	<script src="../../plotly-latest.min.js"></script>
+	<script src="../../crea_indice.js"></script>
+	<style>
+		pre {font-family: monospace;}
+	
+		.click-zoom input[type=checkbox] {
+		  display: none
+		}
+
+		.click-zoom img {
+		  transition: transform 0.25s ease;
+		  cursor: zoom-in
+		}
+
+		.click-zoom input[type=checkbox]:checked~img {
+		  transform: scale(2) translateX(120px) translateY(-90px);
+		  cursor: zoom-out
+		}	
+	</style>
+</head>
+
+<body>
+
+
+
+<div class="indice"><a href="../../index.html">Indice</a></div>
+
+<h2>Abbattimento tramite F-4 e ATM-7F</h2>
+
+
+<img src="apertura.webp" style="display: block; margin: 0 auto; border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.9); filter: brightness(1.1);">
+
+<br><br>
+L'immagine d'apertura ben descrive l'oggetto di questa pagina. Infatti, qui viene trattato lo stesso scenario già visto nella pagina "<a href="../mis_ine/mis_ine.html" target="_blank">Abbattimento tramite missili inerti</a>", ma con specifico riferimento al sistema d'arma F-4 Phantom II e missile ATM-7F, dove la T di ATM indica che la testata bellica (esplosiva) del missile è stata sostituita con una telemetrica, usata durante le esercitazioni e prove di qualifica del missile.<br>
+<br>
+Contrariamente a quanto avviene nel resto del sito, impostato prevalentemente per avere una connotazione divulgativa senza troppi tecnicismi, in questa pagina è necessario fare maggior ricorso a nozioni tecniche specialistiche, poiché la trattazione riguarda una possibile missione condotta da un F-4 armato con 2 o 4 Sparrow pianificata secondo i reali parametri d'impiego dell'aereo e del missile ricavati dai manuali dell'epoca e da testi tecnici che descrivono i circuiti elettronici e meccanici del missile Sparrow.<br>
+Al fine di snellire il testo, saranno evitate lunghe spiegazioni di base su <i>speedgate</i>, filtri di segnale, trigonometria, ecc. Il funzionamento degli apparati viene, comunque, descritto, dando, però, per scontata la competenza di base del lettore, così da saltare le nozioni di base che renderebbero esageratamente lunga e dispersiva questa trattazione.<br>
+<br>
+
+
+
+<!-- ========================================================================================================== -->
+
+
+<p style="margin-left: 5em"><b>INDICE</b></p>
+
+<p id="indice" style="margin-left: 3em">
+<!-- riempito dal JS -->
+</p>
+<br>
+
+<hr>
+
+<br>
+
+<!-- ========================================================================================================== -->
+
+
+
+<!-- ========================================================================================================== -->
+<br><br><br><br><br>
+
+<h3 id="funziona_7f">Principio di funzionamento dell'ATM-7F</h3>
+
+Il missile è composto da alcuni macro-componenti a cui sono interfacciati vari sensori.
+
+<br><br><br>
+Durante il riscaldamento, il missile si sintonizza sulla frequenza di riferimento del radar dell'F-4
+
+
+
+
+
+
+
+
+<br><br><br><br><br>
+<!-- ========================================================================================================== -->
+
+
+<div style="margin-bottom: 1rem; display: inline-block;">
+<img src="esistenza-7f.png" style="float: left; padding-right: 1rem;" alt="AIM-7F in dotazione alla US Navy">
+Stragi_031FL_02SR_005SS_0049UA_Vol01-allA.pdf
+AIM-7F in dotazione alla US Navy
+</div>
+
+
+<br><br><br><br><br>
+
+
+
+
+================================== ==================================
+A prescindere dal regime di volo del DC-9 al momento dell'incidente, il costruttore deve garantire l'integrità della struttura anche nella condizione di volo più sfavorevole. Dalle formule, questo valore si ottiene per <i>W</i> più piccolo possibile.<br>
+Utilizzando le due formule, possiamo calcolare l'ordinata del punto F', corrispondente al fattore di carico di raffica per la velocità di crociera di progetto con l'aereo al peso a vuoto operativo, cioè senza carburante, pari a 22300 kg; condizione di volo inusuale, ma possibile.<br>
+Pur non conoscendo il valore esatto della pendenza della curva di portanza (il parametro <i>a</i> della formula per il calcolo di <i>n</i>), possiamo stimarlo tramite la formula di Helmbold-Diederich con correzione di compressibilità di Prandtl-Glauert: <i>a &approx; 5,25 rad<sup>-1</sup></i> attorno a mach 0,76. Ponendo <i>W / S = 52,64 psf</i> e <i>V = 376 mph EAS</i> (considerati 488 KTAS a 25000 ft), si ottiene <i>K = 1,193</i>, da cui <i>n = 1 - 2,33 = - 1,33 g</i>. La struttura, quindi, deve garantire l'integrità fino al carico ultimo <i>n<sub>ultimo</sub> = -1,33 x 1,5 = -2 g</i>, soglia alla quale sono ammesse deformazioni permanenti, ma con la <u>garanzia della tenuta strutturale per almeno tre secondi</u> (v. CAR §4b.201c).<br>
+<br>
+Sebbene V<sub>B</sub> (velocità di progetto per la raffica della massima intensità) sia inferiore a V<sub>C</sub> (appena vista), la velocità di raffica per V<sub>B</sub> è maggiore di quella per V<sub>C</sub>. Dobbiamo, quindi, verificare se <i>n</i> per V<sub>B</sub> superi quello appena calcolato per V<sub>C</sub>.<br>
+La V<sub>B</sub> viene riportata nel manuale dei velivoli con diciture del tipo "velocità di penetrazione in aria turbolenta" e per il DC-9 vale 285 KIAS. La combinazione di parametri più sfavorevole (cioè che richiede una struttura più robusta) la si ha per la quota di 25000 ft. Facendo tutti i calcoli si ottiene <i>n<sub>ultimo</sub> = -1,42 x 1,5 = -2,13 g</i>; ed è, quindi, questo il valore che la struttura deve garantire.<br>
+<br>
+
+Assumendo un carico ultimo di raffica pari a circa −2,13 g, determinato nelle condizioni più gravose di certificazione, è ragionevole ritenere che la capacità residua della struttura non sia notevolmente più alta. In assenza di dati sperimentali specifici del costruttore, valori dell'ordine di −2,5 g non possono essere considerati supportati dalla certificazione e appaiono verosimilmente superiori alla capacità strutturale attesa della cellula.
+
+================================== ==================================
+
+
+<!-- ===================================================================================== -->
+<!-- Formazione delle SCHEGGE -->
+<!-- ===================================================================================== -->
+
+
+<br><br><br>==============================================================================================================<br><br><br>
+
+<h3 id="spallazione">Modalità di formazione delle schegge</h3>
+
+La nervatura posteriore accumula un'enorme quantità di energia elastica (funziona come una molla tesa al massimo). Quando si verifica la frattura di schianto (fast fracture), l'energia accumulata si libera istantaneamente.
+
+Generazione della scheggia: Se il collasso della sezione flangiata o del pannello d'anima (web) avviene sotto carico massimo, la separazione violenta del metallo (specie se si tratta di leghe d'alluminio ad alta resistenza ma fragili alla propagazione come l'Ergal/7075-T6) può scagliare frammenti della nervatura stessa o le teste dei rivetti tranciati ad altissima velocità, trasformandoli in proiettili.
+
+L'aletta del missile agisce come una ghigliottina o un punzone ad altissima energia cinetica. Impattando la nervatura, asporta e strappa letteralmente una porzione della lamiera d'anima o della flangia. Questo frammento strappato (la scheggia) acquisisce immediatamente una frazione significativa dell'energia cinetica del missile.
+
+Effetto di Spallazione (Spalling): Anche se l'aletta non dovesse penetrare completamente la nervatura ma si limitasse a un impatto d'urto violentissimo, l'onda d'urto compressiva viaggerebbe attraverso lo spessore dell'alluminio della nervatura. Quando quest'onda raggiunge la superficie opposta (quella libera, rivolta verso l'interno/alto), si riflette come un'onda di trazione, superando il limite di rottura del materiale. Questo causa il distacco violento di schegge metalliche taglienti dal lato non colpito, le quali vengono proiettate in avanti e verso l'alto.
+
+
+Al millisecondo zero, l'impatto ad altissima velocità genera un'onda d'urto compressiva ad altissima pressione all'interno della lega d'alluminio della nervatura. Questa onda viaggia alla velocità del suono nel metallo (circa $5000 \text{ m/s}$) muovendosi obliquamente in avanti e verso l'alto, seguendo la direzione del vettore d'impatto originario.
+
+
+Quando l'onda compressiva raggiunge la superficie interna libera della nervatura (quella rivolta verso l'alto e l'interno della struttura della fusoliera), non trova più materiale da comprimere.
+
+Per le leggi della dinamica dei continui, l'onda d'urto si riflette sulla superficie libera trasformandosi istantaneamente da onda di compressione a onda di tensione (trazione).
+
+Poiché le leghe d'alluminio aeronautiche hanno una resistenza a trazione dinamica inferiore rispetto a quella a compressione, lo stress di trazione riflesso supera istantaneamente il limite di rottura del materiale. Il metallo si frattura "per scalzamento" sul lato opposto all'impatto.
+
+
+La scheggia non si genera solo ed esclusivamente nella direzione esatta di provenienza del missile, ma si propaga formando un cono di proiezione (cono di spallazione) caratterizzato da un certo angolo di dispersione.
+
+https://en.wikipedia.org/wiki/Spall
+
+
+
+Resistenza Anisotropa: Il componente è estremamente forte contro i carichi di trazione e flessione che agiscono lungo le sue fibre metalliche. Tuttavia, è intrinsecamente più debole e "fragile" contro gli sforzi che tentano di separare queste fibre trasversalmente. Un impatto balistico perpendicolare o obliquo alla superficie (come quello dell'aletta del missile) agisce proprio per separare queste fibre trasversalmente, dove il materiale ha una minore tenacità dinamica.
+
+<br><br><br>==============================================================================================================<br><br><br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div style="vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="spinta.png" style="float:left; padding-right: 1em;" alt="" title="">
+L'ingrandimento mostra nel dettaglio la fase di transizione da boost a sustain. Questa fase dura 250 ms<br>
+</div>
+
+
+
+
+
+<div style="vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="cd0.png" style="float:left; padding-right: 1em;" alt="" title="">
+			Il grafico comprende l'attrito superficiale e la resistenza d'onda del corpo, ali e coda tutto ad incidenza nulla.
+			La curva Coast (glide) del grafico racchiude già l'attrito superficiale (skin friction), la resistenza d'onda (wave drag) e il massimo sbarramento della base mozza (base drag power-off).
+			La curva Boost racchiude già l'attrito superficiale, la resistenza d'onda e il base drag ridotto dal getto del motore (power-on).
+
+
+Dal grafico risulta consigliabile effettuare il lancio ad una velocità più alta di quella del picco in boost.<br>
+</div>
+
+
+
+<!-- ========================================================================================================== -->
+<br><br><br><br><br>
+
+<h3 id="autopilota">Descrizione autopilota</h3>
+
+Dal punto di vista dell'effetto pratico sulla dinamica del missile, l'<abbr title="autopilota">A/P</abbr> si comporta in modo analogo ad un <a href="https://it.wikipedia.org/wiki/Controllo_PID" target="_blank">controllore PID</a> (Proporzionale-Integrale-Derivativo). Tuttavia, dal punto di vista accademico e strutturale, non si tratta di un PID classico, ma di un'architettura più raffinata, nota come PI con retroazione del rateo (o <i>rate feedback</i>, v. <a href="https://pressbooks.library.torontomu.ca/controlsystems/chapter/9-1introduction/" target="_blank"><i>Introduction to Control Systems</i></a>, fig. 9-4).<br>
+
+Il simulatore implementa un AP a loop in cascata:
+<ul style="margin-top: 0">
+<li>un loop esterno (PI) che controlla l'accelerazione, quindi la traiettoria;</li>
+<li>un loop interno (D) che misura la velocità angolare, fornendo lo smorzamento necessario alla dinamica rotazionale.</li>
+</ul>
+
+Facciamo un esempio pratico. Supponiamo che l'<abbr title="autopilota">A/P</abbr> determini che sia necessario generare, tramite le ali, un'accelerazione superiore a quella attualmente sviluppata. Vediamo come intervengono le tre componenti del controllo:
+<ul>
+<li>P: aumenta l'inclinazione delle ali di una quantità <u>proporzionale</u> all'errore di accelerazione, cioè alla differenza tra l'accelerazione desiderata e quella effettivamente sviluppata in un dato istante;</li>
+<li>I: se l'accelerazione continua ad essere inferiore a quella desiderata, incrementa progressivamente il comando per eliminare l'errore residuo;</li>
+<li>D: se la velocità angolare del corpo del missile (il rateo di rotazione) è troppo alta, introduce uno smorzamento opposto al moto, riducendo la rapidità di variazione per evitare oscillazioni.</li>
+</ul>
+
+
+La parte I del controllore può essere causa di un potenziale problema.<br>
+Se siamo in quota e la densità dell'aria non è sufficiente a generare l'accelerazione desiderata, a causa della ridotta pressione dinamica, l'A/P può arrivare a saturare il comando delle ali. Tuttavia, il circuito integratore continua ad accumulare l'errore e quindi a richiedere un ulteriore incremento del comando, anche se le ali hanno già raggiunto il limite massimo. L'accumulo di questo termine può portare lo stato dell'integratore a valori fittizi sempre più elevati, anche molte decine di gradi. Questo fenomeno è noto come <i>windup</i>.<br>
+Nel momento in cui l'A/P dovesse comandare la riduzione dell'incidenza delle ali, il termine integrale non può rientrare immediatamente nei valori necessari, perché deve prima smaltire tutto l'errore accumulato. Di fatto, il comando può quindi rimanere a lungo in saturazione, introducendo un ritardo del tutto inaccettabile nella risposta del sistema.<br>
+Per ovviare a questo problema, interviene l'<i>anti-windup</i>: quando l'ala è satura alla massima inclinazione, l'azione integrale del PID non viene ulteriormente incrementata, ma viene congelata (comportamento chiamato "integrazione condizionale"). Così facendo, quando l'A/P comanda una riduzione dell'incidenza, il comando può rientrare rapidamente dal limite di saturazione e il servo associato all'ala può iniziare a ridurre l'incidenza senza dover prima smaltire un grande accumulo del termine integrale.<br>
+<br>
+Anche la parte proporzionale può essere causa di un potenziale problema.<br>
+Se, infatti, l'A/P determina che le ali debbano generare un'accelerazione molto maggiore di quella attualmente sviluppata, il comando proporzionale può essere talmente elevato da portare la cerniera di una o più ali a fondo corsa con estrema rapidità, con il rischio di generare danni meccanici.<br>
+Al fine di ridurre drasticamente tale rischio, l'inclinazione delle ali è caratterizzata da due limiti: quello elettronico di 20° e quello meccanico di 22°; questa differenza di 2° viene chiamata <i>headroom</i>.<br>
+Oltre a ridurre il rischio di sollecitare eccessivamente la cerniera delle ali, l'<i>headroom</i> rende possibile il governo del missile anche quando le ali hanno raggiunto il limite elettronico di 20°, lasciando al <i>rate loop</i> (il loop interno derivativo che controlla lo smorzamento) il margine necessario per contrastare eventuali oscillazioni. Infatti, nel caso in cui il missile fosse soggetto a un disturbo improvviso (turbolenza dell'aria, disturbo a un sensore, ecc.), quei 2° di margine consentono di applicare piccole correzioni per compensare disturbi di modesta entità e, allo stesso tempo, permettono al <i>rate loop</i> d'intervenire per smorzare le oscillazioni anche con il comando nominalmente saturo a 20°.<br>
+
+<br><br>==============================================<br><br>
+
+
+
+
+
+
+
+
+
+
+
+<br><br><br><br><br>
+<!-- ========================================================================================================== -->
+
+
+
+
+
+<!-- ========================================================================================================== -->
+<br><br><br><br><br>
+
+<h3 id="simulazione">Simulazione del missile</h3>
+
+
+<!-- -----  Gradi di libertà  -------------------------------------------------------------------------- -->
+<h3 id="DoF" style="margin-left:2em">- Gradi di libertà</h3>
+
+Questo tipo di simulazioni consiste nel far muovere l'oggetto simulato fissando una condizione iniziale che viene propagata nel tempo (avanti o indietro) applicando le leggi della fisica.<br>
+&Egrave; chiaro che per muoversi in uno spazio tridimensionale, un oggetto deve essere libero di spostarsi lungo i tre assi X, Y e Z, deve, cioè, avere 3 gradi di libertà o GdL o DoF (<i>Degrees of Freedom</i>).<br>
+L'oggetto così simulato viene considerato un punto materiale avente le caratteristiche fisiche dell'oggetto reale (come massa e superficie). In questo tipo di simulazione si assume che l'oggetto segua istantaneamente la traiettoria e applichi istantaneamente i comandi aerodinamici (nel caso di un oggetto capace di manovrare).<br>
+Questo modello è chiaramente il più semplice possibile e in questo rientrano tutte le simulazioni fatte da periti e consulenti per determinare le traiettorie di caduta dei rottami del DC-9 (introducendo, a volte, ulteriori semplificazioni ad un modello già di base).<br>
+Anche l'altra simulazione presente nella pagina "<a href="../mis_ine/mis_ine.html" target="_blank">Abbattimento tramite missili inerti</a>" rientra nel 3-DoF. Quindi, sebbene sia una simulazione che tiene in considerazioni molti dettagli del missile, è pur sempre limitata dal fatto che la risposta delle ali è immediata, il missile non deve "perdere tempo" ad inclinarsi prima di virare, l'<abbr title="autopilota">AP</abbr> riceve dati esenti da disturbi (quindi non soggetti a filtraggio), ecc.<br>
+<br>
+Facendo il gradino successivo sia arriva al 5-DoF o pseudo-5-DoF, in cui vengono considerate le 3 traslazioni lungo gli assi più altri 2 GdL dell'assetto: alto/basso e destra/sinistra. Se questi 2 GdL aggiuntivi vengono calcolati in modo non rigoroso, cioè evitando d'includerli nello stesso processo d'integrazione usato per le altre variabili di stato, si ottiene un modello che ha "quasi" 5 GdL o pseudo-5-DoF.<br>
+<br>
+Passando al livello successivo, si arriva al modello completo 6-DoF, dove alle 3 traslazioni lungo gli assi cartesiani si aggiungono 3 rotazioni intorno agli assi. Questo modello simula il comportamento del missile in modo molto accurato, in base ai parametri forniti alla simulazione; ciò significa che se i parametri rispecchiano fedelmente il missile reale, la simulazione riprodurrà il comportamento del missile in modo pressoché indistinguibile da quello vero, ma se i parametri usati differiscono da quelli reali, sarà simulato in modo quasi perfetto un missile di fantasia.<br>
+
+
+
+<!-- -----  Codice usato  -------------------------------------------------------------------------- -->
+<h3 id="codice_usato" style="margin-left:2em">- Codice usato per il sito</h3>
+
+Lo sviluppo del codice che simula il funzionamento del missile è avvenuto in tre fasi: la prima è una simulazione chiamata pseudo-5-DoF (risultata soddisfacente alla 14<sup>a</sup> versione sviluppata), mentre la seconda (usata per presentare i risultati in questa pagina) è la canonica simulazione 6-DoF, risultata soddisfacente e definitiva alla 17<sup>a</sup> versione.<br>
+
+
+
+
+
+<br><br><br><br><br>
+<!-- ========================================================================================================== -->
+
+
+
+
+
+<!-- ========================================================================================================== -->
+<br><br><br><br><br>
+
+sequenza:
+in modalità CAA sim può agganciare un bersaglio fino a +45° in elevazione
+il caccia cabra fino a scoprire il seeker dalla fusoliera 
+
+<br><br><br>
+
+<!-- ==  AGGANCIO  ======================================================================================================== -->
+
+AGGANCIO
+https://www.radartutorial.eu/17.bauteile/bt21.it.html
+<br>
+
+La variazione di frequenza del segnale radar trasmesso dal caccia può essere calcolata tramite la formula presente nella pagina di "<a href="../../defi/radar/radar.html#radar_sorve" target="_blank">RADAR e SIF &rarr; Radar di sorveglianza</a>" https://en.wikipedia.org/wiki/Doppler_radar#Frequency_variation
+
+<i>f<sub>r</sub> = f<sub>t</sub> &middot; (c + v) / (c - v)</i>, dove <i>f<sub>r</sub></i> è la frequenza ricevuta dal seeker del missile, <i>f<sub>t</sub></i> è la frequenza del segnale radar trasmesso dal caccia, <i>c</i> è la velocità del segnale nell'aria e <i>v</i> è la velocità radiale .<br>
+
+<br>
+"<a href="../../defi/radar/radar.html#radar_sorve" target="_blank">RADAR e SIF &rarr; Radar di sorveglianza</a>" &rarr; "Misurazione della distanza"
+
+
+
+<br><br><br><br><br>
+<!-- ========================================================================================================== -->
+
+
+
+
+
+Per stabilire l'azimut dell'intercettore rispetto al DC-9, si può fare affidamento alla <a href="https://www.stragi80.it/documenti/gi/perizie/028.pdf" target="_blank">Perizia medico-legale Giusti</a>, dalla quale, a partire dalla seconda metà di pag. 8, si legge che il DC-9 ha subìto una decompressione esplosiva prodotta da una falla apertasi nella parte destra della fusoliera a causa di un agente esterno (missile o collisione). Nello scenario ipotizzato in questa pagina, quindi, la falla è stata generata da un missile (verosimilmente il 2° lanciato) che ha impattato la parte destra della fusoliera del DC-9. Questo implica che l'attacco sia stato sferrato dai settori sud-ovest/nord-ovest.<br>
+<br>
+I grafici che seguono permettono di selezionare alcuni azimut di lancio tra quelli più probabilmente utilizzati. Per ogni azimut sono disponibili 4 profili caratterizzati da 2 parametri di lancio: l'<u>angolo di salita</u> o di rampa del caccia al momento del lancio (per brevità indichiamolo come angolo <i><b>S</b></i> per "salita") e l'<u>angolo di anticipo</u> della traiettoria del DC-9 al momento del lancio (indichiamolo come angolo <i><b>A</b></i> per "anticipo").<br>
+<br>
+Normalmente questi due angoli vengono impostati dal pilota seguendo le indicazioni presentate dal computer di tiro sullo schermo radar nel caso di F-4 e F-104S o sull'<a href="https://it.wikipedia.org/wiki/Head-up_display" target="_blank">HUD</a> nel caso dell'F-15.<br>
+Tuttavia, usando la <a href="https://it.wikipedia.org/wiki/Girobussola" target="_blank">girobussola</a> e l'<a href="https://it.wikipedia.org/wiki/Orizzonte_artificiale" target="_blank">orizzonte artificiale</a>, il pilota è libero d'impostare anche altri angoli di lancio precalcolati, ignorando le indicazioni del radar di tiro, purché il lancio avvenga all'interno dell'<a href="https://f4.manuals.heatblur.se/systems/radar/air_to_air.html#allowable-steering-error-ase-circle" target="_blank">ASE</a> (il link si riferisce ad un gioco di simulazione, ma serve solo per capire di cosa si sta parlando).<br>
+<br>
+
+Il significato del nome dei profili d'ingaggio selezionabili è il seguente:
+
+<ol>
+<li><b>TOF</b>: il programma che esegue le simulazioni trova i due angoli <i>S</i> e <i>A</i> che riducono al minimo il tempo di volo del missile;</li>
+<li><b>ACC</b>: il programma trova i due angoli <i>S</i> e <i>A</i> che riducono al minimo l'accelerazione comandata dall'A/P del missile al momento del lancio;</li>
+<li><b>TOF / 10</b>: come per il profilo "TOF", ma l'angolo <i>A</i> è vincolato al valore fisso di 10° (quindi il programma varia solo <i>S</i>);</li>
+<li><b>Av / 15</b>: il programma trova l'angolo <i>S</i> che rende massima l'accelerazione verticale che il missile imprime al DC-9 (cioè che crea il massimo danno) mantenendo <i>A</i> fisso a 15°, ciò significa trovare il massimo valore di <i>Vr &times; sen(&beta;)</i> al momento dell'impatto, dove <i>Vr</i> è la velocità relativa tra il missile e il DC-9 e <i>&beta;</i> è l'angolo di salita del missile (<i>S</i> indica tale angolo al momento del lancio).</li>
+</ol>
+
+Il vincolo dei 10 e 15 gradi sull'angolo <i>A</i> serve per considerare profili di lancio realistici nei quali il fascio del radar di tiro non è ad una distanza angolare dal bersaglio troppo elevata. Senza questo vincolo, il programma che fa le simulazioni potrebbe trovare traiettorie di lancio distanti 30/40 gradi dal DC-9, con il risultato che quel profilo d'ingaggio sarebbe, in realtà, puramente teorico, poiché il radar di tiro potrebbe essere al di fuori del cono d'aggancio del bersaglio (indicato dal cerchio ASE).<br>
+
+
+<!-- FINE 14-09-2024 -->
+
+<br>
+
+
+Arriviamo, finalmente, al risultato ottenuto da varie simulazioni.<br>
+<br>
+
+<div style="vertical-align: top; display: inline-block; margin:0px 0px 50px 0px">
+<div id="gra_3d" style="float:left; padding-right: 20px"></div>
+Il grafico di sinistra mostra la traiettoria seguita dal missile, mentre gli altri mostrano alcuni parametri che aiutano a visualizzare l'evoluzione della traiettoria (si veda più avanti per il significato dei valori).<br>
+<br>
+<b>Scegliere un profilo d'ingaggio</b>: <select id="SelectSim" onchange="SimOnChange(this.selectedIndex)"></select>
+<span style="padding-left: 1em"><b>Mostra acc. A/P</b></span> <input type="checkbox" id="CB_acc_ap" checked onchange="AccapOnChange()"><br>
+<span style="font-size: .8em">L'aggiornamento dei grafici potrebbe richiedere qualche secondo.</span>
+<pre>
+Azimut intercettore rispetto al DC-9   : <span id="pro_azm"></span>°
+Angolo di rampa al lancio              : <span id="pro_RA"></span>°
+Angolo di anticipo traiettoria         : <span id="pro_DA"></span>°
+Angolo missile / DC-9 al lancio        : <span id="pro_mis_dc9"></span>°
+Tempo di volo                          : <span id="pro_tof"></span> s
+Spazio percorso dal missile            : <span id="pro_spazio"></span> m
+Velocità comandata dall'A/P del missile: <span id="pro_acc_ap"></span> m/s
+Energia sviluppata dall'impatto        : <span id="pro_energia"></span> MJ
+Angolo di rampa del missile all'impatto: <span id="pro_rampa_impatto"></span>°
+Tempo di trasmissione energia all'ala  : <input style="width: 4em" type="range" min="1" max="8" value="3" class="slider" id="TenergiaSli" onInput="TenergiaSliOnInput(this.value)"><text id="TenergiaLab" style="inline"> 0,5</text>
+<b>Accelerazione verticale DC-9</b>           : <b><span id="pro_acc_vert"></span> g</b>
+</pre>
+
+<div id="gra_2d" style="height: 400px; float:left;"></div>
+
+</div>
+
+
+
+<div style="width: 100%; display: flex; justify-content: space-between; margin-bottom: 30px; vertical-align: top;">
+
+	<div id="gra_mach_res" style="width: 100%; height: 400px; float:left; padding-right: 2em"></div>
+
+	<div id="gra_dst_vr" style="width: 100%; height: 400px; float:left;"></div>
+
+</div>
+
+<br>
+
+Il grafico 3D (il primo a sinistra) mostra il DC-9 con i puntini blu e il missile con quelli rossi. La linea viola rappresenta il muso dell'intercettore (l'asse +X) al momento del lancio. Le linee arancioni rappresentano il vettore accelerazione comandato dall'A/P; la lunghezza delle linee è proporzionale alla <a href="https://www.youmath.it/lezioni/algebra-lineare/matrici-e-vettori/691-vettori-e-versori.html" target="_blank">magnitudine</a> (o modulo) dell'accelerazione.<br>
+<br>
+Spiegazione dei valori mostrati:
+<ul>
+
+<!-- Revisione 15-09-2024 -->
+<li><b>Azimut intercettore rispetto al DC-9:</b> angolo misurato nel piano orizzontale (X-Y) compreso tra il nord geografico del DC-9 e la congiungente DC-9/intercettore passando per est (azimut = 90°), sud e ovest; v. anche <a href="https://it.wikipedia.org/wiki/Azimut#Descrizione" target="_blank">Wikipedia</a>.</li>
+<li><b>Angolo di rampa al lancio:</b> angolo di salita del caccia al momento di lanciare (angolo <i>S</i>).</li>
+<li><b>Angolo di anticipo traiettoria:</b> angolo in azimut tenuto dall'intercettore al momento del lancio per anticipare la traiettoria del DC-9 (angolo <i>A</i>). Se, ad esempio, l'azimut di lancio è 260° e <i>A</i> è 10°, significa che il lancio avviene con il caccia che punta esattamente verso est: 260 - 180 + 10 = 90° (90° è appunto est).</li>
+
+<!-- FINE 15-09-2024 -->
+
+
+<li><b>Angolo missile / DC-9 al lancio:</b> angolo compreso tra l'asse X del caccia e la linea di vista al momento del lancio.</li>
+<li><b>Tempo di volo:</b> tempo che il missile impiega per impattare il DC-9. Viene calcolato (in modo approssimativo) dal computer asservito al radar di tiro del caccia.</li>
+<li><b>Spazio percorso dal missile:</b> lunghezza della traiettoria seguita dal missile per impattare il DC-9. Dividendo questo valore per il tempo di volo si ottiene la velocità media del missile.</li>
+<li><b>Velocità comandata dall'A/P del missile:</b> formalmente è l'<a href="https://it.wikipedia.org/wiki/Integrale" target="_blank">integrale</a> dell'accelerazione comandata dall'A/P in funzione del tempo di volo, il che significa moltiplicare l'accelerazione per il tempo, ottenendo, appunto una velocità. In pratica serve per mettere in evidenza l'entità delle correzioni di rotta apportate dall'A/P. Dividendo questo valore per il tempo di volo si ottiene l'accelerazione media comandata dall'A/P.</li>
+<li><b>Energia sviluppata dall'impatto:</b> energia cinetica sviluppata dall'impatto del missile con il DC-9 ipotizzando il completo arresto del missile che urta il carrello. Un missile che trapassa la fusoliera rilascia all'aereo un'energia molto più bassa, proporzionale al quadrato della differenza tra la velocità in ingresso in fusoliera e quella in uscita.</li>
+<li><b>Angolo di rampa del missile all'impatto:</b> stesso significato di "Angolo di rampa al lancio", ma riferito al momento dell'impatto (angolo <i>&beta;</i>). I due angoli sono differenti a causa dell'intervento dell'A/P. Questo angolo determina la componente verticale dell'accelerazione dovuta all'energia cinetica sprigionata dall'impatto.</li>
+</ul>
+
+La spiegazione dei valori "<b>Accelerazione verticale DC-9</b>" e del relativo "<b>Tempo di trasmissione energia all'ala</b>" necessitano di una trattazione più approfondita, in quanto sono i valori che determinano la rottura del troncone della semiala sinistra.<br>
+L'accelerazione dal basso verso l'alto è dovuta all'azione del missile che urta il carrello. Per calcolarla si può utilizzare la banale formula <i>a = V / t</i>, in cui <i>V</i> è la velocità impulsiva impressa al DC-9 dal missile e <i>t</i> è il tempo nel quale si presume che l'energia venga trasferita dal carrello alla struttura, in particolare ai longheroni alari. Questo tempo è preimpostato a 0,3 s (valore prudenziale), ma è possibile variarlo con l'apposito <i>slider</i>. Ciò è utile in quanto non è possibile stabilire con precisione questo valore, ma considerando un'accelerazione così impulsiva, è più verosimile un tempo di trasferimento più basso, in quanto la struttura degli aerei dell'epoca era piuttosto rigida (probabilmente il tempo più vicino alla realtà è intorno a 0,1/0,2 s).<br>
+Il valore di <i>V</i> lo si ottiene da quello dell'energia cinetica sprigionata dall'impatto, semplicemente calcolando la radice quadrata di <i>E<sub>c</sub> * 2 / 32800</i>, dove 32800 è la massa (in kg) del DC-9 ipotizzabile al momento dell'abbattimento, determinata secondo quanto riportato nei documenti "<a href="https://www.stragi80.it/documenti/processo/trascrizioni/15.05.03.pdf" target="_blank">UDIENZA DEL 15.05.2003</a>" a pag. 60 ("<i>il peso del DC9 in crociera e di circa trentatremila chili</i>") e "<a href="https://www.stragi80.it/documenti/gi/perizie/046.pdf" target="_blank">Capitolo XLVI - Consulenza tecnica Bazzocchi - 09.06.94.</a>" a pag. 14 ("<i>Peso totale nelle condizioni dell’evento kg 32555</i>", sottostimato in quanto è la massa prevista all'atterraggio nel <a href="http://www.noidellitavia.it/176334379.html" target="_blank">foglio di carico</a>).<br>
+La componente verticale della <i>V</i> così calcolata è quella che genera l'accelerazione verticale impulsiva mostrata in "<b>Accelerazione verticale DC-9</b>". Quest'accelerazione, se sufficientemente elevata, determina il superamento del <a href="https://it.wikipedia.org/wiki/Fattore_di_carico" target="_blank">fattore di contingenza</a> negativo (n<sub>z</sub> < 0 del link) causando danni strutturali che vanno dalla deformazione permanente di alcuni elementi strutturali fino alla rottura di quelli più sollecitati (come accaduto alla semiala sinistra).<br>
+<br>
+Ora che abbiamo dati numerici sufficientemente accurati sui quali ragionare, si può ipotizzare quale profilo d'ingaggio possa essere stato pianificato ed usato per abbattere il DC-9.<br>
+<br>
+&Egrave; intuibile che il massimo danno lo si ottiene sparando il missile esattamente nel senso opposto al moto del DC-9 (sparandolo, cioè, da sud verso nord), così da farlo impattare con la massima velocità relativa possibile.<br>
+Un'altra modalità più "comoda" può essere quella di un attacco quasi esattamente da ovest, ipotizzando che l'intercettore sia partito dalla Sardegna (o anche dalla Corsica).<br>
+Visualizzando uno dei profili con azimut 180° e uno con azimut da ovest da 250° in poi, si nota una cosa che rende del tutto sconsigliabile il lancio da sud: l'accelerazione comandata dall'A/P al momento dell'impatto è esattamente verticale, mentre con il lancio da ovest l'accelerazione è quasi orizzontale.<br>
+<br>
+
+
+
+<div style="margin-bottom: 20px; display: inline-block; width:100%;">
+<img src="dc9-15_profi-fronte.png" style="float:left; padding-right: 30px;" alt="" title="">
+
+<!-- Revisione 30-06-2022 -->
+Con l'aiuto di questa immagine (raffigurante un DC-9-15, come l'I-TIGI) si può visualizzare chiaramente che l'area esposta dall'aereo frontalmente è molto inferiore di quella esposta lateralmente.<br>
+<!-- FINE 30-06-2022 -->
+
+Il missile che accelera verticalmente nell'attacco frontale ha un piccolo margine d'errore, dovuto proprio alla piccola sezione frontale dell'aereo. Se, invece, l'attacco espone bene la fusoliera, con il missile che accelera orizzontalmente (verso destra), incrementando la componente della velocità verso la prua del DC-9, il margine d'errore è molto più grande, in quanto il missile dispone di parecchi metri di fusoliera prima di mancare il bersaglio.<br>
+<br>
+In sintesi, quindi, uno stesso errore di guida del missile porta ad una probabilità di mancare il bersaglio molto maggiore per l'attacco frontale che non per quello laterale. Si può, quindi, agevolmente dedurre che il lancio sia avvenuto da un azimut prossimo a ovest (270°).<br>
+</div>
+
+
+Questo fatto consente anche di poter ipotizzare che uno dei due missili lanciati contro il DC-9 sia andato a finire più avanti della zona di massima riflettività (costituita dall'ala), proprio perché l'A/P stava facendo virare il missile a destra, cioè in avanti rispetto alla traiettoria del DC-9, incrementando sempre di più la componente della velocità verso destra. &Egrave;, dunque, plausibile che uno dei due missili, impattando il DC-9 davanti all'ala abbia causato la violenta decompressione di cui parla il perito Giusti e abbia, inoltre, causato l'interruzione delle due barre (destra e sinistra) che portano l'energia elettrica dai motori e dall'<a href="https://it.wikipedia.org/wiki/Auxiliary_power_unit" target="_blank">APU</a> ai vari apparati, si veda "<a href="https://www.stragi80.it/documenti/gi/perizie/048.pdf" target="_blank">Capitolo XLVIII - Perizia tecnico-scientifica Misiti ed altri - 23.07.94.</a>" alle pagg. 30 e segg., in cui si precisa che la prima barra ad interrompersi è stata quella di destra.<br>
+<br>
+Considerando, inoltre, che soltanto una semiala si è rotta, l'accelerazione verticale non doveva essere molto superiore al limite strutturale. Si può quindi ipotizzare che il lancio possa essere avvenuto da un azimut di circa 250/260°. Sono quasi certamente da escludere azimut superiori a 280° a causa della scarsa accelerazione verticale che avrebbero prodotto.<br>
+<br>
+Ulteriori simulazioni permettono di affermare che anche lanci da 6 km di distanza consentono di generare sufficiente energia cinetica all'impatto, purché effettuati da un azimut inferiore ai 250°.<br>
+Stesso discorso anche per velocità di lancio più basse. Una velocità di lancio di mach 0,9 è sufficiente, purché l'azimut non superi i 250°.<br>
+<br>
+
+
+<!-- Revisione 10-09-2024 -->
+
+Si tenga, però, presente quanto già detto, cioè che l'impiego di versioni più recenti dello Sparrow, grazie alle migliori prestazioni, avrebbero consentito il lancio da maggiore distanza e da azimut ben superiori ai 280°.<br>
+<br>
+
+
+
+<!-- ===================================================================================== -->
+<!--  ZONA IMPATTO 1° MISSILE  -->
+<!-- ===================================================================================== -->
+
+<h3 id="zona_impatto">Zona d'impatto del 1° missile</h3>
+
+
+Una volta analizzati i risultati delle simulazioni e avendo stabilito che un attacco di questo tipo doveva essere condotto da azimut laterali rispetto al DC-9 (nel nostro caso da ovest), si possono prendere in considerazione ulteriori elementi oggettivi utili per determinare la probabile zona d'impatto del primo missile.<br>
+<br>
+
+Nel seguito, quando si fa riferimento alla commissione Luzzatti s'intende la <a href="https://www.stragi80.it/documenti/Luzzatti/Luzzatti.pdf" target="_blank">relazione Luzzatti</a> e quando si fa riferimento al collegio Blasi s'intende <a href="http://cristianopi.altervista.org/straus/blasi1.pdf" target="_blank">questa parte</a> della perizia Blasi.<br>
+<br>
+Ulteriori utilissime informazioni sulla struttura di un DC-9 si trovano nella pubblicazione "<a href="https://www.fire.tc.faa.gov/reports/searchresults.asp?searchType=number&searchPhrase=rd-72-88&searchSubmit=" target="_blank"><i>DC-9 Safe Bomb Location Study</i></a>" della McDonnell Douglas relativa ad uno studio fatto per trovare la posizione all'interno di un DC-9 dove far esplodere una bomba col minor danno possibile, alla quale ci si riferirà con "<b>RD-72-88</b>".<br>
+Di particolare utilità sono lo "spaccato" del DC-9 a pag. 14, il diagramma delle stazioni a pag. 16 e il disegno del cono d'emergenza a pag. 27, ma è comunque molto utile scorrere la pubblicazione nella sua interezza.<br>
+<br>
+
+Prima di addentrarci nei dettagli tecnici, vale la pena sottolineare che la relazione Luzzatti costituisce una preziosa fonte d'informazioni, poiché è stata redatta quando ancora non esistevano le influenze esterne che hanno pesantemente condizionato le perizie a partire da quella prodotta dal collegio Blasi.<br>
+Il giudice Priore descrive molto dettagliatamente gli inquinamenti peritali nel "<a href="https://www.stragi80.it/documenti/gi/perizie/062.pdf" target="_blank">Capitolo LXII - Inquinamento peritale.</a>" della sua <a href="https://www.stragi80.it/doc/la-sentenza-ordinanza-del-g-i/" target="_blank">Ordinanza di rinvio a giudizio - Sentenza istruttoria di proscioglimento</a>; vediamone un passo significativo:<br>
+
+<div class="cita">
+Le attività dei periti incaricati nel tempo delle perizie principali – quelle cioè in cui si formulavano quesiti sulle cause del disastro, e quindi i membri del collegio Blasi e di quello Misiti – sono state non poche volte disturbate da interferenze, ed anche inquinate da interventi di ambienti di imputati e consulenti di parte dell’AM; interferenze ed interventi generati da rapporti e collegamenti tra periti d’Ufficio ed ufficiali dell’Arma detta, che a volte hanno determinato nei primi, per insipienza infedeltà incapacità morali e conoscitive, degli stati di subordinazione e dipendenza in totale contrasto con il dovere di assoluta indipendenza d’ogni ufficio del Giudice.<br>
+I rapporti del coordinatore del collegio Blasi, cioè l’ingegnere Massimo Blasi, con ambienti dell’AM sono provati dalla trascrizione di conversazione telefonica avvenuta il 3.03.89 tra di lui e il Sottocapo di Stato Maggiore all’epoca, cioè il generale Meloni.<br>
+<span style="font-family: sans-serif"><i>[...]</i></span><br>
+Nei confronti del collegio successivo, il Misiti, l’impegno <span style="font-family: sans-serif"><i>[dei periti a collaborare con gl'imputati, ndr]</i></span> è di gran lunga superiore, con ogni probabilità a causa del superiore peso della partita, che vede i più alti gradi del tempo dei fatti in ruoli di imputati di reati gravissimi.
+</div>
+
+Non è, quindi, il caso d'ignorare la relazione Luzzatti pensando che sia stata resa obsoleta dalle nuove perizie, perché non è affatto così. Per cui nei prossimi paragrafi saranno presi in considerazione gli elementi oggettivi che <u>con certezza</u> sono stati riscontrati dalla commissione senza interferenze esterne (o comunque ridotte al minimo).<br>
+
+
+
+
+
+<!-- PANNELLO TRAPEZOIDALE -->
+<!-- ================================================================= -->
+
+<h3 id="pantrap" style="margin-left:2em">- Frammento pannello trapezoidale sinistro vano carrello</h3>
+
+
+Questo frammento fu preso in seria considerazione dalla commissione Luzzatti perché venne rinvenuto conficcato nella coscia sinistra di una bambina (Francesca D'Alfonso) pur appartenendo ad un elemento strutturale esterno alla cabina passeggeri. Sebbene questo fatto sia utile per spiegare alcune delle cose successe al momento del disastro, nessun'altra commissione ha mai più preso in considerazione questa scheggia. Il collegio Blasi la nominerà solo per sminuirne notevolmente l'importanza.<br>
+Le cose sono due: o la scheggia è effettivamente priva di qualunque importanza, oppure ne ha fin troppa. Cerchiamo di ragionare senza preconcetti per capire come stanno veramente le cose.<br>
+<br>
+
+Un pannello trapezoidale è un elemento strutturale molto robusto in lega leggera, saldamente vincolato ad una semiala e alla fusoliera. La sua funzione è di conferire alla semiala una maggiore libertà di movimento (aggiunge 1 grado di libertà alla giunzione ala-fusoliera), consentendo una migliore distribuzione dei carichi tra la semiala e la sezione di fusoliera a cui l'ala è agganciata. Per ulteriori dettagli si può consultare questa descrizione di un <a href="https://www.sumobrain.com/patents/wipo/Trapezoidal-panel-pin-joint-allowing/WO2008105805.html" target="_blank">pannello</a> brevettato.<br>
+<br>
+
+
+Il "<a href="https://www.stragi80.it/documenti/gi/perizie/001-007.pdf" target="_blank">Capitolo V - Perizia Tecnica Blasi ed altri - 17.03.89.</a>" dell'<a href="https://www.stragi80.it/doc/la-sentenza-ordinanza-del-g-i/" target="_blank">Ordinanza di rinvio a giudizio - Sentenza istruttoria di proscioglimento</a> riporta a pag. 116:
+
+<div class="cita">
+Alla seconda <span style="font-family: sans-serif"><i>[salma, ndr]</i></span>, una bambina nata nel 73, <span style="font-family: sans-serif"><i>[...]</i></span>, era stata estratta dalla <u>coscia <b>sinistra</b></u> una scheggia. Questo reperto era stato esaminato dall'AM, e dall'NTSB negli Stati Uniti, e riferito alla centina posteriore di sinistra esterna del pannello trapezoidale P/N 9957447-3 posto all'attacco alare.
+</div>
+
+
+
+Iniziamo in ordine cronologico dalla Luzzatti, prendendo in considerazione le descrizioni presenti a pag. 59:
+
+<div class="cita">
+tale frammento <span style="font-family: sans-serif"><i>[del pannello trapezoidale <u>sinistro</u>, ndr]</i></span>, rinvenuto nel corpo di una passeggera, è stato identificato come parte della <u>nervatura posteriore</u> esterna del pannello in oggetto.<br>
+Il frammento presenta una impronta sullo spigolo posteriore ed una sezione di frattura avente le caratteristiche di una rottura dinamica.<br>
+Inoltre, dall'aspetto della superficie di rottura, questa risulta essere iniziata lungo il contorno dalla parte dell'impronta.<br>
+Il frammento, pertanto, deve essersi distaccato perché <u>colpito <b>violentemente</b> dal <b>dietro verso l'avanti</b></u>, in corrispondenza dell'impronta sopraccitata.
+</div>
+
+La commissione aggiunge:
+
+<div class="cita">
+Durante un sopralluogo effettuato da membri della commissione a bordo di un velivolo DC 9, è risultato che l'impronta di cui sopra si adatta al contorno della
+parte anteriore della rotaia del flap sinistro.
+</div>
+
+dando per scontato che il frammento deve per forza aver urtato la rotaia:
+
+<div class="cita">
+Considerando che in volo di crociera l'estremità della rotaia del flap si trova avanzata ed esterna rispetto alla zona di frammentazione del pannello, quest'ultima ha richiesto almeno una fase precedente che consentisse un posizionamento di possibile interferenza.<br>
+Inoltre, benchè la zona interessata dalla frammentazione sia avviluppata da componenti strutturali massicci e separata dalla cabina passeggeri, tenuto conto che sul frammento non vi sono altri segni di urti o sfregamenti e che lo stesso è stato rinvenuto nel corpo di una passeggera, è evidente che al momento dell'urto rotaia-pannello non sussistevano ostacoli al movimento relativo frammento-passeggera.
+</div>
+
+Il ragionamento è tanto superficiale quanto contestabile: siccome l'impronta si adatta alla rotaia del flap, sicuramente il frammento ha urtato tale rotaia.<br>
+La superficialità del ragionamento è indirettamente evidenziata dal collegio Blasi, che, infatti, non fa alcun cenno all'arbitrario vincolo imposto dalla commissione Luzzatti (v. "PARTICOLARE 5" a pag. 51):
+
+<div class="cita">
+L'esame a vista delle superfici di rottura, ha messo in evidenza i caratteri dinamici di tale rottura <span style="font-family: sans-serif"><i>[rottura dinamica confermata anche da questo collegio, ndr]</i></span>, così come la presenza di una forte ammaccatura, <u>probabilmente provocata dall'<b>urto violento</b> con altre parti molto robuste del velivolo</u>, che è stata quindi la causa del distacco di tale pezzo dall'organo meccanico integro cui apparteneva.
+</div>
+
+&Egrave; quindi evidente che Blasi non parla di un urto contro la rotaia del flap, ma semplicemente di "altre parti molto robuste del velivolo", dal momento che l'ammaccatura può essere stata causata dall'urto con uno degli elementi strutturali che circondano il pannello trapezoidale o anche dall'impatto col missile.<br>
+<br>
+
+L'argomento viene ripreso con maggiore dettaglio a partire da pag. 157 della perizia, senza, però, aggiungere informazioni particolarmente utili. Risulta, invece, utile evidenziare il fatto che questo collegio, pur prendendo in considerazione la vicinanza del pannello alla rotaia del flap, giunge a conclusioni differenti da quelle a cui giunge la commissione Luzzatti. Infatti, a pag. 159 il collegio Blasi scrive:
+
+<div class="cita">
+Dalle indagini frattografiche effettuate, (AMI e NTSB), risulta evidente che il frammento si è staccato dal pezzo madre per rottura dinamica, quindi in seguito all'urto con un elemento strutturale di massa e rigidezza elevata; d'altronde è evidente una grossa ammaccatura sul frammento, molto probabilmente prodotta in seguito all'urto. Dalle foto N. 220 - 221 - 222 si evidenzia la vicinanza del frammento, nella sua posizione originaria sul pannello trapezoidale, ad almeno due grossi elementi strutturali:<u>l'estremità della rotaia di scorrimento del perno del flap interno</u> e l'attacco dell'elemento di supporto trasversale del carrello d'atterraggio.
+</div>
+
+Pervenendo ad una conclusione ben diversa da quella data per scontata dalla Luzzatti:
+
+<div class="cita">
+Durante il volo il carrello si trova in posizione retratta e non è detto che l'urto possa essere avvenuto con altri grossi elementi facenti parte del complesso del carrello stesso.
+</div>
+
+o con un missile inerte, verrebbe d'aggiungere.<br>
+Ad ogni modo, è importante sottolineare che Blasi non dà affatto per scontato l'urto del frammento con la rotaia del flap, pur prendendola in considerazione.<br>
+<br>
+
+Tutto ciò dimostra oggettivamente che la scheggia è stata generata dall'urto violento tra la nervatura posteriore del pannello trapezoidale sinistro e un altro oggetto non meglio identificato, che potrebbe essere un elemento strutturale dell'aereo o un oggetto estraneo all'aereo avente energia sufficiente per generare la scheggia.<br>
+<br>
+
+Per stabilire se un missile lanciato all'incirca da ovest possa aver generato la scheggia, cerchiamo di trovare la posizione esatta della nervatura del pannello aiutandoci con i seguenti schemi.<br>
+<br>
+
+<div style="margin-bottom: 2em; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="zi_alasx.png" style="float:left; padding-right: 30px;" alt="" title="">
+Questa parte della semiala sinistra di un DC-9-15 mostra il semi-cassone alare all'interno del tratteggio verde (è la parte dell'ala inglobata nella fusoliera) e il longherone posteriore con evidenziata la zona di "aggancio" del carrello sinistro.<br>
+Il dato d'interesse è la posizione del punto d'aggancio del longherone posteriore alla fusoliera: stazione 577,4. &Egrave; questo il punto in cui viene fissato il pannello trapezoidale.<br>
+<br>
+Lo schema è anche utile per farsi un'idea del carico a cui è soggetto il longherone posteriore e, di conseguenza, il pannello trapezoidale al quale è fissato.
+</div>
+
+
+Nell'RD-72-88 si osserva che tale stazione si trova a 570,4" (pollici) dal vertice del radome (la punta della prua), come mostrato dal seguente schema.<br>
+<br>
+
+<div style="margin-bottom: 2em; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="zi_pos_pantrap.png" style="float:left; padding-right: 30px;" alt="" title="">
+Qui vediamo i due longheroni con tratto verde e la posizione del pannello trapezoidale, situato all'interno dei due cerchi rossi. Più precisamente, i due cerchi indicano la posizione della nervatura posteriore del pannello trapezoidale, situata a circa 30 cm dalla stazione 577,4 (v. disegno seguente).
+</div>
+
+<br>
+
+
+<div style="margin-bottom: 2em; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="zi_pantrap.png" style="float:left; padding-right: 30px;" alt="" title="">
+Questo schema presente a pag. 158 della perizia Blasi mostra nel dettaglio gli elementi strutturali a cui viene fissato il pannello trapezoidale (la prua è verso destra).<br>
+&Egrave; anche evidenziata la parte del pannello dalla quale è partita la scheggia.<br>
+<br>
+La stazione in cui è ubicata l'ordinata di forza è facilmente deducibile osservando lo schema che segue.
+</div>
+
+
+<div style="margin-bottom: 2em; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="zi_stazioni.png" style="float:left; padding-right: 30px;" alt="" title="">
+Questa parte dello schema delle stazioni di fusoliera consente di stabilire che l'ordinata immediatamente dietro al longherone posteriore è posizionata alla stazione 585.<br>
+<br>
+L'immagine evidenzia anche l'ordinata di forza alla stazione 642, che collega il tronco di coda al cassone alare. 
+</div>
+
+
+
+
+<div style="margin-bottom: 2em; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="zi_foto.webp" style="float:left; padding-right: 30px;" alt="" title="">
+Qui vediamo una rappresentazione "artistica" dell'ubicazione dei vari elementi visti negli schemi precedenti.<br>
+<br>
+Tra tutti quei rottami, il posizionamento delle linee non può essere preciso al centimetro, ma è molto significativo poter constatare la netta apertura proprio in corrispondenza della stazione 585, come se "qualcosa" avesse indebolito l'ordinata da dove è partita la scheggia, sbriciolando la corrispondente parte di fusoliera.
+</div>
+
+
+
+
+<div style="margin-bottom: 1em; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="zi_sedili.png" style="float:left; padding-right: 30px;" alt="" title="">
+In questo schema, infine, tratto dalla pag. 100 della perizia Blasi, si può accertare la perfetta compatibilità della posizione dei sedili con la proiezione della scheggia conficcatasi nella coscia sinistra della bambina, senza bisogno di complicare le cose con complesse (ed indimostrabili) interferenze tra elementi strutturali che urtano il pannello trapezoidale al momento del collasso in mare.<br>
+Considerando, infatti, che la nervatura posteriore del pannello trapezoidale è situata circa 20 cm dietro la stazione 585, la scheggia è stata scagliata quasi esattamente a metà dello spazio libero tra le due file di sedili (ovviamente dopo aver tagliato il pavimento) compiendo una corsa di circa 50/60 cm.
+</div>
+
+Si può, quindi, agevolmente stabilire che il primo missile ha colpito l'aereo a non più di qualche decina di centimetri dal pannello trapezoidale, scagliando il frammento a seguito dell'urto diretto con il corpo del missile o con un'aletta.<br>
+<br>
+
+
+
+
+
+<!-- ========================================================================================================== -->
+<!-- CADUTA e IMPATTO COL MARE -->
+<!-- ===================================================================================== -->
+
+
+<h3 id="impatto_mare">Caduta e impatto con il mare</h3>
+
+A prescindere dalla causa che ha generato il disastro, le perizie concordano sulla perdita in quota del troncone lungo 5 m della semiala sinistra e probabilmente questo è l'unico fatto certo tra tutti quelli descritti nelle varie teorie di destrutturazione.<br>
+Alcuni periti azzardano anche la perdita di tutto il tronco di coda, che si sarebbe distaccato dalla parte centrale della fusoliera a partire dal bordo d'uscita dell'ala, alla stazione 642, dove è presente l'ordinata di forza che collega il tronco di coda al cassone alare.<br>
+Questa ipotesi viene avanzata dal collegio Misiti dopo aver consultato la documentazione fornita dalla McDonnell Douglas. Le conclusioni che ne scaturirono furono (v. "<a href="https://www.stragi80.it/documenti/gi/perizie/103.pdf" target="_blank">Capitolo CIII - Note di conclusione Casarosa - Held. 08.04.99.</a>" a pag. 6):
+
+<div class="cita">
+In PT <span style="font-family: sans-serif">[<i>perizia tecnica del collegio Misiti, ndr</i>]</span> era stato riportato che l'esame della documentazione fornita dalla Mc Donnell-Douglas aveva consentito di rilevare che i predetti elementi
+<span style="font-family: sans-serif">[<i>l'ordinata alla stazione 642 e il sistema di vincolo del tronco di coda alla parte posteriore della fusoliera, ndr</i>]</span>
+apparivano elementi critici del velivolo quando esso è sottoposto a condizioni di carico derivanti da manovra bilanciata al massimo valore del fattore di carico di manovra e raffica.<br>
+"In altre parole, <u><b>se</b> il velivolo viene sottoposto a condizioni di carico derivanti dal superamento del massimo valore del fattore di carico a causa di <b>effetti combinati di manovra e raffica</b></u>, su di esso agiscono accelerazioni e, quindi, carichi inerziali che, in aggiunta a quelli di esercizio, possono essere tali da determinare il cedimento della struttura del velivolo in corrispondenza dei predetti elementi critici. Sulla base di queste considerazioni, e come riportato in PT, può pertanto formularsi la plausibile ipotesi che, al momento dell'incidente, il velivolo sia andato soggetto alle predette condizioni di carico che, attraverso il cedimento degli elementi critici della struttura del velivolo, abbiano poi innescato la sequenza degli eventi in precedenza discussa. Pertanto le cause dell'incidente debbono essere ricercate in un evento in grado di causare sul velivolo stesso le condizioni di carico descritte.
+</div>
+
+Per capire ciò che affermano i periti è necessario conoscere alcuni cenni di base sui diagrammi di manovra e di raffica.<br>
+<br>
+
+<div style="margin-bottom: 2em; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="imp_dia-man-raf.png" style="float:left; padding-right: 2em;" alt="" title="">
+Qui vediamo un esempio di fantasia (ma simile ad uno reale) dei diagrammi di manovra e raffica combinati in uno solo, nel quale sono evidenziati i parametri che c'interessano.<br>
+Il diagramma permette di ricavare il fattore di contingenza (o massimo <a href="https://it.wikipedia.org/wiki/Fattore_di_carico" target="_blank">fattore di carico</a>) positivo e negativo (asse verticale) a cui un velivolo può essere sottoposto in funzione della sua velocità (asse orizzontale).<br>
+L'inviluppo di volo consentito è caratterizzato da alcune velocità fondamentali ed è limitato a sinistra dalla velocità di stallo (V<sub>S</sub>) e a destra dalla massima velocità in picchiata di progetto (V<sub>D</sub>). Un'altra importante velocità è quella di crociera di progetto (V<sub>C</sub>).<br>
+<br>
+La linea verde rappresenta il fattore di carico a cui è sottoposto un velivolo in volo livellato (1 g, cioè l'accelerazione di gravità).<br>
+Le due linee rosse limitano l'inviluppo di volo durante le manovre, come le virate, le cabrate e le picchiate e all'interno delle due linee c'è, appunto, il diagramma di manovra, con tratto blu.<br>
+Il diagramma di raffica indica il fattore di carico a cui è sottoposto un dato aereo quando subisce raffiche verticali del valore riportato in figura e, ovviamente, la struttura deve garantire il volo in presenza di quelle raffiche. Il diagramma ha i vertici nei punti dove passano le sei linee tratteggiate arancioni ed è delimitato sia dai quattro lati arancioni che da alcuni lati in comune con il diagramma di manovra.<br>
+<br>
+L'esempio evidenzia un fatto abbastanza usuale in cui la struttura deve essere progettata per reggere un carico di raffica superiore a quello di manovra, come si vede dalla parte arancione al di sopra della linea rossa.
+</div>
+
+Questi pochi cenni dovrebbero essere sufficienti per capire il significato di ciò che è riportato nella documentazione della McDonnell Douglas: <u>se</u> le accelerazioni verticali a cui viene sottoposto un DC-9-15 sono esterne al diagramma appena visto (ovviamente in riferimento a quello reale del DC-9-15), l'ordinata di forza alla stazione 642 e il vincolo al tronco di coda <u>potrebbero</u> cedere o, più semplicemente, deformarsi in modo permanente, in dipendenza dell'entità dell'accelerazione verticale.<br>
+<br>
+Sulla base di questo dato di fatto, il collegio Misiti dà per scontato, in modo del tutto arbitrario, che il DC-9 è stato "<i>sottoposto a condizioni di carico derivanti dal superamento del massimo valore del fattore di carico a causa di effetti combinati di manovra e raffica</i>" e pertanto i due elementi critici hanno ceduto al momento del disastro provocando il distacco del tronco di coda in pochi secondi, ma questa, in realtà, è un'ipotesi tutta da dimostrare.<br>
+La logica, il buonsenso e la scienza pretenderebbero che prima si dimostri il superamento del fattore di contingenza per la velocità di volo tenuta dal DC-9, poi si può anche ipotizzare che ciò abbia portato al cedimento dell'ordinata di forza, ma fare il contrario è privo di senso, poiché non porta a dimostrare assolutamente niente, dal momento che l'ipotesi del cedimento dell'ordinata di forza è basata su di un'altra ipotesi (superamento del fattore di contingenza).<br>
+<br>
+Oltre all'assenza di elementi che possano suffragare l'ipotesi del distacco in quota del tronco di coda, esistono riscontri oggettivi (quindi non ipotesi) che vanno, addirittura, a sfavore di tale ipotesi.<br>
+Nel seguito ne saranno presi in esame alcuni con lo scopo principale di evidenziarne la compatibilità con l'abbattimento tramite missili inerti (che è l'oggetto di questa pagina). Secondariamente, tali riscontri oggettivi saranno utili anche per rendere ben evidente l'infondatezza dell'ipotesi di destrutturazione in volo del DC-9.<br>
+<br>
+Cominciamo ad esaminare ciò che troviamo a pag. 59 del vol. 2 della <a href="http://cristianopi.altervista.org/straus/blasi2.pdf" target="_blank">perizia Blasi</a>, dove i periti parlano del "<i>troncone posteriore <u>estremo</u> della fusoliera</i>":
+
+<div class="cita">
+Il troncone si è staccato, con evidente azione dall'alto verso il basso e <u>rotazione a sinistra</u>, in corrispondenza dell'ordinata posteriore di forza del collegamento fusoliera-piloni di supporto dei motori <span style="font-family: sans-serif">[<i>stazione 860, ndr</i>]</span>.
+</div>
+
+&Egrave; evidente che questo distacco non può essere spiegato dalle teorie che prevedono la perdita in quota del troncone di coda, dal momento che per ruotare, la coda avrebbe dovuto essere asimmetrica e certamente non lo era.<br>
+Quel tipo di distacco trova, invece, facile spiegazione se collocato in un contesto realistico di destrutturazione basato esclusivamente sugli elementi oggettivi riportati nelle varie perizie, evitando di avventurarsi in ipotesi indimostrabili.<br>
+<br>
+Tra le varie ipotesi di destrutturazione formulate, l'unica cosa certa è che al momento del disastro si è distaccato il troncone della semiala sinistra, trovato circa 10 km ad est dal relitto principale. Controversa è la causa che ne ha provocato la rottura, ma non c'è dubbio che sia avvenuta al massimo entro qualche secondo dall'evento catastrofico.<br>
+<br>
+Una volta persa una grossa parte della semiala sinistra, l’aereo non è più stato governabile, a prescindere dalle condizioni dei comandi e delle superfici di governo. Ha quindi iniziato a rollare alzando la semiala destra (molto più portante della sinistra), ha abbassato il muso e ha cominciato a perdere quota acquistando velocità, come descritto a fine paragrafo "<a href="../rico/rico.html#abbatti" target="_blank">18:59 - L'abbattimento</a>". La sequenza può essere visualizzata tramite il seguente video.<br>
+<br>
+
+<div style="margin-bottom: 1em; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="imp_video.png" style="float:left; padding-right: 2em;" alt="" title="">
+Questo fotogramma appartiene al video "<a href="https://youtu.be/M1iZdwK8aS8?t=128" target="_blank"><i>Huge Radio Controlled Aircraft Loses Wing And Crashes!</i></a>", che mostra cosa accade ad un modello di B747-400 dopo aver perso improvvisamente una semiala: precipita nell'unico modo possibile, cioè ruotando intorno all'asse longitudinale mentre l'angolo di picchiata si accentua sempre di più.<br>
+<br>
+Il fatto che si tratti di un modello non implica un comportamento diverso dall'aereo reale; ciò che accade è semplicemente una conseguenza della mancanza di portanza non più generata dalla semiala distaccatasi ed è ciò che è accaduto anche al DC-9 Itavia (ovviamente il DC-9 ha ruotato in senso contrario).
+</div>
+
+
+Da questo punto, descrivere con esattezza cosa sia successo durante la caduta in mare ad un aereo semi-distrutto avente tutta la struttura gravemente compromessa è assolutamente impossibile, perché i vari elementi strutturali possono cedere in qualunque momento a causa di sollecitazioni aerodinamiche del tutto imprevedibili.<br>
+Si tenga conto che l’aereo stava volando alla massima velocità di crociera e quindi ogni sollecitazione aerodinamica è amplificata dal fatto che la forza aerodinamica sviluppata da un elemento dell'aereo è proporzionale al quadrato della velocità rispetto all'aria. Ciò significa, ad esempio, che un aumento della velocità del 10% comporta un aumento della forza aerodinamica del 21%; per un aumento della velocità del 20%, l'incremento della forza aerodinamica è del 44%, e così via.<br>
+<br>
+
+Durante il volo in rotazione con la struttura gravemente compromessa (quale che ne sia stata la causa), i due piloni del motore destro cedono vari secondi prima di quelli del motore sinistro. Ciò è reso ovvio dal fatto di aver ritrovato il motore destro qualche centinaio di metri più a nord del sinistro (v. "<a href="../../fasi/6_cadu/cadu.html#coord_moto" target="_blank">Caduta in mare &rarr; Coordinate dei motori</a>").
+La pagina "<a href="../../fasi/6_cadu/cadu.html" target="_blank">Caduta in mare</a>" tratta estesamente le possibili traiettorie seguite dai motori partendo da differenti modalità del loro distacco.<br>
+In estrema sintesi, non risulta possibile che i motori si siano distaccati in quota a seguito della presunta destrutturazione del DC-9 che sarebbe avvenuta molto rapidamente dopo l'evento catastrofico, perché i motori sarebbero andati a finire molto più a sud di dove sono stati trovati.<br>
+
+<!--  2022-01-08  -->
+
+Di questo fatto si accorgono i consulenti di parte imputata Neri-Giubbolini e quelli del collegio Bazzocchi (tutti sostenitori dell’insostenibile ipotesi bomba) che per far cadere i motori nella zona del loro effettivo ritrovamento devono ipotizzare una picchiata del DC-9 con un angolo iniziale di ben 55°.<br>
+
+<!--  FINE 2022-01-08  -->
+
+<br>
+L'impossibilità matematica che i motori siano andati a finire nella zona del ritrovamento dopo essersi staccati in quota quando l'aereo era in volo livellato, implica che in realtà è stato il DC-9 a portarli molto vicino alla zona del loro ritrovamento, anticipando notevolmente il punto del loro impatto con il mare.<br>
+
+<br>
+
+<div style="margin-bottom: 1em; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="imp_profilo-fronte.png" style="float:left; padding-right: 2em;" alt="" title="">
+Queste due immagini mostrano l'impatto del DC-9 col mare. Chiaramente l'aereo non era così in perfetto stato e non aveva più il motore destro.<br>
+<br>
+Le tre frecce rosse evidenziano che probabilmente la velocità non era parallela all'asse longitudinale, cioè, più che "tuffarsi" in mare con la prua, l'aereo ha urtato l'acqua mentre si muoveva con una significativa componente trasversale (con verso +Y).<br>
+La semiala destra potrebbe aver fatto perno con l'acqua quando ancora la prua si trovava a qualche metro dalla superficie del mare, facendo ruotare l'aereo nel senso di aumentare la velocità con la quale la prua ha urtato il mare.<br>
+La freccia e il punto in verde indicano la rotazione in avanti della semiala intorno alla giunzione ala-fusoliera in corrispondenza del longherone anteriore (v. "<a href="https://www.stragi80.it/documenti/gi/perizie/031.pdf" target="_blank">Capitolo XXXI - Perizia metallografica-frattografica Firrao ed altri - 30.07.94.</a>" al punto 1a di pag. 12 o 5.1c a pag. 14: "<i>azione flettente ad asse z (alto-basso) alla radice dell’ala che ne ha causato il distacco dalla fusoliera</i>").<br>
+Mentre l'aereo stava perdendo la semiala sinistra, il troncone di coda ha <u>iniziato</u> a cedere in corrispondenza dell'ordinata di forza alla stazione 642 (come sarà spiegato tra breve).<br>
+La freccia blu evidenzia la rotazione causata dal fatto che la semiala sinistra è più corta della destra. L'angolo di rollio è solamente indicativo e potrebbe essere stato più o meno accentuato sia in senso orario che antiorario (probabilmente il rollio era meno accentuato, cioè la semiala destra ha urtato il mare più con la parte inferiore o intradosso).<br>
+</div>
+
+Il fatto che l'aereo ha impattato l'acqua con la semiala destra nel modo mostrato dall'immagine di sinistra è reso ovvio dal paragrafo "5.2) Analisi ala destra", a pag. 14 della perizia Firrao:<br>
+
+<div class="cita">
+Sulla lamiera ventrale nella zona più vicina alla radice dell’ala si può notare un danneggiamento continuo e definito come se l’ala fosse sottoposta ad una <u>azione di compressione</u>. Lo schiacciamento delle lamiere, localizzato nella <u>zona vicina alla punta dell’ala, è attribuibile ad un impatto contro una superficie</u>.
+</div>
+
+
+
+<div style="margin-bottom: 2em; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="imp_bla-aladx.png" style="float:left; padding-right: 2em;" alt="" title="">
+Fatto confermato anche dal collegio Blasi attraverso il documento "Risposte ai quesiti a chiarimento sulle perizie relative all'incidente del DC 9 I-TIGI del 27-6-80 del 16-3-89 e del 26-5-90" del 29 ottobre 1990.<br>
+</div>
+
+
+
+
+<div style="margin-bottom: 2em; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="imp_bla-aladx-banana.png" style="float:left; padding-right: 2em;" alt="" title="">
+Particolarmente efficace è l'espressione "a buccia di banana" usata dal collegio Blasi per descrivere l'apertura della semiala destra (v. perizia Blasi del 27/06/1989, vol. II, parte IV.C-8 "Descrizione dei rottami recuperati - Ala destra" a pag. 336 della perizia).<br>
+</div>
+
+
+
+
+Andiamo avanti leggendo attentamente anche il seguente paragrafo della perizia Firrao da fine pag. 15:<br>
+
+<div class="cita">
+6e) Analisi del tronco di coda.<br>
+Si è evidenziata una azione locale che ha causato la <u>rottura dei correnti sulla <b>sinistra</b></u> e che ha dato origine a differenti morfologie di frattura nelle zone a differente giacitura ed un’unica direzione di propagazione, approssimativamente verticale, probabilmente con verso basso-alto. Va sottolineato, però, che le azioni evidenziate alle analisi condotte sui correnti posizionati sulla parte sinistra e sulla parte destra della coda non risultano correlazionabili tra loro. <u>Nella zona di culmine</u> della porzione del tronco di coda in esame, le deformazioni e le rotture dei correnti sembrano indicare un’azione diversa. <u>I correnti appaiono piegati, come se fossero stati sottoposti ad una compressione assiale</u>.
+</div>
+
+&Egrave; da notare che il tronco di coda a cui si riferisce Firrao è quello che inizia dalla stazione 642, mentre Blasi si riferisce al tronco <u>estremo</u> di coda, a partire dalla stazione 860 (piloni posteriori dei motori).<br>
+<br>
+&Egrave; evidente la piena compatibilità della "<i>rottura dei correnti sulla sinistra</i>" con l'impatto in mare mostrato dalle due immagini di prima. Basta considerare, infatti, che al momento dell'impatto in mare il DC-9 ha subìto una violentissima decelerazione mentre stava ruotando intorno all'asse longitudinale.<br>
+La decelerazione ha generato un carico inerziale sul tronco di coda troppo elevato per essere sopportato dall'ordinata di forza alla stazione 642 (basti solo pensare che un motore completamente accessoriato ha una massa maggiore di 1800 kg).<br>
+Mentre l'aereo si conficcava in acqua, la brusca decelerazione ha comportato <u>l'inizio</u> del cedimento dell'ordinata di forza alla stazione 642, cominciando con la rottura dei correnti sulla sinistra e della parte sinistra dell'ordinata di forza.<br>
+<br>
+La rotazione intorno all'asse X (longitudinale) è stata bruscamente fermata dalla semiala destra mentre questa si distruggeva conficcandosi in acqua e, per inerzia, il tronco di coda, già in fase di distacco alla stazione 642, ha continuato a ruotare distaccandosi con rotazione a sinistra, come evidenziato dai periti per il tronco estremo di coda (che ancora non si è distaccato dal resto del troncone). Il distacco alla stazione 642 ha evitato che la parte posteriore della fusoliera subisse le sorti della parte anteriore (con la parte destra estremamente frammentata).<br>
+<br>
+Il troncone di coda ha continuato a ruotare e, ovviamente, a cadere verso il basso. Tale rotazione ha fatto impattare il troncone con l'asse Y pressoché parallelo alla superficie del mare, come schematizzato nella prossima figura. Ma prima di arrivarci, è utile prendere atto di un ulteriore elemento oggettivo, così da avere il quadro completo dei fatti.<br>
+Nel paragrafo "c1) Collegamento anteriore <u>motore sinistro/pilone</u>" a pag. 7 della perizia Firrao si legge:
+
+<div class="cita">
+L’interpretazione delle rotture, fatta anche tenendo presente i risultati delle analisi al videomicroscopio, porta ad ipotizzare che tali fratture siano dovute prevalentemente ad una <u>forza con componente di <b>forte intensità in direzione -z</b></u> (verso l’alto).
+</div>
+
+Adesso sappiamo tutto ciò che serve per arrivare all'ultima parte del DC-9 che si è inabissata, con l'aiuto della seguente figura.<br>
+<br>
+
+<div style="margin-bottom: 1em; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="imp_coda.png" style="float:left; padding-right: 2em;" alt="" title="">
+Vediamo schematizzate alcune forze agenti sul troncone di coda.<br>
+Con CG è schematizzato il baricentro del troncone (la cui posizione è meramente indicativa) considerando la presenza del motore sinistro (non visibile) e l'assenza del motore destro, distaccatosi prima del sinistro (come già spiegato). Il paragrafo "c1) Collegamento anteriore motore sinistro/pilone" ci fa capire quando si è distaccato il motore sinistro. Infatti, una volta collassata l'ordinata di forza (STA 642), il troncone ha mantenuto all'incirca l'angolo di picchiata che aveva l'intero aereo al momento dell'impatto, continuando a ruotare per inerzia, come già detto.<br>
+<br>
+Il paragrafo "6e) Analisi del tronco di coda" visto prima indica la compressione dei correnti lungo il loro asse, ma solo di quelli presenti nella parte in alto del tronco di coda. Ciò può essere spiegato dall'impatto della parte anteriore del troncone con il mare avvenuto quando ancora il resto del troncone stava cadendo. La forza sviluppata dall'impatto genera un momento ad asse +Y rispetto a CG, con evidente compressione della sola parte superiore del troncone, come evidenziato in perizia.
+</div>
+
+Infine, l'ulteriore sprofondamento del troncone, mentre continua a ruotare a sinistra (sempre per inerzia), viene fermato o bruscamente rallentato dal motore sinistro, generando il cedimento "<i>con evidente azione dall'alto verso il basso e rotazione a sinistra, in corrispondenza dell'ordinata posteriore di forza del collegamento fusoliera-piloni di supporto dei motori</i>" (stazione 860), come visto prima nella perizia Blasi a pag. 59.<br>
+<br>
+
+<div style="margin-bottom: 1em; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="imp_mot-sx.png" style="float:left; padding-right: 2em;" alt="" title="">
+Quindi, il motore sinistro si distacca in questo momento (fratture "<i>dovute prevalentemente ad una forza con componente di forte intensità in direzione -z</i>") e sprofonda quasi in verticale, mentre il tronco estremo plana durante la discesa verso il fondo del mare grazie alla presenza degli impennaggi orizzontali.<br>
+</div>
+
+
+<!-- FINE  10-09-2024 -->
+
+<br>
+
+
+
+<!-- ===================================================================================== -->
+
+<!-- COMPATIBILITA' VINCOLI -->
+
+<!-- ===================================================================================== -->
+
+
+<h3 id="compatibi_vinco">Compatibilità con i vincoli</h3>
+
+
+Nel paragrafo "<a href="#vincoli" target="_blank">Vincoli da soddisfare</a>" sono elencate le principali evidenze che devono essere soddisfatte da qualsivoglia ipotesi formulata.<br>
+<br>
+L’ipotesi qui esposta soddisfa le evidenze:
+
+<ul>
+<li>il momento flettente negativo intorno all’asse X che fa staccare il troncone della semiala sinistra è causato da un missile che colpisce il carrello accelerando l’aereo verso l’alto;</li>
+<li>il troncone alare ritrovato a 10 km dal relitto principale è dovuto al fatto che tale troncone si è staccato in quota ed è stato, quindi, trasportato dal forte vento;</li>
+<li>le coordinate delle zone di ritrovamento dell’FDR e dei motori sono compatibili con la traiettoria che l’aereo ha seguito in modo del tutto incontrollato dopo l’abbattimento.</li>
+</ul>
+
+
+<!-- Revisione 10-09-2024 -->
+
+
+Alcune brevi analisi su ulteriori elementi oggettivi sono utili per completare e confermare la compatibilità di questo scenario con un gran numero di riscontri oggettivi difficilmente giustificabili da altre ipotesi di destrutturazione.<br>
+
+
+
+<!-- ==============================================================    -->
+<!-- DOOR JAMB -->
+
+<h3 id="doorjamb" style="margin-left:2em">- Door jamb installation MLG sinistro</h3>
+
+I tecnici della commissione Luzzatti hanno preferito non tradurre il nome di questo elemento strutturale. Lo hanno deciso a ragion veduta, soprattutto per il termine <i>jamb</i>, che si potrebbe tradurre con "stipite", ma sarebbe fuorviante, poiché potrebbe essere assimilato all'elemento estetico di una porta interna di un edificio.<br>
+In realtà, la relazione Luzzatti si riferisce all'elemento strutturale situato perimetralmente al portello del carrello sinistro, che serve per collegare saldamente il portello al meccanismo di apertura/chiusura.<br>
+Nella relazione si legge (v. pag. 59):
+
+<div class="cita">
+il distacco si è prodotto con movimento dall'alto verso il basso, <u>a partire dal lato <b>posteriore</b></u>.<br>
+&Egrave; interessante sottolineare il fatto che questo elemento si trova <u>saldamente ancorato alla struttura</u> e che, contrariamente alle carenature ala-fusoliera, il suo distacco è avvenuto in senso contrario alla direzione del moto.
+</div>
+
+Quindi sia questo elemento che il pannello trapezoidale ("<i>colpito violentemente dal dietro verso l'avanti</i>") sono stati colpiti da qualcosa che ha agito con una componente significativa lungo l'asse longitudinale e verso prua.<br>
+<br>
+
+Siccome lo scopo principale di questa pagina è verificare se i danni oggettivamente riscontrati siano compatibili con un abbattimento tramite missili inerti, possiamo provare a verificare anche questo ulteriore riscontro oggettivo, cioè se un missile con guida proporzionale lanciato da azimut prevalentemente da ovest impatta l'aereo con una rotta ricadente nel 2° quadrante (da est a sud).<br>
+Ciò può essere fatto sfruttando il seguente grafico che evidenzia la rotta del missile (angolo tra il nord geografico e il moto del missile rispetto al suolo in un dato istante) durante il volo e, soprattutto, al momento dell'impatto.<br>
+<br>
+
+<div style="margin-bottom: 2em; vertical-align: top; position:relative; display: inline-block; width:100%;">
+
+<!-- Ripetizione profili d'ingaggio:
+gxfgv fagdx xffgx xggdf gfaxg vddaa adfag ggafa vfgdx aaaad advaf fxaff gaafx dxfxd xaafx ggfgv xfffa aaagg xdxdv xafva ggxdg dxfgf vfdag gadxa ggafx gvgaa fagva dagav ggdga fgaaf vaffx axfvg axfva xgggf gfaga gdxfa dvgfa faxvd dgaav axdfx adadx ggfff dvggg afggd agxaf gxgxf aafdg adgaa dfagx fgfaa avadg daada xddga axffd dagda aadfa gfvga agxfd aagxa x
+-->
+
+<div id="gra_xy" style="height: 500px; float:left; margin-right: 1em"></div>
+<b>Scegliere un profilo d'ingaggio</b>:
+<select id="SelectSim_xy" onchange="SelectSim_xyOnChange(this.selectedIndex)"></select><br>
+<br>
+Il DC-9 si trova nell'origine degli assi (x = 0, y = 0); ciò significa che il sistema di riferimento è solidale con il DC-9 e si muove, quindi, di moto rettilineo uniforme rispetto al suolo (approssimazione valida per la breve durata del volo del missile). L'est è verso destra (+X) e il nord è verso l'alto (+Y).<br>
+I puntini rappresentano la posizione del missile rispetto al DC-9 e i segmenti indicano la rotta del missile in quell'istante.<br>
+L'etichetta che compare muovendo il mouse sopra ai puntini mostra alcuni parametri di volo del missile: tempo di volo, distanza in metri dal DC-9 sul piano X-Y (quindi non tiene conto della componente sull'asse verticale), rotta, velocità verticale in m/s e angolo di salita.<br>
+<br>
+Tenendo presente che il DC-9 stava volando con prua quasi esattamente a sud (v. "<a href="../../fasi/5_fine/fine.html#tas_prua" target="_blank">Fasi del volo - Ultimi minuti</a>"), l'asse Y del grafico rappresenta, a tutti gli effetti pratici, anche l'asse X del DC-9 (l'asse longitudinale, v. figura nel paragrafo "<a href="#vincoli" target="_blank">Vincoli da soddisfare</a>").<br>
+<br>
+Si può osservare che a partire dall'azimut di lancio di 240° il missile inizia a colpire il DC-9 con una piccola componente lungo l'asse X dell'aereo. Questa componente aumenta vistosamente all'aumentare dell'azimut di lancio, arrivando a più di 30° per un lancio da ovest.<br>
+</div>
+
+
+Il grafico non deve trarre in inganno, poiché potrebbe dare l'impressione che il missile si stia muovendo verso nord-est quando, invece, il segmento rosso indica una rotta verso sud-est.<br>
+<br>
+
+
+<div style="margin-bottom: 2em; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="zi_gra_xy.png" style="width: 372px; height: 325px; float:left; padding-right: 1em;" alt="" title="">
+Questa immagine ottenuta dal grafico 3D visto prima per il profilo 260 / Av / 15, opportunamente ruotato nel modo qui mostrato, rende perfettamente evidente che il missile si sta muovendo verso sud-est, proprio come risulta dal precedente grafico (selezionando il profilo 260 / Av / 15).<br>
+<br>
+L'asse X tratteggiato è quello del DC-9 che, come detto, ha la prua quasi esattamente a sud (circa 179°).
+</div>
+
+<br>
+
+Appare evidente, dunque, che un AIM-7C inerte lanciato da un azimut di 260/270° è compatibile anche con gli ulteriori elementi oggettivi associabili ad azioni violente da coda verso prua.<br>
+Se, poi, i missili realmente utilizzati fossero stati della variante -7E o addirittura -7F, le loro caratteristiche nettamente superiori avrebbero consentito anche azimut di lancio intorno ai 300°, aumentando notevolmente la componente in direzione coda-prua.<br>
+<br>
+
+
+
+<!-- ==============================================================    -->
+<!-- CONETTO -->
+
+<h3 id="conetto" style="margin-left:2em">- Cono di coda</h3>
+
+Questo cono viene usato negli aerei della serie DC-9 come uscita d'emergenza.<br>
+<br>
+
+<div style="margin-bottom: 2em; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="zi_conetto.png" style="float:left; padding-right: 30px;" alt="" title="">
+Il fotogramma qui mostrato è tratto dal video <a href="https://youtu.be/TAndXzhgurI?t=75" target="_blank"><i>Super-80 Emergency Exits and Slides</i></a>, che si riferisce all'MD-80, ma è lo stesso (con le dovute proporzioni) di quello montato nel DC-9-15.<br>
+<br>
+Nell'RD-72-88 si può osservare una foto a pag. 25 e lo schema del cono a pag. 27.
+</div>
+
+A pag. 56 della relazione Luzzatti viene scritto:
+
+<div class="cita">
+la rottura del cono si è innescata in corrispondenza della parte inferiore e si è prodotta sotto una <u><b>violenta</b> sollecitazione di flessione, agente dal <b>basso verso l'alto</b></u>, in un piano leggermente obliquo rispetto a quello di mezzeria del cono.<br>
+Quanto sopra esclude che il tronco di cono si sia separato in aria per una sovrappressione, determinatasi all'interno a seguito di cedimento strutturale,
+mentre indica che lo stesso <u>si è separato per un'azione esterna</u>, con tutta probabilità al momento dell'impatto con l'acqua.<br>
+</div>
+
+La commissione ipotizza che la rottura sia avvenuta nell'impatto con il mare, ma all'epoca non si sapeva come questo fosse avvenuto, dal momento che il relitto non era stato ancora recuperato.<br>
+
+L'ipotesi fatta dalla Luzzatti risulterebbe verosimile se l'aereo avesse impattato il mare con la "pancia" (flessione agente dal basso verso l'alto), ma sappiamo che ciò non è successo.<br>
+Tuttavia, il troncone di coda, in effetti, ha impattato il mare con la parte inferiore, per cui il cono potrebbe aver ceduto in questo momento, ma se si considera la violenza dell'impatto iniziale dell'aereo col mare (tanto violento da determinare l'inizio della rottura dell'ordinata di forza alla stazione 642), è difficile poter immaginare che il cono (privo di qualunque funzione strutturale) abbia potuto resistere all'impatto; quindi si sarebbe distaccato con una flessione da sinistra verso destra (azione prevalentemente in direzione Y), non dal basso verso l'alto (azione in direzione Z).<br>
+
+Una volta presi in considerazione gli elementi oggettivi riportati nel paragrafo "<a href="#impatto_mare" target="_blank">Caduta e impatto con il mare</a>", la compatibilità con l'impatto di un missile inerte risulta maggiore sia per la sollecitazione di flessione che per il piano d'azione leggermente obliquo.<br>
+
+
+
+
+
+<!-- ==============================================================    -->
+<!-- Collegamento MOTORE SX -->
+
+<h3 id="coll_mot_sx" style="margin-left:2em">- Collegamento motore sinistro</h3>
+
+Vale la pena, infine, prendere in considerazione anche il "<a href="https://www.stragi80.it/documenti/gi/perizie/031.pdf" target="_blank">Capitolo XXXI - Perizia metallografica-frattografica Firrao ed altri - 30.07.94.</a>" a pag. 7:
+
+<div class="cita">
+c2) Collegamento anteriore <u>pilone sinistro/fusoliera</u>.<br>
+Si rilevano deformazioni con accumuli di materiale della paratia <span style="font-family: sans-serif"><i>[parafiamma, ndr]</i></span> alla base dei rivetti che indicano un movimento relativo attacco-paratia con spostamento degli angolari in <u>direzione -y</u> (verso l’ala sinistra) rispetto alla paratia.
+</div>
+
+In altri termini, la paratia parafiamma in titanio che protegge la fusoliera da un eventuale incendio nei motori è andata incontro al motore sinistro (verso -Y), cioè c'è stato un moto relativo fusoliera-motore con tendenza a ridurre la distanza tra i due elementi.<br>
+Sebbene questa azione possa avere un certo grado di compatibilità con l'impatto in mare (maggiore dell'azione vista per il cono di coda), un missile inerte che impatta la zona carrello con la geometria descritta in questa pagina risulta più consistente con la deformazione riscontrata, dato che l'aereo è stato accelerato da un'elevata componente verso est (cioè proprio nel verso -Y), molto maggiore di quella che lo ha accelerato verso l'alto.<br>
+
+
+
+<!-- FINE  10-09-2024 -->
+
+
+
+<br>
+
+
+
+
+<!-- AVVICINAMENTO INIZIALE -->
+<!-- ===================================================================================== -->
+
+<h3 id="avvi_ini">Avvicinamento iniziale</h3>
+
+<!-- 22-01-2022, aggiunto "078.pdf" -->
+
+Dopo aver appurato con sufficiente dettaglio la modalità utilizzata per l'attacco finale, in questo paragrafo vengono presentate tre ipotesi sulle possibili modalità usate per guidare l'intercettore nella zona del DC-9.<br>
+<!-- FINE 22-01-2022 -->
+
+<br>
+Va subito precisato che nessuno dei 4 tabulati di Ciampino mostra una traccia che possa essere attribuita all'intercettore, per cui si può solo dedurre che siccome il lancio dei missili è avvenuto da ovest, è molto probabile che anche l'avvicinamento iniziale sia partito da ovest.<br>
+
+<h3 style="margin-left:3em">1) Guida caccia</h3>
+
+Una modalità che poteva essere usata per guidare l'intercettore nella zona del DC-9 è quella ovvia del vettoramento radar tramite un guida caccia, sia esso basato a terra o aereo.<br>
+In questa modalità, il guida caccia fornisce all'intercettore il rilevamento (l'azimut) e la distanza dal bersaglio fino a quando l'intercettore non diventa autonomo acquisendo il bersaglio sul radar impostato in modalità ricerca. Poi il pilota del caccia passa in modalità <abbr title="single target tracking">STT</abbr> e, seguendo le indicazioni presentate sullo schermo radar, corregge la traiettoria finale per lanciare.<br>
+
+<h3 style="margin-left:3em">2) TACAN a terra</h3>
+
+Un'altra possibile modalità per portarsi nelle vicinanze del DC-9 era quella di usare un TACAN (una radioassistenza militare). &Egrave; senz'altro una modalità atipica, ma data la particolarità di questo ipotetico scenario, non la si può escludere a priori.<br>
+Per attuare questo tipo d'intercettazione, il caccia aveva bisogno di un aereo nei pressi del DC-9 con un ricevitore sintonizzato sullo stesso TACAN dell'intercettore e che quindi gli poteva comunicare periodicamente la radiale attraversata in quel momento.<br>
+Supponendo che l'intercettore sia decollato dalla Sardegna o dalla Corsica, questo avrebbe potuto seguire una rotta in allontanamento dal TACAN di Solenzara o da quello di Decimomannu, intercettando e mantenendo una specifica <a href="../../defi/altro/altro.html#radiale" target="_blank">radiale</a>.<br>
+La comunicazione dell'aereo nei pressi del DC-9 poteva essere: "Siamo sulla radiale 110 di Solenzara a 180 miglia"; dopo qualche minuto il rilevamento passava a 120°/185 nm e così via.<br>
+L'intercettore avrebbe variato la sua prua in base alla radiale sulla quale si trovava il DC-9 e avrebbe saputo anche la distanza residua.<br>
+<br>
+
+<!-- 22-01-2022, aggiunto "078.pdf" -->
+
+L'effettiva presenza di un aereo nei pressi del DC-9 la possiamo dedurre da quanto emerge dall'analisi dei tabulati del radar Marconi presentata nella pagina "<a href="../../fasi/5_fine/fine.html" target="_blank">Fasi del volo - Ultimi minuti</a>" di questo sito al paragrafo "Presenza di un altro aereo", dal "<a href="https://www.stragi80.it/documenti/gi/perizie/034.pdf" target="_blank">Capitolo XXXIV - Consulenza radaristica Pent-Vadacchino - 21.05.92.</a>" a partire da fondo pag. 4, dal "<a href="https://www.stragi80.it/documenti/gi/perizie/067.pdf" target="_blank">Capitolo LXVII - Consulenza radaristica Algostino ed altri - 23.11.94.</a>" a pag. 22. e dal "<a href="https://www.stragi80.it/documenti/gi/perizie/078.pdf" target="_blank">Capitolo LXXVIII - Consulenza radaristica Algostino ed altri - 31.10.95.</a>" a pag. 4.
+
+<!-- FINE 22-01-2022 -->
+
+<br>
+Quest'intercettazione sarebbe meno efficiente rispetto ad una assista da vettoramento radar, ma avrebbe il vantaggio di non impegnare una postazione radar.<br>
+<br>
+
+<div style="margin-bottom: 20px; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="dec-sza_200.png" style="float:left; padding-right: 30px;" alt="" title="">
+L'immagine mostra l'ubicazione dei due TACAN (dischetti verdi) e quattro radiali d'esempio, per far vedere come un caccia NATO poteva seguirle per arrivare nei pressi dell'IH870.<br>
+<br>
+L'arco di cerchio arancione rappresenta la portata nominale di 200 nm del TACAN di Decimomannu, l'arco verde, invece, è riferito a Solenzara. La portata reale può essere indifferentemente superiore o inferiore a quella nominale e dipende, ovviamente, anche dalla quota di volo, oltre che dalla potenza di trasmissione del TACAN.<br>
+
+<!-- Nel manuale di volo del TF-104G a pag. 139: portata fino a 390 nm LOS -->
+
+</div>
+
+Proseguendo con l'avvicinamento al bersaglio, l'intercettore avrebbe iniziato a vedere il DC-9 sul radar e da quel punto sarebbe stato autonomo.<br>
+
+
+<!-- 22-01-2022 -->
+
+<h3 style="margin-left:3em">3) TACAN aviotrasportato</h3>
+
+Anche per attuare questa modalità, è necessario un aereo nei pressi del DC-9. In questo caso, l'aereo deve essere dotato di un TACAN del tutto simile a quelli basati a terra, con la sola differenza di essere aviotrasportato.<br>
+Una possibile scelta ricade nel Piaggio PD808-RM (la versione per radiomisure del PD808), la cui strumentazione è elencata nel documento "<a href="http://cristianopi.altervista.org/straus/v1f304_WP001835_001.pdf" target="_blank">AA.1C-PD808-2-8</a>"
+<i><sup><abbr title="Procura della Repubblica di Roma, VOL. I - FASC. 304 - PAG. 69704 - 69716, ESTRATTO DEL DOCUMENTO AA.1C-PD808-2-8 RELATIVO ALLE APPARECCHIATURE SPECIFICHE PER RADIO MISURE, UTILIZZATE SUL VELIVOLO PD808. ALLEGATO 'B' AL FG. SMA/40/3276 DATATO 20.11.97 (UI 1833).">fonte</abbr></sup></i>
+
+, dove si legge "RICETRASMETTITORE TACAN TIPO AN/ARN21C VERSIONE RM", le cui caratteristiche si possono trovare nella pagina <a href="http://www.vintageavionics.nl/index_bestanden/ARN21C.htm" target="_blank">AN/ARN-21C</a>.<br>
+<br>
+In questo caso, l'intercettore deve semplicemente manovrare per seguire la rotta indicata dallo strumento di bordo che lo conduce all'aereo nei pressi del DC-9.<br>
+<br>
+Questa modalità è probabilmente la migliore per una missione così particolare, in quanto consente all'intercettore di evitare qualunque emissione elettromagnetica, salvo nella fase finale di aggancio radar del bersaglio. Vengono, inoltre, evitate anche le trasmissioni radio del guida caccia e dell'aereo vicino al DC-9, necessarie nei due casi precedenti.<br>
+
+
+<!-- FINE 22-01-2022 -->
+<br>
+
+
+
+<!-- PLOT A OVEST -->
+<!-- ===================================================================================== -->
+
+
+<h3 id="plot_ovest">I famosi plot a ovest</h3>
+
+Alcuni consulenti ritengono che i tre plot di solo radar primario situati ad ovest del DC-9 possano essere stati generati da uno o due aerei di piccole dimensioni che inizialmente volavano all'incirca in parallelo alla rotta seguita dal DC-9, per poi virare verso est e sferrare l'attacco. Si veda, ad esempio, l'<a href="https://www.stragi80.it/documenti/processo/trascrizioni/16.04.03.pdf" target="_blank">esame</a> del perito Dalle Mese a pag. 95.<br>
+Entrambi gli estrattori del radar primario Marconi riportano i tre plot nei seguenti orari:
+<pre>
+  -17 18:58:11
+  -12 18:58:39
+   2b 18:59:57
+</pre>
+I plot compaiono nel tabulato dell'estrattore 3 come segue:
+<pre>
+      <b>Plot -17</b>
+   RADAR=03  SETTORE=07  NUM.PLOTS=04  TEMPO=0463  N.CICLO=04280565   ORA=80.06.27/18.58.11
+   X= 012.04   Y=-122.08   R= 122.26   A=173 50'     Q= 15                     PR.
+
+      <b>Plot -12</b>
+   RADAR=03  SETTORE=07  NUM.PLOTS=04  TEMPO=0299  N.CICLO=04280704   ORA=80.06.27/18.58.39
+   X= 013.24   Y=-126.21   R= 127.12   A=173 19'     Q= 15                     PR.
+
+      <b>Plot 2b</b>
+   RADAR=03  SETTORE=07  NUM.PLOTS=04  TEMPO=0249  N.CICLO=04281091   ORA=80.06.27/18.59.57
+   X= 027.00   Y=-126.30   R= 129.28   A=167 31'     Q= 13                     PR.
+</pre>
+&Egrave; utile precisare che il radar Selenia non rileva quei tre plot.<br>
+Calcolando la distanza tra i plot, si può calcolare la velocità media tenuta dall'ipotetico caccia. Sfruttando il temporizzatore ad alta risoluzione presente nei tabulati (campo "TEMPO"), abbiamo che il plot -12 viene battuto 27,84 s dopo del plot -17, ottenendo che l'antenna ruota in (5,568 &plusmn; 0,08) s e il plot 2b dopo 105,76 s sempre dal plot -17, ottenendo una rotazione ogni (5,566 &plusmn; 0,08) s, da cui risultano le seguenti velocità medie (rispetto al suolo) e rotte:<br>
+<pre>
+      <b>Marconi 1</b>
+   -17 &rarr; -12: t= 27,84 s, d=  4,77 nm, V<sub>media</sub>= 617 kn, rotta= 157°
+   -12 &rarr;  2b: t= 77,92 s, d= 13,27 nm, V<sub>media</sub>= 613 kn, rotta=  89°
+
+      <b>Marconi 3</b>
+   -17 &rarr; -12: t= 27,84 s, d=  4,70 nm, V<sub>media</sub>= 608 kn, rotta= 157°
+   -12 &rarr;  2b: t= 77,92 s, d= 13,25 nm, V<sub>media</sub>= 612 kn, rotta=  89°
+</pre>
+Considerando la temperatura ambiente e il vento presente quella sera in corrispondenza di quei plot, risulterebbe che l'ipotetico caccia stesse tenendo una velocità piuttosto insolita, in quanto volava in regime transonico. Infatti, se la quota del caccia fosse stata uguale a quella del DC-9, per il primo tratto risulterebbe una velocità di mach 0,99 per l'estrattore 1 e mach 1 per l'estrattore 3, del tutto inverosimile, perché di solito non si vola a mach 1; o si decelera o si accelera, proprio per evitare l'elevatissima resistenza aerodinamica del regime transonico. Per il secondo tratto, invece, la velocità media di mach 0,85 è senz'altro verosimile.<br>
+Per il primo tratto, la velocità è sempre superiore a mach 0,9, qualunque sia la quota, specialmente se si considera l'estrattore 1. Sembrerebbe, quindi, che l'ipotetico caccia stesse rallentando da supersonico ad altamente subsonico, per poi virare verso il DC-9. &Egrave; comunque strano che un caccia voli supersonico senza un valido motivo, solo per raggiungere il DC-9.<br>
+
+<br>
+
+Osservando le seguenti immagini (che possono essere ingrandite cliccandoci sopra), si possono fare alcune considerazioni aggiuntive sull'effettiva possibilità che quei tre plot possano essere attribuibili ad un caccia.<br>
+<br>
+
+<div style="margin-bottom: 30px; vertical-align: top; display: inline-block;">
+
+<div class="click-zoom" style="vertical-align: top; padding-right: 20px; display: inline-block; float:left;">
+	<label> <input type="checkbox">
+	<img src="plot_-12_18,55-19,05.png" alt="" title="" width="310" height="310">
+	</label>
+</div>
+
+<div class="click-zoom" style="vertical-align: top; padding-right: 20px; display: inline-block; float:left;">
+	<label> <input type="checkbox">
+	<img src="plot_-12_tutti.png" alt="" title="" width="310" height="310">
+	</label>
+</div>
+L'immagine di sinistra mostra i plot di solo primario presenti nel tabulato relativo all'estrattore 3 del radar Marconi registrati dalle 18:55 alle 19:05 (l'abbattimento è avvenuto circa alle 18:59:45), mentre l'immagine di destra visualizza tutti i plot di solo primario presenti nel tabulato.<br>
+<br>
+Si nota che i famosi tre plot si trovano in una fascia di distanza dall'antenna in cui sono presenti moltissimi altri plot, per cui la loro presenza potrebbe essere del tutto casuale.
+</div>
+
+L'effettiva possibilità che quei tre plot possano realmente rappresentare un aereo è oggettivamente scarsa, ma questo non può escludere la presenza di altri aerei (oltre al DC-9) in quella zona.<br>
+<br>
+
+<!-- Revisione 21-05-2022 -->
+Per cercare di avere un'idea più precisa in merito alla probabilità che quei tre plot possano essere del tutto casuali o possano, invece, rappresentare una rotta reale, si può ricorrere all'aiuto di un computer per trovare tutte le possibili rotte composte da tre plot di solo primario; più ce ne sono, maggiore è la probabilità che i plot siano casuali.<br>
+<br>
+Iniziamo con il considerare tutti i plot di solo primario presenti nei tabulati di Ciampino che soddisfano le seguenti condizioni:
+<ol style="margin-top: 0px">
+<li>distanza dal radar maggiore di 80 nm;</li>
+<li>azimut rispetto al radar Marconi tale da escludere i falsi plot generati dal Sole al tramonto (plot da 296° a 303° e da 81° a 83°);</li>
+<li>esclusione dei plot presenti nella zona e nell'orario dell'abbattimento.</li>
+</ol>
+
+Soddisfano le tre condizioni 992 plot dell'estrattore 1 e 1000 plot dell'estrattore 3.<br>
+<br>
+Al fine di ottenere un profilo di volo simile a quello mostrato dai tre plot -17, -12 e 2b, per ognuno dei due estrattori, il programma effettua una ricerca esaustiva di tutte le terne di plot che soddisfano le seguenti condizioni:
+
+<ol style="margin-top: 0px">
+<li>distanza tra due plot consecutivi compresa tra 4 nm e 20 nm;</li>
+<li>velocità risultante tra due plot consecutivi compresa tra 500 kn e 650 kn;</li>
+<li><a href="https://www.esercizimatematica.com/angolo-convesso/" target="_blank">angolo convesso</a> compreso tra il segmento plot<sub>1</sub>-plot<sub>2</sub> e il segmento plot<sub>2</sub>-plot<sub>3</sub> non inferiore a 70° (virata non troppo stretta).</li>
+</ol>
+
+<!-- P:\PRG_VC2019\USTICA - Radar\main.cpp  blocco "// STATISTICA 3 PLOT POSSIBILI" -->
+In pratica, il programma, partendo dal 1° plot memorizzato, cerca il 2° plot che soddisfa le condizioni 1 e 2, se lo trova, inizia la ricerca del 3° plot che soddisfa le condizioni 1 e 2 rispetto al 2° plot e la condizione 3. I tre plot così trovati risultano distanti tra le 4 e le 20 miglia dal primo al secondo e dal secondo al terzo e sono compatibili con un aereo che si muove dal 1° plot, passa per il 2° e arriva al 3° percorrendo il tragitto con una velocità (rispetto al suolo) compresa tra i 500 e i 650 kn e non fa virate troppo strette, ottenendo una terna di plot del tutto simile ai tre plot -17, -12 e 2b.<br>
+<br>
+Il programma trova 214 terne di plot per l'estrattore 1 e 203 terne per l'estrattore 3 che soddisfano le condizioni imposte.<br>
+<br>
+
+
+<div style="margin-bottom: 30px; vertical-align: top; display: inline-block;">
+
+<div class="click-zoom" style="vertical-align: top; padding-right: 20px; display: inline-block; float:left;">
+	<label> <input type="checkbox">
+	<img src="terne.png" alt="" title="" width="475" height="450">
+	</label>
+</div>
+La cartina (che può essere ingrandita cliccandoci sopra) mostra il risultato ottenuto per l'estrattore 3.<br>
+<br>
+I plot mostrati sono solo quelli presi in considerazione dal programma (1000 plot). I plot bordati di rosso sono quelli appartenenti alle 203 terne che soddisfano le condizioni di similitudine rispetto alla terna -17, -12 e 2b.<br>
+<br>
+A parte un paio di possibili rotte reali (vicino Ancona e sulla Corsica), le altre sembrano formate da plot del tutto casuali.<br>
+<br>
+Considerando che ci sono ben 203 terne di plot del tutto simili a quella formata dai plot -17, -12 e 2b, si può concludere che quella particolare terna è una tra le tante e può essere ritenuta del tutto casuale.<br>
+
+</div>
+
+<!-- FINE 21-05-2022 -->
+
+
+
+
+<br>
+
+
+<script>
+"use strict";
+
+CreaIndice(0);
+
+
+
+// ===================================================================================================
+//		SIMULAZIONI
+// ===================================================================================================
+
+
+
+var elenco= new Object();
+
+Plotly.d3.csv('simu/elenco.csv', function(err, rows) {
+
+	// elenco,RA,DA,mis_dc9,mis_gs_x,mis_gs_y,mis_gs_z
+	elenco.nome= unpack(rows, 'elenco');
+	elenco.RA= unpack(rows, 'RA'); // Rampa al lancio
+	elenco.DA= unpack(rows, 'DA'); // Offset in AZM (anticipo traiettoria)
+	elenco.mis_dc9= unpack(rows, 'mis_dc9'); // Angolo MISSILE - DC9
+
+	// Velocità iniziale del missile (linea nel grafico 3D)
+	elenco.vx= unpack(rows, 'mis_gs_x').map(Number);
+	elenco.vy= unpack(rows, 'mis_gs_y').map(Number);
+	elenco.vz= unpack(rows, 'mis_gs_z').map(Number);
+
+	var sel= document.getElementById("SelectSim");
+	var sel_xy= document.getElementById("SelectSim_xy");
+	for(let idx in elenco.nome) {
+		//var simu= elenco.nome[idx].split('_'); var opt= new Option(simu[0] + ' / ' + simu[1], elenco.nome[idx]);
+		
+		const str= elenco.nome[idx].split('_').join(' / ');
+		sel.options[sel.options.length]= new Option(str, elenco.nome[idx]);
+		sel_xy.options[sel_xy.options.length]= new Option(str, elenco.nome[idx]);
+	}		
+
+	TenergiaSliOnInput(document.getElementById("TenergiaSli").value);
+	
+	SimOnChange(0); // Seleziona il 1° profilo
+	sel_xy.selectedIndex= 15; SelectSim_xyOnChange(sel_xy.selectedIndex); // Seleziona un profilo che inizia ad essere utile per l'impatto da dietro
+});
+
+
+var energia;
+var t_trasfe; // Tempo di trasferimento "energia" all'ala
+var rampa_imp; // Angolo di rampa del missile all'impatto
+
+
+function CalcAccVert()
+{
+	// massa DC-9: 33000 [https://www.stragi80.it/documenti/processo/trascrizioni/15.05.03.pdf pag. 60]
+	//             32555 [https://www.stragi80.it/documenti/gi/perizie/046.pdf pag. 14] è la massa prevista a LDG sul foglio di carico
+	var Av= Math.sqrt(energia * 2 / 32800) * Math.sin(rampa_imp * Math.PI / 180) / t_trasfe / 9.81; // Acc verticale
+	document.getElementById("pro_acc_vert").innerText= Av.toFixed(2).replace('.', ',');
+	var col= "initial"; if(Av > 2.5) col= "orange"; if(Av > 2.8) col= "red";
+	document.getElementById("pro_acc_vert").style.color= col;
+}
+
+
+// Variato tempo trasmissione energia all'ala
+function TenergiaSliOnInput(val)
+{
+	t_trasfe= val / 10;
+	document.getElementById("TenergiaLab").innerText= " " + t_trasfe.toFixed(1).replace('.', ',') + " s";
+	CalcAccVert();
+}
+
+
+// Mostra/nasconde le linee dell'ACC A/P nel 3D
+function AccapOnChange()
+{
+	SimOnChange(document.getElementById("SelectSim").selectedIndex);
+}
+
+
+// Selezionato un profilo
+function SimOnChange(idx)
+{
+	// GRAFICO 3D
+	Plotly.d3.csv('simu/' + elenco.nome[idx] + '.csv', function(err, rows) {
+
+	var DC9= {
+		type: "scatter3d", name: 'DC-9',
+		mode: 'markers', marker: { size: 2, color: 'blue' },
+		text: unpack(rows, 't'), hoverinfo: 'text',
+		x: unpack(rows, 'tx'),
+		y: unpack(rows, 'ty'),
+		z: unpack(rows, 'tz')
+	};
+
+	var MIS= {
+		type: "scatter3d", name: 'Missile',
+		//mode: 'lines', line: { width: wdt, color: '#000000' },
+		//mode: 'markers', marker: { size: 3, color: 'red' },
+		mode: 'markers+lines', marker: { size: 2, color: 'red' }, line: { width: 3 },
+		text: [...DC9.text], hoverinfo: "text",
+		x: unpack(rows, 'mx'),
+		y: unpack(rows, 'my'),
+		z: unpack(rows, 'mz')
+	};
+
+	var VINI= { // Congiungente MIS - DC9 a t= 0
+		type: "scatter3d", name: 'Vini', hoverinfo: "none",
+		mode: 'lines', line: { width: 2, color: '#ff99ff' },
+		x: [MIS.x[0], Number(MIS.x[0]) + elenco.vx[idx] * 4e3],
+		y: [MIS.y[0], Number(MIS.y[0]) + elenco.vy[idx] * 4e3],
+		z: [MIS.z[0], Number(MIS.z[0]) + elenco.vz[idx] * 4e3]
+	};
+
+	// Ultima riga con ACC A/P e RAMPA all'impatto
+	rampa_imp= MIS.x.pop();
+
+	document.getElementById("pro_rampa_impatto").innerText= rampa_imp.replace('.', ',');
+	document.getElementById("pro_acc_ap").innerText= MIS.text.pop().replace('.', ',');
+
+	// Profilo scelto
+	document.getElementById("pro_azm").innerText= elenco.nome[idx].split('_')[0];
+	document.getElementById("pro_RA").innerText= elenco.RA[idx].replace('.', ',');
+	document.getElementById("pro_DA").innerText= elenco.DA[idx].replace('.', ',');
+	document.getElementById("pro_mis_dc9").innerText= elenco.mis_dc9[idx].replace('.', ','); // Viene salvato cambiato di segno
+
+	// "pro_spazio" viene aggiornato insieme a "Grafico a SX"
+
+	// 3 righe con i range per xyz
+	var raz_mi= MIS.text.pop(), raz_ma= MIS.x.pop();
+	var ray_mi= MIS.text.pop(), ray_ma= MIS.x.pop();
+	var rax_mi= MIS.text.pop(), rax_ma= MIS.x.pop();
+
+	document.getElementById("pro_tof").innerText= MIS.text[MIS.text.length - 1].replace('.', ',');
+
+	// t,mx,my,mx,tx,ty,tz,dst,Vm,Vr
+	var dst= unpack(rows, 'dst');
+	var Vm= unpack(rows, 'Vm');
+	var Vr= unpack(rows, 'Vr');
+	var Aap= unpack(rows, 'Aap');
+
+
+	var Vr_imp= Vr[Vr.length - 5];
+	energia= .5 * 318 * .4536 * Vr_imp*Vr_imp; // GLOBALE
+	document.getElementById("pro_energia").innerText= (energia * 1e-6).toFixed(1).replace('.', ',');
+	CalcAccVert();
+
+
+	for(var i= 0; i < dst.length; i++) {
+		MIS.text[i]= ("t: " + MIS.text[i] + ", d= " + dst[i] +
+			"<br>V= " + Vm[i] + ", Vr= " + Vr[i] +
+			"<br>h= " + Math.round(MIS.z[i] / .3048)).split('.').join(',');
+
+		DC9.text[i]= ("t: " + DC9.text[i] + ", d= " + dst[i] + "<br>Vr= " + Vr[i]).split('.').join(',');
+	}
+
+	var dati= [MIS, DC9, VINI];
+
+	// Vettore ACC A/P
+	if(document.getElementById("CB_acc_ap").checked) {
+		const ka= 1 / 6 / 9.80665; // 6 è il fattore d'amplificazione usato nelle simulazioni per allungare il segmento ACC del grafico 3D
+		var ax= unpack(rows, 'ax').map(Number), ay= unpack(rows, 'ay').map(Number), az= unpack(rows, 'az').map(Number);
+		for(var i= 0; i < MIS.x.length; i++) {
+			var ACC= {
+				type: "scatter3d", hoverinfo: "text",
+				mode: 'lines', line: { width: 1, color: '#ffc266' },
+				text: "ACC<sub>A/P</sub>: " + (Aap[i] + // Magnitudine
+					"<br>x: " + (ax[i] * ka).toFixed(1) + ", y: " + (ay[i] * ka).toFixed(1) + ", z: " + (az[i] * ka).toFixed(1)
+				).split('.').join(','),
+				x: [MIS.x[i], Number(MIS.x[i]) + ax[i]],
+				y: [MIS.y[i], Number(MIS.y[i]) + ay[i]],
+				z: [MIS.z[i], Number(MIS.z[i]) + az[i]]
+			};
+			dati.push(ACC);
+		}
+	}
+
+	var layout= {
+		width: 800, height: 800, uirevision:'true',
+		showlegend: false,
+
+		margin: { l:0, r:0, t:0, b:0},
+		scene:{
+			camera: {
+				eye: { x: -2, y: -.2, z: -.1 }
+			},
+			aspectmode: "cube",
+			xaxis: {
+				showspikes: false,
+				title: 'Longitudine [m]',
+				range: [rax_mi, rax_ma]
+			},
+			yaxis: {
+				showspikes: false,
+				title: 'Latitudine [m]',
+				range: [ray_mi, ray_ma]
+			},
+			zaxis: {
+				showspikes: false,
+				title: 'Altitudine slm [m]',
+				range: [raz_mi, raz_ma]
+			}
+		}
+	};
+
+	Plotly.react('gra_3d', dati, layout, {responsive: true});
+	});
+	
+	Gra_ACCAP(idx);
+}
+
+
+// ============================================================================================================================
+
+// Grafico ACC A/P
+
+function Gra_ACCAP(idx)
+{
+	Plotly.d3.csv('simu/' + elenco.nome[idx] + '_accap.csv', function(err, rows) {
+
+	var t= unpack(rows, 't');
+
+	var DST= {
+		type: "scatter", name: 'Distanza',
+		mode: "lines", line: { width: 2, color: '#0000ff', shape: 'spline' },
+		x: t, y: unpack(rows, 'dst')
+	};
+	
+	var ACC= {
+		type: "scatter", name: 'Accelerazione',
+		mode: "lines", line: { width: 2, color: '#ff9000', shape: 'spline' },
+		x: t, y: unpack(rows, 'Aap'),
+		yaxis: 'y2'
+	};
+
+	var MAX_ACC= {
+		type: "scatter", name: 'Accelerazione MAX',
+		mode: "lines", line: { width: 3, color: '#cc7a00', dash: 'dash' },
+		x: [t[0], t[t.length - 1]], y: [15, 15],
+		yaxis: 'y2'
+	};
+
+
+	var lay= {
+		separators: ",", showlegend: false,
+		margin: { l:10, t:10, b:10},
+		xaxis: {
+			automargin: true,
+			title: { text: '<b>Tempo di volo</b> [s]' }
+		},				
+		yaxis: {
+			automargin: true,
+			title: '<b>Distanza dal DC-9</b> [m]',
+			titlefont: { color: '#0000ff' },
+			tickfont: { color: '#0000ff' },
+			gridcolor: '#ccccff'
+		},
+		yaxis2: {
+			automargin: true,
+			title: "<b>Accelerazione comandata dall'A/P</b> [g]",
+			titlefont: { color: '#ff9000' },
+			tickfont: { color: '#ff9000' },
+			gridcolor: '#ffe0cc',
+			overlaying: 'y',
+			side: 'right'
+		}
+	};
+
+	var config= {
+		showLink: true, plotlyServerURL: "https://chart-studio.plotly.com",
+		responsive: true
+	};
+
+	Plotly.newPlot('gra_2d', [DST, ACC, MAX_ACC], lay, config);
+	
+	
+	
+	// =================================================================================================
+	
+	// Grafico a SX
+	
+	var MACH= {
+		type: "scatter", name: 'Velocità',
+		mode: "lines", line: { width: 2, color: '#0000ff', shape: 'spline' },
+		x: t, y: unpack(rows, 'Vm_mach')
+	};
+	
+	var RES= {
+		type: "scatter", name: 'Resistenza',
+		mode: "lines", line: { width: 2, color: '#ff9000', shape: 'spline' },
+		x: t, y: unpack(rows, 'R_kg'),
+		yaxis: 'y2'
+	};
+	
+	var lay2= lay;
+	lay2.yaxis.title.text= "<b>Velocità missile</b> [mach]";
+	lay2.yaxis2.title.text= "<b>R<sub>aerodinamica</sub> missile</b> [kg]";
+	
+	Plotly.newPlot('gra_mach_res', [MACH, RES], lay2, config);
+	
+
+
+	// Grafico a DX
+	
+	var VM= {
+		type: "scatter", name: 'Vmissile',
+		mode: "lines", line: { width: 2, color: '#0000ff', shape: 'spline' },
+		x: t, y: unpack(rows, 'Vm')
+	};
+	
+	var VREL= {
+		type: "scatter", name: 'Vrelativa',
+		mode: "lines", line: { width: 2, color: '#006600', shape: 'spline' },
+		x: t, y: unpack(rows, 'Vr')
+	};
+
+	var SMIS= { // Spazio percorso dal missile
+		type: "scatter", name: 'Smissile',
+		mode: "lines", line: { width: 2, color: '#ff9000', shape: 'spline' },
+		x: t, y: unpack(rows, 'S'),
+		yaxis: 'y2'
+	};
+
+	document.getElementById("pro_spazio").innerText= SMIS.y[SMIS.y.length - 1];
+
+	var lay3= {
+		separators: ",", showlegend: false,
+		margin: { l:10, t:10, b:10, r:10},
+		xaxis: {
+			automargin: true,
+			title: { text: '<b>Tempo di volo</b> [s]' }
+		},				
+		yaxis: {
+			automargin: true,
+			title: { text: '<b>V<sub>missile</sub> e V<sub>relativa</sub></b> [m/s]' }
+		},
+		yaxis2: {
+			automargin: true,
+			title: "<b>Spazio percorso dal missile</b> [m]",
+			titlefont: { color: '#ff9000' },
+			tickfont: { color: '#ff9000' },
+			gridcolor: '#ffe0cc',
+			overlaying: 'y',
+			side: 'right'
+		}
+	};
+	
+	Plotly.newPlot('gra_dst_vr', [VM, VREL, SMIS], lay3, config);
+	
+	});
+}
+
+
+
+// ====================================================================================================
+//		Grafico nel piano X-Y
+// ====================================================================================================
+
+// Selezionato un profilo
+function SelectSim_xyOnChange(idx)
+{
+	Plotly.d3.csv('simu/' + elenco.nome[idx] + '_xy.csv', function(err, rows) {
+
+		// t,px,py,vx,vy,trk,vv,ra
+		var vx= unpack(rows, 'vx').map(Number), vy= unpack(rows, 'vy').map(Number), trk= unpack(rows, 'trk');
+		var mis_z= unpack(rows, 'vv'), rampa= unpack(rows, 'ra'); // VEL verticale missile e angolo di salita
+		
+		var POS= {
+			type: "scatter", name: 'Pos missile',
+			mode: "markers", marker: { size: 5, color: 'red' },
+			text: unpack(rows, 't'), hoverinfo: 'text',
+			x: unpack(rows, 'px').map(Number), y: unpack(rows, 'py').map(Number)
+		};
+
+		var VEL= {
+			type: "scatter", name: 'Vel missile', hoverinfo: 'none',
+			mode: "lines", line: { width: 1, color: 'red' },
+			x: [], y: [],
+		};
+		var idx= 0;
+		for(var i= 0; i < vx.length; i++) {
+
+			POS.text[i]= (
+				"t: " + POS.text[i] +
+				", Dxy= " + Math.round(Math.sqrt(POS.x[i]*POS.x[i] + POS.y[i]*POS.y[i])) +
+				", trk= " + trk[i] +
+				"<br>Vv= " + mis_z[i] + ", As= " + rampa[i]
+				).split('.').join(',');
+
+			VEL.x[idx]= POS.x[i]; VEL.y[idx]= POS.y[i]; idx++;
+			VEL.x[idx]= POS.x[i] + vx[i]; VEL.y[idx]= POS.y[i] + vy[i]; idx++;
+			VEL.x[idx]= 'null'; VEL.y[idx]= 'null'; idx++;
+		}
+
+		var lay_xy= {
+			//title: { text:'Posizione missile rispetto al DC-9' //, font: { family: 'Courier New, monospace', size: 24 } },
+			separators: ",", showlegend: false, hovermode: 'closest', dragmode: 'pan',
+			margin: { l:10, t:10, b:10},
+			xaxis: {
+				automargin: true,
+				title: '<b>X</b> [m]',
+				constrain: 'domain' // aspect ratio
+			},				
+			yaxis: {
+				automargin: true,
+				title: '<b>Y</b> [m]',
+				scaleanchor: 'x' // aspect ratio
+			}
+		};
+
+		var config= {
+			plotlyServerURL: "https://chart-studio.plotly.com", //showLink: true, linkText: 'This text is custom!'
+			showEditInChartStudio: true,
+			displaylogo: false, responsive: true, //locale: 'it',
+			modeBarButtonsToRemove: ['zoom2d', 'select2d', 'lasso2d'] // https://plotly.com/javascript/configuration-options/#remove-modebar-buttons
+		};
+
+		Plotly.newPlot('gra_xy', [POS, VEL], lay_xy, config);
+	});
+}
+
+
+//	FINE: Grafico nel piano X-Y
+
+
+function unpack(rows, key) {
+	return rows.map(function(row) { return row[key]; });
+}
+
+</script>
+
+
+</body>
+</html>

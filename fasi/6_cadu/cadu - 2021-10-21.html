@@ -1,0 +1,1180 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Strage di Ustica">
+	<meta name="keywords" content="ustica,ih870">
+	<title>Strage di Ustica - Fasi del volo</title>
+	<link rel="stylesheet" type="text/css" href="../../stile.css">
+	<script src="../../plotly-latest.min.js"></script>
+	<style>
+	table, th, td {
+		border: 1px solid black;
+		border-collapse: collapse;
+		border: 1px solid Gray;
+	}
+	td {
+		padding: 0px 2px 0px 2px;
+	}
+	
+	td.ince {
+		padding: 2px 4px 2px 4px;
+	}
+	</style>
+</head>
+
+<body>
+
+<div class="indice"><a href="../../index.html">Indice</a></div>
+
+<h2>Caduta in mare</h2>
+
+
+La modalità con la quale l'aereo è caduto in mare riveste notevole importanza nello stabilire la causa che ne ha determinato tale caduta.<br>
+In questa pagina non si cercherà di stabilire la causa dell'evento catastrofico (come definito in alcune perizie), ma si cercherà, invece, di verificare l'ipotesi secondo la quale i motori del DC-9 si sarebbero staccati dalla fusoliera dopo pochi istanti dall'evento catastrofico, quando l'aereo si trovava ancora alla quota di crociera.<br>
+<br>
+
+<!--  2021-08-07  -->
+L'ipotesi da verificare è quindi: <b>i motori si sono distaccati dalla fusoliera alla quota di crociera (livello di volo 250) e hanno impattato la superficie del mare sulla verticale del punto del ritrovamento</b> (una volta impattato il mare, i motori si sono inabissati in verticale).<br>
+<br>
+<u>Per evitare di appesantire la lettura ripetendo continuamente una frase così lunga, ogni volta che in questa pagina ci si riferirà all'ipotesi in grassetto, verrà usata la grafia <i>IPOTESI</i></u>.<br>
+<br>
+
+
+<!-- ========================================================================================================== -->
+
+
+
+<h3>Coordinate dei motori</h3>
+
+Il riferimento usato in questo sito per le coordinate del punto di recupero dei motori è il filmato "<a href="https://www.youtube.com/watch?v=pkfY0yE3CpU" target="_blank">Immersioni recupero DC-9 ITAVIA - Filmato N°2</a>", dal quale risulta che le coordinate della "zona dei reattori" sono: 39° 41,8’ N, 13° 2,44’ E.<br>
+<br>
+Il documento "<a href="http://www.stragi80.it/documenti/gi/perizie/001-007.pdf" target="_blank">TITOLO 3 - Le Perizie</a>", a fine pag. 90 e a pag. 91, ci dice che il motore sinistro è stato recuperato nei giorni dal 10 giugno al 2 luglio 1987, mentre il motore destro è stato recuperato durante la seconda campagna dal 17 aprile al 25 maggio 1988.<br>
+Siccome la data mostrata dal "Filmato N° 2" è 22/5/1988, se ne deduce che le coordinate si riferiscono al motore destro.<br>
+<br>
+
+<div class="rev">   <!--  2021-10-16  -->
+Per determinare la posizione del motore sinistro, abbiamo tre documenti che, però, sono in contrasto tra loro:
+<ul>
+<li>l'"<a href="http://www.stragi80.it/documenti/processo/trascrizioni/15.05.03.pdf" target="_blank">UDIENZA DEL 15.05.2003</a>", durante la quale il consulente Eula riferisce che "<i>i motori sono stati trovati separati sul fondo del mare di circa <u>cinquecento metri</u></i>" (v. pag. 120);</li>
+</ul>
+</div>
+
+<ul>
+<li>la consulenza di parte imputata "<a href="http://www.stragi80.it/documenti/gi/perizie/036.pdf" target="_blank">Capitolo XXXVI - Consulenza tecnica Bazzocchi ed altri - 18.07.92.</a>" riporta a pag. 20: "<i>Il fatto che la loro distanza reciproca</i> [tra i motori, ndr]<i> sia passata dai circa cinque metri del momento in cui erano solidali con fusoliera ai <u>circa 380 metri</u> del momento di cui si sono adagiati sul fondo del mare,</i> [...]";</li><br>
+
+<li>la perizia "<a href="http://www.stragi80.it/documenti/gi/perizie/048.pdf" target="_blank">Capitolo XLVIII - Perizia tecnico-scientifica Misiti ed altri - 23.07.94.</a>" riporta a pag. 36: "[...] <i>i due motori sono stati recuperati nella stessa zona B con <u>il sinistro più a Sud</u></i> [...]" e a pag. 48: "<i>Questa ipotesi è in accordo con le caratteristiche di ritrovamento dei due motori nella stessa zona, <u>a distanza circa 1000 metri l’uno dall’altro</u> (misurati secondo la direzione del moto iniziale),</i> [...]".</li>
+</ul>
+
+
+<div class="rev">   <!--  2021-10-22  -->
+
+Ad ogni modo, per gli argomenti trattati in questa pagina, la conoscenza della posizione di uno dei due motori è sufficiente, in quanto, dal punto di vista delle simulazioni qui presentate, i motori seguirebbero una traiettoria identica, dato che i motori sono identici. Il fatto che in realtà i due motori siano stati ritrovati distanti qualche centinaio di metri significa che hanno subito sorti differenti dopo dell'evento catastrofico.<br>
+
+</div>
+
+
+<!-- ========================================================================================================== -->
+
+
+<h3>Traiettoria di caduta dei motori</h3>
+
+La verifica sul distacco dei motori in quota presentata in questa pagina si basa su una simulazione simile a quella appena accennata nel documento "<a href="http://www.stragi80.it/documenti/gi/perizie/001-007.pdf" target="_blank">TITOLO 3 - Le Perizie</a>", pag. 37, con la differenza che quella simulazione riguarda i frammenti dell'aereo, mentre qui viene simulata soltanto la caduta dei motori.<br>
+Questo tipo di simulazione è concettualmente molto semplice:
+<ul>
+<li>si posiziona il motore nel punto in cui si trovava prima dell'ipotetico distacco e gli si dà la velocità (intesa come vettore tridimensionale) che aveva l'aereo nell'istante dell'abbattimento;</li>
+<li>da questo momento in poi, si applicano le leggi della fisica che descrivono il moto di un oggetto in caduta libera e si calcolano la posizione e la velocità (due vettori tridimensionali) applicando tali leggi e facendo avanzare il tempo di simulazione a piccoli passi;</li>
+<li>durante la caduta, il motore presenta l'asse longitudinale parallelo al vettore velocità rispetto all'aria ed è soggetto alla forza trasversale esercitata dal vento variabile;</li>
+<li>quando la quota scende a zero, s'interrompe la simulazione.</li>
+</ul>
+
+Il grado d'attendibilità della simulazione è molto variabile, perché dipende da moltissimi fattori. &Egrave; evidente che quanto più piccola è l'incertezza sui parametri considerati nella simulazione, tanto maggiore sarà la sua attendibilità. In base alle considerazioni fatte nelle pagine "<a href="../../fasi/meteo.html" target="_blank">Meteo lungo la rotta</a>" e "<a href="../../fasi/5_fine/fine.html" target="_blank">Ultimi minuti</a>" si può avere un'elevata confidenza che le condizioni meteo e quelle iniziali del motore (posizione e velocità) sono molto vicine a quelle reali.<br>
+
+Per ciò che riguarda il modello usato per simulare il motore e la caduta, è stato fatto tutto il possibile per includere ogni minimo dettaglio:
+<ul>
+<li>la massa del motore è stata assunta pari a 1500 kg;</li>
+<li>la gondola motore ha un'area frontale pari a 0,78 m<sup>2</sup> e un'area laterale pari a 4,26 m<sup>2</sup>. La distinzione serve per calcolare l'accelerazione in direzione longitudinale (dovuta alla velocità rispetto all'aria) e l'accelerazione in direzione trasversale (dovuta al vento variabile);</li>
+<li>il coefficiente di resistenza dell'area frontale varia in funzione della velocità come riportato nel documento pubblicato dalla NASA 
+"<a href="https://ntrs.nasa.gov/citations/20150002109" target="_blank">Validation of an Integrated Airframe and Turbofan Engine Simulation for Evaluation of Propulsion Control Modes</a>", grafico a pag. 5;</li>
+<li>il coefficiente di resistenza dell'area laterale è pari a 1,15;</li>
+<li>l'accelerazione di gravità varia in funzione della quota e della latitudine ed è calcolata tramite la formula "<a href="https://it.wikipedia.org/wiki/Accelerazione_di_gravit%C3%A0#Variazioni_locali_della_gravit%C3%A0_terrestre" target="_blank">Variazioni locali della gravità terrestre</a>";</li>
+<li>le condizioni meteo variano in funzione della posizione e del tempo;</li>
+<li>la densità dell'aria è calcolata tenendo conto anche del vapore acqueo in essa presente.</li>
+</ul>
+
+Veniamo, finalmente al risultato.<br>
+<br>
+
+<!-- Cartina NOMINALE senza MC -->
+<div style="margin-bottom: 30px; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<div id="caduta" style="width: 350px; height: 400px; float:left; padding-right: 30px;"></div>
+La cartina mostra la traiettoria di caduta dei motori (colore verde).<br>
+<br>
+
+  <!--  2021-08-07  -->
+La crocetta centrata sul motore destro è ampia 2 x 2 nm.<br>
+Il cerchio centrato sul motore destro ha un raggio di 500 m; per il suo significato si veda il paragrafo "<a href="#accu_pos_motori">Accuratezza della posizione dei motori &rarr; Incertezza sulla posizione</a>", più avanti.<br>
+L'area delimitata dal colore blu rappresenta l'incertezza sulla posizione del DC-9 nel momento in cui il transponder ha trasmesso l'ultima risposta (ore 18:59:45; si veda il successivo paragrafo).<br>
+
+
+<br>
+Muovendo il puntatore del mouse lungo la traiettoria, vengono mostrate varie informazioni; l'etichetta che compare è organizzata come segue:<br>
+<table style="font-size: .8em;">
+<tr> <td>Tempo</td> <td>Distanza al suolo</td></tr>
+<tr> <td>Quota</td> <td>Velocità all'aria</td></tr>
+<tr> <td>Velocità al suolo</td> <td>Velocità verticale</td></tr>
+<tr> <td>Latitudine</td> <td>Longitudine</td></tr>
+</table>
+<br>
+Particolarmente interessanti sono le due velocità <i>GS</i> e <i>Vv</i>, in quanto consentono di stabilire con sufficiente accuratezza che se veramente i motori si fossero staccati in quota, sarebbero piombati sul mare con una velocità orizzontale residua di ben 150 kn (280 km/h) e con una velocità verticale intorno ai 900 km/h.<br>
+Il documento "TITOLO 3 - Le Perizie", prima citato, riporta a fine pag. 99: "<i>Solo su alcune pale e sul bordo anteriore di esse si notavano delle ammaccature, denotanti che piccoli oggetti erano penetrati negli stadi iniziali del compressore</i>".<br>
+Se i motori fossero veramente caduti in mare con quelle velocità, è molto probabile che invece di recuperarli "malridotti" (come scritto in perizia), sarebbero stati ritrovati con danni ben più evidenti, almeno nel compressore di bassa pressione.
+</div>
+
+<br>
+
+
+<!--  2021-08-07  -->
+La simulazione, quindi, colloca il punto di caduta dei motori 3,1 km più a sud del reale punto di recupero del motore destro.<br>
+<br>
+&Egrave; da considerare, però, che la simulazione parte dalle 18:59:45, cioè quando il transponder ancora funzionava, quindi certamente prima dell'effettivo inizio della caduta in mare, perché l'evento catastrofico è avvenuto entro 5,6 s dalle 18:59:45 (cioè prima del successivo giro d'antenna del radar Marconi).<br>
+In 5,6 s, il DC-9 percorreva in quel momento più di 1,3 km, per cui il risultato della simulazione può essere collocato tra 3,1 km e 4,4 km a sud del punto di recupero del motore destro.<br>
+
+
+
+<!-- ========================================================================================================== -->
+
+
+<h3>Incertezze sui parametri e simulazioni Monte Carlo</h3>
+
+
+La traiettoria mostrata in precedenza è stata ottenuta facendo la simulazione con parametri ben definiti, ma ci si potrebbe domandare cosa accadrebbe se la massa del motore non fosse proprio 1500 kg, ma 1800 oppure 1300. E se il vento fosse stato 10 kn più debole o 10 kn più forte dove sarebbero finiti i motori? E, ancora, se la velocità al momento dell'abbattimento fosse stata 10 kn più alta o 10 kn più bassa? E così via.<br>
+Per rispondere a tutte queste domande perfettamente lecite, si potrebbe decidere di fare un'altra simulazione fissando una massa di 1800 kg e vedere cosa succede, poi un'altra con un vento 10 kn più debole, un'altra ancora variando sia la massa che il vento, ecc. In pratica, ciò che serve è il metodo <a href="https://it.wikipedia.org/wiki/Metodo_Monte_Carlo" target="_blank">Monte Carlo</a>. Nel nostro caso, l'applicazione pratica di questo metodo consiste nel far variare tutti i parametri della simulazione aggiungendo o sottraendo un valore casuale ad ognuno dei parametri in modo tale che il parametro reale sia certamente compreso all'interno del campo di variabilità prefissato. Ripetendo la simulazione molte volte, si otterranno tanti risultati che prendono in considerazione praticamente tutte le possibili situazioni in cui il DC-9 si potrebbe essere trovato al momento dell'ipotetico distacco dei motori. Non si potrà conoscere la posizione esatta di caduta dei motori, ma questo non è un problema, perché ciò che interessa è verificare se c'è una remota possibilità che i motori possano essere caduti nel punto del ritrovamento dopo essersi staccati in quota.<br>
+<br>
+
+Per effettuare la simulazione Monte Carlo, oltre a tutte le incertezze casuali da introdurre sui parametri prima elencati, è necessario includere anche quella sulla posizione del DC-9 al momento dell'abbattimento.<br>
+Al di là delle molte considerazioni teoriche tramite le quali alcuni periti e consulenti sono pervenuti ad una stima altrettanto teorica dell'errore dei radar di Ciampino, in questa sede interessa avere un valore dell'errore massimo sulla distanza e sull'azimut dal radar che sia direttamente utilizzabile nella simulazione.<br>
+<br>
+
+<!-- SCARTI DST -->
+
+
+<div style="margin-bottom: 30px; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<div id="dst_plot-inte" style="width: 650px; height: 450px; float:left; padding-right: 10px;"></div>
+Il grafico mostra la distanza dei plot relativi all'IH870 nei suoi ultimi minuti di vita, così come riportati nel tabulato dell'estrattore 3 (radar Marconi).<br>
+La linea tratteggiata è la parabola usata per l'interpolazione (la curvatura è talmente piccola da farla sembrare una retta). I punti arancioni mostrano la differenza tra la distanza di ogni plot e la distanza interpolata (sono chiamati scarti o errore d'interpolazione).<br>
+Ciò che interessa calcolare, è quanto grande può essere l'errore d'interpolazione della distanza dal radar in un orario qualunque all'interno dell'intervallo di tempo interpolato.<br>
+<br>
+Un'analisi numerica degli scarti evidenzia che questi sono ben approssimati dalla distribuzione normale. Quindi si potrebbe affermare che l'errore non supera 3 volte la deviazione standard (indicata con &sigma;) con una confidenza del 99,7%. Siccome la deviazione standard dei 37 scarti mostrati è pari a 0,01988 nm e la loro media è nulla, si può scrivere che l'errore è compreso tra &plusmn;3&sigma; = &plusmn;0,06 nm con il 99,7% di confidenza.<br>
+Tuttavia, tenendo sempre presente che lo scopo di tutto ciò è verificare se esiste una remota possibilità che i motori possano essere caduti nel punto del recupero dopo essersi distaccati in quota, si può decidere di mettersi nelle condizioni più sfavorevoli ed effettuare i calcoli come se la distribuzione degli errori fosse sconosciuta. Questo obbliga a ricorrere alla <a href="https://it.wikipedia.org/wiki/Disuguaglianza_di_%C4%8Ceby%C5%A1%C3%ABv#Descrizione" target="_blank">diseguaglianza di Chebyshev</a> (già vista in altra parte del sito), valida per qualunque distribuzione, tramite la quale si può affermare che gli errori sono compresi entro &plusmn;20&sigma; con una confidenza sicuramente non inferiore al 99,75%. Quindi si può usare come incertezza sulla distanza dal radar un valore pari a &plusmn;0,4 nm, con la consapevolezza che un errore superiore è estremamente improbabile.
+</div>
+
+
+<span id="scarti_azm"></span>  <!-- link per richiamo da fine.html -->
+
+<!-- SCARTI AZM -->
+
+<div style="margin-bottom: 30px; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<div id="azm_plot-inte" style="width: 650px; height: 450px; float:left; padding-right: 10px;"></div>
+Ben diversa è la situazione per l'azimut. La variabilità è decisamente più evidente di quella sulla distanza. Tuttavia, anche in questo caso, la distribuzione degli scarti è ben approssimata dalla distribuzione normale, ancor meglio che nel caso della distanza (esistono particolari tecniche e parametri che consentono di stabilirlo in modo oggettivo, ad esempio: la <a href="https://it.wikipedia.org/wiki/Stima_kernel_di_densit%C3%A0" target="_blank">stima del kernel di densità</a>, il <a href="https://it.wikipedia.org/wiki/Test_di_Kolmogorov-Smirnov" target="_blank">test di Kolmogorov-Smirnov</a>, analisi dei parametri chiamati asimmetria e curtosi, ecc.).<br>
+<br>
+Siccome la deviazione standard degli scarti è pari a 0,2668° e la loro media è nulla, l'errore è compreso tra &plusmn;0,8° con il 99,7% di confidenza (&plusmn;3&sigma;).<br>
+<br>
+Anche per l'azimut si potrebbe utilizzare l'intervallo &plusmn;20&sigma; come per la distanza. Considerando, però, che la distribuzione degli scarti per l'azimut è molto ben approssimata da quella normale, è lecito utilizzare questa, evitando di usare un'incertezza inutilmente esagerata e del tutto irrealistica.
+</div>
+
+
+<br>
+All'incertezza derivante dall'interpolazione, va aggiunta quella derivante dal metodo usato per determinare lo <a href="../../defi/decli/decli.html" target="_blank">sfasamento del radar</a>. Per ciò che riguarda i soli plot situati alla distanza di 110/130 nm dal radar Marconi, le analisi fatte suggeriscono che &plusmn;0,2° è un margine più che sufficiente.<br>
+<br>
+<br>
+
+
+
+
+<!--  Revisione 2021-08-07  -->
+
+
+<div style="margin-bottom: 30px; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<table style="box-sizing: border-box; vertical-align: bottom; position:relative; display: inline-table; float:left; margin:5px 20px 20px 0px; table-layout: fixed;">
+<tr>
+	<td class="ince" style="text-align: center;"><b>Parametro</b></td>
+	<td class="ince" style="text-align: center;"><b>Incertezza</b> [&plusmn;]</td>
+</tr>
+
+<tr><td class="ince">Distanza dal radar</td> <td class="ince" style="text-align: center">0,4 nm</td></tr>
+<tr><td class="ince">Azimut dal radar  </td> <td class="ince" style="text-align: center">1°</td></tr>
+<tr><td class="ince">Quota             </td> <td class="ince" style="text-align: center">1000 ft</td></tr>
+<tr><td class="ince">Velocità al suolo </td> <td class="ince" style="text-align: center">5 kn</td></tr>
+<tr><td class="ince">Rotta             </td> <td class="ince" style="text-align: center">2,5°</td></tr>
+<tr><td class="ince">Massa del motore  </td> <td class="ince" style="text-align: center">300 kg</td></tr>
+<tr><td class="ince">C<sub>r</sub> del motore</td> <td class="ince" style="text-align: center">15%</td></tr>
+<tr><td class="ince">Densità dell'aria </td> <td class="ince" style="text-align: center">8%</td></tr>
+<tr><td class="ince">Pressione atmosferica</td> <td class="ince" style="text-align: center">8%</td></tr>
+<tr><td class="ince">Velocità del vento</td> <td class="ince" style="text-align: center">8 kn</td></tr>
+<tr><td class="ince">Direzione del vento</td> <td class="ince" style="text-align: center">15°</td></tr>
+
+</table>
+
+La tabella elenca il valore di tutte le incertezze assegnate ai vari parametri all'inizio di ogni simulazione.<br>
+Tutte le simulazioni Monte Carlo presentate in questa pagina adottano tali incertezze.<br>
+<br>
+Ad ognuno dei parametri elencati, prima d'iniziare la simulazione viene assegnato un valore casuale con distribuzione uniforme all'interno dell'incertezza indicata in tabella, in più o in meno rispetto al valore nominale.<br>
+<br>
+La distanza e l'azimut dal radar Marconi vengono usati per il calcolo della posizione iniziale del DC-9 (e quindi del motore che si stacca).<br>
+<br>
+La pressione atmosferica viene usata solamente per calcolare il numero di mach, a sua volta usato per il calcolo del coefficiente di resistenza del motore. Il valore "C<sub>r</sub> del motore", quindi, è affetto da due incertezze: una fissa pari al 15% del valore nominale e una variabile in funzione del numero di mach.
+</div>
+
+
+
+
+<!-- Cartina Vini NOMINALE + MC -->
+<div style="margin-bottom: 30px; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<div id="caduta_monte" style="width: 500px; height: 400px; float:left; padding-right: 30px;"></div>
+La cartina mostra la traiettoria di caduta dei motori (colore verde scuro) già vista in precedenza e i puntini di colore verde chiaro che rappresentano le 5000 simulazioni Monte Carlo.<br>
+<br>
+L'etichetta che compare posizionando il puntatore del mouse sopra ai puntini è organizzata come segue:<br>
+<table style="font-size: .8em;">
+<tr> <td>Tempo di caduta</td> <td>Altezza geometrica iniziale</td> <td></td></tr>
+<tr> <td>Velocità al suolo iniziale</td> <td>Velocità al suolo finale</td> <td>Velocità verticale finale</td></tr>
+<tr> <td>Latitudine</td> <td>Longitudine</td> <td></td></tr>
+</table>
+<br>
+&Egrave; piuttosto evidente che non esiste nemmeno la più remota delle possibilità che i motori possano essere andati a finire nel punto in cui sono stati recuperati.<br>
+<br>
+
+
+</div>
+
+
+<br>
+ <!--  2021-08-07  -->
+Siccome la velocità dei motori al momento del distacco è troppo elevata per andare a cadere nel punto del recupero, tramite un'ulteriore simulazione Monte Carlo si può determinare la velocità iniziale che avrebbero dovuto avere i motori per cadere in anticipo rispetto alla traiettoria appena vista.<br>
+
+<br>
+
+
+<!-- Cartina Vini ridotta + MC -->
+<div style="margin-bottom: 30px; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<div id="caduta_mod" style="width: 500px; height: 400px; float:left; padding-right: 30px;"></div>
+La cartina mostra la traiettoria di caduta dei motori (colore verde scuro) ottenuta con i parametri nominali ed una velocità al suolo iniziale pari a 252 kn, il 54% della velocità del DC-9 al momento dell'abbattimento (467 kn).<br>
+<br>
+I 5000 puntini della simulazione Monte Carlo mostrano che per iniziare ad avere una piccolissima probabilità di ritrovare i motori nell'effettivo punto del recupero, la velocità al suolo iniziale non avrebbe dovuto superare 325 kn circa, altrimenti i motori avrebbero avuto sufficiente energia per arrivare più a sud.<br>
+<br>
+
+</div>
+
+
+
+<br>
+Le perizie e consulenze che sostengono l'<i>IPOTESI</i> parlano di una rapidissima sequenza di avvenimenti accaduti nell'arco di pochi secondi.<br>
+Il vincolo sulla velocità iniziale dei motori inferiore a 325 kn (altrimenti sarebbero caduti troppo a sud) e il fatto che l'aereo stava viaggiando con una velocità al suolo 142 kn più alta implica che per i primi due o tre secondi, i motori dovevano ancora essere attaccati alla fusoliera, mentre l'aereo si stava distruggendo rapidamente in volo in modalità tale da far diminuire repentinamente il coefficiente balistico, dato da <i>CB = massa / (Area &middot; C<sub>r</sub>)</i> (principalmente tramite l'aumento del coefficiente di resistenza <i>C<sub>r</sub></i>). Così facendo, la parte di fusoliera con attaccati i motori ha dovuto rallentare di ben 140 kn in un paio di secondi, dopo di che i motori si sono staccati dalla fusoliera. In tal modo, i motori avrebbero avuto una velocità appena compatibile con quella necessaria ad avere una piccolissima probabilità di cadere nel punto del ritrovamento. Una probabilità più elevata si ottiene con una velocità ancora più bassa di qualche decina di nodi.<br>
+Una decelerazione di tale entità sembra, a dir poco, altamente improbabile.<br>
+<br>
+
+
+<!--  2021-08-07  -->
+Anziché diminuire la velocità orizzontale, si potrebbe aumentare quella verticale per ottenere il medesimo punto di caduta.<br>
+Un risultato uguale a quello appena visto per la simulazione con velocità orizzontale ridotta, lo si ottiene con una velocità verticale iniziale dei motori pari a 180 m/s (650 km/h), ovviamente verso il basso. Tale velocità dovrebbe essere trasmessa dall'aereo ai motori da una particolare rotazione intorno ad uno o più assi, ad esempio cabrando e/o rollando. Data, tuttavia, la notevole entità del valore minimo necessario, l'ipotesi appare del tutto inverosimile. Inoltre, la velocità verticale finale che raggiungerebbero i motori arriverebbe a circa 1050 km/h.<br>
+
+
+<!-- ==  BAZZOCCHI (55°)  ======================================================================================================== -->
+<div class="rev">  <!--  2021-10-18  -->
+
+<h3>Traiettoria dei motori secondo la consulenza Bazzocchi</h3>
+
+L'ing. Bazzocchi è l'unico ad evidenziare ciò che nel precedente paragrafo è stato matematicamente dimostrato, cioè che i motori non possono cadere nel punto di ritrovamento dopo essersi distaccati in quota; si veda "<a href="https://www.stragi80.it/documenti/gi/perizie/071.pdf" target="_blank">Capitolo LXXI - Consulenza tecnica Bazzocchi - 31.12.94.</a>" a fine pag. 2.<br>
+Quindi, per sostenere in ogni modo l'ipotesi della bomba, Bazzocchi deve far picchiare il DC-9 con un angolo di ben 55° e con una velocità iniziale rispetto al suolo uguale a quella che l'aereo aveva prima dell'abbattimento (240 m/s o 467 kn).<br>
+<br>
+<div style="margin-bottom: 30px; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<div id="caduta_bazzo" style="width: 350px; height: 400px; float:left; padding-right: 30px;"></div>
+La cartina mostra la traiettoria di caduta di un motore (colore verde) ipotizzando che <u>il distacco dalla fusoliera sia avvenuto <b>4 s</b> dopo dell'ultima risposta del transponder</u>, momento in cui il DC-9, con i motori al loro posto, aveva un assetto di 55° a picchiare. Così facendo, il motore simulato finisce all'interno dell'area d'incertezza del recupero del motore destro, rendendo accettabile quest'ipotesi dal punto di vista della fisica.<br>
+<br>
+L'etichetta che compare muovendo il mouse sopra alla traiettoria verde mostra una velocità al suolo iniziale (GS) pari a 268 kn, anziché 467 kn, perché GS è la componente parallela al suolo (o al mare) di quei 467 kn: <i>GS = 467 &middot; cos(-55°)</i>.<br>
+L'altra componente (quella verticale) è pari a <i>467 &middot; sen(-55°) = -382,5 kn</i>, equivalenti a quasi 39000 ft/min (!).<br>
+<br>
+L'ing. Bazzocchi fornisce una dettagliata sequenza di eventi che conduce al collasso, come descritto all'inizio della pagina 
+"<a href="../../lc/planata/planata.html" target="_blank">La lunga planata</a>".<br>
+Da ciò che si può apprendere leggendo il documento "<a href="https://www.stragi80.it/documenti/gi/perizie/069.pdf" target="_blank">Capitolo LXIX - Consulenza tecnica Bazzocchi ed altri - 15.12.94.</a>" a pag. 9 o "<a href="https://www.stragi80.it/documenti/gi/perizie/046.pdf" target="_blank">Capitolo XLVI - Consulenza tecnica Bazzocchi - 09.06.94.</a>" a pag. 13, i motori si sono distaccati dalla fusoliera quando l'aereo volava ancora livellato. Solo successivamente, secondo il collegio Bazzocchi, il DC-9 effettua una brusca picchiata che, quindi, non può aver fatto assumere ai motori un angolo di caduta pari a 55°, in quanto si sono staccati prima della picchiata.<br>
+<br>
+Stante ciò, non è chiaro quale sarebbe stata la causa che ha fatto assumere ai motori un angolo di 55° a picchiare.
+</div>
+
+</div>
+
+<!-- ========================================================================================================== -->
+
+
+<h3>Traiettoria dei motori con parte di fusoliera</h3>
+
+
+Un'ulteriore modalità di collasso dell'aereo avanzata da alcuni periti contempla il distacco dei motori come causa scatenante che ha portato alla destrutturazione dell'aereo in pochi secondi. Se i motori si fossero staccati dal DC-9 portando con sé una parte di fusoliera, sarebbe stato possibile un maggiore rallentamento dei motori e la loro conseguente caduta nei pressi della zona dell'effettivo ritrovamento.<br>
+Il documento "<a href="http://www.stragi80.it/documenti/gi/perizie/048.pdf" target="_blank">Capitolo XLVIII - Perizia tecnico-scientifica Misiti ed altri - 23.07.94.</a>" fornisce una dettagliata spiegazione a pag. 36: "<i>Il primo principale evento, che si è verificato a bordo e che ha determinato l’inizio del collasso della struttura, è stato il cedimento dell’attacco anteriore del motore destro, in corrispondenza del vincolo con l’ordinata 786 </i>[situata circa 1,3 m verso coda rispetto alla presa d'aria del motore, ndr]<i>. A seguito di questo evento, <u>si è avuto il distacco del motore destro con parte della fiancata adiacente all’attacco posteriore</u> (recuperata in zona B) e, plausibilmente, <u>anche con parte della fiancata adiacente all’attacco anteriore</u> (di cui sono stati recuperati soltanto i frammenti AZ498 e AZ574).</i>".<br>
+<br>
+La verifica della validità di questa ipotesi può essere effettuata tramite un'ulteriore simulazione Monte Carlo, grazie alla quale può essere stimata con sufficiente accuratezza l'area del pezzo di fusoliera che sarebbe dovuto restare attaccato ai due piloni di un motore per farlo rallentare e cadere nei pressi dell'effettivo punto di ritrovamento.<br>
+<br>
+L'equazione che lega i parametri che c'interessano è: <i>R = &frac12; &rho; V<sup>2</sup> C<sub>r</sub> A</i>, in cui 
+<i>R</i> è la resistenza aerodinamica,
+<i>&rho;</i> è la densità dell'aria,
+<i>V</i> è la velocità rispetto all'aria,
+<i>C<sub>r</sub></i> è il coefficiente di resistenza
+ed <i>A</i> è l'area di riferimento (si veda anche <a href="https://it.wikipedia.org/wiki/Aerodinamica#Resistenza" target="_blank"><i>Aerodinamica &rarr; Resistenza</i></a>).<br>
+
+Per le simulazioni che riguardano la caduta di un motore, <i>C<sub>r</sub></i> ed <i>A</i> sono, ovviamente, i valori riferiti al motore. Dovendo aggiungere una parte di fusoliera attaccata ai piloni del motore, la formula diventa: <i>R = &frac12; &rho; V<sup>2</sup> (C<sub>r</sub> A + C<sub>rf</sub> A<sub>f</sub>)</i>, in cui il pedice <i>f</i> denota il coefficiente di resistenza e l'area di riferimento del pezzo di fusoliera attaccato al motore.<br>
+<br>
+Questo pezzo di fusoliera potrebbe, teoricamente, generare anche una lieve portanza che favorirebbe il sostentamento del motore facendolo cadere più a sud, allontanandolo dal punto del ritrovamento. Tuttavia, l'irregolarità del pezzo di fusoliera e il moto in regime altamente turbolento rende del tutto insignificante l'eventuale piccola portanza generata. Quindi la simulazione considera la sola resistenza, favorendo anche in questo caso l'<i>IPOTESI</i>.<br>
+<br>
+Il coefficiente di resistenza <i>C<sub>rf</sub></i> può essere dedotto dalla pagina 
+<a href="https://en.wikipedia.org/wiki/Drag_coefficient#Drag_coefficient_examples" target="_blank"><i>Drag coefficient &rarr; Drag coefficient examples</i></a>, in cui viene indicato 0,005 per "<i>Turbulent flat plate parallel to the flow (Re > 10<sup>6</sup>)</i>" (lastra piana parallela al flusso turbolento con numero di Reynolds maggiore di 1 milione). Non c'è dubbio che nel nostro caso il coefficiente 0,005 è ampiamente sottostimato, in quanto non tiene conto delle interferenze con il motore e i piloni e il pezzo di fusoliera non è proprio una lastra, ma ha una seppur piccola area frontale ed è irregolare. Quel coefficiente deve, quindi, essere moltiplicato per un fattore correttivo.<br>
+Per la stima di questo fattore correttivo, conviene considerare anche il fatto che a parità del prodotto <i>C<sub>rf</sub> &middot; A<sub>f</sub></i>, la grandezza del pezzo di fusoliera attaccato ai motori (<i>A<sub>f</sub></i>) diminuisce all'aumentare di <i>C<sub>rf</sub></i>. Siccome sarebbe inverosimile l'ipotesi di un pezzo di fusoliera grande decine di metri quadri, aumentando forzatamente <i>C<sub>rf</sub></i> più del ragionevole, si favorisce ulteriormente l'<i>IPOTESI</i>, in quanto per frenare sufficientemente i motori non servirà un enorme pezzo di fusoliera, ma ne basterà uno di dimensioni più piccole.<br>
+Considerando, quindi, quanto appena detto e tutte le varie correzioni che includono interferenze, forma irregolare e asperità, si può scegliere un fattore correttivo pari a 4, ottenendo <b><i>C<sub>rf</sub> = 0,02</i></b>.<br>
+<br>
+Passando alla versione in italiano della stessa pagina "<i>Drag coefficient</i>", si nota il riquadro "Vari esempi di <i>C<sub>d</sub></i>" (<i>C<sub>d</sub></i> equivale a <i>C<sub>r</sub></i> in questa pagina), in cui compare "Corpo affusolato" con <i>C<sub>d</sub> = 0,04</i>. Ciò potrebbe indurre a pensare che un pezzaccio irregolare di fusoliera non possa avere un coefficiente di resistenza che è la metà di quello di un corpo affusolato; verrebbe, invece, da pensare il contrario.<br>
+Quel "corpo affusolato", in realtà, è un solido di rivoluzione piuttosto tozzo simile a una sfera alla quale viene aggiunto un cono. Il nostro pezzo di fusoliera, invece, è una lamiera con una sezione frontale enormemente più piccola della superficie totale, ciò riduce drasticamente il coefficiente di resistenza. Si veda, per confronto, il coefficiente di resistenza per un'ala abbastanza tozza anch'essa, con sezione simile a quella del "corpo affusolato": <a href="http://airfoiltools.com/airfoil/details?airfoil=naca0015-il" target="_blank">NACA 0015</a>; scorrendo la pagina si vede il grafico "Cl v Cd" dal quale risulta che per coefficienti di portanza piccoli, il coefficiente di resistenza è inferiore a 0,008, cioè meno di 1/5 di quello del "corpo affusolato". L'ala, come il pezzo di lamiera, ha un'apertura e una corda molto maggiori rispetto allo spessore e questo fa sì che la resistenza di forma sia enormemente più bassa rispetto a quella di un solido di rivoluzione (il corpo affusolato) di pari sezione. Ciò deve far comprendere che il <i>C<sub>rf</sub></i> scelto per il pezzo di fusoliera è ampiamente sovrastimato, sempre per favorire il più possibile l'<i>IPOTESI</i>.<br>
+<br>
+Avendo fissato <i>C<sub>rf</sub> = 0,02</i>, la simulazione fa variare casualmente il prodotto <i>C<sub>rf</sub> &middot; A<sub>f</sub></i> tra 0 e 2 in modo uniforme, cioè tutti i valori da 0 a 2 hanno la stessa probabilità di presentarsi. Il valore 0 rappresenta l'assenza del pezzo di fusoliera (si ritornerebbe alle simulazioni viste fino ad ora), mentre il valore 2 rappresenta un pezzo di fusoliera avente un'area pari a 100 m<sup>2</sup>, valore assolutamente impossibile, ma ugualmente preso in considerazione per simulare anche i casi estremi.<br>
+
+<br>
+
+
+<!-- Cartina CrA. Derivate calcolate con "DER_MOT_e_FUS_MONTE" -->
+
+<div style="margin-bottom: 30px; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<div id="CrA_Monte" style="width: 600px; height: 500px; float:left; padding-right: 30px;"></div>
+Ecco il risultato della simulazione Monte Carlo usata per stimare l'area <i>A<sub>f</sub></i>. La simulazione differisce da quelle viste in precedenza solo per l'aggiunta del termine <i>C<sub>rf</sub> &middot; A<sub>f</sub></i>, come già spiegato; tutto il resto è identico.<br>
+<br>
+L'etichetta che compare quando si posiziona il puntatore del mouse sui puntini è organizzata come segue:<br>
+<table style="font-size: .8em;">
+<tr> <td>C<sub>rf</sub> &middot; A<sub>f</sub></td> <td>Distanza dai motori</td>      <td></td>                          </tr>
+<tr> <td>Velocità al suolo iniziale</td>            <td>Velocità al suolo finale</td> <td>Velocità verticale finale</td> </tr>
+<tr> <td>Latitudine</td>                            <td>Longitudine</td>              <td></td>                          </tr>
+</table>
+<br>
+
+Le simulazioni eseguite (e quindi i puntini presenti nella cartina) sono state ben 46379. Ciò si è reso necessario al fine di avere un numero sufficiente di punti (o campioni) d'analizzare per ottenere un risultato statisticamente significativo (lo stesso file con i campioni usato per questa cartina può essere scaricato da
+<!-- <a href="http://ih870.altervista.org/fasi/6_cadu/cra_monte.csv" target="_blank">qui</a>, -->
+<a href="cra_monte.csv" target="_blank">qui</a>,
+1,76 MB).<br>
+
+</div>
+<br>
+
+Poiché, come già detto, è inverosimile che un enorme pezzo di fusoliera possa essere rimasto attaccato ai motori, l'interesse per tutti quei 46379 campioni è focalizzato sulla stima <u>statisticamente (cioè matematicamente) valida</u> dell'area del più piccolo pezzo di fusoliera sufficiente a rallentare i motori e farli cadere nella zona del loro effettivo ritrovamento.<br>
+<br>
+Il lungo e complesso metodo che consente di pervenire al risultato cercato dà <b><i>C<sub>rf</sub> &middot; A<sub>f</sub> = 0,5896</i> con il 98,2% di confidenza</b>.<br>
+La spiegazione su come si ottiene una stima statisticamente valida richiederebbe una trattazione molto approfondita di elementi di statistica che, in questo contesto, è del tutto fuori luogo. Per chi fosse realmente interessato ad approfondire l'argomento, si precisa che 0,5896 è il limite inferiore dell'intervallo di confidenza calcolato per il 2° percentile dei 1471 campioni (sui 46379 totali) compresi entro 500 m dal punto di ritrovamento dei motori (v. paragrafo "<a href="#accu_pos_motori">Accuratezza della posizione dei motori</a>", più avanti). L'utilizzo di questi particolari parametri statistici complica notevolmente la simulazione, ma consente la riproducibilità del risultato. In altri termini, chiunque volesse cimentarsi in questo tipo di simulazione otterrebbe un risultato compatibile ("simile") con quello presentato in questa pagina.<br>
+<br>
+Ora che si dispone del <i>C<sub>rf</sub> &middot; A<sub>f</sub></i> <u>minimo</u> sufficiente a frenare i motori, si può calcolare l'area <b><i>A<sub>f</sub> = 0,5896 / 0,02 = 29,5 m<sup>2</sup></i></b>. Quindi, i motori devono essersi trascinati per tutta la caduta un pezzo di fusoliera grande <u>almeno</u> una trentina di metri quadri. Se volessimo immaginare questo pezzo di fusoliera con una forma all'incirca rettangolare, avrebbe potuto essere grande circa 4 o 5 m nel senso parallelo al vento relativo (data la distanza che intercorre tra i due piloni del motore) e con l'altro lato, di conseguenza, compreso tra 6 e 8 m. Chiaramente, avrebbe potuto anche essere un pezzo simile ad un quadrato o avere avuto qualunque altra forma irregolare.<br>
+Vediamo, allora, dove vanno a cadere i soliti 5000 puntini che rappresentano un motore con attaccato stabilmente un pezzo di fusoliera grosso 29,5 m<sup>2</sup>, indeformabile e in grado di resistere alla forza aerodinamica che si sviluppa durante tutta la caduta.<br>
+<br>
+
+<!-- Cartina MONTE + FUSOLIERA - 2° PERCENTILE -->
+<div style="margin-bottom: 20px; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<div id="monte_fuso_2perce" style="width: 500px; height: 300px; float:left; padding-right: 30px;"></div>
+Si nota che il limite nord della simulazione arriva a lambire il punto nominale di caduta del motore destro. Quindi, una piccola probabilità che l'<i>IPOTESI</i> sia attendibile, da un punto di vista esclusivamente statistico, inizia ad esserci.<br>
+<br>
+Bisogna, tuttavia, considerare che sebbene i piloni dei motori non avrebbero avuto alcun problema a reggere la forza aerodinamica sviluppata dal pezzo di fusoliera (poco più di 1 tonnellata durante i primi secondi di volo), è molto difficile poter immaginare che un pezzo di fusoliera di quelle dimensioni, privato della resistenza strutturale (conferitagli da correnti, ordinate e longheroni, ma solo se perfettamente integri) se ne possa stare tranquillamente attaccato ai motori per tutta la caduta. Si sarebbe, molto probabilmente, piegato o spezzato in varie parti, offrendo una resistenza insufficiente per rallentare il motore che sarebbe, quindi, caduto più a sud, rendendo, anche in questo caso, estremamente improbabile l'<i>IPOTESI</i>.
+
+</div>
+
+
+
+<!-- ========================================================================================================== -->
+
+<span id="accu_pos_motori"></span>  <!-- link per richiamo da un paragrafo precedente -->
+
+<h3>Accuratezza della posizione dei motori</h3>
+
+&Egrave; forse superfluo precisare che le considerazioni basate sulla distanza tra il punto di ritrovamento dei motori e il punto calcolato con le simulazioni sono valide solo se le coordinate del punto di recupero sono sufficientemente accurate.<br>
+Bisogna, quindi, determinare:
+<ol style="margin-top: 0px">
+<li>l'incertezza sulla posizione di recupero dei motori;</li>
+<li>l'incertezza minima sulla posizione di recupero dei motori che rende accettabile l'<i>IPOTESI</i>.</li>
+</ol>
+
+<h3 style="margin-left:2em">1) Incertezza sulla posizione</h3>
+
+Siccome le coordinate del motore destro derivano da un'operazione di recupero effettuata nel 1988, è possibile escludere il GPS in favore del Loran-C.<br>
+L'errore a cui può andare soggetto questo sistema di navigazione ce lo fornisce il manuale "<a href="https://chetaero.files.wordpress.com/2016/11/loran-c_users_handbook_entire.pdf" target="_blank"><i>Loran-C User Handbook</i></a>". A circa metà pag. 30 inizia la dettagliata spiegazione dell'accuratezza del Loran-C; poi a pag. 31 troviamo:
+<ul style="margin-top: 0px">
+<li>"<i>The absolute accuracy of the Loran-C system varies from approximately 0.1 to 0.25 nautical miles, depending upon the mariners location in the coverage area.</i>" (l'accuratezza assoluta del sistema Loran-C varia approssimativamente da 185 a 463 m e dipende dalla posizione del ricevitore nell'area di copertura).</li>
+
+<li>"<i>The official specification of the Loran-C system is that absolute accuracy should be no less than 0.25 nautical mile within the defined coverage area of the chain.</i>" (la specifica ufficiale del sistema Loran-C è che l'accuratezza assoluta non deve essere inferiore a 463 m entro l'area di copertura definita della catena Loran).</li>
+</ul>
+
+Il manuale riporta che l'accuratezza assoluta comprende sia gli errori casuali che sistematici del sistema Loran-C (v. "<a href="http://ebook.scuola.zanichelli.it/amalditraiettorie/volume-1/la-misura/l-incertezza-delle-misure/errori-casuali-ed-errori-sistematici#119" target="_blank">Errori casuali ed errori sistematici</a>") e viene spiegata con l'esempio di un'imbarcazione che, entrando in un porto, cerca d'individuare la boa che segna il punto iniziale dell'ingresso in porto. &Egrave; chiaro, quindi, che l'accuratezza assoluta rappresenta la distanza tra il punto reale e il punto dato dal ricevitore Loran-C.<br>
+<br>
+Si può finalmente concludere che un'incertezza superiore a 500 m sulle coordinate date nel "Filmato N° 2" appare inverosimile (ecco spiegato il significato del cerchio centrato sul motore destro).<br>
+
+<h3 style="margin-left:2em">2) Incertezza minima ammissibile</h3>
+
+Appurata l'incertezza sulla posizione, resta da determinare il minimo spostamento verso sud del reale punto di recupero del motore destro tale da iniziare a rendere possibile l'<i>IPOTESI</i>. Infatti, avvicinando il punto di ritrovamento al limite nord della simulazione Monte Carlo, la probabilità che l'<i>IPOTESI</i> sia statisticamente valida aumenta.<br>
+<br>
+Se la simulazione Monte Carlo avesse incluso incertezze molto piccole sui parametri, tanto da avere dubbi sulla loro effettiva adeguatezza, una distanza di svariate centinaia di metri tra il cerchio di 500 m e il limite nord della simulazione sarebbe già sufficiente a rendere probabile l'<i>IPOTESI</i>, ma siccome l'incertezza adottata nelle simulazioni è ampiamente superiore a quella reale (specialmente quella relativa alla distanza del DC-9 dal radar Marconi e quella sulla velocità al suolo), l'<i>IPOTESI</i> può iniziare ad essere presa in considerazione solo se almeno alcuni punti della simulazione cadono all'interno del cerchio di 500 m.<br>
+
+
+<h3 style="margin-left:3em">2a) Caduta senza pezzo di fusoliera</h3>
+
+La simulazione presentata nel paragrafo "Incertezze sui parametri e simulazioni Monte Carlo" colloca il limite nord del punto di caduta dei motori circa 1,7 km a sud del punto di recupero del motore destro, cioè a 1,2 km oltre il cerchio di raggio 500 m che rappresenta la peggiore accuratezza specificata per il Loran-C.<br>
+Quindi, l'ipotesi che uno dei motori possa essere caduto nel punto di recupero del motore destro dopo essersi distaccato in quota <u>senza portare con sé alcun pezzo di fusoliera o con un pezzo di fusoliera di forma o dimensioni inadatte a rallentare il motore</u> inizia ad essere probabile se l'errore sulle coordinate è di almeno 1,2 km, contro i 463 m massimi ammessi per il Loran-C.<br>
+Se a questo si aggiunge che la caduta dei motori è certamente iniziata dopo delle 18:59:45 (come detto all'inizio), l'errore deve salire a circa 2 km. In altri termini, affinché l'<i>IPOTESI</i> inizi ad avere una piccola probabilità di essere valida, l'incertezza sulla posizione del punto di recupero deve essere talmente grande da raggiungere almeno 2 km, cioè oltre il quadruplo dell'incertezza nominale massima del Loran-C.<br>
+Ciò rende questa ipotesi del tutto impossibile.<br>
+
+
+<h3 style="margin-left:3em">2b) Caduta con pezzo di fusoliera</h3>
+
+La simulazione fatta per <i>A<sub>f</sub> = 29,5 m<sup>2</sup></i> colloca i punti soltanto nella metà sud del cerchio di 500 m, ma siccome la reale posizione del motore può essere in un punto qualunque all'interno di quel cerchio, l'incertezza minima per rendere statisticamente valida l'<i>IPOTESI</i> è pari proprio a 500 m. Il che equivale a dire che per accettare l'<i>IPOTESI</i>, l'incertezza minima sulla posizione dei motori è uguale all'incertezza massima del Loran-C, quindi l'<i>IPOTESI</i> è rifiutata, in quanto non c'è sovrapposizione tra le due incertezze (avrebbe dovuto essere: incertezza minima <u>inferiore</u> all'incertezza massima del Loran-C).<br>
+Bisogna, quindi, trovare il più piccolo <i>A<sub>f</sub></i> in grado di ricoprire interamente il cerchio d'incertezza.<br>
+<br>
+
+<!-- Cartina MONTE + FUSOLIERA - 10° PERCENTILE -->
+<div style="margin-bottom: 20px; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<div id="monte_fuso_10perce" style="width: 500px; height: 300px; float:left; padding-right: 30px;"></div>
+Con quest'ultima simulazione, è possibile appurare che il <i>C<sub>rf</sub> &middot; A<sub>f</sub></i> cercato è pari a 0,7996 (è il 10° percentile di quei 1471 campioni con il 98,5% di confidenza), cioè il pezzo di fusoliera deve avere un'area <u>non inferiore</u> a 40 m<sup>2</sup>.<br>
+<br>
+Da un punto di vista esclusivamente statistico, dunque, un pezzo di fusoliera avente un'aerea di 40 m<sup>2</sup>, stabilmente attaccato ai motori e indeformabile è il minimo indispensabile per soddisfare l'<i>IPOTESI</i>, in quanto è l'area più piccola che consente di coprire totalmente il cerchio d'incertezza, fino al limite nord.<br>
+<br>
+Tuttavia, oltre alla probabilità puramente matematica, bisogna aggiungere anche quella tecnica in merito al fatto che un grosso pezzo di fusoliera possa rimanere attaccato ai piloni del motore senza piegarsi né spezzarsi. Appare ragionevole avere forti dubbi sull'effettiva possibilità che ciò si verifichi. Comunque, se si hanno elementi per ritenere che ciò sia possibile da un punto di vista tecnico, si può senz'altro ritenere valida l'<i>IPOTESI</i> anche dal punto di vista statistico.<br>
+
+</div>
+
+
+
+<!-- ========================================================================================================== -->
+
+
+<h3>Attendibilità delle perizie</h3>
+
+Tutto ciò che in questa pagina è stato <u>matematicamente dimostrato</u> tramite l'applicazione delle leggi della fisica e le considerazioni che da tali dimostrazioni scaturiscono portano ad una riflessione.<br>
+<br>
+Secondo varie perizie, il distacco dei motori in quota è avvenuto sia per l'ipotesi della bomba nella toilette (si veda, ad esempio "<a href="http://www.stragi80.it/documenti/gi/perizie/048.pdf" target="_blank">Capitolo XLVIII - Perizia tecnico-scientifica Misiti ed altri - 23.07.94.</a>", penultimo capoverso di pag. 4) che per l'ipotesi della quasi-collisione (v. <a href="http://www.stragi80.it/documenti/processo/trascrizioni/30.10.02.pdf" target="_blank">esame del perito Casarosa del 30/10/2002</a>, pag. 50).<br>
+Siccome, però, le leggi della fisica portano ad avere forti dubbi nel ritenere compatibile il distacco dei motori in quota con il punto del loro effettivo ritrovamento, bisognerebbe valutare con la giusta dose di spirito critico l'attendibilità delle perizie che teorizzano il distacco in volo dei motori. Questo non significa che tali perizie debbano essere automaticamente scartate, ma per renderle valide è necessario integrarle con elementi che possano giustificare una particolare modalità di distacco dei motori, tale da rallentarli o da scagliarli verso il basso così da farli cadere con molto anticipo rispetto alla normale traiettoria di caduta libera calcolata in questa pagina.<br>
+<br>
+In tal senso, l'ipotesi della quasi-collisione peggiora la velocità iniziale del motore, in quanto la perdita di una parte della semiala sinistra fa rollare l'aereo (come afferma lo stesso perito Casarosa) alzando la semiala destra (che, essendo integra, genera più portanza della sinistra). Al momento del distacco, quindi, il motore destro ha una velocità verticale diretta verso l'alto (non verso il basso, come servirebbe) e ciò fa sì che il punto di caduta si allontani ulteriormente dal punto calcolato in questa pagina. Pertanto, l'ipotesi della quasi-collisione non può essere ritenuta valida così com'è.<br>
+<br>
+Situazione diversa per l'ipotesi della bomba. &Egrave;, infatti plausibile che un'esplosione possa indebolire e far distaccare il pezzo di fusoliera vincolato ai due piloni del motore, ma appare inverosimile che l'esplosione e la successiva decompressione esplosiva possano scagliare il motore verso il basso; eventualmente, lo scaglierebbero parallelamente al suolo. Si ritorna, quindi, all'ipotesi esposta in precedenza, cioè che un motore deve essersi trascinato con sé almeno 40 m<sup>2</sup> di fusoliera rimasta in posizione senza piegarsi né spezzarsi, ma abbiamo già visto che è un'ipotesi piuttosto improbabile (se non impossibile).<br>
+<br>
+Ecco, dunque, la riflessione. Sono agli atti (almeno accennate) varie simulazioni che periti e consulenti hanno usato per stimare il punto di caduta sia del DC-9 che di centinaia di frammenti di vario tipo (con tutta la complessità che comporta questo tipo di simulazione, in particolare quella dell'aereo completo), ma non sembra disponibile agli atti alcuna simulazione che dia esplicitamente il punto di caduta dei motori. Data l'importanza che riveste il distacco in quota dei motori per alcuni periti, sarebbe stato logico trovare dettagliate descrizioni di simulazioni il cui risultato avalli una teoria che, da quanto emerso in questa pagina, risulta incompatibile con le leggi della fisica, nonostante tutte le forzature fatte in questa pagina per favorire oltre misura l'<i>IPOTESI</i>.<br>
+
+
+
+
+</div> <!--  FINE rev. 2021-08-07  -->
+
+
+
+
+<!-- ========================================================================================================== -->
+
+
+<h3>Profili verticali del vento e della densità dell'aria</h3>
+
+
+A completamento della trattazione, si riportano i profili verticali del vento e della densità dell'aria usati per le simulazioni.<br>
+
+<br>
+
+<!-- Profilo verticale VENTO -->
+
+<div style="vertical-align: top; position:relative; display: inline-block; margin:0px 0px 50px 0px;width:100%;">
+<div id="gra_vert" style="float:left; padding-right: 20px"></div>
+
+Questo è il profilo verticale del vento nel punto e orario dell'abbattimento (ottenuto tramite interpolazione). Durante la caduta, i motori si sono allontanati dal punto iniziale e il profilo verticale variava leggermente, ma questo viene preso in considerazione dalla simulazione.<br>
+<br>
+Oltre alla vistosa (e normalissima) riduzione della velocità del vento al diminuire della quota, si nota anche una significativa rotazione della direzione verso nord, tale da contribuire a spostare i motori ancor più verso sud e rendere sempre più lontana la possibilità del loro distacco in volo.
+</div>
+
+
+
+<!-- Profilo verticale DENSITA' dell'aria -->
+
+<div style="vertical-align: top; position:relative; display: inline-block; margin:0px 0px 40px 0px;width:100%;">
+<div id="gra_dens" style="float:left; padding-right: 20px"></div>
+
+Quest'ultimo grafico mostra il profilo verticale della densità dell'aria (stimata tramite interpolazione) e la sua differenza rispetto all'aria tipo nel punto e orario dell'abbattimento.<br>
+<br>
+Questo grafico può essere utile per avere un valore più accurato della reale densità dell'aria di quella sera. Infatti il calcolo avviene tenendo conto dell'umidità presente (l'aria umida è meno densa dell'aria secca).<br>
+Si può osservare che la densità è solo leggermente più bassa di quella definita per l'atmosfera standard, ma ciò, comunque, implica una velocità terminale leggermente superiore a quella calcolata assumendo la presenza di aria secca.
+</div>
+
+
+<br>
+
+
+
+<!-- ========================================================================================================== -->
+
+
+<script>
+"use strict";
+
+var dati1= [], dati2= [], dati3= [], dati4= [], dati5= [], dati6= [], flg_dati= 1;
+
+// Cartina SOLO TRAIETTORIA NOMINALE
+
+// Il timer ad alta risoluzione "TEMPO" colloca UPT 200,4 s dopo delle 18:56:25.
+// Siccome la simulazione (double x) NON tiene conto di TEMPO, mentre l'interpolazione per DSTm3() e AZMm3() viene fatta con TEMPO,
+// si sposta tutto di 0,4 s PRIMA dell'effettivo UPT (quindi il DC-9 è più a nord di UPT reale di circa 97 m)
+
+
+Plotly.d3.csv("mar3.csv", function(err, rows) {
+
+	// Motori: https://www.youtube.com/watch?v=pkfY0yE3CpU
+	// flight data recorder: 39°42’39”, 13°03’01” [Perizia tecnico-scientifica Misiti ed altri - 23.07.94, pagg. 18 e 26]
+	var RECU= { 
+		type:'scattermapbox', name: 'Sommersi', hoverinfo: 'text',
+		lat: [39+41.8/60, 39+42/60+39/3600],
+		lon: [13+2.44/60, 13+ 3/60+ 1/3600],
+		text:[ 'Motore DX', 'FDR' ],
+		mode: 'markers', marker: { size: 6, color: '#ff00ff' }
+	};
+
+	var CROCE= { // Crocette per distanza dai motori [usare "Simulazione aereo" -> main.cpp]
+		type:'scattermapbox', hoverinfo: 'text', text: '2 x 2 nm',
+		lat: [39.7133, 39.6800, null, 39.6967, 39.6967],
+		lon: [13.0407, 13.0407, null, 13.0190, 13.0623],
+		mode: 'lines', line: { width: 1, color: '#555555' }
+	};
+
+	var CERCHIO500= { // Usare "USTICA - Radar\main.cpp" blocco "Calcolo coordinate MOTORE SX - Cerchio 500 m intorno al MOTORE DX"
+		type:'scattermapbox', hoverinfo: 'text', text: 'Raggio<br>500 m',
+		lat: [39.7012, 39.7009, 39.7001, 39.6989, 39.6974, 39.6959, 39.6944, 39.6932, 39.6924, 39.6922, 39.6924, 39.6932, 39.6944, 39.6959, 39.6974, 39.6989, 39.7001, 39.7009, 39.7012],
+		lon: [13.0407, 13.0427, 13.0444, 13.0457, 13.0464, 13.0464, 13.0457, 13.0444, 13.0427, 13.0407, 13.0387, 13.0369, 13.0356, 13.0349, 13.0349, 13.0356, 13.0369, 13.0387, 13.0407],
+		mode: 'lines', line: { width: 1, color: '#777777' }
+	};
+
+	var InceUPT= { // Usare "USTICA - Radar\main.cpp" blocco "Area d'INCERTEZZA sulla POSIZIONE UPT"
+		type:'scattermapbox', hoverinfo: 'text', text: 'Incertezza UPT',
+		lat: [ 39.7502, 39.7447, 39.7394, 39.7343, 39.7292, 39.7164, 39.7164, 39.7214, 39.7266, 39.732, 39.7375, 39.7502 ],
+		lon: [ 13.0693, 13.0461, 13.0228, 12.9995, 12.9761, 12.9807, 12.9807, 13.0042, 13.0277, 13.0511, 13.0744, 13.0693 ],
+		mode: 'lines', line: { width: 1, color: 'Blue' }
+	};
+
+	// Area di delimitazione dei relitti: 39°41’25”N a 39°43’91”N <-- 91'' SECONDI??   e da 13°01’01”E a 13°04’05”E
+	var la1= 39 + 41.25 / 60, la2= 39 + 43.91 / 60, lo1= 13 + 1.1 / 60, lo2= 13 + 4.05 / 60; // Formato DD°MM.MM'
+	var AREA= {
+		type:'scattermapbox', hoverinfo: 'text',
+		lat: [la1, la2, la2, la1, la1],
+		lon: [lo2, lo2, lo1, lo1, lo2],
+		mode: 'lines', line: { width: 1, color: '#ff00ff' }
+	};
+
+	var data= [RECU, AREA, CROCE, CERCHIO500, InceUPT];
+
+	var PLOT= {
+		type:'scattermapbox', name: 'Plot',
+		text: unpack(rows, 'UTC'), hoverinfo: "text",
+		lat: unpack(rows, 'lat'), lon: unpack(rows, 'lon'),
+		mode: 'markers', marker: { size: 5, color: [] }
+	};
+	// UTC,ID,lat,lon,FL,estra,d,faz,Q,SSR
+	var ID= unpack(rows, 'ID');
+	var FL= unpack(rows, 'FL');
+	var estra= unpack(rows, 'estra');
+	var dst= unpack(rows, 'd'); var faz= unpack(rows, 'faz');
+	var QUA= unpack(rows, 'Q'); var SSR= unpack(rows, 'SSR');
+	for(var i= 0; i < PLOT.text.length; i++) {
+		PLOT.text[i] += ", " + ID[i] + ', e' + estra[i] +
+			'<br>FL' + FL[i] + ', ' + SSR[i] + ', Q: ' + QUA[i] +
+			'<br>lat: ' + PLOT.lat[i] + ', lon: ' + PLOT.lon[i] + 
+			'<br>d: ' + dst[i] + ', a: ' + faz[i]
+		if(ID[i] !== '1133') {
+			var col= '#000000'; if(ID[i] === '1136') col= '#ff0000';
+			PLOT.marker.color[i]= col;
+		}
+	}
+
+	data.push(PLOT);
+
+
+	// USARE "main.cpp" blocco "ABBATTIMENTO - Distanza radiale in funzione del TEMPO"
+	Plotly.d3.csv('lat_lon-inte.csv', function(err, rows) { // Punti ottenuti convertendo DST/AZM interpolati in LAT/LON
+		var LAT_LON= {
+			type:'scattermapbox', name: 'Plot interpolati',
+			text: unpack(rows, 'UTC'), hoverinfo: "text",
+			lat: unpack(rows, 'lat'), lon: unpack(rows, 'lon'),
+			mode: 'lines', line: { width: 1, color: '#ff0000' }
+		};
+		dst= unpack(rows, 'dst'); faz= unpack(rows, 'azm');
+		for(var i= 0; i < LAT_LON.text.length; i++)
+			LAT_LON.text[i] += "<br>lat: " + LAT_LON.lat[i] + ', lon: ' + LAT_LON.lon[i] +
+									 "<br>d: " + dst[i] + ', a: ' + faz[i];
+		data.push(LAT_LON);
+		
+		dati1= [...data]; dati2= [...data]; dati3= [...data]; dati4= [...data]; dati5= [...data];
+		dati6= [...data]; dati6.splice(4, 1); // Toglie l'incertezza UPT per "Bazzocchi"
+		flg_dati= 0; // Segnala che dati[] è disponibile
+
+		// CADUTA MOTORI
+		// t,d,h,TAS,GSori,GSvert,lat,lon
+		Plotly.d3.csv('caduta.csv', function(err, rows) {
+			var MOTORE= {
+				type:'scattermapbox', name: 'Motore',
+				text: unpack(rows, 't'), hoverinfo: "text",
+				lat: unpack(rows, 'lat'), lon: unpack(rows, 'lon'),
+				mode: 'lines', line: { width: 2, color: '#006600' }
+			};
+			var Mdst= unpack(rows, 'd'); // [m]
+			var Mh= unpack(rows, 'h'); // [ft]
+			var Mtas= unpack(rows, 'TAS'); // [kn]
+			var GSori= unpack(rows, 'GSori'); // [kn]
+			var GSvert= unpack(rows, 'GSvert'); // [ft/min]
+
+			for(var i= 0; i < Mdst.length; i++) {
+				MOTORE.text[i] = 't: ' + MOTORE.text[i] + ' s, d: ' + Mdst[i] + ' m' +
+					"<br>h: " + Mh[i] + ' ft, TAS: ' + Mtas[i] + ' kn' +
+					"<br>GS: " + GSori[i] + ' kn, Vv: ' + GSvert[i] + ' km/h' +
+					'<br>lat: ' + MOTORE.lat[i] + ', lon: ' + MOTORE.lon[i]
+			}
+			data.push(MOTORE);
+
+/*
+			var ORDISENT= {
+				type:'scattermapbox', name: 'Ordinanza-sentenza', hoverinfo: "text",
+				//lat: [39 + 42/60 + 40/3600], lon: [12 + 54/60 + 32/3600], text: 'PM - Marconi', // https://www.stragi80.it/documenti/gi/perizie/098.pdf  pag. 5
+				//lat: [39 + 42/60 + 26/3600], lon: [12 + 53/60 + 17/3600], text: 'PM - Selenia', // https://www.stragi80.it/documenti/gi/perizie/098.pdf  pag. 5
+				lat: [39 + 43/60 + 32/3600], lon: [13 + 0/60 + 46/3600], text: 'Algostino - UPT + 3,6', // https://www.stragi80.it/documenti/gi/perizie/078.pdf  pag. 2
+				//lat: [39 + 44/60 + 1/3600], lon: [13 + 0/60 + 56/3600], text: 'Misiti - Marconi', // https://www.stragi80.it/documenti/gi/perizie/049.pdf  pag. 42
+				mode: 'markers', marker: { size: 6, color: 'orange'  }
+			};
+			data.push(ORDISENT);
+*/
+
+			var layout = {
+				margin: { l:0, r:0, t:0, b:0},
+				hovermode: 'closest', showlegend: false,
+				mapbox: {
+					style: 'carto-positron',
+					center: { lat: 39.72, lon: 13.02 },
+					zoom: 10.5, bearing: 0, pitch: 0
+				}
+			};
+
+			Plotly.plot('caduta', data, layout, {responsive: true, displayModeBar: false});
+		});
+	});
+});
+
+
+// ============================================================================================================================
+
+
+// Cartina SOLO TRAIETTORIA NOMINALE - BAZZOCCHI
+
+CaricaCadutaNominaleBazzo();
+
+async function CaricaCadutaNominaleBazzo()
+{
+	do	await sleep(61); while(flg_dati); // Attende la disponibilità di dati[]
+
+	// t,d,h,TAS,GSori,GSvert,lat,lon
+	Plotly.d3.csv('caduta-bazzo.csv', function(err, rows) {
+		var MOTORE= {
+			type:'scattermapbox', name: 'Motore',
+			text: unpack(rows, 't'), hoverinfo: "text",
+			lat: unpack(rows, 'lat'), lon: unpack(rows, 'lon'),
+			mode: 'lines', line: { width: 2, color: '#006600' }
+		};
+		var Mdst= unpack(rows, 'd'); // [m]
+		var Mh= unpack(rows, 'h'); // [ft]
+		var Mtas= unpack(rows, 'TAS'); // [kn]
+		var GSori= unpack(rows, 'GSori'); // [kn]
+		var GSvert= unpack(rows, 'GSvert'); // [ft/min]
+
+		for(var i= 0; i < Mdst.length; i++) {
+			MOTORE.text[i] = 't: ' + MOTORE.text[i] + ' s, d: ' + Mdst[i] + ' m' +
+				"<br>h: " + Mh[i] + ' ft, TAS: ' + Mtas[i] + ' kn' +
+				"<br>GS: " + GSori[i] + ' kn, Vv: ' + GSvert[i] + ' km/h' +
+				'<br>lat: ' + MOTORE.lat[i] + ', lon: ' + MOTORE.lon[i]
+		}
+		dati6.push(MOTORE);
+
+
+		var layout = {
+			margin: { l:0, r:0, t:0, b:0},
+			hovermode: 'closest', showlegend: false,
+			mapbox: {
+				style: 'carto-positron',
+				center: { lat: 39.723, lon: 13.017 },
+				zoom: 10.8, bearing: 0, pitch: 0
+			}
+		};
+
+		Plotly.plot('caduta_bazzo', dati6, layout, {responsive: true, displayModeBar: false});
+		
+	});
+}
+
+
+
+// ============================================================================================================================
+
+
+// CADUTA MOTORI con Vini NOMINALE + MONTE
+
+CaricaCadutaNominaleMonte();
+
+async function CaricaCadutaNominaleMonte()
+{
+	do	await sleep(89); while(flg_dati); // Attende la disponibilità di dati[]
+
+	// t,d,h,TAS,GSori,GSvert,lat,lon
+	Plotly.d3.csv('caduta.csv', function(err, rows) {
+		var MOTORE= {
+			type:'scattermapbox', name: 'Motore',
+			text: unpack(rows, 't'), hoverinfo: "text",
+			lat: unpack(rows, 'lat'), lon: unpack(rows, 'lon'),
+			mode: 'lines', line: { width: 2, color: '#006600' }
+		};
+		var Mdst= unpack(rows, 'd'); // [m]
+		var Mh= unpack(rows, 'h'); // [ft]
+		var Mtas= unpack(rows, 'TAS'); // [kn]
+		var GSori= unpack(rows, 'GSori'); // [kn]
+		var GSvert= unpack(rows, 'GSvert'); // [ft/min]
+
+		for(var i= 0; i < Mdst.length; i++) {
+			MOTORE.text[i] = 't: ' + MOTORE.text[i] + ' s, d: ' + Mdst[i] + ' m' +
+				"<br>h: " + Mh[i] + ' ft, TAS: ' + Mtas[i] + ' kn' +
+				"<br>GS: " + GSori[i] + ' kn, Vv: ' + GSvert[i] + ' km/h' +
+				'<br>lat: ' + MOTORE.lat[i] + ', lon: ' + MOTORE.lon[i]
+		}
+		dati1.push(MOTORE);
+
+
+		Plotly.d3.csv('monte.csv', function(err, rows) {
+			var MONTE= { // t,h0,GSi,GSf,Vv,lat,lon
+				type:'scattermapbox', name: 'Monte Carlo',
+				text: unpack(rows, 't'), hoverinfo: "text",
+				lat: unpack(rows, 'lat'), lon: unpack(rows, 'lon'),
+				mode: 'markers', marker: { size: 3, color: '#009900' }
+			};
+			var h0= unpack(rows, 'h0'); // Hgeom iniziale [ft]
+			var GSi= unpack(rows, 'GSi'); // GS iniziale [kn]
+			var GSf= unpack(rows, 'GSf'); // GS finale [kn]
+			var Vv= unpack(rows, 'Vv'); // Vverticale finale [km/h] componente Z Vinerziale
+
+			for(var i= 0; i < h0.length; i++) {
+				MONTE.text[i] = 't: ' + MONTE.text[i] + ' s, h<sub>0</sub>: ' + h0[i] + ' ft' +
+					'<br>GSi: ' + GSi[i] + ' kn, GSf: ' + GSf[i] + ' kn, Vv: ' + Vv[i] + ' km/h' +
+					'<br>lat: ' + MONTE.lat[i] + ', lon: ' + MONTE.lon[i]
+			}
+			dati1.push(MONTE);
+
+			var layout = {
+				margin: { l:0, r:0, t:0, b:0},
+				hovermode: 'closest', showlegend: false,
+				mapbox: {
+					style: 'carto-positron',
+					center: { lat: 39.71, lon: 13.04 },
+					zoom: 10.5, bearing: 0, pitch: 0
+				}
+			};
+
+			Plotly.plot('caduta_monte', dati1, layout, {responsive: true, displayModeBar: false});
+			
+			Plotly.moveTraces(document.getElementById('caduta_monte'), -1, 0); // Porta in 1° piano la traiettoria nominale
+		});
+	});
+}
+
+
+// =====================================================================================================================
+
+
+// CADUTA MOTORI con Vini MODIFICATA per farli cadere nel punto di ritrovamento
+
+CaricaCadutaMod();
+
+async function CaricaCadutaMod()
+{
+	do	await sleep(107); while(flg_dati); // Attende la disponibilità di dati[]
+
+	// t,d,h,TAS,GSori,GSvert,lat,lon
+	Plotly.d3.csv('caduta_mod.csv', function(err, rows) {
+		var MOTORE= {
+			type:'scattermapbox', name: 'Motore',
+			text: unpack(rows, 't'), hoverinfo: "text",
+			lat: unpack(rows, 'lat'), lon: unpack(rows, 'lon'),
+			mode: 'lines', line: { width: 2, color: '#006600' }
+		};
+		var Mdst= unpack(rows, 'd'); // [m]
+		var Mh= unpack(rows, 'h'); // [ft]
+		var Mtas= unpack(rows, 'TAS'); // [kn]
+		var GSori= unpack(rows, 'GSori'); // [kn]
+		var GSvert= unpack(rows, 'GSvert'); // [ft/min]
+
+		for(var i= 0; i < Mdst.length; i++) {
+			MOTORE.text[i] = 't: ' + MOTORE.text[i] + ' s, d: ' + Mdst[i] + ' m' +
+				"<br>h: " + Mh[i] + ' ft, TAS: ' + Mtas[i] + ' kn' +
+				"<br>GS: " + GSori[i] + ' kn, Vv: ' + GSvert[i] + ' km/h' +
+				'<br>lat: ' + MOTORE.lat[i] + ', lon: ' + MOTORE.lon[i]
+		}
+		dati2.push(MOTORE);
+
+
+		Plotly.d3.csv('monte_mod.csv', function(err, rows) {
+			var MONTE= { // t,h0,GSi,GSf,Vv,lat,lon
+				type:'scattermapbox', name: 'Monte Carlo',
+				text: unpack(rows, 't'), hoverinfo: "text",
+				lat: unpack(rows, 'lat'), lon: unpack(rows, 'lon'),
+				mode: 'markers', marker: { size: 3, color: '#009900' }
+			};
+			var h0= unpack(rows, 'h0'); // Hgeom iniziale [ft]
+			var GSi= unpack(rows, 'GSi'); // GS iniziale [kn]
+			var GSf= unpack(rows, 'GSf'); // GS finale [kn]
+			var Vv= unpack(rows, 'Vv'); // Vverticale finale [km/h] componente Z Vinerziale
+
+			for(var i= 0; i < h0.length; i++) {
+				MONTE.text[i] = 't: ' + MONTE.text[i] + ' s, h<sub>0</sub>: ' + h0[i] + ' ft' +
+					'<br>GSi: ' + GSi[i] + ' kn, GSf: ' + GSf[i] + ' kn, Vv: ' + Vv[i] + ' km/h' +
+					'<br>lat: ' + MONTE.lat[i] + ', lon: ' + MONTE.lon[i]
+			}
+			dati2.push(MONTE);
+
+			var layout = {
+				margin: { l:0, r:0, t:0, b:0},
+				hovermode: 'closest', showlegend: false,
+				mapbox: {
+					style: 'carto-positron',
+					center: { lat: 39.71, lon: 13.04 },
+					zoom: 10.5, bearing: 0, pitch: 0
+				}
+			};
+
+			Plotly.plot('caduta_mod', dati2, layout, {responsive: true, displayModeBar: false});
+			
+			Plotly.moveTraces(document.getElementById('caduta_mod'), -1, 0); // Porta in 1° piano la traiettoria nominale
+		});
+	});
+}
+
+
+// =====================================================================================================================
+
+
+// CADUTA MOTORI - CrA Monte [Derivate calcolate con DER_MOT_e_FUS_MONTE() ]
+
+CaricaCrA_Monte();
+
+async function CaricaCrA_Monte()
+{
+	do	await sleep(131); while(flg_dati); // Attende la disponibilità di dati[]
+
+	Plotly.d3.csv('cra_monte.csv', function(err, rows) {
+		var MONTE= { // CrA,Dmot,GSi,GSf,Vv,lat,lon
+			type:'scattermapbox', name: 'Monte Carlo',
+			text: unpack(rows, 'CrA'), hoverinfo: "text",
+			lat: unpack(rows, 'lat'), lon: unpack(rows, 'lon'),
+			mode: 'markers', marker: { size: 3, color: '#009900' }
+		};
+		var Dmot= unpack(rows, 'Dmot'); // Distanza dai motori [m]
+		var GSi= unpack(rows, 'GSi'); // GS iniziale [kn]
+		var GSf= unpack(rows, 'GSf'); // GS finale [kn]
+		var Vv= unpack(rows, 'Vv'); // Vverticale finale [km/h] componente Z Vinerziale
+
+		for(var i= 0; i < Vv.length; i++) {
+			MONTE.text[i] = 'C<sub>rf</sub> A<sub>f</sub>: ' + MONTE.text[i] + ', D<sub>mot</sub>: ' + Dmot[i] + ' m' +
+				'<br>GSi: ' + GSi[i] + ' kn, GSf: ' + GSf[i] + ' kn, Vv: ' + Vv[i] + ' km/h' +
+				'<br>lat: ' + MONTE.lat[i] + ', lon: ' + MONTE.lon[i]
+		}
+
+		dati3.unshift(MONTE); // MC sullo sfondo e altri elementi in primo piano
+
+		var layout = {
+			margin: { l:0, r:0, t:0, b:0},
+			hovermode: 'closest', showlegend: false,
+			mapbox: {
+				style: 'carto-positron',
+				//style: 'white-bg', // Non richiede connessione
+				center: { lat: 39.7, lon: 13.04 },
+				zoom: 11, bearing: 0, pitch: 0
+			}
+		};
+
+		Plotly.plot('CrA_Monte', dati3, layout, {responsive: true, displayModeBar: false});
+	});
+}
+
+
+// ============================================================================================================================
+
+
+// CADUTA MOTORI con MONTE + FUSOLIERA - 2° e 10° PERCENTILE
+
+MF2();
+async function MF2() {
+	do await sleep(149); while(flg_dati); CaricaCadutaMonteFuso('2', dati4);
+}
+
+MF10();
+async function MF10() {
+	do await sleep(163); while(flg_dati); CaricaCadutaMonteFuso('10', dati5);
+}
+
+function CaricaCadutaMonteFuso(perce, dat)
+{
+	Plotly.d3.csv('monte_cra_' + perce + '.csv', function(err, rows) {
+		var MONTE= { // t,h0,GSi,GSf,Vv,lat,lon
+			type:'scattermapbox', name: 'Monte Carlo',
+			text: unpack(rows, 't'), hoverinfo: "text",
+			lat: unpack(rows, 'lat'), lon: unpack(rows, 'lon'),
+			mode: 'markers', marker: { size: 3, color: '#009900' }
+		};
+		var h0= unpack(rows, 'h0'); // Hgeom iniziale [ft]
+		var GSi= unpack(rows, 'GSi'); // GS iniziale [kn]
+		var GSf= unpack(rows, 'GSf'); // GS finale [kn]
+		var Vv= unpack(rows, 'Vv'); // Vverticale finale [km/h] componente Z Vinerziale
+
+		for(var i= 0; i < h0.length; i++) {
+			MONTE.text[i] = 't: ' + MONTE.text[i] + ' s, h<sub>0</sub>: ' + h0[i] + ' ft' +
+				'<br>GSi: ' + GSi[i] + ' kn, GSf: ' + GSf[i] + ' kn, Vv: ' + Vv[i] + ' km/h' +
+				'<br>lat: ' + MONTE.lat[i] + ', lon: ' + MONTE.lon[i]
+		}
+		dat.unshift(MONTE);
+
+		var layout = {
+			margin: { l:0, r:0, t:0, b:0},
+			hovermode: 'closest', showlegend: false,
+			mapbox: {
+				style: 'carto-positron',
+				center: { lat: 39.71, lon: 13.04 },
+				zoom: 10.5, bearing: 0, pitch: 0
+			}
+		};
+
+		Plotly.plot('monte_fuso_' + perce + 'perce', dat, layout, {responsive: true, displayModeBar: false});
+	});
+}
+
+
+// =====================================================================================================================
+
+
+// =====================================================================================================================
+
+
+// Profilo verticale del vento e densità
+
+Plotly.d3.csv('meteo_vert.csv', function(rows) {
+
+	const wdt= 2;
+	
+	// HGHT,DRCT,SKNT
+	var h= unpack(rows, 'HGHT');
+	
+	var DRCT= {
+		type: "scatter",
+		mode: "lines", line: {color: '#ff9000', width: wdt, shape: 'spline'},
+		name: 'Direzione',
+		y: h, x: unpack(rows, 'DRCT')
+	};
+
+	var SKNT= {
+		type: "scatter",
+		mode: "lines", line: {color: '#009900', width: wdt, shape: 'spline'},
+		name: 'Velocità',
+		y: h, x: unpack(rows, 'SKNT'),
+		xaxis: 'x2'
+	};
+
+	var lay= {
+		width: 600, height: 700,
+		showlegend: false, separators: '.', hovermode: 'closest',
+		margin: { l:10, t:20, b:40, r:10},
+		xaxis : {
+			title: '<b>Direzione del vento</b> [°]',
+			titlefont: { color: '#ff9000' }, tickfont: { color: '#ff9000' }, gridcolor: '#ffcc80'
+		},
+		xaxis2: {
+			automargin: true,
+			title: '<b>Velocità del vento</b> [kn]',
+			titlefont: { color: '#009900' }, tickfont: { color: '#009900' }, gridcolor: '#1aff1a',
+			overlaying: 'x',
+			side: 'top'
+		},
+		yaxis: {
+			automargin: true,
+			title: '<b>Altitudine slm</b> [ft]',
+			tickformat: 'f'
+		}
+	};
+
+	var config= {
+		showLink: true, plotlyServerURL: "https://chart-studio.plotly.com",
+		responsive: true
+	};
+
+	Plotly.newPlot('gra_vert', [DRCT, SKNT], lay, config);
+
+
+	// Profilo verticale DENSITA'
+
+
+	// dVERA,diff
+	
+	var dVERA= {
+		type: "scatter",
+		mode: "lines", line: {color: '#0000ff', width: wdt},
+		name: "Densità",
+		y: h, x: unpack(rows, 'dVERA'),
+		xaxis: 'x2'
+	};
+
+	var diff= {
+		type: "scatter",
+		mode: "lines", line: {color: '#ff5050', width: wdt, shape: 'spline'},
+		name: 'Scarto',
+		y: h, x: unpack(rows, 'diff')
+	};
+
+	var lay2= {
+		width: 600, height: 700,
+		showlegend: false, separators: '.', hovermode: 'closest',
+		margin: { l:10, t:20, b:40, r:10},
+		xaxis: {
+			title: '<b>Scarto rispetto aria tipo</b> [%]',
+			titlefont: { color: '#ff5050' }, tickfont: { color: '#ff5050' }, gridcolor: '#ff8080'
+		},
+		xaxis2: {
+			automargin: true,
+			title: "<b>Densità dell'aria</b> [kg/m<sup>3</sup>]",
+			titlefont: { color: '#0000ff' }, tickfont: { color: '#0000ff' }, gridcolor: '#b3b3ff',
+			overlaying: 'x',
+			side: 'top'
+		},
+		yaxis: {
+			automargin: true,
+			title: '<b>Altitudine slm</b> [ft]',
+			tickformat: 'f'
+		}
+	};
+
+	Plotly.newPlot('gra_dens', [dVERA, diff], lay2, config);
+});
+
+
+function unpack(rows, key) {
+	return rows.map(function(row) { return row[key]; });
+}
+
+
+function sleep(ms) {
+	return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+
+// ============================================================================================================================
+
+// Grafici DST e AZM con interpolazione
+
+Plotly.d3.csv('ince_dst-azm.csv', function(err, rows) {
+
+	var config= {
+		showLink: true, plotlyServerURL: "https://chart-studio.plotly.com",
+		responsive: true
+	};
+
+	// t,drdr,dint,ds,ardr,aint,as
+	var t= unpack(rows, 't');
+
+	// DISTANZA
+	
+	var Drdr= {
+		type: "scatter", name: 'Distanza plot',
+		mode: "markers", marker: { size: 6, color: '#0000ff' },
+		x: t, y: unpack(rows, 'drdr')
+	};
+	var Dint= {
+		type: "scatter", name: 'Distanza interpolata',
+		mode: "lines", line: { width: 1, color: '#8080ff', shape: 'spline' },
+		x: t, y: unpack(rows, 'dint')
+	};
+	var Dsca= {
+		type: "scatter", name: 'Scarto',
+		mode: "markers", marker: { size: 5, color: '#ff9000' },
+		x: t, y: unpack(rows, 'ds'),
+		yaxis: 'y2'
+	};
+
+	var layDST= {
+		separators: ".", showlegend: false,
+		margin: { l:10, t:10, b:10},
+		xaxis: {
+			automargin: true,
+			title: { text: '<b>Tempo dopo le 18:56:25</b> [s]' }
+		},				
+		yaxis: {
+			automargin: true,
+			title: '<b>Distanza plot DC-9 dal radar Marconi</b> [nm]',
+			titlefont: { color: '#0000ff' },
+			tickfont: { color: '#0000ff' },
+			gridcolor: '#ccccff'
+		},
+		yaxis2: {
+			automargin: true,
+			title: "<b>Scarto rispetto all'interpolazione</b> [nm]",
+			titlefont: { color: '#ff9000' },
+			tickfont: { color: '#ff9000' },
+			gridcolor: '#ffe0cc',
+			overlaying: 'y',
+			side: 'right'
+		}
+	};
+
+	Plotly.newPlot('dst_plot-inte', [Drdr, Dint, Dsca], layDST, config);
+
+
+	// AZIMUT
+	
+	var Ardr= {
+		type: "scatter", name: 'Azimut plot',
+		mode: "markers", marker: { size: 6, color: '#0000ff' },
+		x: t, y: unpack(rows, 'ardr')
+	};
+	var Aint= {
+		type: "scatter", name: 'Azimut interpolato',
+		mode: "lines", line: { width: 1, color: '#8080ff', shape: 'spline' },
+		x: t, y: unpack(rows, 'aint')
+	};
+	var Asca= {
+		type: "scatter", name: 'Scarto',
+		mode: "markers", marker: { size: 5, color: '#ff9000' },
+		x: t, y: unpack(rows, 'as'),
+		yaxis: 'y2'
+	};
+
+	var layAZM= {
+		separators: ".", showlegend: false,
+		margin: { l:10, t:10, b:10},
+		xaxis: {
+			automargin: true,
+			title: { text: '<b>Tempo dopo le 18:56:25</b> [s]' }
+		},				
+		yaxis: {
+			automargin: true,
+			title: '<b>Azimut plot DC-9 dal radar Marconi</b> [gradi]',
+			titlefont: { color: '#0000ff' },
+			tickfont: { color: '#0000ff' },
+			gridcolor: '#ccccff'
+		},
+		yaxis2: {
+			automargin: true,
+			title: "<b>Scarto rispetto all'interpolazione</b> [gradi]",
+			titlefont: { color: '#ff9000' },
+			tickfont: { color: '#ff9000' },
+			gridcolor: '#ffe0cc',
+			overlaying: 'y',
+			side: 'right'
+		}
+	};
+
+	Plotly.newPlot('azm_plot-inte', [Ardr, Aint, Asca], layAZM, config);
+});
+
+</script>
+
+
+</body>
+</html>

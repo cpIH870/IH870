@@ -1,0 +1,72 @@
+body {
+	margin: 10px 15px 2em 15px;
+	line-height: 1.5;
+}
+
+/* Classe per quoting */
+.cita {
+	border-left: 8px solid #ccc;
+	/*font-weight: bold; NON USARE, alcune citazioni hanno il bold su alcune parti*/
+	font-family: monospace;
+	font-size: 1rem;
+	padding-left: 1em;
+	margin: 1em 0px 1em 1em;
+	text-align: justify;
+	/*hyphens: auto;*/
+}
+
+/* Titolo delle pagine */
+h2 {
+	margin: 0px 0px 30px 0px;
+	text-align: center;
+	font-weight: bold;
+	text-shadow: 1px 1px 2px #888888;
+}
+
+h3 {
+	margin-left: 1em;
+	margin-bottom: 0.5em;
+	font-weight: bold;
+	font-style: italic;
+	text-shadow: 1px 1px 2px #888888;
+}
+
+/* Evidenzia le revisioni con una barra a dx */
+div.rev {
+	margin: 0px 0px 0px 0px;
+	border:none;
+	border-right: 3pt solid #000000; 
+	padding:0px 8px 0px 0px;
+}
+
+/* Usata per indice in alto a dx in ogni pagina */
+div.indice {
+	position: absolute;
+	top: 0px;
+	right: 0;
+	width: 5em;
+	height: 1em;
+}
+
+
+a {
+	text-decoration: none;
+	background: transparent;
+	cursor: pointer;
+	text-shadow: 0px 0px 1px;
+}
+
+a:hover {
+	border-bottom: 1px solid;
+	background: #cdfeaa;
+}
+
+a:active {
+	background: #265301;
+	color: #cdfeaa;
+}
+
+
+abbr {
+	cursor: help;
+}

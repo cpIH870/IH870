@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+	<meta charset="UTF-8">
+	<title>Simulazione in Layout e Telemetria</title>
+	<style>
+		/* Setup della pagina generale */
+		body { 
+			margin: 0; 
+			background-color: #1a1a1a; 
+			color: #fff;
+		}
+
+		/* PANNELLO DELLA TELEMETRIA (LABEL) */
+		#telemetria {
+			position: fixed;
+			z-index: 99; /* Lo spinge sopra il canvas */
+			pointer-events: auto; /* FORZA il browser a catturare i click del mouse qui dentro */
+			top: 15px;
+			left: 15px;
+			background: rgba(50, 50, 50, 0.65);
+			border-left: 4px solid #00ff00;
+			padding: 12px;
+			border-radius: 4px;
+			font-family: monospace;
+			font-size: 1.2em;
+			line-height: 1.4;
+		}
+
+		.btn-vista {
+			background: rgba(0, 0, 0, 0.85);
+			color: #cc9933;
+			border: 1px solid #555;
+			padding: 8px 14px;
+			font-family: sans-serif;
+			font-size: 12px;
+			font-weight: bold;
+			cursor: pointer;
+			border-radius: 4px;
+			transition: background 0.2s, border-color 0.2s;
+		}
+		.btn-vista:hover {
+			background: #222;
+			border-color: #00ff00; /* Evidenzia in verde al passaggio del mouse */
+		}
+		.txt-rosso { color: #ff4d4d; }
+	</style>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+</head>
+<body>
+
+
+<div id="controlli-viste" style="position: fixed; top: 15px; right: 15px; z-index: 9999; display: flex; gap: 10px;">
+    <button onclick="impostaVista('pianta')" class="btn-vista">Vista in Pianta</button>
+    <button onclick="impostaVista('ovest')" class="btn-vista">Profilo da Ovest</button>
+    <button onclick="impostaVista('sud')" class="btn-vista">Profilo da Sud</button>
+</div>
+
+<div id="telemetria">
+	Tempo   : <span id="MIStempo">0</span> s<br>
+	Distanza: <span id="MISdst">0</span> m<br>
+	<br>
+	<span class="txt-rosso">== MISSILE ==</span><br>
+	Quota   : <span id="MISquota">0</span> m<br>
+	Mach    : <span id="MISmach">0</span> m<br>
+	Acc AP  : <span id="MISaccGen">0</span> m<br>
+	S. perc : <span id="MISsper">0</span> m<br>
+	
+	<hr style="border: 0; border-top: 1px solid #444; margin: 10px 0;">
+
+	<div style="display: flex; flex-direction: column; color: #aaa;">
+		<label for="slider-velocita" style="font-weight: bold; margin-bottom: 4px; text-align: center;">Velocità animazione</label>
+		<div style="display: flex; align-items: center; gap: 10px;">
+			<input type="range" id="slider-velocita" min=".25" max="1.5" step="0.25" value="1" style="cursor: pointer; flex-grow: 1;">
+			<span id="lbl-velocita-val" style="font-family: monospace; color: #00ff00; background: #222; padding: 2px 6px; border-radius: 3px; min-width: 35px; text-align: center;">1.00x</span>
+		</div>
+	</div>	
+</div>
+
+<script>
+"use strict";
+
+const righe=[
+'0,0,7902.07,-1082.53,1875,6652.07,0.00,1.334,3.2',
+'5.07698,-23.482,7902.07,-1067.82,1835.57,6663.19,0.10,1.367,1.3',
+'10.154,-46.964,7902.07,-1052.67,1795.15,6674.5,0.20,1.401,1.2',
+'15.231,-70.4459,7902.07,-1037.38,1753.67,6685.99,0.30,1.435,1.7',
+'20.3079,-93.9279,7902.07,-1022.02,1711.1,6697.67,0.40,1.469,0.4',
+'25.3849,-117.41,7902.07,-1006.45,1667.47,6709.53,0.50,1.503,0.9',
+'30.4619,-140.892,7902.07,-990.503,1622.82,6721.57,0.60,1.538,0.8',
+'35.5389,-164.374,7902.07,-974.19,1577.15,6733.79,0.70,1.572,0.1',
+'40.6159,-187.856,7902.07,-957.607,1530.42,6746.19,0.80,1.607,0.6',
+'45.6929,-211.338,7902.07,-940.819,1482.62,6758.76,0.90,1.641,0.3',
+'50.7698,-234.82,7902.07,-923.792,1433.77,6771.51,1.00,1.676,0.2',
+'55.8468,-258.302,7902.07,-906.462,1383.86,6784.44,1.10,1.711,1.3',
+'60.9238,-281.784,7902.07,-888.777,1332.95,6797.65,1.20,1.746,2.0',
+'66.0008,-305.266,7902.07,-870.711,1281.07,6811.21,1.30,1.780,2.2',
+'71.0778,-328.748,7902.07,-852.247,1228.21,6825.15,1.40,1.815,2.4',
+'76.1548,-352.23,7902.07,-833.369,1174.41,6839.48,1.50,1.850,2.8',
+'81.2317,-375.712,7902.07,-814.058,1119.66,6854.24,1.60,1.884,3.3',
+'86.3087,-399.194,7902.07,-794.296,1064,6869.48,1.70,1.919,3.6',
+'91.3857,-422.676,7902.07,-774.065,1007.44,6885.24,1.80,1.953,3.9',
+'96.4627,-446.158,7902.07,-753.347,950,6901.54,1.90,1.988,4.3',
+'101.54,-469.64,7902.07,-732.122,891.697,6918.42,2.00,2.022,4.7',
+'106.617,-493.122,7902.07,-710.371,832.56,6935.93,2.10,2.057,5.0',
+'111.694,-516.604,7902.07,-688.077,772.606,6954.09,2.20,2.091,5.4',
+'116.771,-540.086,7902.07,-665.219,711.859,6972.95,2.30,2.126,5.9',
+'121.848,-563.568,7902.07,-641.777,650.347,6992.54,2.40,2.160,6.2',
+'126.925,-587.05,7902.07,-617.735,588.097,7012.91,2.50,2.194,6.6',
+'132.002,-610.532,7902.07,-593.071,525.133,7034.08,2.60,2.228,7.0',
+'137.079,-634.014,7902.07,-567.769,461.485,7056.1,2.70,2.262,7.4',
+'142.156,-657.496,7902.07,-541.809,397.185,7079.01,2.80,2.297,7.8',
+'147.233,-680.977,7902.07,-515.173,332.261,7102.84,2.90,2.331,8.1',
+'152.31,-704.459,7902.07,-487.846,266.745,7127.62,3.00,2.365,8.5',
+'157.387,-727.941,7902.07,-459.81,200.669,7153.4,3.10,2.399,8.8',
+'162.463,-751.423,7902.07,-431.05,134.065,7180.2,3.20,2.432,9.2',
+'167.54,-774.905,7902.07,-401.552,66.9653,7208.05,3.30,2.466,9.5',
+'172.617,-798.387,7902.07,-371.303,-0.599002,7236.99,3.40,2.500,9.8',
+'177.694,-821.869,7902.07,-340.291,-68.5961,7267.04,3.50,2.534,10.0',
+'182.771,-845.351,7902.07,-308.505,-136.996,7298.22,3.60,2.568,10.2',
+'187.848,-868.833,7902.07,-275.938,-205.772,7330.56,3.70,2.602,10.4',
+'192.925,-892.315,7902.07,-242.582,-274.895,7364.07,3.80,2.636,10.5',
+'198.002,-915.797,7902.07,-208.432,-344.343,7398.76,3.90,2.670,10.6',
+'203.079,-939.279,7902.07,-173.486,-414.095,7434.65,4.00,2.704,10.6',
+'208.156,-962.761,7902.07,-137.743,-484.134,7471.74,4.10,2.739,10.6',
+'213.233,-986.243,7902.07,-101.203,-554.449,7510.03,4.20,2.773,10.4',
+'218.31,-1009.73,7902.07,-63.8731,-625.033,7549.52,4.30,2.808,10.2',
+'223.387,-1033.21,7902.07,-25.7587,-695.886,7590.18,4.40,2.843,9.9',
+'228.464,-1056.69,7902.07,13.1295,-767.014,7632.01,4.50,2.878,9.5',
+'233.541,-1080.17,7902.07,52.7614,-838.402,7674.96,4.60,2.908,9.0',
+'238.618,-1103.65,7902.07,92.9372,-909.739,7718.77,4.70,2.916,7.9',
+'243.695,-1127.14,7902.07,133.353,-980.621,7763.04,4.80,2.915,5.5',
+'248.772,-1150.62,7902.07,173.927,-1051.22,7807.64,4.90,2.919,2.9',
+'253.849,-1174.1,7902.07,214.552,-1121.76,7852.43,5.00,2.923,1.4',
+'258.825,-1197.11,7902.07,254.28,-1191,7896.32,5.10,2.926,3.4',
+'258.926,-1197.58,7902.07,255.089,-1192.42,7897.21,5.10,2.926,3.4',
+'259.028,-1198.05,7902.07,255.898,-1193.84,7898.11,5.10,2.927,3.4',
+'259.129,-1198.52,7902.07,256.707,-1195.25,7899,5.10,2.927,3.4',
+'259.231,-1198.99,7902.07,257.515,-1196.67,7899.9,5.11,2.927,3.4',
+'259.332,-1199.46,7902.07,258.324,-1198.08,7900.79,5.11,2.927,3.4',
+'259.434,-1199.93,7902.07,259.132,-1199.5,7901.68,5.11,2.927,3.4',
+'259.535,-1200.4,7902.07,259.941,-1200.91,7902.58,5.11,2.927,3.4',
+];
+
+// Array globali per le traiettorie 3D
+let traiettoriaAereo = [];
+let traiettoriaMissile = [];
+
+let telemetria= []; // Dati aggiuntivi per i parametri extra (indicizzati frame per frame)
+
+const SEPARATORE = ','; // Separatore colonne
+
+for (let i = 0; i < righe.length; i++) {
+	const riga = righe[i];
+	const valori = riga.split(SEPARATORE);
+	if (valori.length < 9) continue;
+
+	traiettoriaAereo.push(new THREE.Vector3(-parseFloat(valori[0]), parseFloat(valori[2]), parseFloat(valori[1])));
+	traiettoriaMissile.push(new THREE.Vector3(-parseFloat(valori[3]), parseFloat(valori[5]), parseFloat(valori[4])));
+
+	telemetria.push({
+		t: valori[6],
+		mach: valori[7],
+		Agen: valori[8]
+	});
+}
+
+
+// --- RIFERIMENTI DOM PER LE LABEL ---
+
+const lblTempo   = document.getElementById('MIStempo');
+const lblMISdst  = document.getElementById('MISdst');
+const lblMISquota= document.getElementById('MISquota');
+const lblMISmach = document.getElementById('MISmach');
+const lblMISaccAP= document.getElementById('MISaccGen');
+const lblMISsper = document.getElementById('MISsper');
+
+
+// traiettoriaAereo e traiettoriaMissile sono gli array di vettori reali
+const bounds = new THREE.Box3();
+
+// Inserisci tutti i punti nel calcolo dei limiti
+traiettoriaAereo.forEach(punto => bounds.expandByPoint(punto));
+traiettoriaMissile.forEach(punto => bounds.expandByPoint(punto));
+
+// Ora abbiamo il centro geometrico dei dati reali e la dimensione del volume occupato
+const centroDati = new THREE.Vector3();
+bounds.getCenter(centroDati);
+
+const dimensioniDati = new THREE.Vector3();
+bounds.getSize(dimensioniDati);
+
+// Troviamo la dimensione massima tra Larghezza, Altezza e Profondità
+const maxDim = Math.max(dimensioniDati.x, dimensioniDati.y, dimensioniDati.z);
+
+
+// --- SCENA E TELECAMERA ---
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, maxDim * 10);
+camera.updateProjectionMatrix(); // Notifica a Three.js che i parametri sono cambiati
+camera.position.set(-250, 8000, -1500); // POS telecamera
+
+
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setSize(window.innerWidth, window.innerHeight); // renderer della dimensione di window
+document.body.appendChild(renderer.domElement);
+
+const controls = new THREE.OrbitControls(camera, renderer.domElement);
+controls.target.copy(centroDati); // Punta OrbitControls al centro dei dati
+controls.update(); // Forza l'aggiornamento dei controlli
+
+
+// --- CONFIGURAZIONE GRIGLIA METRICA CON ASSI AL CENTRO ---
+const dimensioneQuadratino = 100; // 100 metri
+
+// Calcoliamo quanti quadratini servono per coprire il semiasse più grande
+// Usiamo Math.ceil per approssimare per eccesso
+const quadratiniPerSemiasse = Math.ceil((maxDim * 0.7) / dimensioneQuadratino);
+
+// Il numero totale di suddivisioni DEVE essere il doppio dei quadratini di un semiasse
+// In questo modo il numero totale è matematicamente PARI e lo zero è perfettamente al centro
+const numeroSuddivisioni = quadratiniPerSemiasse * 2;
+
+// Di conseguenza, la dimensione totale della griglia sarà:
+const dimensioneTotaleGriglia = numeroSuddivisioni * dimensioneQuadratino;
+
+// Creazione della griglia
+// Per evidenziare bene i due assi principali a croce sullo zero (0,0), 
+// impostiamo il primo colore molto più luminoso (es. 0x888888 o un colore acceso)
+const gridHelper = new THREE.GridHelper(dimensioneTotaleGriglia, numeroSuddivisioni, 0x888888, 0x333333);
+
+const quotaScelta = bounds.min.y - (maxDim * 0.05); 
+gridHelper.position.set(0, quotaScelta, 0); 
+scene.add(gridHelper);
+
+
+// --- POSIZIONAMENTO PUNTI CARDINALI ANCORATI A (0,0) ---
+const raggioGriglia = (dimensioneTotaleGriglia / 2) + (dimensioneQuadratino * 0.5); 
+creaEtichettaCardinale("N", new THREE.Vector3(0, quotaScelta, raggioGriglia)); // Nord +Z
+creaEtichettaCardinale("S", new THREE.Vector3(0, quotaScelta, -raggioGriglia)); // Sud -Z
+creaEtichettaCardinale("E", new THREE.Vector3(-raggioGriglia, quotaScelta, 0)); // Est -X
+creaEtichettaCardinale("W", new THREE.Vector3(raggioGriglia, quotaScelta, 0)); // Ovest +X
+
+
+// --- LUCI E AMBIENTE ---
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+scene.add(ambientLight);
+const dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
+dirLight.position.set(20, 50, 20);
+scene.add(dirLight);
+
+const objectAereo = creaSagomaAereo(0x00ff00);
+scene.add(objectAereo);
+
+const objectMissile = creaSagomaMissile(0xff0000);
+scene.add(objectMissile);
+
+function creaLineaTraiettoria(punti, colore)
+{
+	const geometry = new THREE.BufferGeometry().setFromPoints(punti);
+	const material = new THREE.LineBasicMaterial({ color: colore, opacity: 0.3, transparent: true });
+	const line = new THREE.Line(geometry, material);
+	scene.add(line);
+}
+creaLineaTraiettoria(traiettoriaAereo, 0x55ff55);
+creaLineaTraiettoria(traiettoriaMissile, 0xff5555);
+
+
+// Scala le sagome dei velivoli per renderle visibili nella nuova proporzione
+objectAereo.scale.setScalar(maxDim * 0.003); // Regola il moltiplicatore
+objectMissile.scale.setScalar(maxDim * 0.003);
+
+
+// --- LOGICA ANIMAZIONE ---
+let clock = new THREE.Clock();
+let tempoSimulazione = 0;
+const durataVolo = telemetria[righe.length-1].t;  // Durata del volo effettivo (ultimo tempo delle righe)
+const pausaIniziale = 2; // Secondi di attesa all'inizio
+const pausaFinale = 3;   // Secondi di attesa alla fine
+
+// La durata totale del ciclo è la somma del volo + le due pause
+const durataTotaleCiclo = pausaIniziale + durataVolo + pausaFinale;
+
+let tNorm= 0; // Tempo di simulazione
+
+// --- CONTROLLI MOLTIPLICATORE TEMPO ---
+const sliderVelocita = document.getElementById('slider-velocita');
+const lblVelocitaVal = document.getElementById('lbl-velocita-val');
+
+let moltiplicatoreTempo = 1.0; // Di base a 1x (velocità reale)
+
+// Ascolta i cambi dello slider
+sliderVelocita.addEventListener('input', (e) => {
+    moltiplicatoreTempo = parseFloat(e.target.value);
+    lblVelocitaVal.innerText = moltiplicatoreTempo.toFixed(2) + "x";
+});
+
+
+// Calcolo posizione (versione con interpolazione flessibile)
+function calcolaPosizione(traiettoria, tNorm)
+{
+	const maxIndex = traiettoria.length - 1;
+	const indiceFrazionario = tNorm * maxIndex;
+	const indexBase = Math.floor(indiceFrazionario);
+	const indexNext = Math.min(indexBase + 1, maxIndex);
+	const fattoreInterpolazione = indiceFrazionario - indexBase;
+
+	const pos = new THREE.Vector3();
+	pos.lerpVectors(traiettoria[indexBase], traiettoria[indexNext], fattoreInterpolazione);
+
+	return { pos, indexBase, indexNext, maxIndex };
+}
+
+
+// --- LOGICA TEMPORALE GESTITA A STATI ---
+let faseAttuale = "pausaIniziale"; // Può essere: "pausaIniziale", "inVolo", "pausaFinale"
+let timerPausa = 0; // Timer locale per gestire i secondi reali di orologio
+
+function aggiornaSimulazione(deltaReale, moltiplicatore)
+{
+	switch (faseAttuale) {
+		case "pausaIniziale": // Conta i secondi reali di orologio
+			timerPausa += deltaReale;
+			tNorm = 0; // Forza i modelli all'inizio
+
+			if (timerPausa >= pausaIniziale) {
+				faseAttuale = "inVolo";
+				tempoSimulazione = 0; // Azzeriamo il tempo di volo pronto a partire
+			}
+			break;
+
+		case "inVolo": // Il tempo di volo avanza scalato dallo slider
+			tempoSimulazione += deltaReale * moltiplicatore;
+			tNorm = tempoSimulazione / durataVolo;
+
+			// Se il volo è terminato (tNorm >= 1) passa alla pausa finale
+			if (tNorm >= 1) {
+				tNorm = 1; // Blocca i modelli alla fine esatta
+				faseAttuale = "pausaFinale";
+				timerPausa = 0; // Resetta il timer per i 3 secondi successivi
+			}
+			break;
+
+		case "pausaFinale": // Conta i secondi reali di orologio
+			timerPausa += deltaReale;
+			tNorm = 1; // Mantieni i modelli fermi a fine traiettoria
+
+			if (timerPausa >= pausaFinale) {
+				faseAttuale = "pausaIniziale"; // Ricomincia il loop da capo
+				timerPausa = 0;
+			}
+			break;
+	}
+}
+
+
+// ANIMAZIONE
+function animate() 
+{
+	requestAnimationFrame(animate);
+
+	const deltaReale = clock.getDelta();
+
+	// Elabora lo stato dell'animazione (calcola internamente anche tNorm)
+	aggiornaSimulazione(deltaReale, moltiplicatoreTempo);
+
+	// --- AGGIORNAMENTO POSIZIONI E HUD ---
+	const datiAereo = calcolaPosizione(traiettoriaAereo, tNorm);
+	objectAereo.position.copy(datiAereo.pos);
+	if (datiAereo.indexBase < datiAereo.maxIndex) {
+		objectAereo.lookAt(traiettoriaAereo[datiAereo.indexNext]);
+		// Ruota l'aereo attorno al suo asse verticale locale
+		let angoloImbardata = THREE.MathUtils.degToRad(-11.2);
+		objectAereo.rotateY(angoloImbardata);
+	}
+
+	const datiMissile = calcolaPosizione(traiettoriaMissile, tNorm);
+	objectMissile.position.copy(datiMissile.pos);
+	if (datiMissile.indexBase < datiMissile.maxIndex) objectMissile.lookAt(traiettoriaMissile[datiMissile.indexNext]);
+
+	lblMISquota.innerText = objectMissile.position.y.toFixed(0);
+
+	const idx = datiAereo.indexBase;
+	const tel = telemetria[idx];
+	if (tel) {
+	  lblTempo.innerText = tel.t;
+	  lblMISmach.innerText = tel.mach;
+	  lblMISaccAP.innerText = tel.Agen;
+	}
+	lblMISdst.innerText = objectAereo.position.distanceTo(objectMissile.position).toFixed(1);
+
+	controls.update();
+	renderer.render(scene, camera);
+}
+
+
+animate();
+
+
+function creaEtichettaCardinale(testo, posizione)
+{
+	// Canvas in memoria per disegnare il testo
+	const canvas = document.createElement('canvas');
+	canvas.width = 128; canvas.height = 128;
+	const ctx = canvas.getContext('2d');
+
+	// Stile del testo
+	ctx.font = 'Bold 70px Arial';
+	ctx.fillStyle = '#cc9933'; // Colore
+	ctx.textAlign = 'center';
+	ctx.textBaseline = 'middle';
+	ctx.fillText(testo, 64, 64); // testo al centro del canvas
+
+	// Trasformazione canvas in una texture di Three.js
+	const texture = new THREE.CanvasTexture(canvas);
+	const materialeSprite = new THREE.SpriteMaterial({ 
+		map: texture, 
+		transparent: true,
+		depthTest: true // Mantiene la coerenza di profondità nella scena
+	});
+
+	// Creazione e posizionamento sprite
+	const sprite = new THREE.Sprite(materialeSprite);
+	sprite.position.copy(posizione);
+
+	// Regola la dimensione visiva della lettera nello spazio 3D (proporzionata alla maxDim della griglia)
+	const scalaLettera = maxDim * 0.05; 
+	sprite.scale.set(scalaLettera, scalaLettera, 1);
+
+	scene.add(sprite);
+}
+
+
+function impostaVista(tipo)
+{
+	const distanzaVisiva = maxDim * 1.3;
+	const alt= 7700;//centroDati.y;
+
+	camera.up.set(0, 1, 0); // RESET STANDARD: per default l'alto è l'asse Y (quota Up)
+	controls.target.set(0, alt, 0); // Forza il mirino dei controlli a guardare esattamente lo zero (0, 0) alla quota dei dati
+
+	switch(tipo) {
+		case 'pianta':
+		camera.up.set(0, 0, 1); // Forza l'alto verso il Nord (+Z)
+		camera.position.set(0, alt + distanzaVisiva, 0); // Posiziona la camera sulla stessa verticale (0, 0)
+		break;
+
+		case 'ovest':
+		camera.position.set(distanzaVisiva, alt, 0);
+		break;
+
+		case 'sud':
+		camera.position.set(0, alt, -distanzaVisiva);
+		break;
+	}
+
+	controls.update(); // Forza OrbitControls a digerire la nuova posizione, il nuovo target e il nuovo vettore UP
+}
+
+
+// --- MODELLI SCHEMATICI missile e DC-9 ---
+function creaSagomaMissile(colore) {
+	const gruppo = new THREE.Group();
+	const materiale = new THREE.MeshLambertMaterial({ color: colore });
+	const geometryCorpo = new THREE.CylinderGeometry(0.8, 0.8, 8, 16);
+	geometryCorpo.rotateX(Math.PI / 2);
+	const corpo = new THREE.Mesh(geometryCorpo, materiale);
+	gruppo.add(corpo);
+	const geometryPunta = new THREE.ConeGeometry(0.8, 2, 16);
+	geometryPunta.rotateX(Math.PI / 2);
+	const punta = new THREE.Mesh(geometryPunta, materiale);
+	punta.position.z = 5;
+	gruppo.add(punta);
+	const geometryAletta = new THREE.BoxGeometry(0.1, 2.5, 1.5);
+	const aletta1 = new THREE.Mesh(geometryAletta, materiale);
+	aletta1.position.set(0, 0.8, -3.5);
+	gruppo.add(aletta1);
+	const aletta2 = aletta1.clone();
+	aletta2.position.y = -0.8;
+	gruppo.add(aletta2);
+	const geometryAlettaOrizz = new THREE.BoxGeometry(2.5, 0.1, 1.5);
+	const aletta3 = new THREE.Mesh(geometryAlettaOrizz, materiale);
+	aletta3.position.set(0.8, 0, -3.5);
+	gruppo.add(aletta3);
+	const aletta4 = aletta3.clone();
+	aletta4.position.x = -0.8;
+	gruppo.add(aletta4);
+	return gruppo;
+}
+
+function creaSagomaAereo(colore) {
+	const gruppo = new THREE.Group();
+	const materiale = new THREE.MeshLambertMaterial({ color: colore });
+	const geometryFusoliera = new THREE.CylinderGeometry(1.5, 1.5, 15, 16);
+	geometryFusoliera.rotateX(Math.PI / 2);
+	const fusoliera = new THREE.Mesh(geometryFusoliera, materiale);
+	gruppo.add(fusoliera);
+	const geometryMuso = new THREE.ConeGeometry(1.5, 4, 16);
+	geometryMuso.rotateX(Math.PI / 2);
+	const muso = new THREE.Mesh(geometryMuso, materiale);
+	muso.position.z = 9.5;
+	gruppo.add(muso);
+	const geometryAli = new THREE.BoxGeometry(16, 0.3, 4);
+	const ali = new THREE.Mesh(geometryAli, materiale);
+	ali.position.z = 1;
+	gruppo.add(ali);
+	const geometryCodaOrizz = new THREE.BoxGeometry(6, 0.2, 2);
+	const codaOrizz = new THREE.Mesh(geometryCodaOrizz, materiale);
+	codaOrizz.position.set(0, 0, -6.5);
+	gruppo.add(codaOrizz);
+	const geometryTimone = new THREE.BoxGeometry(0.2, 3, 2);
+	const timone = new THREE.Mesh(geometryTimone, materiale);
+	timone.position.set(0, 1.5, -6.5);
+	gruppo.add(timone);
+	return gruppo;
+}
+
+
+// --- TELEMETRIA CON LARGHEZZA AUTOMATICA INIZIALE ---
+setTimeout(() => {
+	const boxTelemetria = document.getElementById('telemetria');
+	if (boxTelemetria) {
+		const larghezzaIniziale = boxTelemetria.offsetWidth;
+		boxTelemetria.style.width = larghezzaIniziale + 'px';
+	}
+}, 100);
+
+
+// Gestione ridimensionamento finestra
+window.addEventListener('resize', () => {
+	camera.aspect = window.innerWidth / window.innerHeight;
+	camera.updateProjectionMatrix();
+	renderer.setSize(window.innerWidth, window.innerHeight);
+});
+
+</script>
+</body>
+</html>

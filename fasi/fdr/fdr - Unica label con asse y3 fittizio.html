@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>	
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Strage di Ustica">
+	<meta name="keywords" content="ustica,ih870">
+	<title>Strage di Ustica - Grafici FDR</title>
+	<link rel="stylesheet" type="text/css" href="../../stile.css">
+	<script src="../../plotly-latest.min.js"></script>
+	<script src="../../comune.js"></script>
+	<script src="../../crea_indice.js"></script>
+</head>
+<body>
+
+<div class="indice"><a href="../../index.html">Indice</a></div>
+
+<h2>Fasi del volo - Grafici <i>flight data recorder</i></h2>
+
+
+
+Spiegazione iniziale
+<br>
+<br><br>
+
+
+<!-- ========================================================================================================== -->
+
+
+<p style="margin-left: 5em"><b>INDICE</b></p>
+
+<p id="indice" style="margin-left: 3em">
+<!-- riempito dal JS -->
+</p>
+<br>
+
+<hr>
+
+<br>
+
+<!-- ========================================================================================================== -->
+
+
+
+
+<h3 id="paravolo">Parametri di volo</h3>
+
+
+<div id="ALT_IAS_HDG" style="height: 700px"></div>
+
+<br>
+<div id="HDG_vert" style="height: 900px; width: 700px"></div>
+
+<br>
+
+
+
+
+<h3 id="conversione">Conversione dai grafici originali</h3>
+
+<!-- v. P:\PRG_VC2019\USTICA - Radar\FDR\Grafici\Grafici.docx -->
+
+<div style="margin-bottom: 2em; display: inline-block; width:100%;">
+<img src="ias.png" style="float:left; padding-right: 1em;" alt="" title="">
+xxxxxxxxxxx 20 nm a nord-ovest di Nizza.<br>
+</div>
+
+
+
+
+Il collegio peritale fa alcune deduzioni per stabilire la corrispondenza tra la scala temporale dell'FDR (in secondi) e l'orario UTC. Queste sono alcune delle considerazioni riportate a pag. IV-17 della perizia:<br>
+
+<div class="cita">
+
+L'esame del tabulato, consente anche di verificare che il rilascio freni al decollo, si è avuto dopo 366 sec dall'attivazione dell'FDR e, pertanto, l'incidente si è verificato dopo 52' 54" dall'inizio della manovra di decollo.<br>
+Poiché, come riportato nella Parte I, il decollo è avvenuto circa alle ore 20 08' locali (18 08' GMT), l'incidente può essersi verificato nell'intorno delle ore 21 00'.54" locali (19 00'.54" GMT).<br>
+Tale dato è in buon accordo con quanto ricavabile dai dati radar che, come riferito in altra parte della relazione, rilevano l'ultimo segnale del trasponder alle 20h 59' 45" locali (18h 59' 45" GMT).<br>
+Sempre dal tabulato allegato al documento dell'Ente inglese, si può osservare che il velivolo ha raggiunto il livello di volo FL290 a t=1854 sec dall'inizio della registrazione, e quindi a t=24' 48" dal decollo e cioè alle 18h 32'48" GMT ed ha iniziato la discesa a t=2796 sec e cioè alle 18h 48' 30" GMT.<br>
+Anche questi dati risultano in buon accordo con quanto riportato nelle trascrizioni delle registrazione delle comunicazioni Bordo/Terra/Bordo (B/T/B) dalle quali risulta che il velivolo si è livellato al FL290 (29000 ft) alle 18h 31' 56" GMT, e tale livello è stato mantenuto fino alle 18h 46' 31" GMT.<br>
+
+</div>
+
+<br>
+
+
+
+
+
+
+<h3 id="partenza">Posizione</h3>
+
+La cartina mostra i tracciati dei voli <abbr title="DC-9 Itavia Bologna - Palermo">IH870</abbr> (rosso), 
+<br>
+<br><br>
+
+
+
+
+
+<div style="margin-bottom:1em; width:100%; display:flex; align-items:flex-start; gap:1em;">
+<img src="POS.png" alt="">
+<div id="cartina" style="width:400px; height:700px;"></div>
+<div>
+L'immagine di sinistra (tratta dalla fig. IV-14 della perizia) è compressa in orizzontale di un fattore 0,743 per portare in scala la longitudine rispetto alla latitudine media di 42°.<br>
+
+Il tratto blu rappresenta la rotta ricavata dall'immagine di sinistra, mentre col tratto verde viene mostrata la rotta calcolata con il processo d'integrazione spiegato in precedenza. Di questa seconda rotta, è riportata soltanto la parte fino a Peretola, non coperta dai dati dei radar di Roma.
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+"use strict";
+
+// CARTINA POSIZIONE
+
+Plotly.setPlotConfig({
+	mapboxAccessToken: 'pk.eyJ1IjoiY3Jpc3RpYW5vcGkiLCJhIjoiY2pycXl1N3piMXAzODQzbnRtZzd4NzBlbiJ9.QugZVJkXpGrSJpoz_ghJqQ'
+});
+
+
+Plotly.d3.csv('gra_lon-lat.csv', function(err, rows)
+{
+	var FDR= {
+		type:'scattermapbox', name: 'Pos. FDR',
+		//text: [], hoverinfo: "text",
+		lat: unpack(rows, 'lat'), lon: unpack(rows, 'lon'),
+		mode: 'markers', marker: { size: 4, color: 'blue' }
+	};
+	
+	PUNTI.text.push('PIPPO'); PUNTI.lat.push(44 + 41.3/60); PUNTI.lon.push(11 + 30.6/60); 
+	AYW.lat.push(44.8133); AYW.lon.push(11.6167); // FER
+	
+	layout.legend= {
+		x: 0.99, y: 0.99,
+		xanchor: 'right', yanchor: 'top',
+		bgcolor: 'rgba(255,255,255,0.7)',
+		bordercolor: 'black',
+		borderwidth: 1
+	};
+	
+	layout.mapbox= {
+		style: 'basic', // "streets"; // Orografia e strade
+		center: { lat: 42.25, lon: 12 },
+		zoom: 6.1, bearing: 0, pitch: 0
+	};
+
+
+	Plotly.d3.csv('../rafari.csv', function(err, rows)
+	{
+		// ID,T,LAT,LON
+		var ID= unpack(rows, 'ID');
+		var T= unpack(rows, 'T');
+		var lat= unpack(rows, 'LAT');
+		var lon= unpack(rows, 'LON');
+		var n= ID.length;
+		for(var i= 0; i < n; i++) {
+			// T: 0= VOR/DME, 1= VORTAC, 2= VOR, 3= NDB, 4= TACAN
+			// MLG: VOR/DME o TACAN
+			switch(T[i]) {
+			case '0': VORDME.text.push(ID[i]); VORDME.lat.push(lat[i]); VORDME.lon.push(lon[i]); break;
+			case '1': VORTAC.text.push(ID[i]); VORTAC.lat.push(lat[i]); VORTAC.lon.push(lon[i]); break;
+			case '2': VOR.text.push(ID[i])   ; VOR.lat.push(lat[i])   ; VOR.lon.push(lon[i])   ; break;
+			case '3': NDB.text.push(ID[i])   ; NDB.lat.push(lat[i])   ; NDB.lon.push(lon[i])   ; break;
+			case '4': TACAN.text.push(ID[i]) ; TACAN.lat.push(lat[i]) ; TACAN.lon.push(lon[i]) ; break;
+			}
+		}
+
+
+		// Posizione INTEGRATA
+		Plotly.d3.csv('pos_integrata.csv', function(err, rows)
+		{
+			// t,UTC,lon,lat,ias,tas,alt,hdgT,ws,wd
+			var POS_INTE= {
+				type:'scattermapbox', name: 'Calcolata',
+				text: unpack(rows, 'UTC'), hoverinfo: "text",
+				lat: unpack(rows, 'lat'), lon: unpack(rows, 'lon'),
+				mode: 'lines+markers', line: { width: 1, color: '#008800' },
+				marker: { size: 4, color: '#008800' }
+			};
+
+			const t= unpack(rows, 't');
+			const ias= unpack(rows, 'ias');
+			const tas= unpack(rows, 'tas');
+			const alt= unpack(rows, 'alt');
+			const hdgT= unpack(rows, 'hdgT');
+			const wspd= unpack(rows, 'ws'), wdir= unpack(rows, 'wd');
+			for(var i= 0; i < POS_INTE.lat.length; i++)
+				POS_INTE.text[i] += ', t: ' + t[i] +
+					'<br>h: ' + alt[i] + ', hdgT: ' + hdgT[i] +
+					'<br>IAS: ' + ias[i] + ', TAS: ' + tas[i] +
+					'<br>WND: ' + wdir[i] + '@' + wspd[i]
+
+
+
+			Plotly.newPlot('cartina', [FDR, AYW, VORTAC, VORDME, VOR, NDB, TACAN, PUNTI, POS_INTE], layout, {responsive: true});
+
+		});
+	});
+});
+
+
+// ------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+// File in "P:\PRG_VC2019\wxGraphRead" modificati a mano
+
+
+// Posizioni salienti
+var POS= {
+	type: "scatter", hoverinfo: 'skip', showlegend: false,
+	mode: "markers+text", textposition: 'top center',
+	marker: { size: 5, color: 'red' },
+	textfont: {
+		family: 'Verdana, sans-serif', size: 14, color: 'red'
+	},
+	text:      ["PNZ D42"        , "PNZ D8"        , "PNZ"  , "PNZ D11"       , "A-13A"    , "UPT"],
+	hovertext: ["42 nm per Ponza", "8 nm per Ponza", "Ponza", "11 nm da Ponza", "A-13 ALFA", "Ultima risp. IH870"],
+	x:         [500                , 900,                1600     , 2000             ,  3000,         3500],
+	y: [],
+	yaxis: 'y3',
+};
+for(var i= 0; i < POS.text.length; i++) POS.y[i]= .5;
+
+
+var config= {
+	//showLink: true, plotlyServerURL: "https://chart-studio.plotly.com",
+	responsive: true
+};
+
+
+Plotly.d3.csv('alt_hdg_ias.csv', function(err, rows)
+{
+	// t,alt,hdg,ias
+	var tSec= unpack(rows, 't');
+	const MMSS= tSec.map(s => new Date(Number(s) * 1000).toISOString());
+
+	const t0= Date.parse("1980-06-27T18:00:40Z");
+	const UTC= tSec.map(s => new Date(t0 + Number(s) * 1000));	
+
+	POS.x= POS.x.map(s => new Date(Number(s) * 1000).toISOString());
+	
+	var ALT= {
+		type: "scatter", name: "ALT", hoverinfo: 'skip',
+		mode: "lines", line: { width: 2, color: '#0000ff' },
+		x: MMSS, y: unpack(rows, 'alt')
+	};
+	
+	var IAS= {
+		type: "scatter", name: "IAS", hoverinfo: 'skip',
+		mode: "lines", line: { width: 2, color: '#ff9900' },
+		x: MMSS, y: unpack(rows, 'ias'),
+		yaxis: 'y2'
+	};
+
+	var HDG= {
+		type: "scatter", name: "HDG", hoverinfo: 'skip',
+		mode: "lines", line: { width: 2, color: '#336600' },
+		x: MMSS, y: unpack(rows, 'hdg'),
+		yaxis: 'y2'
+	};
+
+	var HOVER = {
+		type: "scatter", showlegend: false,
+		x: MMSS, y: MMSS.map(() => 0.5), yaxis: 'y3',
+		mode: 'lines', line: { width: 0, color: 'white' },
+		hoverinfo: 'text', text: []
+	};
+
+	for(var i= 0; i < HOVER.x.length; i++)
+		HOVER.text[i] =
+			'UTC: ' + UTC[i].toISOString().substring(11,19) +
+			'<br>ALT: ' + Number(ALT.y[i]).toFixed(0) + ' ft' +
+			'<br>IAS: ' + Number(IAS.y[i]).toFixed(1) + ' kn' +
+			'<br>HDG: ' + Number(HDG.y[i]).toFixed(1) + '°';
+
+
+	var lay= {
+		separators: ',', showlegend: true,
+		margin: { l:0, r:0, t:0, b:0},
+		legend: {
+			x: 0.99, y: 0.1,
+			xanchor: 'right', yanchor: 'bottom',
+			bgcolor: 'rgba(255,255,255,.5)',
+			bordercolor: 'black',
+			borderwidth: 1
+		},		
+		hoverlabel: {
+			font: {
+				family: 'Monospace' //, size: 14, color: 'white'
+			},
+			//bgcolor: 'black', bordercolor: 'gray'
+		},
+		xaxis: {
+			title: { text: '<b>Tempo</b> [mm:ss]' },
+			type: 'date', automargin: true,
+			tickformat: '%H:%M:%S'
+			//hoverformat: 'Tempo: %M:%S',
+ 		},
+		yaxis: {
+			automargin: true,
+			title: '<b>Quota</b> [ft]',
+			tickformat: '.0f',
+			titlefont: { color: 'blue' }, tickfont: { color: 'blue' }, gridcolor: '#ccccff'
+		},
+		yaxis2: {
+			automargin: true,
+			title: "<b>IAS</b> [kn] e <b>HDG</b> [gradi]",
+			overlaying: 'y',
+			side: 'right'
+		},
+		yaxis3: {
+			overlaying: "y",
+			range: [0,1],
+			visible: false
+		}
+	};
+
+	Plotly.newPlot('ALT_IAS_HDG', [HOVER, POS, ALT, IAS, HDG], lay, config);
+	
+	
+	
+	// PRUA su grafico VERTICALE
+	
+	var HDG_vert= {
+		type: "scatter", name: "HDG",
+		mode: "lines", line: { width: 2, color: '#336600' },
+		x: unpack(rows, 'hdg'), y: MMSS,
+		hovertemplate:
+			'Tempo: %{y|%M:%S}<br>' +
+			'Prua: %{x:.1f}°' +
+			'<extra></extra>' // elimina il riquadro con il nome della traccia ("HDG")
+	};
+	
+	var lay_vert= {
+		separators: ',', showlegend: false, hovermode: 'y',//closest',
+		margin: { l:0, r:0, t:0, b:0},
+		yaxis: {
+			automargin: true,
+			autorange: 'reversed', // 0 in alto
+			type: 'date', tickformat: '%H:%M:%S',
+			title: {
+				text: '<b>Tempo</b> [mm:ss]',
+				standoff: 15 // Aumenta lo spazio tra titolo e numeri
+			}
+ 		},
+		xaxis: {
+			zeroline: false, // non mostra la linea verticale X = 0
+			automargin: true,
+			autorange: 'reversed', // 0 a destra
+			title: '<b>Prua</b> [gradi]',
+			titlefont: { color: '#336600' }, tickfont: { color: '#336600' }, gridcolor: '#d9ffb3'
+		},
+		shapes: [{ // Sostituisce la linea verticale X = 0 (evita che sia più marcata della griglia)
+			type: 'line', yref: 'paper',
+			x0: 0, x1: 0, y0: 0, y1: 1,
+			line: {
+				color: '#d9ffb3', width: 1, dash: 'solid'
+			}
+		}]
+	};
+	Plotly.newPlot('HDG_vert', [HDG_vert], lay_vert, config);
+});
+
+
+CreaIndice();
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Strage di Ustica">
+	<meta name="keywords" content="ustica,ih870">
+	<title>Strage di Ustica - Fasi del volo</title>
+	<link rel="stylesheet" type="text/css" href="../../stile.css">
+	<script src="../../plotly-latest.min.js"></script>
+	<script src="../../comune.js"></script>
+</head>
+
+<body>
+
+<h2>Fasi del volo - Affiancamento con il TF-104G</h2>
+
+<h3>TF-104G in addestramento</h3>
+
+Il documento: "<a href="https://www.stragi80.it/documenti/gi/Titolo2a.pdf" target="_blank">TITOLO 2 - L’istruttoria dal 27 luglio 90 al 31 dicembre 97.</a>", pag. 485 riporta quanto segue:<br>
+<br>
+<div style="font-family: 'Courier New', Courier, monospace"><b>
+Da un esame dei registri di volo del 4° Stormo di Grosseto, si rileva che il 27.06.80 dopo le ore 19.00 locali, si levarono in volo tre F104 del 20° Gruppo, che rientrarono a distanza di pochi minuti l'uno dall'altro dalle 20.35 alle 20.50. Precisamente:<br>
+<br>
+-h.19.40 – decollo velivolo TF104-G matr.54230, atterraggio h.20.50, pilotato dal capitano Bergamini Giovanni e dal s.tenente Moretti;<br>
+-h.19.30 – decollo velivolo TF104-G matr.54253, atterraggio h.20.45, pilotato dal capitano Nutarelli Ivo e Naldini Mario;<br>
+-h.19.30 – decollo velivolo TF104-G matr.54261, atterraggio h.20.35, pilotato dal s.tenente Giannelli.<br>
+<br>
+Si rammenta che il 20° Gruppo del 4° Stormo era il Gruppo Addestramento e che i velivoli tipo TF104 sono biposto.<br>
+L’orario di decollo e il tipo di missione effettuata dal primo dei TF – MIX INT 8 - riportati nel registro del 20° Gruppo del velivolo pilotato dal capitano Bergamini, potrebbe esser compatibile con l’annotazione del registro del G.C.A. di Villafranca.</b><br>
+</div>
+<br>
+Unendo quanto appena riportato (specialmente l'ultima frase) all'"<a href="https://www.stragi80.it/documenti/processo/trascrizioni/16.05.01.PDF" target="_blank">esame di Bergamini</a>", pagg. 12 e segg., appare evidente che Bergamini e Moretti hanno fatto l'esercitazione a Villafranca, mentre gli altri due TF-104G hanno svolto l'altra esercitazione.<br>
+<br>
+
+<h3>Sfasamento temporale tra Ciampino e Poggio Ballone</h3>
+La "<a href="https://www.stragi80.it/documenti/gi/perizie/050.pdf" target="_blank">Perizia tecnico scientifica Misiti; parte radaristica 2<sup>a</sup></a>" riporta a pag. 9: "<i>converrà precisare che il ritardo del clock fra Poggio Ballone e Marsala di circa 3'50" (es.21h.
+a Marsala 21h03'50" Poggio Ballone) (da video cassetta AM). Questo ritardo è stato avvalorato dall'analisi sulle registrazioni.</i>" e a fine pag. 12: "[...] <i>è possibile desumere un ritardo di circa 1 min. per il radar di Marsala rispetto al Marconi</i>", quindi la differenza tra Poggio Ballone e Marconi è di circa 2<sup>m</sup>50<sup>s</sup>. Tuttavia, confrontando accuratamente la posizione dei plot nel tabulato del Marconi e di Poggio Ballone si ottiene una differenza di 2<sup>m</sup>43<sup>s</sup>, comunque molto simile a quella indicata nella perizia.<br>
+Siccome non è possibile sapere quale radar riporta i plot con l'orario esatto, le cartine che mostrano i plot ottenuti dal tabulato di Poggio Ballone hanno l'orario "risincronizzato" con quello di Ciampino, ottenuto sottraendo quei 2<sup>m</sup>43<sup>s</sup> al tabulato di Poggio Ballone.<br>
+<br>
+
+
+
+<h3>Assenza di plot per 3<sup>m</sup>34<sup>s</sup></h3>
+Appare utile mettere in evidenza che il tabulato di Poggio Ballone non riporta alcun plot dalle 18:30:19 alle 18:33:52 (3<sup>m</sup>34<sup>s</sup>); orari che, sincronizzati con Ciampino, corrispondono rispettivamente alle 18:27:35 e alle 18:31:10. Osservando la cartina di destra, è ben evidente a cosa corrisponde questo "buco" temporale.<br>
+Considerando che tutti gli altri plot sono riportati nel tabulato di Poggio Ballone con una distanza temporale massima di 7 secondi (la media è 0,87 s tra due plot consecutivi), è evidente che quel vuoto di 214 secondi è estremamente "strano" (per usare un eufemismo).<br>
+Ugualmente "strano" è l'orario centrale di quel vuoto temporale: 18:29:23 (orario di Ciampino). Muovendo il puntatore del mouse sulla cartina di sinistra, vediamo che quel plot rosso tutto spostato verso il TF-104G è delle 18:29:11, molto vicino, quindi, all'orario centrale del "buco".<br>
+<br>
+
+
+<h3>Descrizione degli eventi</h3>
+
+Le seguenti cartine mostrano i percorsi degli aerei ricavati dai tabulati radar di Ciampino e Poggio Ballone. Il percorso del TF-104G ottenuto da Poggio Ballone è stato ricostruito secondo quanto indicato nella "<a href="https://www.stragi80.it/documenti/gi/perizie/087.pdf" target="_blank">Perizia radaristica Dalle Mese ed altri - 16.06.97</a>", pag. 10 (la perizia parla di "coppia di F104", ma in realtà abbiamo visto che la traccia si riferisce ad un solo TF-104G).<br>
+<br>
+
+
+<!-- Cartine di Ciampino e Poggio Ballone con TF-104G, 1133 e 1136 -->
+<div style="margin-bottom: 30px; vertical-align: top; display: inline-block;">
+<div id="roma" style="width: 30%; height: 600px; display: inline-block; float:left;"></div>
+<div id="poggio" style="width: 25%; height: 600px; display: inline-block; float:left; padding-right: 2em;"></div>
+
+La scala della cartine è rappresentata dalle crocette 10 x 10 nm (miglia nautiche) disegnate ogni 0,5° in longitudine e in latitudine. I cerchi relativi a VORTAC, VOR/DME, NDB e TACAN rappresentano le <a href="../../defi/radio/radio.html" target="_blank">radioassistenze</a>.<br>
+L'etichetta informativa che compare posizionando il puntatore del mouse sopra ai plot mostra:
+<ul style= "margin: 0px">
+<li>per Ciampino: orario UTC (o zulu), codice impostato nel <a href="../../defi/altro/altro.html#transponder" target="_blank">transponder</a> (1133: IH779, 1136: IH870, 4200 e 5400: TF-104G), <a href="../../defi/altro/altro.html#livello_volo" target="_blank">livello di volo</a>, radar che ha ricevuto il plot (SSR: radar secondario, PR: radar primario, SPI: l'aereo si sta identificando su richiesta del controllore), livello del segnale (da 0 a 15), latitudine, longitudine, distanza e azimut dal radar Marconi;</li>
+<li>per Poggio Ballone: orario UTC (risincronizzato con Ciampino), codice identificativo, velocità (nodi), direzione, SIF2, SIF3 e qualità del segnale (7 è il massimo).</li>
+</ul>
+<br>
+I plot di dimensioni maggiorate sono quelli con "SPI" per Ciampino e con SIF2 = 7777 per Poggio Ballone.<br>
+<br>
+
+</div>
+<br>
+
+Particolare menzione meritano alcuni plot presenti nel tabulato dell'estrattore 3:
+<ul style="margin: 0px">
+<li>significativa presenza di plot di solo primario (di colore nero) non associabili a nessuno dei tre aerei noti, in quanto sono già presenti altri plot nello stesso orario che si trovano in posizioni differenti;</li>
+<li>presenza di tre plot (due di primario e uno di primario e secondario) intorno alle 18:29 tra la rotta del TF-104G e quella dell'IH870, in sequenza tale da mostrare un aereo che si muove dall'IH870 verso il TF-104G;</li>
+<li>presenza di un plot alle 18:32:31 appartenente al TF-104G (come sequenza temporale), ma con transponder 5200, diverso da 4200 e 5400 usati dall'addestratore.</li>
+</ul>
+<br>
+
+Il tracciato radar di Poggio Ballone mostra il TF-104G che proviene da Villafranca e va in direzione di Bologna per poi virare verso Firenze.<br>
+Alle 18:21:28, a circa 17 nm dal VORTAC di Firenze, il TF-104G inizia a trasmettere il codice 7777 con il <a href="../../defi/altro/altro.html#transponder" target="_blank">transponder</a> (v. paragrafo "<i>Aerei militari</i>"). Quindi, a partire da questo istante, il TF-104G non è più in volo d'addestramento, ma inizia una missione di difesa aerea attiva, ovviamente su ordine di qualcuno. Nel nostro caso, in base a quanto spiegato nel documento "<a href="https://www.globalsecurity.org/military/library/policy/usmc/mcwp/3-22/ch3.pdf" target="_blank">GlobalSecurity.org - CHAPTER 3. AIR DEFENSE</a>", la missione di difesa aerea attiva poteva solo consistere nell'identificazione di un aereo potenzialmente ostile e nella valutazione della sua pericolosità.<br>
+<br>
+Intorno alle 18:21, l'IH870 è circa 17 nm più a sud, nei pressi del VORTAC di Firenze, ad una quota troppo bassa per essere rilevato dai radar di Ciampino, ma abbiamo le comunicazioni <abbr title="Terra/Bordo/Terra">TBT</abbr>.<br>
+Anche l'altro DC-9 (l'IH779) è nei pressi di Firenze, ma, siccome è decollato da Bergamo, sta provenendo dal VOR di Parma (aerovia UA-14) e sta mantenendo il livello 250.<br>
+<br>
+Una volta passato Firenze, il TF-104G si dirige, inizialmente, verso il TACAN di Grosseto (rappresentato dal cerchietto verde), attraversando l’asse dell’aerovia A-14 nel tratto Firenze - Bolsena una trentina di secondi dopo che è passato l’IH779.<br>
+Si vede chiaramente che il TF-104G continua a volare esattamente verso il TACAN di Grosseto per tre minuti e mezzo, poi inizia a volare quasi in parallelo all’A-14.<br>
+In questo momento (sono circa le 18:27), i due DC-9 Itavia si trovano a 3 o 4 nm l'uno dall'altro (in allontanamento) e l'IH870 si trova 3500 ft più in basso dell'altro e sta salendo.<br>
+La rotta del TF-104G tende ad avvicinarsi lentamente all’asse dell’aerovia, arrivando a circa 8 nm dall'IH870, che serpeggia nel tentativo di seguire la <a href="../../defi/altro/altro.html#radiale" target="_blank">radiale</a> 153 in allontanamento dal VORTAC di Firenze, che ha problemi di funzionamento.<br>
+Il TF-104G vola quasi parallelo al DC-9 per tre minuti e mezzo, per un tratto lungo circa 28 nm. Poi vira circa 25 gradi a destra e mantiene la rotta per 1 minuto per poi virare ancora a destra verso Grosseto ed eseguire la procedura d’avvicinamento e l’atterraggio.<br>
+<br>
+Il grafici seguenti possono aiutare a visualizzare quanto appena detto.<br>
+<br>
+
+<div style="margin-bottom: 30px; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="dst_azm.png" style="float:left; padding-right: 30px;" alt="" title="">
+Ho riportato la distanza e l’<a href="https://it.wikipedia.org/wiki/Azimut" target="_blank">azimut</a> dell’IH870 rispetto al TF-104G.<br>
+Le due linee rosse verticali rappresentano la fase di volo quasi parallelo all'A-14.<br>
+La linea tratteggiata rossa rappresenta un azimut di 55° ed è l’azimut di un ipotetico bersaglio che si trova esattamente a sinistra del TF-104G (i piloti devono girare la testa a sinistra per guardare quel bersaglio). I 55° derivano dal fatto che, dai tracciati radar, la rotta seguita dal TF-104G durante il volo parallelo risulta pari a 145°; l’azimut di un bersaglio esattamente a sinistra è 145° - 90° = 55°.</div>
+
+Si può osservare che all'inizio del volo parallelo all'aerovia, il TF-104G ha una velocità più elevata del DC-9 (l'azimut si riduce velocemente) per sbrigarsi ad arrivargli al traverso. Poi, con manovra da manuale, rallenta per mantenere il DC-9 una decina di gradi in avanti, tenendolo bene sotto controllo.<br>
+Questa posizione relativa viene mantenuta per circa 1 minuto (o poco meno), poi il TF-104G si allontana e rientra alla base.<br>
+<br>
+
+<div style="margin-bottom: 30px; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="vel4200_1136.png" style="float:left; padding-right: 30px;" alt="" title="">
+Questo grafico esplicita la velocità rispetto al suolo dei due aerei.<br>
+Alle 18:28, l'IH870 livella al 230 ed inizia a mantenere la velocità di crociera di 450 kn. Dopo appena 30 secondi, alle 18:29, inizia la salita al livello finale di crociera (il 290).<br>
+Ben maggiore è la velocità tenuta dal TF-104G, che arriva a quasi 530 kn per affrettarsi ad affiancare il DC-9. Una volta portatosi quasi al traverso del DC-9, il TF-104G rallenta vistosamente perdendo 50 kn in circa 35 s.<br>
+La nuova velocità di circa 470 kn viene mantenuta per qualche decina di secondi, fino a quando l'addestratore inizia a manovrare per rientrare alla base.
+</div>
+<br>
+
+
+
+<!-- ========================================================================================================== -->
+
+
+<script>
+"use strict";
+
+layout.mapbox.style= "basic";
+//layout.mapbox.style= "streets"; // Orografia e strade
+Plotly.setPlotConfig({
+	mapboxAccessToken: 'pk.eyJ1IjoiY3Jpc3RpYW5vcGkiLCJhIjoiY2pycXl1N3piMXAzODQzbnRtZzd4NzBlbiJ9.QugZVJkXpGrSJpoz_ghJqQ'
+});
+
+
+Plotly.d3.csv('rafari.csv', function(err, rows) {
+	// ID,T,LAT,LON
+	var ID= unpack(rows, 'ID');
+	var T= unpack(rows, 'T');
+	var lat= unpack(rows, 'LAT');
+	var lon= unpack(rows, 'LON');
+	var n= ID.length;
+	for(var i= 0; i < n; i++) {
+		// T: 0= VOR/DME, 1= VORTAC, 2= VOR, 3= NDB, 4= TACAN
+		// MLG: VOR/DME o TACAN
+		switch(T[i]) {
+		case '0': VORDME.text.push(ID[i]); VORDME.lat.push(lat[i]); VORDME.lon.push(lon[i]); break;
+		case '1': VORTAC.text.push(ID[i]); VORTAC.lat.push(lat[i]); VORTAC.lon.push(lon[i]); break;
+		case '2': VOR.text.push(ID[i])   ; VOR.lat.push(lat[i])   ; VOR.lon.push(lon[i])   ; break;
+		case '3': NDB.text.push(ID[i])   ; NDB.lat.push(lat[i])   ; NDB.lon.push(lon[i])   ; break;
+		case '4': TACAN.text.push(ID[i]) ; TACAN.lat.push(lat[i]) ; TACAN.lon.push(lon[i]) ; break;
+		}
+	}
+
+	Plotly.d3.csv('grid.csv', function(err, rows) {
+
+		GRID.lat= unpack(rows, 'lat'); GRID.lon= unpack(rows, 'lon');
+
+		data= [GRID, AYW, VORTAC, VORDME, VOR, NDB, TACAN, PUNTI, RADAR];
+
+		CaricaPunti(); // Carica tracciati radar
+	});
+});
+
+
+function CaricaPunti()
+{
+	var data_poggio= [...data];
+	var lay_poggio= Object.assign({}, layout);
+	
+	// ROMA
+	
+	Plotly.d3.csv("mar3.csv", function(err, rows) {
+
+		var PLOT= {
+			type:'scattermapbox', name: 'Plot',
+			text: unpack(rows, 'UTC'), hoverinfo: "text",
+			lat: unpack(rows, 'lat'), lon: unpack(rows, 'lon'),
+			mode: 'markers', marker: { size: [], color: [] }
+		};
+		// UTC,ID,lat,lon,FL,d,faz,Q,SSR
+		var ID= unpack(rows, 'ID');
+		var FL= unpack(rows, 'FL');
+		var dst= unpack(rows, 'd'); var faz= unpack(rows, 'faz');
+		var QUA= unpack(rows, 'Q'); var SSR= unpack(rows, 'SSR');
+		for(var i= 0; i < ID.length; i++) {
+			PLOT.text[i] += ", " + ID[i] +
+				'<br>FL' + FL[i] + ', ' + SSR[i] + ', Q: ' + QUA[i] +
+				'<br>lat: ' + PLOT.lat[i] + ', lon: ' + PLOT.lon[i] + 
+				'<br>d: ' + dst[i] + ', a: ' + faz[i]
+			var col= '#000000';
+			switch(ID[i]) {
+				case '1133': col= '#0000ff'; break;
+				case '1136': col= '#ff0000'; break;
+				case '5200': col= '#800080'; break;
+				case '4200':
+				case '5400': col= '#cc7a00'; break;
+			}
+			PLOT.marker.color[i]= col;
+			// SPI più grandi
+			if(SSR[i].search('SPI') === -1) PLOT.marker.size[i]= 5; else PLOT.marker.size[i]= 7;
+		}
+
+		data.push(PLOT);
+
+		var nota= {
+			showarrow: false,
+			xref: 'paper', x: .95, xanchor: 'right',
+			yref: 'paper',	y: .95, yanchor: 'bottom',
+			text: '<b>Marconi 3</b>', font: { size: 16, color: '#e68a00' }
+		};
+		layout.annotations= [nota]; layout.mapbox.zoom= 7.2; layout.mapbox.center.lat= 43.3; layout.mapbox.center.lon= 11.7;
+
+		Plotly.plot('roma', data, layout, {responsive: true, displayModeBar: false});
+	});
+
+
+	// POGGIO BALLONE
+	
+	Plotly.d3.csv("poggio.csv", function(err, rows) {
+
+		var PLOT= {
+			type:'scattermapbox', name: 'radar',
+			text: unpack(rows, 'UTC'), hoverinfo: "text",
+			lat: unpack(rows, 'lat'), lon: unpack(rows, 'lon'),
+			mode: 'markers', marker: { size: [], color: 'blue' }
+		};
+		// UTC,IDalfa,lat,lon,spd,hdg,alt,SIF2,SIF3,QUA      alt è sempre 0
+		var ID= unpack(rows, 'IDalfa');
+		var spd= unpack(rows, 'spd'); var hdg= unpack(rows, 'hdg'); //var alt= unpack(rows, 'alt');
+		var SIF2= unpack(rows, 'SIF2'); var SIF3= unpack(rows, 'SIF3');
+		var QUA= unpack(rows, 'QUA');
+		for(var i= 0; i < ID.length; i++) {
+			PLOT.text[i] += ", " + ID[i] +
+			'<br>v: ' + spd[i] + ', hdg: ' + hdg[i] + //', alt: ' + alt[i] +
+			'<br>S2: ' + SIF2[i] + ', S3: ' + SIF3[i] + ', Q: ' + QUA[i];
+			if(SIF2[i] === '7777') PLOT.marker.size[i]= 7; else PLOT.marker.size[i]= 5;
+		}
+
+		data_poggio.push(PLOT);
+
+		var nota= {
+			showarrow: false,
+			xref: 'paper', x: .95, xanchor: 'right',
+			yref: 'paper',	y: .95, yanchor: 'bottom',
+			text: '<b>Poggio Ballone</b>', font: { size: 16, color: '#e68a00' }
+		};
+
+		lay_poggio.showlegend= false; lay_poggio.annotations= [nota];
+		lay_poggio.mapbox.zoom= 6.7; lay_poggio.mapbox.center.lat= 44; lay_poggio.mapbox.center.lon= 11.5;
+
+		Plotly.plot('poggio', data_poggio, lay_poggio, {responsive: true, displayModeBar: false});
+	});
+}
+
+</script>
+
+
+</body>
+</html>

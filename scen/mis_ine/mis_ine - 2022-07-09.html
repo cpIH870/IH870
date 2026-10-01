@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Strage di Ustica">
+	<meta name="keywords" content="ustica,ih870">
+	<title>Strage di Ustica - Scenari</title>
+	<link rel="stylesheet" type="text/css" href="../../stile.css">
+	<script src="../../plotly-latest.min.js"></script>
+	<style>
+		pre {font-family: monospace;}
+	
+		.click-zoom input[type=checkbox] {
+		  display: none
+		}
+
+		.click-zoom img {
+		  transition: transform 0.25s ease;
+		  cursor: zoom-in
+		}
+
+		.click-zoom input[type=checkbox]:checked~img {
+		  transform: scale(2) translateX(120px) translateY(-50px);
+		  cursor: zoom-out
+		}	
+	</style>
+</head>
+
+<body>
+
+<div class="indice"><a href="../../index.html">Indice</a></div>
+
+<h2>Abbattimento tramite missili inerti</h2>
+
+In questa pagina viene preso in considerazione lo scenario in cui il DC-9 Itavia viene abbattuto tramite due missili inerti (da esercitazione) AIM-7C, la cui la testata esplosiva viene sostituita con materiale inerte.<br>
+<br>
+L'argomento è stato già trattato nel forum di questo sito al thread "<a href="http://ih870.altervista.org/phpBB3/viewtopic.php?f=3&t=8" target="_blank">Abbattimento tramite missili inerti</a>", ma qui vengono aggiunti ulteriori dettagli e si prende in considerazione specificatamente il missile AIM-7C da esercitazione lanciabile a testata inerte.<br>
+<br>
+Per praticità, si riportano anche le note introduttive e le varie considerazioni già fatte nel forum.<br>
+<br>
+
+
+
+<h3>Come nasce questa ipotesi?</h3>
+
+Il documento "<a href="http://www.stragi80.it/documenti/gi/capo3-inquina.pdf" target="_blank">CAPO 3° - Gli inquinamenti</a>" raccoglie un gran numero di dichiarazioni rilasciate dai più disparati personaggi volte ad inquinare le indagini con il fine di ostacolare il raggiungimento della comprensione dei fatti.<br>
+<br>
+Le dichiarazioni dell’ex ufficiale dell’AMI Mario Ciancarella, riportate a partire da pag. 116, vengono esposte tra quelle fatte da "<i>persone che in buona fede riferivano ricostruzioni obbiettivamente devianti</i>".<br>
+A pag. 118 si può apprendere che Ciancarella riferisce di due colloqui telefonici intercorsi con il maresciallo Dettori, radarista a Poggio Ballone, appena dopo la sciagura del DC-9 Itavia.<br>
+Dettori gli avrebbe detto: "<i>Ha visto il casino di Ustica? Siamo stati noi</i>" e in seguito: "<i>Dopo questa puttanata del MiG, le posso solo dire di cercare gli orari di atterraggio, i <u>missili a guida radar e a testata inerte</u></i>".<br>
+L’Autorità Giudiziaria ritiene che gli scritti presentati da Ciancarella siano "<i>tutti connotati da osservazioni e considerazioni che appaiono ispirate, o quanto meno influenzate, dal particolare rapporto </i>[pessimo, ndr]<i> con l’Aeronautica.</i>" (v. pag. 117).<br>
+<br>
+Un ulteriore cenno sul possibile abbattimento tramite missili inerti lo troviamo anche nel documento "<a href="https://www.stragi80.it/documenti/processo/sentenza/motivazioni/parte1.pdf" target="_blank">motivazioni</a>" della sentenza di I grado a pag. 224: "<i>Valutata criticamente l’ipotesi formulata dal consulente di PC SEWELL (impatto di due missili contro il bersaglio), l’abbattimento è ritenuto ipotesi ragionevolmente da escludere anche se un abbattimento mediante impatto con <u>missile inerte</u> potrebbe rendere ragione delle caratteristiche di ritrovamento di esplosivo incombusto su alcuni reperti.</i>".<br>
+<br>
+Anche se l’ipotesi dei missili inerti viene esclusa, i missili da esercitazione (a testata inerte e di altro tipo), all’epoca dei fatti, esistevano ed ovviamente esistevano anche gli aerei per lanciarli. Ecco alcuni link in lingua inglese:
+<ul>
+<li><a href="https://www.designation-systems.net/dusrm/m-7.html" target="_blank">Directory of U.S. Military Rockets and Missiles - AIM/RIM-7</a></li>
+<li><a href="https://pdfcoffee.com/us-missiles-pdf-free.html" target="_blank">FAS Military Analysis Network - U.S. Missiles</a></li>
+<li><a href="https://www.globalsecurity.org/military/systems/munitions/aim-7.htm" target="_blank">GlobalSecurity.org - AIM-7 Sparrow</a></li>
+<li><a href="http://www.military-today.com/missiles/aim_7_sparrow.htm" target="_blank">Military-Today.com - AIM-7 Sparrow</a></li>
+<li><a href="http://www.military-today.com/missiles/aim_7f_sparrow.htm" target="_blank">Military-Today.com - AIM-7F Sparrow</a></li>
+</ul>
+
+
+<!-- 22-01-2022 -->
+
+Nessuno dei link cita l'AIM-7C inerte, ma viene qui considerato per il fatto che il giudice Priore chiese informazioni all'AMI in merito a due consegne di 6 missili AIM-7C inerti ciascuna. Relativamente alla seconda consegna, il cui contratto di fornitura è del 1966, non è stato comunicato l'ente dell'AMI al quale i missili sono stati inviati. Inoltre, è stato possibile rintracciare solo 6 testate inerti (v. "<a href="http://cristianopi.altervista.org/straus/v1f71_WP018811_001.pdf" target="_blank">Relazione - Rif. IL/92 DEL 28.05.92</a>"
+<i><sup><abbr title="Procura della Repubblica di Roma, VOL. I - FASC. 71 - PAG. 17479 - 17492, DATA 14.07.92, ALL. 1 AL FG. SMA-0/5222/G53-1 DEL 31.07.92 (U.I. 18809) RELAZIONE (TRASMESSA AL CAPO DI SMA CON NOTA IL/129 DEL 14.07.92 - U.I. 18810) IN MERITO A RICERCHE AL FINE DI DETERMINARE LA QUANTITA' DI TESTE DI GUERRA INERTI E TELEMETRICHE APPROVVIGGIONATE PRIMA DEL 27.06.80 E SITUAZIONE INVENTARIALE DELLE STESSE DOPO TALE DATA - ANNESSO A NOTA 2">fonte</abbr></sup></i>
+
+, in particolare l'ultima pagina al punto "B" e anche la 
+
+<a href="http://cristianopi.altervista.org/straus/v1f71_WP018822_001.pdf" target="_blank">tabella "Approvvigionamenti comunicati da COSTARMAEREO"</a>
+<i><sup><abbr title="Procura della Repubblica di Roma, VOL. I - FASC. 71 - PAG. 17509 ALLEGATO 3 AL FG. SMA-0/5222/G53-1 DEL 31.07.92 (U.I. 18809). TABELLA RIEPILOGATIVA DEGLI APPROVVIGIONAMENTI COMUNICATI DA COSTARMAEREO">fonte</abbr></sup></i>
+
+, sempre al punto "B"), con la conseguenza che non si può escludere che le altre possano essere finite nelle mani sbagliate.<br>
+
+<!-- FINE 22-01-2022 -->
+
+
+<br>
+Era, dunque, assolutamente possibile attaccare il DC-9 con due missili AIM-7C a testata inerte. Si può, quindi, provare a delineare un attacco di questo tipo e i possibili effetti sul DC-9.<br>
+
+
+<h3>Dubbi</h3>
+
+Le ragioni politiche e militari che avrebbero indotto alcuni ad abbattere un aereo di linea non sono oggetto di questa trattazione, pubblicata con il solo scopo di analizzare se un attacco al DC-9 con due o più missili inerti fosse fattibile e se questo tipo d’attacco poteva provocare i danni e generare le altre evidenze di cui abbiamo ampia documentazione.<br>
+<br>
+Dal punto di vista tecnico e logico viene da domandarsi: perché usare missili inerti e non due grossi AIM-7 con testata bellica che avrebbero completamente distrutto il DC-9 senza possibilità di scampo? La risposta è più ovvia della domanda: perché qualunque missile con testata bellica avrebbe lasciato una "firma" inconfondibile, permettendo, molto facilmente, di risalire al tipo di missile, facendo risultare che un aereo della NATO ha abbattuto un aereo civile di una nazione amica.<br>
+Inoltre, i missili inerti, se di massa sufficientemente grande, si prestano bene per simulare un cedimento strutturale, data la totale assenza di segni d'esplosione.<br>
+<br>
+Un altro dubbio potrebbe riguardare la possibilità che possa essere recuperato qualche inconfondibile frammento di missile tra tutti i rottami, ad esempio le alette, risalendo, anche in questo caso, alla paternità del missile, ma leggendo il documento "<a href="http://www.stragi80.it/documenti/gi/perizie/057.pdf" target="_blank">Capitolo LVII - Quesiti a chiarimento sui recuperi - 30.11.94.</a>" si evince che tale possibilità è piuttosto remota. Ad inizio pag. 2, infatti, possiamo leggere: "<i>fu così possibile accertare inosservanze e carenze nelle operazioni di ricerca e recupero dei relitti del DC9 e di quant'altro d'interesse alla ricostruzione dell'evento, nelle attività di documentazione di tali operazioni, negli obblighi del collegio;</i>", tanto che il Giudice Istruttore chiese di riferire "<i>i criteri in base ai quali gli oggetti non facenti parte del relitto erano stati stimati d'interesse o non, e conseguentemente recuperati o meno</i>". Come dire che le società di recupero decidevano autonomamente l’importanza di ogni rottame ritrovato, in barba a tutta la schiera di periti preposti per analizzare minuziosamente ogni singolo frammento ripescato.<br>
+<br>
+Prima di questo "filtraggio" operato dalle compagnie di recupero, è senz’altro verosimile l’attuazione di una precedente "ripulitura" del fondale. Ne è convinto anche il Giudice Istruttore; si veda la "<a href="https://www.leggioggi.it/wp-content/uploads/2011/09/parte04.pdf" target="_blank">sentenza del Tribunale di Palermo</a>" a pag. 46 (link alternativo "<a href="parte04_46.pdf" target="_blank">parte04_46.pdf</a>"), paragrafo 1.3.3: "<i>prima delle campagne ufficiali di recupero del relitto qualcuno raggiunse il fondo e recuperò degli oggetti</i>". Lo stesso Giudice Priore evidenziava che "<i>all’epoca potevano raggiungere la profondità di quei fondali soltanto sommergibili francesi e statunitensi</i>".<br>
+
+
+
+<h3>Vincoli da soddisfare</h3>
+
+Assodata l’inesistenza di motivazioni reali che si possano opporre all’utilizzo di un paio di grossi missili inerti per abbattere il DC-9, resta il problema di trovare le evidenze che supportino tale ipotesi.<br>
+<br>
+Tra gli elementi oggettivi che devono essere soddisfatti per rendere verosimile l’ipotesi, ce ne sono alcuni di fondamentale importanza descritti nel documento "<a href="http://www.stragi80.it/documenti/gi/perizie/031.pdf" target="_blank">Capitolo XXXI - Perizia metallografica-frattografica Firrao ed altri - 30.07.94.</a>".<br>
+A fondo pag. 13, inizia la descrizione delle modalità secondo le quali il troncone più esterno (zona 3 della semiala sinistra) si è staccato dal resto della semiala:
+
+<div class="cita">
+Le modalità di rottura dei due longheroni sono totalmente analoghe ed appaiono determinate da una trazione, per le parti superiori dei longheroni, e da una compressione per le parti verso il basso. Tali modalità di rottura, anche per quanto riguarda i correnti, portano ad ipotizzare un’azione flettente ad asse -x (verso la coda).
+</div>
+
+cioè il troncone terminale si è rotto a causa di una forza (che potrebbe anche essere <a href="https://it.wikipedia.org/wiki/Interazione_apparente" target="_blank">fittizia</a>) applicata sulla semiala sinistra avente una componente perpendicolare all'ala <u>diretta verso il basso</u> (contraria alla portanza generata durante il volo normale).<br>
+<br>
+
+<div style="margin-bottom: 20px; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="assi_aereo.png" style="float:left; padding-right: 30px;" alt="" title="">
+Per comodità, ecco un'immagine che riporta gli assi di un aereo.<br>
+<br>
+Si veda anche "<a href="http://www.stragi80.it/documenti/gi/perizie/031.pdf" target="_blank">Capitolo XXXI - Perizia metallografica-frattografica Firrao ed altri - 30.07.94.</a>" a fine pag. 5.
+</div>
+
+A pag. 14 i periti riportano le conclusioni delle analisi fatte sulla semiala sinistra:<br>
+<div class="cita">
+Le analisi condotte portano ad isolare due azioni principali:<br>
+- azione flettente ad asse z (alto-basso) alla radice dell’ala che ne ha causato il distacco dalla fusoliera;<br>
+- un’azione flettente ad asse -x (cabina-coda) che ha causato estesi danneggiamenti in corrispondenza dell’intera zona 2.<br>
+<u>Le due azioni non sono collegate tra loro</u> e, se si vuole dare una successione temporale, <u>la seconda può essere considerata antecedente alla prima</u>.
+</div>
+
+Un ulteriore fatto da conciliare è quello che si può acquisire dal documento "<a href="https://www.stragi80.it/documenti/gi/perizie/069.pdf" target="_blank">Capitolo LXIX - Consulenza tecnica Bazzocchi ed altri - 15.12.94.</a>", dove, a partire da fine pag. 9, viene descritta la sequenza degli eventi che, secondo i consulenti, avrebbero portato alla distruzione del DC-9:
+
+<div class="cita">
+un tratto dell’ala sinistra, a partire dalla estremità e per un’apertura di circa 5 m, si rompe per flessione negativa, si separa e <u>viene recuperato sul fondo del mare ad una distanza di circa 10 km dal relitto principale</u> nella direzione da cui proveniva il velivolo. Questa notevole distanza mostra chiaramente che tale tratto dell’ala si è separato in un tempo molto breve dall’evento catastrofico quando il velivolo era ancora a quota elevata.
+</div>
+
+(probabilmente, la frase "<i>nella direzione da cui proveniva il velivolo</i>" va letta "nella direzione da cui proveniva il <u>vento</u>", altrimenti sembrerebbe una frase priva di senso, perché il troncone è stato trovato 10 km ad est del relitto principale, cioè, sospinto dal vento).<br>
+<br>
+Abbiamo, infine, il vincolo dei motori che devono andare a finire nella zona del loro effettivo recupero; si vedano le considerazioni fatte nella pagina "<a href="../../fasi/6_cadu/cadu.html" target="_blank">Caduta in mare</a>".<br>
+<br>
+Questi elementi oggettivi devono essere tutti soddisfatti dalla sequenza degli eventi ipotizzata. Ciò, tuttavia, non accade per le versioni più semplicistiche delle ipotesi d’abbattimento tramite missile.<br>
+Infatti, tali ipotesi (nelle loro varianti) prevedono che un caccia abbia lanciato contro il DC-9, o contro un aereo nelle sue vicinanze, un missile (o due) a guida radar semi-attiva avente una piccola carica bellica e che a seguito della detonazione della testata, il corpo del missile abbia proseguito la sua corsa trapassando la fusoliera del DC-9, generando il grosso squarcio d’uscita ben visibile nella parte sinistra della fusoliera.<br>
+<br>
+Questa versione non è ammissibile, poiché è incompatibile con quanto riscontrato da Firrao. Infatti, l’aereo avrebbe espulso attraverso lo squarcio un numero significativo dei malcapitati passeggeri e una certa quantità di oggetti, oltre ad aver perso una parte della fusoliera sbriciolata dal missile.<br>
+Una tale perdita di massa verificatasi in posizione molto avanzata rispetto a quella del baricentro può esclusivamente provocare una veloce cabrata (non può esserci alcun dubbio su questo fatto), a prescindere da qualunque tempestiva azione che i piloti avessero attuato per contrastarla (ammesso che i comandi avessero ancora funzionato).<br>
+La cabrata fa generare all’ala più portanza (fino a quando non stalla) e quindi un momento flettente verso l’alto, non verso il basso, come invece afferma Firrao osservando le evidenti deformazioni dei due longheroni della semiala sinistra.<br>
+<br>
+Il vincolo del momento negativo può essere soddisfatto imponendo tre condizioni principali:<br>
+<ol>
+<li>i missili hanno una significativa componente verso l'alto della velocità al momento dell'impatto;</li>
+<li>almeno 1 missile inerte deve aver impattato una zona molto resistente del DC-9 situata in prossimità dell’ala: il carrello principale;</li>
+<li>il missile inerte deve aver posseduto un’enorme energia cinetica.</li>
+</ol>
+
+Infatti, se il missile impatta il carrello, l'energia sprigionata dall'impatto viene trasmessa a tutta la struttura accelerando il DC-9 nella direzione di volo del missile. Tale accelerazione può essere scomposta nelle tre componenti che agiscono lungo gli assi dell'aereo.<br>
+Se il missile proviene dal basso, l'accelerazione ha una componente in direzione -Z (verso l'alto) e se questa componente supera il limite certificato, la struttura subisce un danno che può limitarsi alla sola deformazione permanente o che può arrivare alla rottura e al distacco di elementi dell'aereo.<br>
+<br>
+La mancata rottura, al momento dell'impatto, della semiala destra <u>potrebbe</u> significare che il missile possa aver impattato la gamba sinistra del carrello, imprimendo all'aereo anche una rotazione impulsiva (di brevissima durata, ma con elevata accelerazione angolare) ad asse +X, facendo rollare l'aereo a destra (cioè gli ha fatto abbassare la semiala destra).<br>
+<br>
+<div style="margin-bottom: 20px; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="acc_ango.png" style="float:left; padding-right: 30px;" alt="" title="">
+L'immagine mostra come questo ulteriore movimento di rotazione porti all'incremento dell'accelerazione verticale che si somma vettorialmente all'accelerazione generata dall'impatto.<br>
+<br>
+Le quattro frecce applicate sull'ala rappresentano l'inerzia delle due semiali che, con la loro notevole massa, si oppongono (per inerzia, appunto) all'accelerazione verticale diretta verso l'alto dovuta al missile, quindi flettono verso il basso, come in effetti risulta dalla deformazione dei due longheroni della semiala sinistra.<br>
+Si può vedere che i due vettori applicati sulla semiala destra si sottraggono (hanno verso contrario), mentre quelli sulla semiala sinistra si sommano. Quindi la semiala sinistra si rompe, la destra no.
+</div>
+
+
+
+
+
+<h3>Profilo d'ingaggio</h3>
+
+In questo paragrafo vengono analizzate nel modo più accurato possibile (in base alle informazioni disponibili) alcune modalità di lancio dei missili compatibili con i danni riscontrati sul DC-9 e tali da generare una sufficiente accelerazione verticale.<br>
+<br>
+Siccome i missili sono inerti, il bersaglio può essere danneggiato solo per impatto diretto.<br>
+Alcuni periti disquisiscono sul fatto che il missile sia veramente in grado d’impattare il bersaglio, in quanto il potere distruttivo del missile è dato dalla detonazione della testata in prossimità del bersaglio che scaglia frammenti ad altissima velocità, non è necessario che il corpo del missile lo impatti.<br>
+Questo è certamente vero, ma è anche vero che se un missile aria-aria non è in grado d’impattare un "grosso" aereo di linea che vola con rotta, altitudine e velocità quasi costanti, c’è da chiedersi a quante decine di metri può passare da un aereo che manovra. Insomma, sembra veramente impossibile pensare che un AIM-7 avesse potuto mancare il DC-9.<br>
+<br>
+Comunque, per rendere massima la probabilità di centrare l’aereo, l’attacco deve essere portato in modo da favorire il missile, cioè bisogna far "vedere" al missile una grossa superficie riflettente: l’ala. Questo implica che l’attacco avvenga ad una quota sufficientemente differente da quella tenuta dal bersaglio.<br>
+Un attacco dall’alto è da escludere per i seguenti motivi:
+<ul>
+<li>il pilota del caccia fatica a vedere il bersaglio e deve mantenere una rotta piuttosto angolata rispetto a quella che conduce al bersaglio, altrimenti il muso del caccia copre la visuale;</li>
+<li>al momento d’agganciare con il radar il bersaglio, il caccia deve "tirare" g negativi (è sempre un fastidio sia per il pilota che per il caccia);</li>
+<li>se l'intercettore era un F-104S, mantenendo una rotta troppo angolata rispetto alla linea di vista (linea che congiunge il caccia con il bersaglio), l'arcaico radar <a href="https://www.youtube.com/watch?v=OFJ-W7LcpYs" target="_blank">NASARR</a> non riesce ad agganciare il bersaglio;</li>
+<li>il caccia può essere rilevato dai radar del controllo del traffico aereo di Ciampino.</li>
+</ul>
+Molto meglio un attacco dal basso per i motivi opposti a quelli appena citati.<br>
+<br>
+Per calcolare l’angolo verticale migliore per il lancio bisogna considerare sia la superficie riflettente del bersaglio che i limiti prestazionali di salita del caccia. Infatti, il bersaglio deve essere continuamente illuminato dal radar del caccia fino a quando il missile non lo colpisce; se l’angolo di rampa è troppo elevato, il caccia potrebbe avere problemi a mantenerlo stabilmente.<br>
+<br>
+Un altro aspetto da considerare è che l’attacco deve infliggere il massimo danno strutturale al malcapitato DC-9. Ciò si ottiene facendo in modo che il missile colpisca l’aereo con la massima <a href="https://it.wikipedia.org/wiki/Energia_cinetica#Descrizione" target="_blank">energia cinetica</a>. Dalla formula <i>E<sub>c</sub> = &frac12; m V<sup>2</sup></i> risulta chiaro che l’impatto deve avvenire con il missile alla massima velocità possibile, idealmente qualche istante dopo lo spegnimento del motore e comunque non troppo prima della minima distanza di lancio ammissibile.<br>
+<br>
+Per calcolare in modo sufficientemente accurato l'energia cinetica sviluppata dall'impatto, si può ricorrere ad una simulazione simile a quelle già trattate per calcolare la traiettoria di caduta dei motori.<br>
+Il grado di accuratezza con il quale si riesce a determinare i danni che un missile causa al bersaglio dipende dal grado di accuratezza delle informazioni disponibili sul missile e sul bersaglio. Nel nostro caso, ad informazioni molto dettagliate su molti particolari, si contrappone l'assenza di altre informazioni sull'angolo di lancio e poco altro, per cui è necessario eseguire varie simulazioni per avere un quadro sufficientemente accurato del possibile risultato. I dati sono tratti dai seguenti documenti:
+<ul>
+<li>"<a href="http://alternatewars.com/SAC/AAM-N-6_Sparrow_III_SAC_-_30_July_1960.pdf" target="_blank">Guided Missile Model AAM-N-6-Sparrow III</a>" per le caratteristiche fisiche del missile, del suo motore, della capacità di manovra e per la massima velocità di lancio pari a mach 1,3 ("AAM-N-6" è la vecchia designazione dell'AIM-7C, v. <a href="https://en.wikipedia.org/wiki/AIM-7_Sparrow#Sparrow_III" target="_blank">Wikipedia</a>);</li>
+<li>"<a href="https://ntrs.nasa.gov/api/citations/19780004098/downloads/19780004098.pdf" target="_blank">Supersonic Aerodynamic Characteristics of a Sparrow III Type Missile Model With Wing Controls and Comparison With Existing Tail-Control Results</a>" per i coefficienti aerodinamici;</li>
+<li>"<a href="https://turano.io/projects/Launch_Systems.pdf" target="_blank">AIM-7M Sparrow: Conceptual design for upgrades in Range, Velocity and Maneuverability</a>" per le formule relative al coefficiente di resistenza aerodinamica;</li>
+<li>"<a href="http://mae-nas.eng.usu.edu/MAE_5420_Web/MAE_5420_2020.html" target="_blank">Compressible Fluid Flow</a>" per le formule della sezione 7.2 relative al coefficiente di resistenza aerodinamica in regime supersonico delle alette di governo;</li>
+<li>"<a href="https://www.jhuapl.edu/Content/techdigest/pdf/V29-N01/29-01-Palumbo_Principles_Rev2018.pdf" target="_blank">Basic Principles of Homing Guidance</a>" principalmente per la formula n° 21 relativa all'accelerazione comandata dall'<abbr title="autopilota">A/P</abbr> del missile; la formula è anche riportata su <a href="https://en.wikipedia.org/wiki/Proportional_navigation" target="_blank">Wikipedia</a> in una forma più esplicita, direttamente utilizzabile nelle simulazioni.</li>
+</ul>
+Il modello aerodinamico del missile è piuttosto accurato, in quanto prende in considerazione la resistenza di forma del corpo del missile, la resistenza dovuta alla viscosità dell'aria e quella dovuta all'onda d'urto supersonica. Viene, inoltre, considerata la resistenza delle quattro alette centrali (di governo) e delle quattro alette stabilizzatrici di coda; tale resistenza è ottenuta sommando quella dovuta alla viscosità dell'aria a quella derivante dall'onda d'urto. Per le alette centrali, inoltre, è considerata anche la resistenza aggiuntiva dovuta alla deflessione comandata dall'A/P.<br>
+<br>
+Il sistema di navigazione del missile è proporzionale, ciò significa che l'accelerazione comandata dall'A/P è proporzionale alla velocità angolare della linea di vista ed è sempre ortogonale a questa (si parla di vettori). Nel caso dell'AIM-7C, l'accelerazione è limitata elettronicamente a 15 g.<br>
+Nella formula per l'accelerazione è presente la costante <i>N</i> che generalmente assume i valori 3, 4 o 5. Siccome non sono disponibili informazioni così dettagliate sullo <i>Sparrow</i>, la simulazione assume <i>N = 4</i> (nel caso di un aereo che non manovra, come il DC-9, le differenze sono comunque minime).<br>
+<br>
+<div style="margin-bottom: 30px; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="guida_prop.png" style="float:left; padding-right: 30px;" alt="" title="">
+<br>
+Il grafico mostra un esempio ottenuto da una delle simulazioni illustrate più avanti.<br>
+<br>
+Si nota chiaramente che l'accelerazione comandata è proporzionale alla velocità angolare della linea di vista (LOS).<br>
+Siccome l'accelerazione è anche proporzionale alla velocità relativa e a quella del missile stesso, i due grafici non sono esattamente sovrapponibili.
+</div>
+
+Una volta calcolata l'accelerazione da comandare, l'<abbr title="autopilota">A/P</abbr> invia il comando alle alette centrali. La modalità usata per impostare la traiettoria voluta è <a href="https://en.wikipedia.org/wiki/Skid-to-turn" target="_blank"><i>Skid-to-turn</i></a> (si potrebbe tradurre in "derapa per virare"), cioè il missile non s'inclina per virare come fa un aereo o altri missili, ma usa le due alette verticali per cambiare direzione derapando e le due orizzontali per il controllo sia della traiettoria verticale che del rollio indotto dalla derapata.<br>
+<br>
+La simulazione assume che l'accelerazione comandata dall'A/P sia applicata istantaneamente ed esattamente come calcolata, ma ciò è, ovviamente, impossibile nella realtà, per cui la traiettoria reale differisce da quella calcolata che, comunque, resta valida a livello qualitativo, anche se numericamente sarà lievemente diversa dalla realtà.<br>
+<br>
+Il motore è modellato per fornire una spinta che varia linearmente con la pressione atmosferica da 7100 lb al livello del mare (con una pressione atmosferica di 1013,25 hPa) a 7800 lb nel vuoto (in assenza di una contropressione dovuta all'atmosfera, un motore a razzo fornisce la massima spinta possibile). La durata della spinta è fissa a 1,9 s ed è ottenuta dall'interpolazione lineare dei 2,04 s al livello del mare e 1,8 s nel vuoto.<br>
+<br>
+Passando all'istante iniziale della simulazione, abbiamo il DC-9 che si muove con moto rettilineo uniforme (in realtà non è così, ma dato il breve tempo di volo del missile, l'approssimazione è assolutamente valida) ad una quota sul livello del mare di 25925 ft (corrispondente al livello di volo 250, nelle condizioni meteo presenti quella sera) e con una velocità rispetto all'aria di 488 kn o mach 0,79. Il forte vento presente in quota fa viaggiare il DC-9 con una velocità rispetto al suolo di 467 kn e rotta di 167,8° rispetto al nord vero (non magnetico).<br>
+<br>
+Il missile viene lanciato da una quota di 22505 ft (3420 ft più in basso del DC-9) alcuni secondi dopo che l'intercettore ha iniziato una salita con 20° di rampa, a mach 1,25 (1443 km/h o 779 kn rispetto all'aria) da una distanza di 10000 ft (3 km) dal DC-9. Ciò equivale ad ipotizzare che l'intercettore sia inizialmente in volo livellato ad una quota di 20000/21000 ft a mach 1,3 e che all'approssimarsi della distanza minima di lancio, inizi a richiamare impostando l'angolo di salita e la prua come indicato dall'avionica (lo schermo radar nel caso di F-4 e F-104S o l'<a href="https://it.wikipedia.org/wiki/Head-up_display" target="_blank">HUD</a> nel caso dell'F-15).<br>
+Al momento del lancio, infatti, al pilota viene presentata una particolare simbologia per indicare dove orientare il muso dell'aereo. Siccome non sono disponibili i dettagli che consentono di calcolare il reale angolo ottimale di lancio indicato al pilota, né tantomeno (ovviamente) l'effettivo angolo usato dal pilota, la simulazione considera 3 angoli: quello che permette di avere il più piccolo tempo di volo del missile (calcolato dal computer asservito al radar e presentato numericamente o simbolicamente al pilota), idem ma con la limitazione a 10° dell'angolo di anticipo della traiettoria e quello che consente di avere la più bassa accelerazione possibile comandata dall'A/P al momento del lancio.<br>
+<br>
+Per stabilire l'azimut dell'intercettore rispetto al DC-9, si può fare affidamento alla <a href="http://www.stragi80.it/documenti/gi/perizie/028.pdf" target="_blank">Perizia medico-legale Giusti</a>, dalla quale, a partire dalla seconda metà di pag. 8, si legge che il DC-9 ha subìto una decompressione esplosiva prodotta da una falla apertasi nella parte destra della fusoliera a causa di un agente esterno (missile o collisione). Nello scenario ipotizzato in questa pagina, quindi, la falla è stata generata da un missile che ha impattato la parte destra della fusoliera del DC-9. Questo implica che l'attacco sia stato sferrato dai settori sud-ovest/nord-ovest.<br>
+<br>
+
+Arriviamo, finalmente, al risultato ottenuto da varie simulazioni.<br>
+<br>
+
+<div style="vertical-align: top; display: inline-block; margin:0px 0px 50px 0px">
+<div id="gra_3d" style="float:left; padding-right: 20px"></div>
+Il grafico di sinistra mostra la traiettoria seguita dal missile, mentre gli altri mostrano alcuni parametri che aiutano a visualizzare l'evoluzione della traiettoria (si veda più avanti per il significato dei valori).<br>
+<br>
+<b>Scegliere un profilo d'ingaggio</b>: <select id="SelectSim" onchange="SimOnChange(this.selectedIndex)"></select>
+<span style="padding-left: 1em"><b>Mostra acc. A/P</b></span> <input type="checkbox" id="CB_acc_ap" checked onchange="AccapOnChange()"><br>
+<span style="font-size: .8em">L'aggiornamento dei grafici potrebbe richiedere qualche secondo.</span>
+<pre>
+Azimut intercettore rispetto al DC-9   : <span id="pro_azm"></span>°
+Angolo di rampa al lancio              : <span id="pro_RA"></span>°
+Angolo di anticipo traiettoria         : <span id="pro_DA"></span>°
+Angolo missile / DC-9 al lancio        : <span id="pro_mis_dc9"></span>°
+Tempo di volo                          : <span id="pro_tof"></span> s
+Spazio percorso dal missile            : <span id="pro_spazio"></span> m
+Velocità comandata dall'A/P del missile: <span id="pro_acc_ap"></span> m/s
+Energia sviluppata dall'impatto        : <span id="pro_energia"></span> MJ
+Angolo di rampa del missile all'impatto: <span id="pro_rampa_impatto"></span>°
+Tempo di trasmissione energia all'ala  : <input style="width: 4em" type="range" min="1" max="8" value="4" class="slider" id="TenergiaSli" onInput="TenergiaSliOnInput(this.value)"><text id="TenergiaLab" style="inline"> 0,5</text>
+<b>Accelerazione verticale DC-9</b>           : <b><span id="pro_acc_vert"></span> g</b>
+</pre>
+
+<div id="gra_2d" style="height: 400px; float:left;"></div>
+
+</div>
+
+
+
+<div style="width: 100%; display: flex; justify-content: space-between; margin-bottom: 30px; vertical-align: top;">
+
+	<div id="gra_mach_res" style="width: 100%; height: 400px; float:left; padding-right: 2em"></div>
+
+	<div id="gra_dst_vr" style="width: 100%; height: 400px; float:left;"></div>
+
+</div>
+
+<br>
+
+I profili d'ingaggio sono elencati indicando l'azimut e il tipo di profilo: <i>TOF</i> = minor tempo di volo, <i>ACC</i> = minima accelerazione comandata dall'A/P al momento del lancio. I profili " / TOF / 10" sono quelli col minor tempo di volo, ma con limitazione di anticipo della traiettoria di 10°.<br>
+Il grafico 3D (il primo a sinistra) mostra il DC-9 con i puntini blu e il missile con quelli rossi. La linea viola rappresenta il muso dell'intercettore (l'asse +X) al momento del lancio. Le linee arancioni rappresentano il vettore accelerazione comandato dall'A/P; la lunghezza delle linee è proporzionale alla <a href="https://www.youmath.it/lezioni/algebra-lineare/matrici-e-vettori/691-vettori-e-versori.html" target="_blank">magnitudine</a> (o modulo) dell'accelerazione.<br>
+<br>
+Segue la spiegazione dei valori mostrati.
+<ul>
+<li><b>Azimut intercettore rispetto al DC-9:</b> angolo compreso tra il nord del DC-9 e la congiungente DC-9/intercettore passando per est (azimut = 90°), sud e ovest; v. anche <a href="https://it.wikipedia.org/wiki/Azimut#Descrizione" target="_blank">Wikipedia</a>.</li>
+<li><b>Angolo di rampa al lancio:</b> angolo di salita del caccia al momento di lanciare.</li>
+<li><b>Angolo di anticipo traiettoria:</b> angolo in azimut tenuto dall'intercettore al momento del lancio per anticipare la traiettoria del DC-9.</li>
+<li><b>Angolo missile / DC-9 al lancio:</b> angolo compreso tra l'asse X del caccia e la linea di vista al momento del lancio.</li>
+<li><b>Tempo di volo:</b> tempo che il missile impiega per impattare il DC-9. Viene calcolato (in modo approssimativo) dal computer asservito al radar di tiro del caccia.</li>
+<li><b>Spazio percorso dal missile:</b> lunghezza della traiettoria seguita dal missile per impattare il DC-9. Dividendo questo valore per il tempo di volo si ottiene la velocità media del missile.</li>
+<li><b>Velocità comandata dall'A/P del missile:</b> formalmente è l'integrale dell'accelerazione comandata dall'A/P in funzione del tempo di volo, il che significa moltiplicare l'accelerazione per il tempo, ottenendo, appunto una velocità. In pratica serve per mettere in evidenza l'entità delle correzioni di rotta apportate dall'A/P. Dividendo questo valore per il tempo di volo si ottiene l'accelerazione media comandata dall'A/P.</li>
+<li><b>Energia sviluppata dall'impatto:</b> energia cinetica sviluppata dall'impatto del missile con il DC-9 ipotizzando il completo arresto del missile che urta il carrello. Un missile che trapassa la fusoliera rilascia all'aereo un'energia molto più bassa, proporzionale al quadrato della differenza tra la velocità in ingresso in fusoliera e quella in uscita.</li>
+<li><b>Angolo di rampa del missile all'impatto:</b> stesso significato di "Angolo di rampa al lancio", ma riferito al momento dell'impatto. I due angoli sono differenti a causa dell'intervento dell'A/P. Questo angolo determina la componente verticale dell'energia cinetica sprigionata dall'impatto.</li>
+</ul>
+
+La spiegazione dei valori "<b>Accelerazione verticale DC-9</b>" e del relativo "<b>Tempo di trasmissione energia all'ala</b>" necessitano di una trattazione più approfondita, in quanto sono i valori che determinano la rottura del troncone della semiala sinistra.<br>
+L'accelerazione dal basso verso l'alto è dovuta all'azione del missile che urta il carrello. Per calcolarla si può utilizzare la banale formula <i>a = V / t</i>, in cui <i>V</i> è la velocità impulsiva impressa al DC-9 dal missile e <i>t</i> è il tempo nel quale si presume che l'energia venga trasferita dal carrello alla struttura, in particolare ai longheroni alari. Questo tempo è preimpostato a 0,4 s (valore prudenziale), ma è possibile variarlo con l'apposito <i>slider</i>. Ciò è utile in quanto non è possibile stabilire con precisione questo valore, ma considerando un'accelerazione così impulsiva, è più verosimile un tempo di trasferimento più basso, in quanto la struttura degli aerei dell'epoca era piuttosto rigida (probabilmente il tempo più vicino alla realtà è intorno a 0,2 s).<br>
+Il valore di <i>V</i> lo si ottiene da quello dell'energia cinetica sprigionata dall'impatto, semplicemente calcolando la radice quadrata di <i>E<sub>c</sub> * 2 / 32800</i>, dove 32800 è la massa (in kg) del DC-9 ipotizzabile al momento dell'abbattimento, determinata secondo quanto riportato nei documenti "<a href="http://www.stragi80.it/documenti/processo/trascrizioni/15.05.03.pdf" target="_blank">UDIENZA DEL 15.05.2003</a>" a pag. 60 ("<i>il peso del DC9 in crociera e di circa trentatremila chili</i>") e "<a href="https://www.stragi80.it/documenti/gi/perizie/046.pdf" target="_blank">Capitolo XLVI - Consulenza tecnica Bazzocchi - 09.06.94.</a>" a pag. 14 ("<i>Peso totale nelle condizioni dell’evento kg 32555</i>", sottostimato in quanto è la massa prevista all'atterraggio nel <a href="http://www.noidellitavia.it/176334379" target="_blank">foglio di carico</a>).<br>
+La componente verticale della <i>V</i> così calcolata è quella che genera l'accelerazione verticale impulsiva mostrata in "<b>Accelerazione verticale DC-9</b>". Quest'accelerazione, se sufficientemente elevata, determina il superamento del <a href="https://it.wikipedia.org/wiki/Fattore_di_carico" target="_blank">fattore di contingenza</a> negativo (n<sub>z</sub> < 0 del link) causando danni strutturali che vanno dalla deformazione permanente di alcuni elementi strutturali fino alla rottura di quelli più sollecitati (come accaduto alla semiala sinistra).<br>
+<br>
+Ora che abbiamo dati numerici sufficientemente accurati sui quali ragionare, si può ipotizzare quale profilo d'ingaggio possa essere stato pianificato ed usato per abbattere il DC-9.<br>
+<br>
+&Egrave; intuibile che il massimo danno lo si ottiene sparando il missile esattamente nel senso opposto al moto del DC-9 (sparandolo, cioè, da sud verso nord), così da farlo impattare con la massima velocità relativa possibile.<br>
+Un'altra modalità più "comoda" può essere quella di un attacco quasi esattamente da ovest, ipotizzando che l'intercettore sia partito dalla Sardegna (o anche dalla Corsica).<br>
+Visualizzando uno dei profili con azimut 180° e uno con azimut da ovest da 250° in poi, si nota una cosa che rende del tutto sconsigliabile il lancio da sud: l'accelerazione comandata dall'A/P al momento dell'impatto è esattamente verticale, mentre con il lancio da ovest l'accelerazione è quasi orizzontale.<br>
+<br>
+
+
+
+<div style="margin-bottom: 20px; display: inline-block; width:100%;">
+<img src="dc9-15_profi-fronte.png" style="float:left; padding-right: 30px;" alt="" title="">
+
+<div class="rev"> <!-- Revisione 30-06-2022 -->
+Con l'aiuto di questa immagine (raffigurante un DC-9-15, come l'I-TIGI) si può visualizzare chiaramente che l'area esposta dall'aereo frontalmente è molto inferiore di quella esposta lateralmente.<br>
+</div> <!-- FINE 30-06-2022 -->
+
+Il missile che accelera verticalmente nell'attacco frontale ha un piccolo margine d'errore, dovuto proprio alla piccola sezione frontale dell'aereo. Se, invece, l'attacco espone bene la fusoliera, con il missile che accelera orizzontalmente (verso destra), incrementando la componente della velocità verso la prua del DC-9, il margine d'errore è molto più grande, in quanto il missile dispone di parecchi metri di fusoliera prima di mancare il bersaglio.<br>
+<br>
+In sintesi, quindi, uno stesso errore di guida del missile porta ad una probabilità di mancare il bersaglio molto maggiore per l'attacco frontale che non per quello laterale. Si può, quindi, agevolmente dedurre che il lancio sia avvenuto da un azimut prossimo a ovest (270°).<br>
+</div>
+
+
+Questo fatto consente anche di poter ipotizzare che uno dei due missili lanciati contro il DC-9 sia andato a finire più avanti della zona di massima riflettività (costituita dall'ala), proprio perché l'A/P stava facendo virare il missile a destra, cioè in avanti rispetto alla traiettoria del DC-9, incrementando sempre di più la componente della velocità verso destra. &Egrave;, dunque, plausibile che uno dei due missili, impattando il DC-9 davanti all'ala abbia causato la violenta decompressione di cui parla il perito Giusti e abbia, inoltre, causato l'interruzione delle due barre (destra e sinistra) che portano l'energia elettrica dai motori e dall'<a href="https://it.wikipedia.org/wiki/Auxiliary_power_unit" target="_blank">APU</a> ai vari apparati, si veda "<a href="http://www.stragi80.it/documenti/gi/perizie/048.pdf" target="_blank">Capitolo XLVIII - Perizia tecnico-scientifica Misiti ed altri - 23.07.94.</a>" alle pagg. 30 e segg., in cui si precisa che la prima barra ad interrompersi è stata quella di destra.<br>
+<br>
+Considerando, inoltre, che soltanto una semiala si è rotta, l'accelerazione verticale non doveva essere molto superiore al limite strutturale. Si può quindi ipotizzare che il lancio possa essere avvenuto da un azimut di circa 250/260°. Sono quasi certamente da escludere azimut superiori a 280° a causa della scarsa accelerazione verticale che avrebbero prodotto.<br>
+<br>
+Ulteriori simulazioni permettono di affermare che anche lanci da 6 km di distanza consentono di generare sufficiente energia cinetica all'impatto, purché effettuati da un azimut inferiore ai 250°.<br>
+Stesso discorso anche per velocità di lancio più basse. Una velocità di lancio di mach 0,9 è sufficiente, purché l'azimut non superi i 250°.<br>
+
+
+
+
+<!-- CADUTA IN MARE -->
+<!-- ===================================================================================== -->
+
+
+<h3>Caduta in mare</h3>
+
+Una volta persa una grossa parte della semiala sinistra, l’aereo non è più stato governabile, a prescindere dalle condizioni dei comandi e delle superfici di governo. Ha quindi iniziato a rollare alzando la semiala destra (molto più portante della sinistra), ha abbassato il muso e ha cominciato a perdere quota acquistando velocità.<br>
+<br>
+Da questo punto, descrivere con esattezza cosa sia successo ad un aereo semi-distrutto, avente tutta la struttura gravemente compromessa è assolutamente impossibile, perché i vari elementi strutturali possono cedere in qualunque momento a causa di sollecitazioni aerodinamiche del tutto imprevedibili.<br>
+Si tenga conto che l’aereo stava volando alla massima velocità di crociera e quindi ogni sollecitazione aerodinamica è amplificata dal fatto che la forza aerodinamica sviluppata da un elemento dell'aereo è proporzionale al quadrato della velocità rispetto all'aria. Ciò significa, ad esempio, che un aumento della velocità del 10% comporta un aumento della forza aerodinamica del 21%; per un aumento della velocità del 20%, l'incremento della forza aerodinamica è del 44%, e così via.<br>
+<br>
+Cercando d'ipotizzare una possibile evoluzione della traiettoria, si può provare a farlo considerando la zona di ritrovamento dei motori.<br>
+La pagina "<a href="../../fasi/6_cadu/cadu.html" target="_blank">Caduta in mare</a>" tratta estesamente le possibili traiettorie seguite dai motori partendo da differenti modalità del loro distacco.<br>
+In estrema sintesi, non risulta possibile che i motori si siano distaccati in quota a seguito della presunta destrutturazione del DC-9 che sarebbe avvenuta molto rapidamente dopo l'evento catastrofico, perché i motori sarebbero andati a finire molto più a sud di dove sono stati trovati.<br>
+L'unico che sembra accorgersi di questo fatto è l'ing. Bazzocchi (uno dei sostenitori dell’insostenibile ipotesi bomba) che per far cadere i motori nella zona del loro ritrovamento deve ipotizzare una picchiata del DC-9 con un angolo iniziale di ben 55° (v. "<a href="https://www.stragi80.it/documenti/gi/perizie/071.pdf" target="_blank">Capitolo LXXI - Consulenza tecnica Bazzocchi - 31.12.94.</a>", inizio pag. 3).<br>
+<br>
+L'impossibilità matematica che i motori siano andati a finire nella zona del ritrovamento dopo essersi staccati in quota, implica che in realtà è stato il DC-9 a portarli molto vicino alla zona del loro ritrovamento.<br>
+Si può dunque dedurre con ragionevole sicurezza che il DC-9 sia precipitato per qualche decina di secondi ruotando su sé stesso (intorno all’asse longitudinale), anticipando notevolmente il punto d’impatto dei motori con il mare.<br>
+&Egrave; possibile che il motore destro, ritrovato qualche centinaio di metri più a nord del sinistro (v. "<a href="../../fasi/6_cadu/cadu.html" target="_blank">Caduta in mare</a>" paragrafo "Coordinate dei motori") si sia staccato poco prima del sinistro a causa delle elevatissime sollecitazioni asimmetriche alla struttura causate dall'elevata velocità raggiunta negli ultimi secondi della caduta in mare.<br>
+
+
+
+
+
+<!-- COMPATIBILITA' VINCOLI -->
+<!-- ===================================================================================== -->
+
+
+<h3>Compatibilità con i vincoli</h3>
+
+
+Nel paragrafo "Vincoli da soddisfare" sono elencate le principali evidenze che devono essere soddisfatte da qualsivoglia ipotesi formulata.<br>
+<br>
+L’ipotesi qui esposta soddisfa le evidenze:
+
+<ul>
+<li>il momento flettente negativo intorno all’asse X che fa staccare il troncone della semiala sinistra è causato da un missile che colpisce il carrello accelerando l’aereo verso l’alto;</li>
+<li>il troncone alare ritrovato a 10 km dal relitto principale è dovuto al fatto che tale troncone si è staccato in quota ed è stato, quindi, trasportato dal forte vento;</li>
+<li>le coordinate delle zone di ritrovamento dell’FDR e dei motori sono compatibili con la traiettoria che l’aereo ha seguito in modo del tutto incontrollato dopo l’abbattimento.</li>
+</ul>
+
+Non è possibile avere la certezza che il DC-9 sia stato abbattuto con le modalità qui descritte, ma le evidenze oggettive disponibili sono certamente compatibili con l’ipotesi di abbattimento tramite un paio di grossi missili inerti, senza bisogno di alcuna forzatura.
+<br>
+
+
+
+
+<!-- AVVICINAMENTO INIZIALE -->
+<!-- ===================================================================================== -->
+
+<h3>Avvicinamento iniziale</h3>
+
+<!-- 22-01-2022, aggiunto "078.pdf" -->
+
+Dopo aver appurato con sufficiente dettaglio la modalità utilizzata per l'attacco finale, in questo paragrafo vengono presentate tre ipotesi sulle possibili modalità usate per guidare l'intercettore nella zona del DC-9.<br>
+<!-- FINE 22-01-2022 -->
+
+<br>
+Va subito precisato che nessuno dei 4 tabulati di Ciampino mostra una traccia che possa essere attribuita all'intercettore, per cui si può solo dedurre che siccome il lancio dei missili è avvenuto da ovest, è molto probabile che anche l'avvicinamento iniziale sia partito da ovest.<br>
+
+<h3 style="margin-left:3em">1) Guida caccia</h3>
+
+Una modalità che poteva essere usata per guidare l'intercettore nella zona del DC-9 è quella ovvia del vettoramento radar tramite un guida caccia, sia esso basato a terra o aereo.<br>
+In questa modalità, il guida caccia fornisce all'intercettore il rilevamento (l'azimut) e la distanza dal bersaglio fino a quando l'intercettore non diventa autonomo acquisendo il bersaglio sul radar impostato in modalità ricerca. Poi il pilota del caccia passa in modalità <abbr title="single target tracking">STT</abbr> e, seguendo le indicazioni presentate sullo schermo radar, corregge la traiettoria finale per lanciare.<br>
+
+<h3 style="margin-left:3em">2) TACAN a terra</h3>
+
+Un'altra possibile modalità per portarsi nelle vicinanze del DC-9 era quella di usare un TACAN (una radioassistenza militare). &Egrave; senz'altro una modalità atipica, ma data la particolarità di questo ipotetico scenario, non la si può escludere a priori.<br>
+Per attuare questo tipo d'intercettazione, il caccia aveva bisogno di un aereo nei pressi del DC-9 con un ricevitore sintonizzato sullo stesso TACAN dell'intercettore e che quindi gli poteva comunicare periodicamente la radiale attraversata in quel momento.<br>
+Supponendo che l'intercettore sia decollato dalla Sardegna o dalla Corsica, questo avrebbe potuto seguire una rotta in allontanamento dal TACAN di Solenzara o da quello di Decimomannu, intercettando e mantenendo una specifica <a href="../../defi/altro/altro.html#radiale" target="_blank">radiale</a>.<br>
+La comunicazione dell'aereo nei pressi del DC-9 poteva essere: "Siamo sulla radiale 110 di Solenzara a 180 miglia"; dopo qualche minuto il rilevamento passava a 120°/185 nm e così via.<br>
+L'intercettore avrebbe variato la sua prua in base alla radiale sulla quale si trovava il DC-9 e avrebbe saputo anche la distanza residua.<br>
+<br>
+
+<!-- 22-01-2022, aggiunto "078.pdf" -->
+
+L'effettiva presenza di un aereo nei pressi del DC-9 la possiamo dedurre da quanto emerge dall'analisi dei tabulati del radar Marconi presentata nella pagina "<a href="../../fasi/5_fine/fine.html" target="_blank">Fasi del volo - Ultimi minuti</a>" di questo sito al paragrafo "Presenza di un altro aereo", dal "<a href="https://www.stragi80.it/documenti/gi/perizie/034.pdf" target="_blank">Capitolo XXXIV - Consulenza radaristica Pent-Vadacchino - 21.05.92.</a>" a partire da fondo pag. 4, dal "<a href="https://www.stragi80.it/documenti/gi/perizie/067.pdf" target="_blank">Capitolo LXVII - Consulenza radaristica Algostino ed altri - 23.11.94.</a>" a pag. 22. e dal "<a href="https://www.stragi80.it/documenti/gi/perizie/078.pdf" target="_blank">Capitolo LXXVIII - Consulenza radaristica Algostino ed altri - 31.10.95.</a>" a pag. 4.
+
+<!-- FINE 22-01-2022 -->
+
+<br>
+Quest'intercettazione sarebbe meno efficiente rispetto ad una assista da vettoramento radar, ma avrebbe il vantaggio di non impegnare una postazione radar.<br>
+<br>
+
+<div style="margin-bottom: 20px; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="dec-sza_200.png" style="float:left; padding-right: 30px;" alt="" title="">
+L'immagine mostra l'ubicazione dei due TACAN (dischetti verdi) e quattro radiali d'esempio, per far vedere come un caccia NATO poteva seguirle per arrivare nei pressi dell'IH870.<br>
+<br>
+L'arco di cerchio arancione rappresenta la portata nominale di 200 nm del TACAN di Decimomannu, l'arco verde, invece, è riferito a Solenzara. La portata reale può essere indifferentemente superiore o inferiore a quella nominale e dipende, ovviamente, anche dalla quota di volo, oltre che dalla potenza di trasmissione del TACAN.<br>
+
+<!-- Nel manuale di volo del TF-104G a pag. 139: portata fino a 390 nm LOS -->
+
+</div>
+
+Proseguendo con l'avvicinamento al bersaglio, l'intercettore avrebbe iniziato a vedere il DC-9 sul radar e da quel punto sarebbe stato autonomo.<br>
+
+
+<!-- 22-01-2022 -->
+
+<h3 style="margin-left:3em">3) TACAN aviotrasportato</h3>
+
+Anche per attuare questa modalità, è necessario un aereo nei pressi del DC-9. In questo caso, l'aereo deve essere dotato di un TACAN del tutto simile a quelli basati a terra, con la sola differenza di essere aviotrasportato.<br>
+Una possibile scelta ricade nel Piaggio PD808-RM (la versione per radiomisure del PD808), la cui strumentazione è elencata nel documento "<a href="http://cristianopi.altervista.org/straus/v1f304_WP001835_001.pdf" target="_blank">AA.1C-PD808-2-8</a>"
+<i><sup><abbr title="Procura della Repubblica di Roma, VOL. I - FASC. 304 - PAG. 69704 - 69716, ESTRATTO DEL DOCUMENTO AA.1C-PD808-2-8 RELATIVO ALLE APPARECCHIATURE SPECIFICHE PER RADIO MISURE, UTILIZZATE SUL VELIVOLO PD808. ALLEGATO 'B' AL FG. SMA/40/3276 DATATO 20.11.97 (UI 1833).">fonte</abbr></sup></i>
+
+, dove si legge "RICETRASMETTITORE TACAN TIPO AN/ARN21C VERSIONE RM", le cui caratteristiche si possono trovare nella pagina <a href="http://www.vintageavionics.nl/index_bestanden/ARN21C.htm" target="_blank">AN/ARN-21C</a>.<br>
+<br>
+In questo caso, l'intercettore deve semplicemente manovrare per seguire la rotta indicata dallo strumento di bordo che lo conduce all'aereo nei pressi del DC-9.<br>
+<br>
+Questa modalità è probabilmente la migliore per una missione così particolare, in quanto consente all'intercettore di evitare qualunque emissione elettromagnetica, salvo nella fase finale di aggancio radar del bersaglio. Vengono, inoltre, evitate anche le trasmissioni radio del guida caccia e dell'aereo vicino al DC-9, necessarie nei due casi precedenti.<br>
+
+
+<!-- FINE 22-01-2022 -->
+
+
+
+
+<!-- PLOT A OVEST -->
+<!-- ===================================================================================== -->
+
+
+<h3>I famosi plot a ovest</h3>
+
+Alcuni consulenti ritengono che i tre plot di solo radar primario situati ad ovest del DC-9 possano essere stati generati da uno o due aerei di piccole dimensioni che inizialmente volavano all'incirca in parallelo alla rotta seguita dal DC-9, per poi virare verso est e sferrare l'attacco. Si veda, ad esempio, l'<a href="https://www.stragi80.it/documenti/processo/trascrizioni/16.04.03.pdf" target="_blank">esame</a> del perito Dalle Mese a pag. 95.<br>
+Entrambi gli estrattori del radar primario Marconi riportano i tre plot nei seguenti orari:
+<pre>
+  -17 18:58:11
+  -12 18:58:39
+   2b 18:59:57
+</pre>
+I plot compaiono nel tabulato dell'estrattore 3 come segue:
+<pre>
+      <b>Plot -17</b>
+   RADAR=03  SETTORE=07  NUM.PLOTS=04  TEMPO=0463  N.CICLO=04280565   ORA=80.06.27/18.58.11
+   X= 012.04   Y=-122.08   R= 122.26   A=173 50'     Q= 15                     PR.
+
+      <b>Plot -12</b>
+   RADAR=03  SETTORE=07  NUM.PLOTS=04  TEMPO=0299  N.CICLO=04280704   ORA=80.06.27/18.58.39
+   X= 013.24   Y=-126.21   R= 127.12   A=173 19'     Q= 15                     PR.
+
+      <b>Plot 2b</b>
+   RADAR=03  SETTORE=07  NUM.PLOTS=04  TEMPO=0249  N.CICLO=04281091   ORA=80.06.27/18.59.57
+   X= 027.00   Y=-126.30   R= 129.28   A=167 31'     Q= 13                     PR.
+</pre>
+&Egrave; utile precisare che il radar Selenia non rileva quei tre plot.<br>
+Calcolando la distanza tra i plot, si può calcolare la velocità media tenuta dall'ipotetico caccia. Sfruttando il temporizzatore ad alta risoluzione presente nei tabulati (campo "TEMPO"), abbiamo che il plot -12 viene battuto 27,84 s dopo del plot -17, ottenendo che l'antenna ruota in (5,568 &plusmn; 0,08) s e il plot 2b dopo 105,76 s sempre dal plot -17, ottenendo una rotazione ogni (5,566 &plusmn; 0,08) s, da cui risultano le seguenti velocità medie (rispetto al suolo) e rotte:<br>
+<pre>
+      <b>Marconi 1</b>
+   -17 &rarr; -12: t= 27,84 s, d=  4,77 nm, V<sub>media</sub>= 617 kn, rotta= 157°
+   -12 &rarr;  2b: t= 77,92 s, d= 13,27 nm, V<sub>media</sub>= 613 kn, rotta=  89°
+
+      <b>Marconi 3</b>
+   -17 &rarr; -12: t= 27,84 s, d=  4,70 nm, V<sub>media</sub>= 608 kn, rotta= 157°
+   -12 &rarr;  2b: t= 77,92 s, d= 13,25 nm, V<sub>media</sub>= 612 kn, rotta=  89°
+</pre>
+Considerando la temperatura ambiente e il vento presente quella sera in corrispondenza di quei plot, risulterebbe che l'ipotetico caccia stesse tenendo una velocità piuttosto insolita, in quanto volava in regime transonico. Infatti, se la quota del caccia fosse stata uguale a quella del DC-9, per il primo tratto risulterebbe una velocità di mach 0,99 per l'estrattore 1 e mach 1 per l'estrattore 3, del tutto inverosimile, perché di solito non si vola a mach 1; o si decelera o si accelera, proprio per evitare l'elevatissima resistenza aerodinamica del regime transonico. Per il secondo tratto, invece, la velocità media di mach 0,85 è senz'altro verosimile.<br>
+Per il primo tratto, la velocità è sempre superiore a mach 0,9, qualunque sia la quota, specialmente se si considera l'estrattore 1. Sembrerebbe, quindi, che l'ipotetico caccia stesse rallentando da supersonico ad altamente subsonico, per poi virare verso il DC-9. &Egrave; comunque strano che un caccia voli supersonico senza un valido motivo, solo per raggiungere il DC-9.<br>
+
+<br>
+
+Osservando le seguenti immagini (che possono essere ingrandite cliccandoci sopra), si possono fare alcune considerazioni aggiuntive sull'effettiva possibilità che quei tre plot possano essere attribuibili ad un caccia.<br>
+<br>
+
+<div style="margin-bottom: 30px; vertical-align: top; display: inline-block;">
+
+<div class="click-zoom" style="vertical-align: top; padding-right: 20px; display: inline-block; float:left;">
+	<label> <input type="checkbox">
+	<img src="plot_-12_18,55-19,05.png" alt="" title="" width="310" height="310">
+	</label>
+</div>
+
+<div class="click-zoom" style="vertical-align: top; padding-right: 20px; display: inline-block; float:left;">
+	<label> <input type="checkbox">
+	<img src="plot_-12_tutti.png" alt="" title="" width="310" height="310">
+	</label>
+</div>
+L'immagine di sinistra mostra i plot di solo primario presenti nel tabulato relativo all'estrattore 3 del radar Marconi registrati dalle 18:55 alle 19:05 (l'abbattimento è avvenuto circa alle 18:59:45), mentre l'immagine di destra visualizza tutti i plot di solo primario presenti nel tabulato.<br>
+<br>
+Si nota che i famosi tre plot si trovano in una fascia di distanza dall'antenna in cui sono presenti moltissimi altri plot, per cui la loro presenza potrebbe essere del tutto casuale.
+</div>
+
+L'effettiva possibilità che quei tre plot possano realmente rappresentare un aereo è oggettivamente scarsa, ma questo non può escludere la presenza di altri aerei (oltre al DC-9) in quella zona.<br>
+<br>
+
+<!-- Revisione 21-05-2022 -->
+Per cercare di avere un'idea più precisa in merito alla probabilità che quei tre plot possano essere del tutto casuali o possano, invece, rappresentare una rotta reale, si può ricorrere all'aiuto di un computer per trovare tutte le possibili rotte composte da tre plot di solo primario; più ce ne sono, maggiore è la probabilità che i plot siano casuali.<br>
+<br>
+Iniziamo con il considerare tutti i plot di solo primario presenti nei tabulati di Ciampino che soddisfano le seguenti condizioni:
+<ol style="margin-top: 0px">
+<li>distanza dal radar maggiore di 80 nm;</li>
+<li>azimut rispetto al radar Marconi tale da escludere i falsi plot generati dal Sole al tramonto (plot da 296° a 303° e da 81° a 83°);</li>
+<li>esclusione dei plot presenti nella zona e nell'orario dell'abbattimento.</li>
+</ol>
+
+Soddisfano le tre condizioni 992 plot dell'estrattore 1 e 1000 plot dell'estrattore 3.<br>
+<br>
+Al fine di ottenere un profilo di volo simile a quello mostrato dai tre plot -17, -12 e 2b, per ognuno dei due estrattori, il programma effettua una ricerca esaustiva di tutte le terne di plot che soddisfano le seguenti condizioni:
+
+<ol style="margin-top: 0px">
+<li>distanza tra due plot consecutivi compresa tra 4 nm e 20 nm;</li>
+<li>velocità risultante tra due plot consecutivi compresa tra 500 kn e 650 kn;</li>
+<li><a href="https://www.esercizimatematica.com/angolo-convesso/" target="_blank">angolo convesso</a> compreso tra il segmento plot<sub>1</sub>-plot<sub>2</sub> e il segmento plot<sub>2</sub>-plot<sub>3</sub> non inferiore a 70° (virata non troppo stretta).</li>
+</ol>
+
+<!-- P:\PRG_VC2019\USTICA - Radar\main.cpp  blocco "// STATISTICA 3 PLOT POSSIBILI" -->
+In pratica, il programma, partendo dal 1° plot memorizzato, cerca il 2° plot che soddisfa le condizioni 1 e 2, se lo trova, inizia la ricerca del 3° plot che soddisfa le condizioni 1 e 2 rispetto al 2° plot e la condizione 3. I tre plot così trovati risultano distanti tra le 4 e le 20 miglia dal primo al secondo e dal secondo al terzo e sono compatibili con un aereo che si muove dal 1° plot, passa per il 2° e arriva al 3° percorrendo il tragitto con una velocità (rispetto al suolo) compresa tra i 500 e i 650 kn e non fa virate troppo strette, ottenendo una terna di plot del tutto simile ai tre plot -17, -12 e 2b.<br>
+<br>
+Il programma trova 214 terne di plot per l'estrattore 1 e 203 terne per l'estrattore 3 che soddisfano le condizioni imposte.<br>
+<br>
+
+
+<div style="margin-bottom: 30px; vertical-align: top; display: inline-block;">
+
+<div class="click-zoom" style="vertical-align: top; padding-right: 20px; display: inline-block; float:left;">
+	<label> <input type="checkbox">
+	<img src="terne.png" alt="" title="" width="475" height="450">
+	</label>
+</div>
+La cartina (che può essere ingrandita cliccandoci sopra) mostra il risultato ottenuto per l'estrattore 3.<br>
+<br>
+I plot mostrati sono solo quelli presi in considerazione dal programma (1000 plot). I plot bordati di rosso sono quelli appartenenti alle 203 terne che soddisfano le condizioni di similitudine rispetto alla terna -17, -12 e 2b.<br>
+<br>
+A parte un paio di possibili rotte reali (vicino Ancona e sulla Corsica), le altre sembrano formate da plot del tutto casuali.<br>
+<br>
+Considerando che ci sono ben 203 terne di plot del tutto simili a quella formata dai plot -17, -12 e 2b, si può concludere che quella particolare terna è una tra le tante e può essere ritenuta del tutto casuale.<br>
+
+</div>
+
+<!-- FINE 21-05-2022 -->
+
+
+
+
+<br>
+
+
+<script>
+"use strict";
+
+var elenco= new Object();
+
+Plotly.d3.csv('simu/elenco.csv', function(err, rows) {
+
+	// elenco,RA,DA,mis_dc9,mis_gs_x,mis_gs_y,mis_gs_z
+	elenco.nome= unpack(rows, 'elenco');
+	elenco.RA= unpack(rows, 'RA'); // Rampa al lancio
+	elenco.DA= unpack(rows, 'DA'); // Offset in AZM (anticipo traiettoria)
+	elenco.mis_dc9= unpack(rows, 'mis_dc9'); // Angolo MISSILE - DC9
+
+	// Velocità iniziale del missile (linea nel grafico 3D)
+	elenco.vx= unpack(rows, 'mis_gs_x').map(Number);
+	elenco.vy= unpack(rows, 'mis_gs_y').map(Number);
+	elenco.vz= unpack(rows, 'mis_gs_z').map(Number);
+
+	var sel= document.getElementById("SelectSim");
+	for(let idx in elenco.nome) {
+		//var simu= elenco.nome[idx].split('_'); var opt= new Option(simu[0] + ' / ' + simu[1], elenco.nome[idx]);
+		
+		var opt= new Option(elenco.nome[idx].split('_').join(' / '), elenco.nome[idx]);
+
+		sel.options[sel.options.length]= opt;
+	}		
+
+	TenergiaSliOnInput(document.getElementById("TenergiaSli").value);
+	
+	SimOnChange(0); // Seleziona il 1° profilo
+});
+
+
+var energia;
+var t_trasfe; // Tempo di trasferimento "energia" all'ala
+var rampa_imp; // Angolo di rampa del missile all'impatto
+
+
+function CalcAccVert()
+{
+	// massa DC-9: 33000 [http://www.stragi80.it/documenti/processo/trascrizioni/15.05.03.pdf pag. 60]
+	//             32555 [https://www.stragi80.it/documenti/gi/perizie/046.pdf pag. 14] è la massa prevista a LDG sul foglio di carico
+	var Av= Math.sqrt(energia * 2 / 32800) * Math.sin(rampa_imp * Math.PI / 180) / t_trasfe / 9.81; // Acc verticale
+	document.getElementById("pro_acc_vert").innerText= Av.toFixed(2).replace('.', ',');
+	var col= "initial"; if(Av > 2.5) col= "orange"; if(Av > 2.8) col= "red";
+	document.getElementById("pro_acc_vert").style.color= col;
+}
+
+
+// Variato tempo trasmissione energia all'ala
+function TenergiaSliOnInput(val)
+{
+	t_trasfe= val / 10;
+	document.getElementById("TenergiaLab").innerText= " " + t_trasfe.toFixed(1).replace('.', ',') + " s";
+	CalcAccVert();
+}
+
+
+// Mostra/nasconde le linee dell'ACC A/P nel 3D
+function AccapOnChange()
+{
+	SimOnChange(document.getElementById("SelectSim").selectedIndex);
+}
+
+
+// Selezionato un profilo
+function SimOnChange(idx)
+{
+	// GRAFICO 3D
+	Plotly.d3.csv('simu/' + elenco.nome[idx] + '.csv', function(err, rows) {
+
+	var DC9= {
+		type: "scatter3d", name: 'DC-9',
+		mode: 'markers', marker: { size: 2, color: 'blue' },
+		text: unpack(rows, 't'), hoverinfo: "text",
+		x: unpack(rows, 'tx'),
+		y: unpack(rows, 'ty'),
+		z: unpack(rows, 'tz')
+	};
+
+	var MIS= {
+		type: "scatter3d", name: 'Missile',
+		//mode: 'lines', line: { width: wdt, color: '#000000' },
+		//mode: 'markers', marker: { size: 3, color: 'red' },
+		mode: 'markers+lines', marker: { size: 2, color: 'red' }, line: { width: 3 },
+		text: [...DC9.text], hoverinfo: "text",
+		x: unpack(rows, 'mx'),
+		y: unpack(rows, 'my'),
+		z: unpack(rows, 'mz')
+	};
+
+/*
+	var INI= { // Congiungente MIS - DC9 a t= 0
+		type: "scatter3d", name: 'INI', hoverinfo: "none",
+		mode: 'lines', line: { width: 1, color: '#ff99ff' },
+		x: [MIS.x[0], DC9.x[0]],
+		y: [MIS.y[0], DC9.y[0]],
+		z: [MIS.z[0], DC9.z[0]]
+	};
+*/
+	var VINI= {
+		type: "scatter3d", name: 'Vini', hoverinfo: "none",
+		mode: 'lines', line: { width: 2, color: '#ff99ff' },
+		x: [MIS.x[0], Number(MIS.x[0]) + elenco.vx[idx] * 4e3],
+		y: [MIS.y[0], Number(MIS.y[0]) + elenco.vy[idx] * 4e3],
+		z: [MIS.z[0], Number(MIS.z[0]) + elenco.vz[idx] * 4e3]
+	};
+
+	// Ultima riga con ACC A/P e RAMPA all'impatto
+	rampa_imp= MIS.x.pop();
+
+	document.getElementById("pro_rampa_impatto").innerText= rampa_imp.replace('.', ',');
+	document.getElementById("pro_acc_ap").innerText= MIS.text.pop().replace('.', ',');
+
+	// Profilo scelto
+	document.getElementById("pro_azm").innerText= elenco.nome[idx].split('_')[0];
+	document.getElementById("pro_RA").innerText= elenco.RA[idx].replace('.', ',');
+	document.getElementById("pro_DA").innerText= elenco.DA[idx].replace('.', ',');
+	document.getElementById("pro_mis_dc9").innerText= elenco.mis_dc9[idx].replace('.', ','); // Viene salvato cambiato di segno
+
+	// "pro_spazio" viene aggiornato insieme a "Grafico a SX"
+
+	// 3 righe con i range per xyz
+	var raz_mi= MIS.text.pop(), raz_ma= MIS.x.pop();
+	var ray_mi= MIS.text.pop(), ray_ma= MIS.x.pop();
+	var rax_mi= MIS.text.pop(), rax_ma= MIS.x.pop();
+
+	document.getElementById("pro_tof").innerText= MIS.text[MIS.text.length - 1].replace('.', ',');
+
+	// t,mx,my,mx,tx,ty,tz,dst,Vm,Vr
+	var dst= unpack(rows, 'dst');
+	var Vm= unpack(rows, 'Vm');
+	var Vr= unpack(rows, 'Vr');
+	var Aap= unpack(rows, 'Aap');
+
+
+	var Vr_imp= Vr[Vr.length - 5];
+	energia= .5 * 318 * .4536 * Vr_imp*Vr_imp; // GLOBALE
+	document.getElementById("pro_energia").innerText= (energia * 1e-6).toFixed(1).replace('.', ',');
+	CalcAccVert();
+
+
+	for(var i= 0; i < dst.length; i++) {
+		MIS.text[i]= ("t: " + MIS.text[i] + ", d= " + dst[i] +
+			"<br>V= " + Vm[i] + ", Vr= " + Vr[i] +
+			"<br>A<sub>A/P</sub>= " + Aap[i] + ", h= " + Math.round(MIS.z[i] / .3048)).split('.').join(',');
+
+		DC9.text[i]= ("t: " + DC9.text[i] + ", d= " + dst[i] + "<br>Vr= " + Vr[i]).split('.').join(',');
+	}
+
+	var dati= [MIS, DC9, /*INI,*/ VINI];
+
+	// Vettore ACC A/P
+	if(document.getElementById("CB_acc_ap").checked) {
+		var ax= unpack(rows, 'ax'), ay= unpack(rows, 'ay'), az= unpack(rows, 'az');
+		for(var i= 0; i < MIS.x.length; i++) {
+			var ACC= {
+				type: "scatter3d", hoverinfo: "none",
+				mode: 'lines', line: { width: 1, color: '#ffc266' },
+				x: [MIS.x[i], Number(MIS.x[i]) + Number(ax[i])],
+				y: [MIS.y[i], Number(MIS.y[i]) + Number(ay[i])],
+				z: [MIS.z[i], Number(MIS.z[i]) + Number(az[i])]
+			};
+			dati.push(ACC);
+		}
+	}
+
+	var layout= {
+		width: 800, height: 800,
+		showlegend: false,
+
+		margin: { l:0, r:0, t:0, b:0},
+		scene:{
+			camera: {
+				eye: { x: -.01, y: -1.9, z: 1.1 }
+			},
+			aspectmode: "cube",
+			xaxis: {
+				showspikes: false,
+				title: 'Longitudine [m]',
+				range: [rax_mi, rax_ma]
+			},
+			yaxis: {
+				showspikes: false,
+				title: 'Latitudine [m]',
+				range: [ray_mi, ray_ma]
+			},
+			zaxis: {
+				showspikes: false,
+				title: 'Altitudine slm [m]',
+				range: [raz_mi, raz_ma]
+			}
+		}
+	};
+
+	Plotly.newPlot('gra_3d', dati, layout, {responsive: true});
+	});
+	
+	Gra_ACCAP(idx);
+}
+
+
+// ============================================================================================================================
+
+// Grafico ACC A/P
+
+function Gra_ACCAP(idx)
+{
+	Plotly.d3.csv('simu/' + elenco.nome[idx] + '_accap.csv', function(err, rows) {
+
+	var t= unpack(rows, 't');
+
+	var DST= {
+		type: "scatter", name: 'Distanza',
+		mode: "lines", line: { width: 2, color: '#0000ff', shape: 'spline' },
+		x: t, y: unpack(rows, 'dst')
+	};
+	
+	var ACC= {
+		type: "scatter", name: 'Accelerazione',
+		mode: "lines", line: { width: 2, color: '#ff9000', shape: 'spline' },
+		x: t, y: unpack(rows, 'Aap'),
+		yaxis: 'y2'
+	};
+
+	var MAX_ACC= {
+		type: "scatter", name: 'Accelerazione MAX',
+		mode: "lines", line: { width: 3, color: '#cc7a00', dash: 'dash' },
+		x: [t[0], t[t.length - 1]], y: [15, 15],
+		yaxis: 'y2'
+	};
+
+
+	var lay= {
+		separators: ",", showlegend: false,
+		margin: { l:10, t:10, b:10},
+		xaxis: {
+			automargin: true,
+			title: { text: '<b>Tempo di volo</b> [s]' }
+		},				
+		yaxis: {
+			automargin: true,
+			title: '<b>Distanza dal DC-9</b> [m]',
+			titlefont: { color: '#0000ff' },
+			tickfont: { color: '#0000ff' },
+			gridcolor: '#ccccff'
+		},
+		yaxis2: {
+			automargin: true,
+			title: "<b>Accelerazione comandata dall'A/P</b> [g]",
+			titlefont: { color: '#ff9000' },
+			tickfont: { color: '#ff9000' },
+			gridcolor: '#ffe0cc',
+			overlaying: 'y',
+			side: 'right'
+		}
+	};
+
+	var config= {
+		showLink: true, plotlyServerURL: "https://chart-studio.plotly.com",
+		responsive: true
+	};
+
+	Plotly.newPlot('gra_2d', [DST, ACC, MAX_ACC], lay, config);
+	
+	
+	
+	// =================================================================================================
+	
+	// Grafico a SX
+	
+	var MACH= {
+		type: "scatter", name: 'Velocità',
+		mode: "lines", line: { width: 2, color: '#0000ff', shape: 'spline' },
+		x: t, y: unpack(rows, 'Vm_mach')
+	};
+	
+	var RES= {
+		type: "scatter", name: 'Resistenza',
+		mode: "lines", line: { width: 2, color: '#ff9000', shape: 'spline' },
+		x: t, y: unpack(rows, 'R_kg'),
+		yaxis: 'y2'
+	};
+	
+	var lay2= lay;
+	lay2.yaxis.title.text= "<b>Velocità missile</b> [mach]";
+	lay2.yaxis2.title.text= "<b>R<sub>aerodinamica</sub> missile</b> [kg]";
+	
+	Plotly.newPlot('gra_mach_res', [MACH, RES], lay2, config);
+	
+
+
+	// Grafico a DX
+	
+	var VM= {
+		type: "scatter", name: 'Vmissile',
+		mode: "lines", line: { width: 2, color: '#0000ff', shape: 'spline' },
+		x: t, y: unpack(rows, 'Vm')
+	};
+	
+	var VREL= {
+		type: "scatter", name: 'Vrelativa',
+		mode: "lines", line: { width: 2, color: '#006600', shape: 'spline' },
+		x: t, y: unpack(rows, 'Vr')
+	};
+
+	var SMIS= { // Spazio percorso dal missile
+		type: "scatter", name: 'Smissile',
+		mode: "lines", line: { width: 2, color: '#ff9000', shape: 'spline' },
+		x: t, y: unpack(rows, 'S'),
+		yaxis: 'y2'
+	};
+
+	document.getElementById("pro_spazio").innerText= SMIS.y[SMIS.y.length - 1];
+
+	var lay3= {
+		separators: ",", showlegend: false,
+		margin: { l:10, t:10, b:10, r:10},
+		xaxis: {
+			automargin: true,
+			title: { text: '<b>Tempo di volo</b> [s]' }
+		},				
+		yaxis: {
+			automargin: true,
+			title: { text: '<b>V<sub>missile</sub> e V<sub>relativa</sub></b> [m/s]' }
+		},
+		yaxis2: {
+			automargin: true,
+			title: "<b>Spazio percorso dal missile</b> [m]",
+			titlefont: { color: '#ff9000' },
+			tickfont: { color: '#ff9000' },
+			gridcolor: '#ffe0cc',
+			overlaying: 'y',
+			side: 'right'
+		}
+	};
+	
+	Plotly.newPlot('gra_dst_vr', [VM, VREL, SMIS], lay3, config);
+	
+	});
+}
+
+
+function unpack(rows, key) {
+	return rows.map(function(row) { return row[key]; });
+}
+
+</script>
+
+
+</body>
+</html>

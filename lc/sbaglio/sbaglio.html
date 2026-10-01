@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Strage di Ustica">
+	<meta name="keywords" content="ustica,ih870">
+	<title>Strage di Ustica - Luoghi comuni</title>
+	<link rel="stylesheet" type="text/css" href="../../stile.css">
+	<script src="../../plotly-latest.min.js"></script>
+	<script src="../../comune.js"></script>
+	<script src="../../crea_indice.js"></script>
+	<style>
+		.click-zoom input[type=checkbox] {
+		  display: none
+		}
+
+		.click-zoom img {
+		  transition: transform 0.25s ease;
+		  cursor: zoom-in
+		}
+
+		.click-zoom input[type=checkbox]:checked~img {
+		  transform: scale(2) translateX(210px) translateY(0px);
+		  cursor: zoom-out
+		}	
+	</style>
+</head>
+
+<body>
+
+<div class="indice"><a href="../../index.html">Indice</a></div>
+
+<h2>Il MiG-23 aspettava l'Air Malta KM153</h2>
+
+<b>Luogo comune</b>: il MiG-23 aspettava il volo Air Malta KM153, non l'Itavia IH870.<br>
+<b>Motivazione</b>: il KM153 sarebbe stato l'aereo predestinato per essere abbattuto o per essere usato dal MiG-23 per nascondersi e tornare in Libia indisturbato.<br>
+<br>
+
+<hr>
+<br>
+
+
+
+
+<!-- ========================================================================================================== -->
+
+
+<p style="margin-left: 5em"><b>INDICE</b></p>
+
+<p id="indice" style="margin-left: 3em">
+<!-- riempito dal JS -->
+</p>
+<br>
+
+<hr>
+
+<br>
+
+
+<!-- ========================================================================================================== -->
+
+
+
+Anche questo luogo comune prende di mira il povero Air Malta KM153 (Londra - Malta), come l'altro in cui viene affermato che l'abbattimento del DC-9 avviene di notte per giustificare la confusione che il pilota militare avrebbe fatto nello scambiare un piccolo bireattore con un quadrigetto che volava 12000 ft più in alto. In questo caso, però, non ci sarebbe stato nessun errore; il pilota del MiG, non vedendo il KM153, si sarebbe semplicemente accodato al primo aereo che passava andando verso sud (l'IH870).<br>
+<br>
+
+
+<!-- =============  TABULATI RADAR  ============= -->
+
+<h3 id="tabu_radar">Tabulati radar</h3>
+
+La totale infondatezza di questa fantasiosa fandonia è semplicemente dimostrabile osservando il tracciato radar del KM153.<br>
+<br>
+
+
+<!-- Revisione 06-05-2022 -->
+Il KM153 aveva il <a href="../../defi/radar/radar.html#apparati_velivoli" target="_blank">transponder</a> impostato sul codice 0323  mentre si trovava nella <a href="https://it.wikipedia.org/wiki/Regione_di_informazioni_di_volo" target="_blank">FIR</a> di Marsiglia, per poi cambiarlo su richiesta del controllore (come da normale prassi) in 1235 una volta entrato nella FIR di Roma (v. "<a href="http://cristianopi.altervista.org/straus/v1f321_WP000299_001.pdf" target="_blank">WP000299_001.DOC</a>" <i><sup><abbr title="Procura della Repubblica di Roma, VOL. I - FASC. 321 - PAG. 73456 - 73471 - DATA 31.07.98 REQUISITORIE P.P. NR. 266/90A P.M. E 527/84A G.I. 'CD. STRAGE DI USTICA'. PARTE SECONDA - ELEMENTI SULLE CAUSE DEL DISASTRO DEMUSIBILI DAI DATI RADAR: II.18. I RADAR MILITARI.">fonte</abbr></sup></i> a pag. 5 e
+"<a href="https://www.stragi80.it/documenti/gi/Titolo2a.pdf" target="_blank">TITOLO 2 - L'istruttoria dal 27 luglio 90 al 31 dicembre 97</a>" a pag. 184):<br>
+
+
+<!--  Revisione 2023-11-08  -->
+
+<div class="cita">
+
+LA TRACCIA DI RIFERIMENTO, CUI SARA' POI ATTRIBUITO IL NTN AG266, E' IL VOLO <b>AIR
+MALTA KM153</b>. ESSA SI ORIGINA COME MG715 CON <u>SIF-3 = 0323</u>, TRASMESSA DA
+MARSIGLIA, POI LG477 CON SIF-3 = 0323 PRESA IN CARICO DAL SITO DI MORTARA E DA
+QUEST'ULTIMO TRASMESSA A POGGIO BALLONE; QUINDI LG477 CON <u>SIF-3 = 1235</u> NEL
+PERIODO IN CUI E' SEGUITA DAL SITO TOSCANO E CON TALE CODICE DI SIF-3 ANCHE DAL
+RADAR CIVILE DI FIUMICINO; DIVIENE QUINDI AG262 PER LICOLA E AG262 E AJ061 PER
+MARSALA CON IL SIF-3 INVARIATO.
+
+</div>
+Il brano è riportato anche nel documento "<a href="https://www.stragi80.it/documenti/pm/RequisitoriePm.pdf" target="_blank">REQUISITORIE DEL PUBBLICO MINISTERO NEL PROCEDIMENTO NR. 266/90A P.M. E 527/84A G.I.</a>" a fondo pag. 215.<br>
+<br>
+
+
+<!-- Cartina KM153 NADGE -->
+<div style="margin-bottom: 2em; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="nadge.png" style="float:left; padding-right: 30px;" alt="" title="">
+Il sistema NADGE (tabulato di Poggio Ballone) inizia a mostrare il KM153 a partire dalle 18:26, come MG715 (traccia trasmessa da Marsiglia), quando si trova 20 nm a nord-ovest di Nizza.<br>
+</div>
+<br>
+
+<!--  FINE 2023-11-08  -->
+
+
+
+<!-- Cartina KM153 e IH870 e aerovie -->
+<div style="margin-bottom: 3em; vertical-align: top; display: inline-block;">
+<div id="roma" style="width: 600px; height: 600px; display: inline-block; float:left; padding-right: 2em"></div>
+
+La cartina mostra la rotta dell'IH870 (rosso) e quella del KM153 (blu), come rilevate dal radar Marconi.<br>
+<br>
+La scala è rappresentata dalle crocette 10 x 10 nm (miglia nautiche) disegnate ogni 0,5° in longitudine e in latitudine. I dischetti di vari colori rappresentano le <a href="../../defi/radio/radio.html" target="_blank">radioassistenze</a> e i punti di riporto.<br>
+<br>
+L'etichetta informativa che compare posizionando il puntatore del mouse sopra ai plot mostra: orario UTC (o zulu), codice impostato nel transponder, l'estrattore (usato solo l'estrattore 3 del radar Marconi), <a href="../../defi/altro/altro.html#livello_volo" target="_blank">livello di volo</a>, radar che ha ricevuto il plot (SSR: radar secondario, PR: radar primario, SPI: l'aereo si sta identificando su richiesta del controllore), latitudine e longitudine.<br>
+<br>
+
+Il KM153 stava scendendo verso sud sorvolando la Francia e la traccia radar lo inizia a mostrare al livello di volo 370 lungo l'aerovia UR-46 Nizza - Bastia (rinominata, a fine anni '80, in UR-160).<br>
+
+<br>
+In base a ciò che si può osservare, non è nemmeno lontanamente ipotizzabile che il MiG stesse aspettando il KM153 in zona Bologna - Firenze, perché l'Air Malta sarebbe transitato a circa 190 km da quella zona. Chi pianifica una missione del genere è certamente a conoscenza della rotta seguita dai vari aerei e di come è strutturato lo spazio aereo con le sue aerovie.
+</div>
+
+
+Tra le varie bufale riguardanti il KM153 c'è anche quella relativa alla distanza temporale tra questo aereo e l'IH870. Alcuni creativi parlano di 5/6 minuti, altri di meno di 10 minuti e così via.<br>
+L'esatta distanza temporale tra i due voli la si legge dai tabulati radar di Ciampino, senza bisogno d'inventarsi niente. Alle 19:11:00 il KM153 si trova alla stessa latitudine del punto in cui il DC-9 si trovava alle 18:59:45 (ultima risposta del transponder), cioè dopo 11<sup>m</sup>25<sup>s</sup>.<br>
+<br>
+
+
+
+<!-- =============  T/B/T  ============= -->
+
+<h3 id="tbt">Comunicazioni T/B/T</h3>
+
+Le comunicazioni <abbr title="terra/bordo/terra">T/B/T</abbr> (v. "<a href="../../note.html" target="_blank">Note introduttive</a>" &rarr; "Principali fonti d'informazione") tra il KM153 e Roma Radar confermano il codice transponder 1235 (di modo A) e la rotta seguita: UR-46A, UR-46C, UA-1, Ponza, Palermo e Malta.<br>
+<br>
+
+<div style="margin-bottom: 3em; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="tbt.png" style="float:left; padding-right: 2em;" alt="" title="">
+Leggiamo anche la richiesta d'identificazione da parte del controllore, prontamente soddisfatta dal primo ufficiale del KM153 premendo il pulsante "IDENT" nel pannello del transponder, come facilmente verificabile muovendo il puntatore del mouse sui plot blu nella precedente cartina (presenza dell'impulso SPI per una trentina di secondi dalle 18:47).<br>
+</div>
+
+
+<!-- Jeppesen E(HI) 7 -->
+
+<div style="margin-bottom: 2em; vertical-align: top; position:relative; display: inline-block; width:100%;">
+
+<div class="click-zoom" style="vertical-align: top; padding-right: 2em; display: inline-block; float:left;">
+	<label> <input type="checkbox">
+	<img id="jepp_ehi7" src="jepp_ehi7.webp" alt="" title="" width="835" height="262">
+	</label>
+</div>
+
+Questa vecchia cartina mostra proprio le aerovie usate dal KM153 (l'immagine può essere ingrandita cliccandoci sopra).<br>
+<br>
+Si nota l'avvenuto cambio dei nomi dei punti di riporto; non esistono più, infatti, i punti UR-46A e UR-46C, quasi certamente sostituiti dal GILET e dal MEDAL.<br>
+<br>
+Si nota anche la rarissima presenza (forse più unica che rara) di un punto di riporto che manteneva ancora la vecchia nomenclatura (UR-46D lungo il confine delle FIR Roma/Marsiglia) dopo vari anni dall'introduzione delle nuove regole ICAO per l'assegnazione dei nomi ai punti di riporto (nomi bisillabi composti da cinque lettere).
+</div>
+
+
+
+<div class="rev"> <!--  Revisione 2024-02-24  -->
+
+<!-- =============  EQUIVOCO ALFA  ============= -->
+
+<h3 id="ritardo">L'incredibile equivoco dell'ALFA</h3>
+
+Come sono nate tutte le bufale su questo insignificante volo? Ci ha pensato l'<abbr title="Autorità Giudiziaria">A.G.</abbr>, che prende in seria considerazione il KM153 (v. "<a href="https://www.stragi80.it/documenti/gi/Titolo2b.pdf" target="_blank">5. Le rogatorie maltesi e le tracce di sorvoli di C130 libici verso l’Italia.</a>" a fondo pag. 348):
+
+<div class="cita">
+
+Esso  è  stato  preso  in considerazione nelle indagini per quelle ragioni che hanno fatto supporre un errore di obiettivo e cioè che il reale bersaglio di un presunto attacco fosse l'aereo maltese e non quello italiano.
+
+</div>
+
+Il motivo che ha indotto l'A.G. a formulare una supposizione così strampalata è tanto banale quanto errato (v. il seguito della frase appena citata):
+
+<div class="cita">
+
+In effetti in una comunicazione delle 18.45 il KM153 riferì a Roma-Ciampino di stimare il <u>punto Alpha ai '55</u> ovvero di prevedere di essere a 18.55, dopo dieci minuti, su quella posizione che <span style="text-decoration-line: underline; text-decoration-style: wavy; text-decoration-color: red;">è un punto dell'aerovia Ambra 13</span>, la stessa che stava percorrendo il DC9 Itavia. Questo velivolo sarà sul punto Alpha ai '56, un minuto dopo lo stimato dell'aereo delle linee maltesi,  e  precipiterà  a  circa  tre  minuti  di  distanza,  per  l'esattezza  darà l'ultima risposta transponder a 19.59.45.
+
+</div>
+
+La frase sottolineata in rosso (errata) è quella che darà origine a tutta l'incredibile serie di frottole sul KM153.<br>
+Da quello che si può leggere, infatti, l'A.G. ritiene (sbagliando) che il KM153 stesse dando a Roma lo stimato per l'A-13 ALFA, ma è una certezza che le cose stanno diversamente (v. oltre).<br>
+<br>
+Non è possibile affermare con sicurezza la ragione che ha spinto l'A.G. a commettere un errore così grossolano, ma sembrerebbe che l'A.G. possa aver creduto che l'unico punto ALFA si trovasse solo lungo l'aerovia A-13. Forse ignorava che quasi tutte le aerovie avevano i punti ALFA, BRAVO, ecc.<br>
+<br>
+In ogni caso, l'errore porta l'A.G. a credere che (v. "<a href="https://www.stragi80.it/documenti/gi/Titolo2a.pdf" target="_blank">TITOLO 2 - L'istruttoria dal 27 luglio 90 al 31 dicembre 97</a>" a pag. 184):<br>
+
+<div class="cita">
+La traccia in questione <span style="font-family: sans-serif">[<i>Air Malta KM153, ndr</i>]</span>
+sarebbe dovuta transitare su Ponza alle ore 18.50 circa ed alle ore 19.00 trovarsi nei pressi del luogo del disastro. In realtà <span style="text-decoration-line: underline; text-decoration-style: wavy; text-decoration-color: red;">il volo accusa un ritardo di circa 13.30 minuti</span> e nel momento in cui si sarebbe dovuto trovare all’altezza di Ponza navigava invece al largo dell’Argentario.
+</div>
+
+ma questa deduzione è palesemente errata, poiché nasce dall'equivoco consistente nel confondere il punto ALFA dell'aerovia R-46 o A-1 col punto A-13 ALFA (situato lungo l'aerovia A-13). Infatti, la comunicazione delle 18:45 a cui si riferisce l'A.G. è: "<i>Air Malta 153 Roma, 153 stima il punto ALFA ai 55</i>" (v. precedente paragrafo "<a href="#tbt" target="_blank">Comunicazioni T/B/T</a>"). Piloti e controllori sanno bene di quale punto ALFA stanno parlando grazie alla loro competenza, ma questo, evidentemente, non vale per l'A.G.<br>
+Quindi, quei 13 minuti e mezzo di cui parla l'A.G. non rappresentano un ritardo, ma è un tempo privo di qualunque significato, dal momento che deriva dall'incredibile cantonata presa dall'A.G. nel ritenere che il KM153 stesse riferendosi all'A-13 ALFA.<br>
+<br>
+Non è nemmeno chiaro come sia stato calcolato quel "ritardo", poiché il KM153 transita all'altezza dell'A-13 ALFA alle 19:07:23 (passandogli 7,1 nm a est), quando, secondo l'A.G. avrebbe dovuto trovarsi in quel punto alle 18:55. Per cui, il ritardo calcolato sarebbe 12<sup>m</sup>23<sup>s</sup>, non 13<sup>m</sup>30<sup>s</sup>. Alle 19:08:30 (18:55 + 13<sup>m</sup>30<sup>s</sup>) il KM153 si trova oltre 9 nm a sud del punto A-13 ALFA e oltre 19 nm a nord del punto del disastro.<br>
+
+<br>
+L'A.G., dunque, dopo aver preso l'abbaglio dei 13 minuti e mezzo di ritardo, afferma (ovviamente sbagliando) che il KM153 si sarebbe dovuto trovare nel luogo del disastro alle 19:00, cioè allo stesso orario dell'IH870, che, quindi, sarebbe stato abbattuto per errore al posto del KM153, ma per rendersi conto di quanto sia facile che una frottola se ne tiri dietro un'altra, si può leggere la pagina "<a href="../visi/visi.html" target="_blank">L'IH870 è stato abbattuto di notte al posto del KM153</a>", dalla quale dovrebbe risultare lampante quanto fosse impossibile confondere i due aerei.<br>
+<br>
+
+<div style="margin-bottom: 30px; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="tbt_pnz.png" style="float:left; padding-right: 30px;" alt="" title="">
+Fortunatamente, l'orario stimato per Ponza ce lo dice lo stesso KM153: 19:05, ben 15 minuti dopo rispetto alle strampalate supposizioni dell'A.G.<br>
+<br>
+Tra l'altro, questa comunicazione con Roma Radar avrebbe dovuto rendere evidente all'A.G. che se il KM153 stima Ponza alle 19:05, non poteva stimare l'A-13 ALFA (43 nm dopo Ponza) 10 minuti prima di arrivare a Ponza. Doveva essere chiaro che il punto ALFA nominato dal KM153 era situato da qualche altra parte.<br>
+</div>
+<br>
+
+
+
+Il reale ritardo del KM153 sulla tabella di marcia è ben diverso.<br>
+Gli orari programmati ed effettivi relativi a vari voli Air Malta sono elencati nel documento "<a href="http://cristianopi.altervista.org/straus/v3f9_WP001949_003.pdf" target="_blank">WP001949_003.DOC</a>" 
+<i><sup><abbr title="Procura della Repubblica di Roma, VOL. III - FASC. 9, PAG. 1775 - 1776, DATA DOCUMENTO 21.12.90, DA AIR MALTA ALDO BORG A TRIBUNALE ROMA UFFICIO ISTRUZIONE: TRASMISSIONE  DELLA  DOCUMENTAZIONE  PERVENUTA  DALLA  DIREZIONE  GENERALE DELLA COMPAGNIA AIR MALTA DI MALTA.">fonte</abbr></sup></i>. Il volo che c'interessa è il n° 17.<br>
+La partenza da Heathrow era pianificata per le 15:10, ma è avvenuta alle 16:58 (1<sup>h</sup>48<sup>m</sup> di ritardo). L'arrivo a Luqa era pianificato per le 18:15, ma è avvenuto alle 19:57 (1<sup>h</sup>42<sup>m</sup> di ritardo). &Egrave; chiaro, quindi, che il KM153 ha mantenuto un ritardo di circa un'ora e tre quarti lungo tutto il tragitto.<br>
+<br>
+
+<!-- Cartina KM153 - SELENIA 4 -->
+<div style="margin-bottom: 1em; vertical-align: top; display: inline-block; width:100%;">
+<div id="km153" style="width: 700px; height: 700px; display: inline-block; float:left; padding-right: 2em; padding-bottom: 1em"></div>
+
+La cartina mostra la rotta del KM153 ottenuta dall'estrattore 4 del radar Selenia.<br>
+Siccome i radar Marconi e Selenia avevano un disallineamento leggermente diverso rispetto al nord geografico, la posizione dei plot non è accurata come per il Marconi, ma questo non costituisce un problema, poiché lo scopo della cartina è fornire il valore di alcuni parametri di volo del KM153 (e in questo, il Selenia è da preferire per i plot meno fluttuanti). Tali informazioni vengono mostrate dall'etichetta che compare portando il puntatore del mouse sopra ai plot. Compaiono la velocità al suolo (GS), la <a href="https://www.navigazione-aerea.com/6-direzioni-e-orientamento/" target="_blank">rotta</a> vera (TRK), la velocità rispetto all'aria (TAS) e la prua vera (HDG).<br>
+Il procedimento usato per il calcolo della velocità è descritto nel paragrafo "<a href="../mig/mig.html#ana_vel" target="_blank">Presenza del MiG-23 &rarr; 1) Analisi della velocità di volo</a>". Si tratta di un procedimento piuttosto complesso che dà origine ad un'incertezza nella velocità calcolata; tale incertezza è indicata con "&plusmn;". Ad esempio, <i>576,4 &plusmn; 2,3</i> indica che la velocità al suolo è compresa tra 574,1 kn e 578,7 kn con una confidenza del 90% (in realtà il discorso è piuttosto complesso; chi volesse approfondire può leggere "<a href="https://it.wikipedia.org/wiki/Intervallo_di_confidenza" target="_blank">Intervallo di confidenza</a>"). Lo stesso procedimento è usato anche per il calcolo della rotta.<br>
+TAS e HDG, invece, vengono calcolate da GS e TRK attraverso il <a href="../../fasi/meteo.html" target="_blank">modello meteo</a> usato per calcolare il vento presente lungo la rotta dell'Air Malta.<br>
+<br>
+I punti A-1 B e A-1 D risultano situati rispettivamente a circa 72 nm e a 108 nm da ELB e sono ricavati dai riporti di posizione del Flyjet 56 (v. "<a href="../../fasi/3_affi/affi.html#pd808_lg461" target="_blank">Volo in A-14 &rarr; PD-808 e LG461</a>").<br>
+<br>
+Muovendo il puntatore del mouse sui plot, si può appurare la posizione del KM153 nel momento della comunicazione delle 18:45 e quella raggiunta 10 minuti dopo (lo stimato per l'A-1 ALFA, che doveva trovarsi tra i punti B e D).<br>
+<br>
+La velocità rispetto al suolo è elevatissima grazie al fortissimo vento in coda. Durante gli ultimi due minuti che precedono lo stimato per l'ALFA (comunicazione delle 18:45) è pari a circa 590 kn.<br>
+Considerando che alle 18:45 l'aereo si trova a 203 nm dall'A-13 ALFA, se il calcolo dello stimato lo avesse fatto l'<a href="https://www.navigazione-aerea.com/15-navigazione-inerziale/" target="_blank">INS</a>, questo avrebbe calcolato 203 / 590 x 60 = 20,64 minuti.<br>
+Se il calcolo fosse stato eseguito dai piloti, questi avrebbero tenuto conto del fatto che, piegando verso sud, la componente in coda del vento sarebbe stata molto inferiore di quella attuale; avrebbero potuto considerare, ad esempio, 560 kn, stimando l'A-13 ALFA dopo circa 203 / 560 x 60 = 21,75 minuti, cioè "ai 07" (19:07).<br>
+In ogni caso, per impiegarci 10 minuti (come crede l'A.G.) ci voleva un Concorde!<br>
+<br>
+Errare è umano e anche i piloti possono sbagliare, ma pensare che possano commettere un errore di oltre 10 minuti su 20 è troppo. Se poi l'aereo aveva un INS (cosa molto probabile), l'errore poteva essere di 1 o 2 minuti al massimo, a causa della variazione della componente in coda del vento, dal momento che i calcoli li fa l'INS tenendo conto del vento.<br>
+</div>
+
+Non può esserci alcun dubbio sul fatto che il KM153 <u>certamente</u> non parlava dell'A-13 ALFA. Il dubbio può esserci, in mancanza di una cartina dell'epoca, tra il punto ALFA della R-46 e quello dell'A-1, ma di certo non quello dell'A-13.<br>
+<br>
+
+Anche nel caso in cui non risulti chiaro a quale ALFA il KM153 si stesse riferendo o in caso d'errore da parte dei piloti (o dell'INS) nel calcolare lo stimato, la comunicazione delle 18:59 rende evidente che <u>il ritardo calcolato dall'A.G. è del tutto privo di fondamento</u>.<br>
+<br>
+A causa di questo madornale errore, ancora oggi ci trasciniamo dietro tutta la serie di frottole su questo "povero" volo che, oltre a non avere niente a che fare col MiG-23, è anche del tutto irrilevante per la strage di Ustica.<br>
+<br>
+Nel caso in cui si volessero fare ulteriori analisi, possono tornare utili i grafici seguenti.<br>
+Il primo mostra la rotta vera (cioè quella rispetto al nord geografico) "nominale" (con tratto più spesso) e l'intervallo entro cui dovrebbe essere compresa la reale rotta. L'incertezza è esplicitata più chiaramente dal grafico arancione (come detto, l'incertezza deriva dal procedimento usato per fare i calcoli). Sono anche riportati alcuni punti significativi lungo la rotta.<br>
+Il secondo grafico è concettualmente uguale al primo, ma prende in considerazione la velocità al suolo e la relativa incertezza.<br>
+Nel terzo grafico vediamo la velocità rispetto all'aria e la prua vera (rispetto al nord geografico).<br>
+Nel quarto, infine, è riportata la velocità e la direzione del vento lungo la rotta del KM153.<br>
+<br>
+
+<!--  GRAFICI GS/TRK + incertezza  -->
+
+<div id="km153_trk+ince" style="width: 100%; height: 500px;"></div>
+<div id="km153_gs+ince"  style="width: 100%; height: 500px;"></div>
+<div id="km153_tas+hdg"  style="width: 100%; height: 500px;"></div>
+<div id="km153_vento"    style="width: 100%; height: 500px;"></div>
+
+
+</div> <!--  FINE 2024-02-24  -->
+
+
+
+<!-- =============  AEROVIE DISPONIBILI  ============= -->
+
+<h3 id="awy_dispo">Aerovie disponibili</h3>
+
+
+Quanto detto oggettiva ampiamente l'infondatezza di questo luogo comune, ma si può andare avanti considerando ulteriori elementi noti a chiunque decida di pianificare una missione così delicata.<br>
+Le considerazioni che seguono si basano su elementi concreti (come d'abitudine in questo sito) in merito all'economia del volo e alle aerovie effettivamente disponibili all'epoca dei fatti.<br>
+<br>
+
+&Egrave; ovvio per chiunque che le compagnie aeree sono interessate a collegare due aeroporti sostenendo il minor costo possibile, a parità del livello di comfort e sicurezza.<br>
+<br>
+L'attenzione all'economia del volo non implica necessariamente la scelta della rotta più breve, perché in presenza di vento sfavorevole potrebbe essere conveniente allungare il percorso passando dove il vento è meno sfavorevole.<br>
+Idealmente, ogni compagnia aerea vorrebbe volare seguendo la rotta che minimizza la lunghezza del percorso espressa in <i>nautical air mile</i> o NAM (che si potrebbe tradurre in "miglia nautiche in aria"). Il NAM, diversamente dal consueto miglio nautico, tiene conto del vento incontrato dall'aereo lungo il percorso. Se il vento è contrario, i NAM aumentano (è come se l'aereo percorresse più strada e, quindi, consuma più carburante), se il vento è favorevole, i NAM diminuiscono. In totale assenza di vento 1 NAM è esattamente uguale a 1 nm.<br>
+<br>
+La lunghezza del tragitto e il vento contrario non sono l'unica causa di costi aggiuntivi. Infatti, la scarsa copertura radar dell'epoca rendeva probabile l'attesa in aerovia prima di entrare in una FIR o in una zona "affollata" (tipicamente una <a href="https://it.wikipedia.org/wiki/Regione_di_controllo" target="_blank">TMA</a>), con ulteriore spreco di carburante e perdite di tempo.<br>
+<br>
+Inoltre, per far transitare i propri aerei all'interno delle aerovie, le compagnie devono effettuare i pagamenti agli enti che assicurano il controllo del traffico (oggi è EUROCONTROL per l'Europa, all'epoca dei fatti erano i singoli stati). I costi possono variare da stato a stato e da aerovia ad aerovia (i costi possono variare anche per disincentivare il transito in aerovie troppo affollate).<br>
+<br>
+Tutti questi elementi venivano tenuti in grande considerazione dal <a href="https://it.wikipedia.org/wiki/Flight_Dispatcher" target="_blank"><i>Flight dispatcher</i></a> in sede di pianificazione. &Egrave;, quindi, evidente che in alcuni casi la rotta pianificata può apparire "strana" ad un occhio profano.<br>
+<br>
+
+
+<!-- Cartina ortodromia Londra - Malta -->
+<div style="margin-bottom: 30px; vertical-align: top; display: inline-block;">
+<div id="orto" style="display: inline-block; float:left; padding-right: 2em"></div>
+La cartina mostra la rotta ideale (la più breve) e la parte di rotta pianificata della quale si ha certezza (la rotta più breve non appare esattamente come una retta perché la proiezione geografica usata dalla cartina distorce leggermente quella che viene chiamata <a href="https://it.wikipedia.org/wiki/Ortodromia" target="_blank">ortodromia</a>).<br>
+<br>
+La rotta ideale passa nelle vicinanze di Nizza e Bastia ed è, quindi, molto vicina a quella realmente seguita. Poi, da Bastia a Palermo non esisteva alcuna aerovia, per cui il KM153 poteva solo passare per il breve tratto dell'UA-1 e Ponza, dove in effetti è passato.<br>
+<br>
+La rotta ideale era anche favorevole dal punto di vista del vento. Infatti, le cartine meteo di quel giorno mostrano un discreto vento (più di 50 kn) da nord-ovest sopra la Francia, quindi quasi esattamente a favore del KM153.
+</div>
+<br>
+
+<br>
+Appurata la convenienza economica nel seguire una rotta molto prossima a quella ideale, passiamo alla verifica delle aerovie che avrebbero potuto essere usate in alternativa a quelle effettivamente usate.<br>
+<br>
+
+
+
+<!-- Cartina PARTENZA -->
+<div style="margin-bottom: 30px; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="partenza.webp" style="float:left; padding-right: 30px;" alt="" title="">
+La partenza strumentale da Heathrow (dischetto rosso) prevedeva l'ingresso in aerovia in corrispondenza delle radioassistenze di Midhurst, Mayfield o Seaford.<br> <!-- TITOLO 2b pag. 349: "persone che, malgrado non fossero prenotate, furono accettate alla presentazione all'aeroporto di Heatrow" -->
+</div>
+
+<br>
+
+
+<!-- Cartina Jeppesen nord-sud -->
+<div style="margin-bottom: 2em; vertical-align: top; position:relative; display: inline-block; width:100%; z-index: 1;">
+
+<div class="click-zoom" style="vertical-align: top; padding-right: 20px; display: inline-block; float:left;">
+	<label> <input type="checkbox">
+	<img id="cartina" src="cartina.webp" alt="" title="" width="832" height="624">
+	</label>
+</div>
+
+La possibilità di usare varie partenze non era bilanciata dalla possibilità di scegliere varie aerovie, come mostrato dalla carta aeronautica (che può essere ingrandita cliccandoci sopra).<br>
+<br>
+Si notino i vari circuiti d'attesa a forma di biscotto nominati in precedenza, ad esempio, su BNE e ABB, vicino alle due frecce blu, ma ce ne sono molti altri.<br>
+<br>
+
+La struttura dello spazio aereo era tale per cui i voli verso sud dovevano utilizzare le aerovie situate nella parte ovest dello spazio aereo francese, mentre i voli verso nord utilizzavano le aerovie ad est; si notano le frecce con il nome dell'aerovia che indicano il senso unico (proprio come per le strade).<br>
+<br>
+La freccia verde più in alto evidenzia che se non si volevano utilizzare le aerovie che sorvolavano l'area di Parigi, erano disponibili soltanto aerovie che obbligavano a volare estremamente ad oriente, assolutamente inutilizzabili per un volo Londra - Malta.<br>
+<br>
+Quindi il percorso era quasi obbligato. I quadratini blu (aggiunti) evidenziano il possibile percorso seguito dal KM153 nella prima parte del volo.<br>
+</div>
+
+
+
+Come sottolineato varie volte, le cartine non sono proprio del 1980, ma di alcuni anni dopo, per cui nel 1980 c'erano meno aerovie (e meno scelta) rispetto a quelle mostrate nella cartina.<br>
+<br>
+Il volo è poi proseguito verso sud, arrivando a sorvolare Nizza e procedere come riportato nei tabulati radar.<br>
+<br>
+<br>
+
+
+
+<!-- Esempio Flightradar KM101 -->
+<div style="margin-bottom: 30px; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="km101.png" style="float:left; padding-right: 30px;" alt="" title="">
+Un esempio dei giorni nostri (12 maggio 2021) è mostrato da quest'immagine tratta da <i>flightradar24</i>, in cui un Airbus A320 del volo KM101 va da Heathrow a Luqa passando molto vicino alla rotta percorsa circa quarant'anni prima dal KM153.<br>
+<br>
+Nonostante oggi ci sia molta più scelta rispetto al 1980, è ancora evidente la necessità di sorvolare Parigi. Poi, le innumerevoli aerovie create in tutti questi anni rendono possibile "tagliare" più a est, ma comunque, ancora oggi, siamo ben distanti dalla zona Bologna - Firenze.
+</div>
+
+
+<br>
+
+
+<hr>
+<br>
+
+
+<span style="margin-left: 2em"><b>Conclusione</b></span><br>
+
+Non può esserci alcun dubbio che l'Air Malta KM153 non aveva niente a che fare con il MiG-23, perché sarebbe passato a circa 190 km dal presunto punto d'attesa (che la leggenda vuole collocato nella zona Bologna - Firenze) circostanza certamente ben nota a chi ha pianificato una missione del genere e a chi ha una conoscenza di base d'aviazione e d'organizzazione dello spazio aereo.<br>
+
+<div class="rev"> <!--  Revisione 2024-03-01  -->
+Non solo il KM153 non ha niente a che vedere col MiG-23, ma è anche del tutto irrilevante per la strage di Ustica.<br>
+</div>
+
+<br>
+
+
+
+<!-- ========================================================================================================== -->
+
+
+<script>
+
+CreaIndice();
+
+"use strict";
+
+layout.mapbox.style= "basic";
+//layout.mapbox.style= "streets"; // Orografia e strade
+Plotly.setPlotConfig({
+	mapboxAccessToken: 'pk.eyJ1IjoiY3Jpc3RpYW5vcGkiLCJhIjoiY2pycXl1N3piMXAzODQzbnRtZzd4NzBlbiJ9.QugZVJkXpGrSJpoz_ghJqQ'
+});
+
+layout.legend.x= 1; layout.legend.y= 1; layout.legend.xanchor= 'right';
+
+
+Plotly.d3.csv('rafari.csv', function(err, rows) {
+	// ID,T,LAT,LON
+	var ID= unpack(rows, 'ID');
+	var T= unpack(rows, 'T');
+	var lat= unpack(rows, 'LAT');
+	var lon= unpack(rows, 'LON');
+	var n= ID.length;
+	for(var i= 0; i < n; i++) {
+		// T: 0= VOR/DME, 1= VORTAC, 2= VOR, 3= NDB, 4= TACAN
+		// MLG: VOR/DME o TACAN
+		switch(T[i]) {
+		case '0': VORDME.text.push(ID[i]); VORDME.lat.push(lat[i]); VORDME.lon.push(lon[i]); break;
+		case '1': VORTAC.text.push(ID[i]); VORTAC.lat.push(lat[i]); VORTAC.lon.push(lon[i]); break;
+		case '2': VOR.text.push(ID[i])   ; VOR.lat.push(lat[i])   ; VOR.lon.push(lon[i])   ; break;
+		case '3': NDB.text.push(ID[i])   ; NDB.lat.push(lat[i])   ; NDB.lon.push(lon[i])   ; break;
+		case '4': TACAN.text.push(ID[i]) ; TACAN.lat.push(lat[i]) ; TACAN.lon.push(lon[i]) ; break;
+		}
+	}
+
+	AYW.lat.push('null'); AYW.lon.push('null');
+	AYW.lat.push(43.77); AYW.lon.push(7.255); // NIZ
+	AYW.lat.push(42.5736); AYW.lon.push(9.47483); // BTA
+	AYW.lat.push(42.0333 ); AYW.lon.push(11.4); // MEDAL
+	
+	AYW.lat.push('null'); AYW.lon.push('null');
+	AYW.lat.push(44.4233); AYW.lon.push(9.0833); // GEN
+	AYW.lat.push(42.7307); AYW.lon.push(10.3967); // ELB
+	AYW.lat.push(40.9119); AYW.lon.push(12.9575); // PNZ
+	AYW.lat.push(38.7559); AYW.lon.push(16.3691); // CDC
+
+	Plotly.d3.csv('grid.csv', function(err, rows) {
+
+		GRID.lat= unpack(rows, 'lat'); GRID.lon= unpack(rows, 'lon');
+		GRID.line.color= '#999999';
+
+		data= [GRID, AYW, VORTAC, VORDME, VOR, NDB, TACAN, PUNTI, RADAR];
+
+		CaricaPunti(); // Carica tracciati radar
+	});
+});
+
+
+function CaricaPunti()
+{
+	Plotly.d3.csv('trk.csv', function(err, rows) {
+
+		var PLOT= {
+			type:'scattermapbox', name: 'Plot',
+			text: unpack(rows, 'UTC'), hoverinfo: "text",
+			lat: unpack(rows, 'lat'), lon: unpack(rows, 'lon'),
+			mode: 'markers', marker: { size: 4, color: unpack(rows, 'col') }
+		};
+
+
+		// UTC,ID,col,rdr,lat,lon,FL,SSR
+		var ID= unpack(rows, 'ID');
+		var rdr= unpack(rows, 'rdr');
+		var FL= unpack(rows, 'FL');
+		var SSR= unpack(rows, 'SSR');
+
+		for(var i= 0; i < ID.length; i++)		
+			PLOT.text[i] += ", " + ID[i] + ', e' + rdr[i] +
+				'<br>FL' + FL[i] + ', ' + SSR[i] +
+				'<br>lat: ' + PLOT.lat[i] + ', lon: ' + PLOT.lon[i];
+
+		var km153= [...data];
+
+		data.push(PLOT);
+
+		layout.mapbox.zoom= 6; layout.mapbox.center.lat= 41.9; layout.mapbox.center.lon= 11.4;
+
+		Plotly.plot('roma', data, layout, {responsive: true, displayModeBar: false});
+
+
+		// Aggiunge A-1 B e A-1 D. Calcolati con il codice a fine Ctor usando i riporti di Flyjet 56
+		var WP= {
+			type:'scattermapbox', name: 'WPY',
+			lat: [41.9111, 41.4968],
+			lon: [11.5787, 12.1583],
+			text:['A-1 B',  'A-1 D'], textposition: "bottom left",
+			mode: 'markers+text', marker: { size: 8, color: '#9999ff' }
+		};
+		km153.slice(7); // Toglie PUNTI
+		PUNTI_153= PUNTI; PUNTI_153.mode= 'markers+text'; PUNTI_153.textposition= "bottom left";
+		PUNTI_153.text[0]= 'A-13 A'; PUNTI_153.text[1]= 'A-13 B'; // Sostituisce "ALFA" e "BRAVO"
+		lay153= layout; lay153.showlegend= false;
+		layout.mapbox.zoom= 6.7; layout.mapbox.center.lat= 41.2; layout.mapbox.center.lon= 11.3;
+		km153.push(WP);
+
+
+		// Cartina e grafico GS/TRK + INCERTEZZA. Selenia 4. Usato "P:\PRG_VC2019\USTICA - Radar"  blocco  "// Calcolo VELOCITA' e STATISTICA KS"
+		Plotly.d3.csv('km153_gs-trk.csv', function(err, rows) {
+
+			// UTC,lat,lon,GS,GSi,TRK,TRKi
+			var UTC= unpack(rows, 'UTC');
+			var gs= unpack(rows, 'GS'); // GS
+			var gsi= unpack(rows, 'GSi').map(Number); // Incertezza @ 90% [kn]
+			var trk= unpack(rows, 'TRK'); // Rotta
+			var trki= unpack(rows, 'TRKi').map(Number);
+
+			var PLOT= { // CARTINA
+				type:'scattermapbox', name: 'Plot_153',
+				text: [...UTC], hoverinfo: "text",
+				lat: unpack(rows, 'lat'), lon: unpack(rows, 'lon'),
+				mode: 'markers', marker: { size: 4, color: '#9933ff' }
+			};
+
+			// Grafico HDG / TAS
+			Plotly.d3.csv('km153_hdg-tas.csv', function(err, rows) { // Creato con "P:\PRG_VC2019\USTICA - Radar\Simulazione aereo\"  PROVA_CalcMeteo()
+			
+				// UTC,hdg,tas,mach,SKNT,DRCT
+				var hdg= unpack(rows, 'hdg');
+				var tas= unpack(rows, 'tas');
+				var sknt= unpack(rows, 'SKNT'), drct= unpack(rows, 'DRCT');
+
+				for(var i= 0; i < gs.length; i++) // Popup CARTINA
+					PLOT.text[i] += "<br>GS: " + gs[i].replace('.', ',') + ' ± ' + gsi[i].toFixed(1).replace('.', ',') +
+						"<br>TRK: " + trk[i].replace('.', ',') + ' ± ' + trki[i].toFixed(1).replace('.', ',') +
+						"<br>TAS: " + tas[i].replace('.', ',') + ', HDG: ' + hdg[i].replace('.', ',') +
+						'<br>lat: ' + PLOT.lat[i] + ', lon: ' + PLOT.lon[i];
+
+				km153.push(PLOT);
+				Plotly.plot('km153', km153, layout, {responsive: true, displayModeBar: false});
+
+				gs= gs.map(Number);
+				trk= trk.map(Number);
+
+
+				// ===================
+				//  Grafici GS/TRK + INCE
+				// ===================
+
+				var config= {
+					showLink: true, plotlyServerURL: "https://chart-studio.plotly.com",
+					responsive: true
+				};
+
+				// GS
+				var GSmed= {
+					type: "scatter", name: 'GS<sub>med</sub>',
+					mode: "lines", line: { width: 3, color: '#0000ff' /*, shape: 'spline'*/ },
+					x: UTC, y: gs
+				};
+				var GSmin= {
+					type: "scatter", name: 'GS<sub>min</sub>',
+					mode: "lines", line: { width: 1, color: '#0000ff' /*, shape: 'spline'*/ },
+					x: UTC, y: []
+				};
+				var GSmax= {
+					type: "scatter", name: 'GS<sub>max</sub>',
+					mode: "lines", line: { width: 1, color: '#0000ff' /*, shape: 'spline'*/ },
+					x: UTC, y: []
+				};
+
+				for(var i= 0; i < gs.length; i++) {
+					UTC[i]= "1980-06-27 " + UTC[i];
+					GSmin.y[i]= gs[i] - gsi[i];
+					GSmax.y[i]= gs[i] + gsi[i];
+				}
+
+				var GS_INCE= {
+					type: "scatter", name: 'Incertezza',
+					mode: "lines", line: { width: 1, color: '#ff9900' },
+					x: UTC, y: gsi,
+					yaxis: 'y2'
+				};
+
+
+				// TRK
+				var TRKmed= {
+					type: "scatter", name: 'TRK<sub>med</sub>',
+					mode: "lines", line: { width: 3, color: '#0000ff' /*, shape: 'spline'*/ },
+					x: UTC, y: trk
+				};
+				var TRKmin= {
+					type: "scatter", name: 'TRK<sub>min</sub>',
+					mode: "lines", line: { width: 1, color: '#0000ff' /*, shape: 'spline'*/ },
+					x: UTC, y: []
+				};
+				var TRKmax= {
+					type: "scatter", name: 'TRK<sub>max</sub>',
+					mode: "lines", line: { width: 1, color: '#0000ff' /*, shape: 'spline'*/ },
+					x: UTC, y: []
+				};
+
+				for(var i= 0; i < trk.length; i++) {
+					TRKmin.y[i]= trk[i] - trki[i];
+					TRKmax.y[i]= trk[i] + trki[i];
+				}
+				
+				var TRK_INCE= {
+					type: "scatter", name: 'Incertezza',
+					mode: "lines", line: { width: 1, color: '#ff9900' },
+					x: UTC, y: trki,
+					yaxis: 'y2'
+				};
+				
+				// Posizioni salienti KM153
+				var POS= {
+					type: "scatter", name: 'Posizione KM153', hoverinfo: 'text',
+					mode: "markers+text", textposition: 'top center',
+					marker: { size: 10, color: 'red' },
+					textfont: {
+						family: 'Verdana, sans-serif', size: 16, color: 'red'
+					},
+					hovertemplate:
+						'<b>%{hovertext}</b>' +
+						'<br>GS<sub>med</sub>: %{y}' +
+						'<br>%{x}',
+					text:      ["BTA"   , "IDENT"      , "A-1"            , "(A-1A)"             , "PNZ D42"        , "PNZ D8"        , "PNZ"  , "PNZ D11"       , "A-13A"    , "UPT"],
+					hovertext: ["Bastia", "1° plot SPI", "Ingresso in A-1", "Probabile pos. A-1A", "42 nm per Ponza", "8 nm per Ponza", "Ponza", "11 nm da Ponza", "A-13 ALFA", "Ultima risp. IH870"],
+					x: [], y: []
+				};
+				const idx= [15, 63, 108, 144, 170, 208, 216, 230, 270, 303]; // Indici in "km153_gs.csv"
+				for(var i= 0; i < idx.length; i++) {
+					POS.x[i]= UTC[idx[i]]; POS.y[i]= gs[idx[i]];
+				}
+				
+				var TRK_POS= JSON.parse(JSON.stringify(POS)); // Copia per valore
+				for(var i= 0; i < idx.length; i++) {
+					TRK_POS.x[i]= UTC[idx[i]]; TRK_POS.y[i]= trk[idx[i]];
+				}
+				TRK_POS.hovertemplate=
+						'<b>%{hovertext}</b>' +
+						'<br>TRK<sub>med</sub>: %{y}' +
+						'<br>%{x}';
+
+				var TAS_POS= JSON.parse(JSON.stringify(POS)); // Copia per valore
+				for(var i= 0; i < idx.length; i++) {
+					TAS_POS.x[i]= UTC[idx[i]]; TAS_POS.y[i]= tas[idx[i]];
+				}
+				TAS_POS.hovertemplate=
+						'<b>%{hovertext}</b>' +
+						'<br>TAS: %{y}' +
+						'<br>%{x}';
+
+				var WND_POS= JSON.parse(JSON.stringify(POS));
+				for(var i= 0; i < idx.length; i++) {
+					WND_POS.x[i]= UTC[idx[i]]; WND_POS.y[i]= sknt[idx[i]];
+				}
+				WND_POS.hovertemplate=
+						'<b>%{hovertext}</b>' +
+						'<br>WND: %{y}' +
+						'<br>%{x}';
+
+
+				var layGS= {
+					separators: ".", showlegend: false,
+					margin: { l:10, t:0, b:0},
+					xaxis: {
+						type: 'date',
+						// https://github.com/d3/d3-time-format/tree/v2.2.3#locale_format
+						tickformat : '%H:%M:%S', // E' il formato anche per la popup label
+						automargin: true,
+						title: { text: '<b>Orario</b> [UTC]' }
+					},				
+					yaxis: {
+						automargin: true,
+						title: '<b>Velocità al suolo</b> [kn]',
+						titlefont: { color: '#0000ff' },
+						tickfont: { color: '#0000ff' },
+						gridcolor: '#ccccff'
+					},
+					yaxis2: {
+						automargin: true,
+						title: "<b>Incertezza</b> [kn]",
+						titlefont: { color: '#ff9000' },
+						tickfont: { color: '#ff9000' },
+						gridcolor: '#ffe0cc',
+						overlaying: 'y',
+						side: 'right'
+					}
+				};
+
+				Plotly.newPlot('km153_gs+ince', [GSmed, GSmin, GSmax, GS_INCE, POS], layGS, config);
+
+
+				var layTRK= {
+					separators: ".", showlegend: false,
+					margin: { l:10, t:0, b:10},
+					xaxis: {
+						type: 'date',
+						tickformat : '%H:%M:%S',
+						automargin: true,
+						title: { text: '<b>Orario</b> [UTC]' }
+					},				
+					yaxis: {
+						automargin: true,
+						title: '<b>Rotta</b> [gradi]',
+						titlefont: { color: '#0000ff' },
+						tickfont: { color: '#0000ff' },
+						gridcolor: '#ccccff'
+					},
+					yaxis2: {
+						automargin: true,
+						title: "<b>Incertezza</b> [gradi]",
+						titlefont: { color: '#ff9000' },
+						tickfont: { color: '#ff9000' },
+						gridcolor: '#ffe0cc',
+						overlaying: 'y',
+						side: 'right'
+					}
+				};
+
+				Plotly.newPlot('km153_trk+ince', [TRKmed, TRKmin, TRKmax, TRK_INCE, TRK_POS], layTRK, config);
+
+
+				// Grafico TAS/HDG
+
+				var TAS= {
+					type: "scatter", name: 'TAS',
+					mode: "lines", line: { width: 3, color: '#0000ff' },
+					x: UTC, y: tas
+				};
+				
+				var HDG= {
+					type: "scatter", name: 'HDG',
+					mode: "lines", line: { width: 3, color: '#009933' },
+					x: UTC, y: hdg,
+					yaxis: 'y2'
+				};
+
+				var layTAS= {
+					separators: ".", showlegend: false,
+					margin: { l:10, t:0, b:10},
+					xaxis: {
+						type: 'date',
+						tickformat : '%H:%M:%S', // E' il formato anche per la popup label
+						automargin: true,
+						title: { text: '<b>Orario</b> [UTC]' }
+					},				
+					yaxis: {
+						automargin: true,
+						title: '<b>Velocità aria</b> [kn]',
+						titlefont: { color: '#0000ff' },
+						tickfont: { color: '#0000ff' },
+						gridcolor: '#ccccff'
+					},
+					yaxis2: {
+						automargin: true,
+						title: "<b>Prua</b> [gradi]",
+						titlefont: { color: '#009933' },
+						tickfont: { color: '#009933' },
+						gridcolor: '#80ffaa',
+						overlaying: 'y',
+						side: 'right'
+					}
+				};
+
+				Plotly.newPlot('km153_tas+hdg', [TAS, HDG, TAS_POS], layTAS, config);
+
+
+				// Grafico VENTO
+
+				var SKNT= {
+					type: "scatter", name: 'Vel vento',
+					mode: "lines", line: { width: 3, color: '#0000ff' },
+					x: UTC, y: sknt
+				};
+				
+				var DRCT= {
+					type: "scatter", name: 'Dir vento',
+					mode: "lines", line: { width: 3, color: '#009933' },
+					x: UTC, y: drct,
+					yaxis: 'y2'
+				};
+
+				var layWND= {
+					separators: ".", showlegend: false,
+					margin: { l:10, t:0, b:10},
+					xaxis: {
+						type: 'date',
+						tickformat : '%H:%M:%S',
+						automargin: true,
+						title: { text: '<b>Orario</b> [UTC]' }
+					},				
+					yaxis: {
+						automargin: true,
+						title: '<b>Velocità vento</b> [kn]',
+						titlefont: { color: '#0000ff' },
+						tickfont: { color: '#0000ff' },
+						gridcolor: '#ccccff'
+					},
+					yaxis2: {
+						automargin: true,
+						title: "<b>Direzione vento</b> [gradi]",
+						titlefont: { color: '#009933' },
+						tickfont: { color: '#009933' },
+						gridcolor: '#80ffaa',
+						overlaying: 'y',
+						side: 'right'
+					}
+				};
+
+				Plotly.newPlot('km153_vento', [SKNT, DRCT, WND_POS], layWND, config);
+
+			});
+			
+		});
+
+	});
+}
+
+
+// Cartina con linea Londra - Malta
+
+var ORTO= {
+	type:'scattermapbox', name: 'Ideale',
+	lat: [51.48, 50.1967, 48.8903, 47.5628, 46.2162, 44.8523, 43.4725, 42.0783, 40.6709, 39.2514, 37.8209, 36.3803, 35.86],
+	lon: [-.46, 1.21508, 2.80193, 4.30756, 5.73847, 7.10066, 8.39966, 9.64057, 10.8281, 11.9665, 13.0597, 14.1113, 14.48],
+	mode: 'lines', line: { width: 3, color: 'blue' }
+};
+
+var PLAN= {
+	type:'scattermapbox', name: 'Reale',
+	//     NIZ      BTA    (MEDAL)   PNZ      PAL      MLG
+	lat: [43.77, 42.5736, 42.0333, 40.9119, 38.034,  36.03833],
+	lon: [7.255, 9.47483, 11.4,    12.9575, 13.1774, 14.205],
+	mode: 'lines', line: { width: 3, color: 'green' }
+};
+
+var lay= {
+	width: 500, height: 600,
+	margin: { l:0, r:0, t:0, b:0},
+	showlegend: true, legend: { x: 1, y: 1, xanchor: 'right' },
+	mapbox: {
+		style: 'carto-positron',
+		center: { lat: 44, lon: 8 },
+		zoom: 4.1, bearing: 0, pitch: 0
+	}
+};
+
+Plotly.plot('orto', [ORTO, PLAN], lay, {responsive: true, displayModeBar: false});
+
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>	
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Strage di Ustica">
+	<meta name="keywords" content="ustica,ih870">
+	<title>Strage di Ustica - METEO</title>
+	<link rel="stylesheet" type="text/css" href="../stile.css">
+	<script src="../plotly-latest.min.js"></script>
+</head>
+<body>
+
+<div class="indice"><a href="../index.html">Indice</a></div>
+
+<h2>Fasi del volo - Meteo lungo la rotta</h2>
+
+In questa pagina vengono presentati vari grafici e cartine che mostrano il valore di alcuni parametri meteorologici lungo la rotta del volo IH870.<br>
+Tali parametri sono stati ricavati in modo semi-empirico dai <a href="https://it.wikipedia.org/wiki/Radiosondaggi" target="_blank">radiosondaggi</a> relativi ad alcune stazioni meteo opportunamente elaborati tramite <a href="../defi/altro/altro.html#inte_estra" target="_blank">interpolazione/estrapolazione</a>. La posizione del DC-9 usata per effettuare i calcoli (livello di volo, latitudine e longitudine) è stata ricavata dall'estrattore 3 del radar Marconi (tabulati di Ciampino).<br>
+<br>
+Il primo grafico mostra il livello di volo espresso in piedi (che in questo caso è più corretto chiamare altitudine di pressione) ed è quello ricavato direttamente dai tabulati radar di Ciampino, l'altitudine dell'aereo sul livello del mare, la temperatura e l'umidità relativa.<br>
+La differenza tra l'altitudine di pressione e l'altitudine sul livello del mare è spiegata nella pagina "<a href="../defi/altro/altro.html#livello_volo" target="_blank">Altri termini &rarr; Livello di volo</a>". Zoomando sulle due fasi di volo livellato, è possibile apprezzare la salita dell'aereo mentre l'autopilota mantiene costante il livello di volo. La crociera iniziale a FL290 comincia con l'aereo ad un'altitudine sul livello del mare pari a circa 29430 ft e termina ad un'altitudine di 29740 ft (l'aereo sale meno di 100 m in un quarto d'ora).<br>
+<br>
+L'umidità relativa e la temperatura sono utili per valutare la possibilità di generare la scia di condensazione, argomento trattato nella pagina "<a href="../lc/radio/radio.html" target="_blank">Stato delle radioassistenze &rarr; Incrocio con altri aerei</a>".<br>
+
+<br>
+<div id="gra1" style="height:700px;"></div>
+<br>
+
+
+<!-- Grafico VENTO -->
+
+
+<br>
+Questo secondo grafico mostra il livello di volo (propriamente detto, cioè l'altitudine di pressione diviso 100), la direzione da cui soffia il vento (270 significa che il vento soffia da ovest verso est, mentre 180 soffia da sud verso nord) e la velocità del vento. Cliccando sulla voce "Livello di volo" della legenda (a destra del grafico), il grafico mostrerà soltanto la direzione e la velocità del vento.<br>
+<br>
+<div id="gra2" style="height:700px;"></div>
+<br>
+
+
+<!-- Cartina vento FL300 -->
+
+<br>
+<div style="margin-bottom: 40px; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="meteo_300.png" style="float:left; padding-right: 20px;" alt="" title="">
+La cartina mostra il vento per la superficie di 300 hPa (corrispondente al livello di volo 300 circa) ed è utile per valutare l'attendibilità del grafico precedente.<br>
+<br>
+Quella sorta di triangolo viola chiaro all'altezza di Roma rappresenta una velocità di circa 125 kn ed è la velocità massima del vento mostrato nella cartina. Il colore viola circostante rappresenta una velocità pari a circa 120 kn. Scendendo verso sud, la velocità si riduce molto regolarmente fino a circa 90/95 kn della fascia gialla.<br>
+La traccia verde del grafico, quindi, risulta coerente con quanto mostrato dalla cartina meteo dell'epoca, in quanto il DC-9 si trova nel punto in cui il vento ha un picco alle 18:40:09, circa 15 nm a nord di Fiumicino, proprio nella zona del triangolino viola chiaro. Andando verso sud, la velocità mostrata dal grafico si riduce coerentemente a quanto mostrato dalla cartina. La riduzione di velocità è più consistente quando l'aereo scende di quota.<br>
+Appurata la coerenza qualitativa del grafico, passiamo alla coerenza quantitativa della velocità del vento mostrata dal grafico.<br>
+I radiosondaggi per Fiumicino dànno per la superficie di 300 hPa 120 kn alle ore 12 del 27 giugno e 114 kn per le ore 0 del 28. Considerando che la cartina mostra per quella zona una velocità di 120/125 kn per le ore 18, la velocità di 116 kn mostrata dal grafico per le 18:40, quando l'aereo è all'altezza di Roma, risulta verosimile.<br>
+</div>
+
+
+
+<!-- =====  FORTISSIMA TURBOLENZA        rev. 07-07-2021       ================================================================= -->
+
+<div class="rev">
+A completamento del quadro meteo di quella sera, è utile riportare la <a href="https://www.stragi80.it/documenti/processo/trascrizioni/14.05.02.pdf" target="_blank">testimonianza</a> del teste Tacchio Nicola (comandante, all'epoca dei fatti, del 4° Stormo a Grosseto).<br>
+Egli riferisce che il 27 giugno 1980 si è recato a Gioia del Colle insieme al Capo di Stato Maggiore della 2<sup>a</sup> Regione Aerea a bordo di un aereo da collegamento Aermacchi MB-326 (v. fondo pag. 209 della trascrizione, pag. 210 del PDF).<br>
+Durante il viaggio di ritorno, alle "diciassette e qualcosa", all'altezza del Terminale Sud Roma (lo spazio aereo più a sud in cui Roma fornisce il servizio di controllo radar del traffico), il teste riferisce che stavano già ascoltando Roma radar che emanava <a href="https://it.wikipedia.org/wiki/SIGMET" target="_blank">SIGMET</a> relativi alla presenza di una corrente a getto (ben visibile nella cartina di cui sopra).<br>
+<br>
+Egli a pag. 212 dichiara: "<i>A dire la verità questa noi l’avevamo già avvertita </i>[la corrente a getto, ndr]<i> perché eravamo a ventiduemila piedi e l’aereo vibrava a tal punto che abbiamo dovuto tirare giù i due seggiolini perché col casco si batteva sul tettuccio dell’aeroplano e siccome erano fortissime queste vibrazioni, tant’è vero che dico sinceramente avevo impressione che l’MB era... non era poi un velivolo nuovo, insomma era abbastanza vecchiotto, temevamo che si rompesse pure, e chiedemmo a Roma radar di cambiare la quota e di cambiare anche direzione e Roma radar ci ha fatto scendere a diecimila piedi e un po’ accostando verso l’interno dell’Italia girando chiaramente la zona del terminal di Roma e dirigendo verso Grosseto.</i>".<br>
+<br>
+Insomma, contrariamente a quanto indicato in alcuni documenti processuali, in cui si parla di SIGMET relativi a forte turbolenza, poi, però smentiti dai fatti, il teste Tacchio Nicola conferma pienamente la fortissima turbolenza presente.<br>
+<br>
+Ma al di là della testimonianza (che comunque va presa per buona fino a prova contraria), quel tipo di turbolenza, chiamata <abbr title="Turbolenza in aria chiara (Clear Air Turbulence)">CAT</abbr>, è un fenomeno normalissimo sistematicamente presente in determinate zone di una corrente a getto (come quella presente la sera dei fatti). Si veda, ad esempio: <a href="https://it.wikipedia.org/wiki/Corrente_a_getto#Influenze_meteorologiche_e_climatiche" target="_blank">Corrente a getto &rarr; Influenze meteorologiche e climatiche</a>.<br>
+<br>
+Ciò che è stato verbalizzato in alcuni documenti processuali denota, purtroppo, una certa superficialità nel trarre alcune conclusioni: "<i>a) le condizioni erano tali da non creare problemi alla condotta del volo. La forte turbolenza in aria chiara segnalata dai SIGMET, non ha trovato riscontro né nelle comunicazioni TBT del volo IH870, né nello sviluppo degli AIDS dei voli che lo hanno immediatamente preceduto e seguito.</i>", si veda "<a href="https://www.stragi80.it/documenti/gi/perizie/001-007.pdf" target="_blank">TITOLO 3 - Le perizie</a>", a pag. 38.<br>
+Il fatto che l'IH870 non abbia mai comunicato ai controllori la presenza di CAT non prova assolutamente niente, principalmente perché sarebbe del tutto superfluo comunicare la presenza di CAT ad un controllore appartenente allo stesso ente che emette un SIGMET di CAT; è ovvio che il controllore sa benissimo che la CAT è presente, non c'è alcun motivo per comunicarglielo.<br>
+&Egrave;, invece, molto significativo in tal senso il fatto che l'IH870 richiede l'autorizzazione a scendere con larghissimo anticipo rispetto alla reale necessità d'iniziare la discesa per l'avvicinamento a Palermo: "<b>20.46.31</b> =IH870= E' LA 870, E' POSSIBILE AVERE UN 250 DI LIVELLO?" (l'IH870, che si trovava al livello 290, chiede di scendere di 4000 ft).<br>
+Il fatto che la richiesta di scendere è stata fatta al controllore con larghissimo anticipo trova conferma nell'orario in cui il controllore di Roma dà l'autorizzazione a scendere: "<b>21.04.28</b> = ROMA= IH870 QUANDO PRONTI AUTORIZZATI A 110, UNO UNO ZERO, RICHIAMATE LASCIANDO 250 E ATTRAVERSANDO 150", quasi 20 minuti dopo della richiesta del comandante Gatti. Considerando i 3 o 4 minuti che l'aereo avrebbe impiegato per scendere dal 290 al 250 alla normale velocità verticale di discesa (1000 / 1500 ft/min), l'IH870 avrebbe potuto mantenere il livello 290 ancora per un quarto d'ora circa.<br>
+Nessun pilota richiederebbe mai d'iniziare la discesa con tutto quell'anticipo senza avere un validissimo motivo per farlo. E il validissimo motivo, in quel caso, poteva solo essere la presenza di CAT, non necessariamente forte, ma che sicuramente era almeno fastidiosa. Non c'erano temporali, non c'erano cumulinembi da evitare, non c'era assolutamente niente che potesse indurre il comandante a richiedere una quota inferiore, all'infuori della turbolenza.<br>
+<br>
+Ovviamente la presenza di turbolenza, per quanto forte avesse potuto essere, non implica in alcun modo che la struttura del DC-9 possa essere stata indebolita da questo fenomeno atmosferico; è fuori di dubbio.<br>
+<br>
+In conclusione, quindi, è bene precisare che lo scopo di quest'ultima parte della pagina relativa al quadro meteo è unicamente quello di chiarire la situazione meteo presente quella sera nella sua interezza, evitando di prendere per buone superficiali conclusioni che non hanno fondamento, quale che ne sia la fonte.
+
+
+</div>
+
+
+
+
+<!-- =================================================================================== -->
+
+
+<script>
+"use strict";
+
+Plotly.d3.csv('meteo.csv', function(rows) {
+
+	const wdt= 2;
+	
+	// UTC,FL,HGHT,TEMP,RELH,DRCT,SKNT
+	var utc= unpack(rows, 'UTC');
+	
+	var ALTpres= {
+		type: "scatter",
+		mode: "lines", line: {color: '#0000ff', width: wdt},
+		name: 'Livello volo',
+		x: utc, y: unpack(rows, 'FL')
+	};
+
+	var ALTgeo= {
+		type: "scatter",
+		mode: "lines", line: {color: '#ff9000', width: wdt},
+		name: 'Altitudine slm',
+		x: utc, y: unpack(rows, 'HGHT')
+	};
+
+	var TEMP= {
+		type: "scatter",
+		mode: "lines", line: {color: '#cc33ff', width: wdt},
+		name: 'Temperatura',
+		x: utc, y: unpack(rows, 'TEMP'),
+		yaxis: 'y2'
+	};
+
+	var RELH= {
+		type: "scatter",
+		mode: "lines", line: {color: '#99cc00', width: wdt},
+		name: 'Umidità relativa',
+		x: utc, y: unpack(rows, 'RELH'),
+		yaxis: 'y2'
+	};
+
+	var lay1= {
+		showlegend: true, separators: '.',
+		margin: { t:20, b:30}, // Lasciare un margine inferiore per le date
+		xaxis: {
+			type: 'date'
+		},
+		yaxis: {
+			automargin: true,
+			title: '<b>Livello volo</b> e <b>altitudine slm</b> [ft]',
+			//titlefont: { color: '#000000' },
+			tickformat: 'f' // For more formatting types, see: https://github.com/d3/d3-format/blob/master/README.md#locale_format
+		},
+		yaxis2: {
+			automargin: true,
+			title: '<b>Temperatura</b> [°C] e <b>umidità relativa</b> [%]',
+			//titlefont: { color: '#009900' }, tickfont: { color: '#009900' }, gridcolor: '#ffe0cc',
+			overlaying: 'y',
+			side: 'right'
+		}
+	};
+
+	var config= {
+		showLink: true, plotlyServerURL: "https://chart-studio.plotly.com",
+		responsive: true
+	};
+
+	Plotly.newPlot('gra1', [ALTpres, ALTgeo, TEMP, RELH], lay1, config);
+
+
+
+	var FL= {
+		type: "scatter",
+		mode: "lines", line: {color: '#0000ff', width: wdt},
+		name: 'Livello di volo',
+		x: utc, y: []
+	};
+	for(var i= 0; i < ALTpres.y.length; i++) FL.y[i]= ALTpres.y[i] / 100;
+
+	var DRCT= {
+		type: "scatter",
+		mode: "lines", line: {color: '#ff9000', width: wdt},
+		name: 'Direzione vento',
+		x: utc, y: unpack(rows, 'DRCT')
+	};
+
+	var SKNT= {
+		type: "scatter",
+		mode: "lines", line: {color: '#009900', width: wdt},
+		name: 'Velocità vento',
+		x: utc, y: unpack(rows, 'SKNT'),
+		yaxis: 'y2'
+	};
+
+	var lay2= {
+		showlegend: true, separators: '.',
+		margin: { t:20, b:30}, // Lasciare un margine inferiore per le date
+		xaxis: {
+			type: 'date'
+		},
+		yaxis: {
+			automargin: true,
+			title: '<b>Livello volo</b> [ft] e <b>direzione vento</b> [°]',
+		},
+		yaxis2: {
+			automargin: true,
+			title: '<b>Velocità del vento</b> [kn]',
+			titlefont: { color: '#009900' },
+			tickfont: { color: '#009900' },
+			gridcolor: '#ffe0cc',
+			overlaying: 'y',
+			side: 'right'
+		}
+	};
+
+	Plotly.newPlot('gra2', [FL, DRCT, SKNT], lay2, config);
+
+});
+
+
+
+function unpack(rows, key) {
+	return rows.map(function(row) { return row[key]; });
+}
+
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Strage di Ustica">
+	<meta name="keywords" content="ustica,ih870">
+	<title>Strage di Ustica - Allineamento radar</title>
+	<link rel="stylesheet" type="text/css" href="../../stile.css">
+	<style>
+	table, td {
+		border-spacing: 0px;
+		border-collapse: collapse;
+		border: 1px solid #999999;
+		text-align: center;
+		overflow: hidden;
+	}
+	td {
+		padding: .1em .5em .1em .5em;
+	}
+	
+	.click-zoom input[type=checkbox] {
+	  display: none
+	}
+
+	.click-zoom img {
+	  transition: transform 0.25s ease;
+	  cursor: zoom-in
+	}
+
+	.click-zoom input[type=checkbox]:checked~img {
+	  transform: scale(2) translateX(120px);
+	  cursor: zoom-out
+	}	
+	</style>
+</head>
+
+<body>
+
+<h2>Allineamento radar Marconi e Selenia</h2>
+
+Quasi tutte le perizie radaristiche pongono l'accento sull'effettivo allineamento dei due radar di Ciampino rispetto al nord geografico.<br>
+&Egrave; evidente che ruotando arbitrariamente un plot rilevato da un radar, questo risulterà posizionato su coordinate differenti rispetto alla posizione geografica reale. L'entità di questo sfasamento angolare è legato alla distanza tra il punto vero e il plot del radar dalla semplice relazione: <i>d = d<sub>radar</sub></i> &middot; <i>sen(sfasamento)</i>, valida per piccoli angoli di sfasamento.<br>
+Ad esempio, il tabulato relativo all'estrattore 3 del Marconi mostra l'ultimo plot del volo IH870 in questo modo:<br>
+<pre>RADAR=03  SETTORE=07  NUM.PLOTS=03  TEMPO=0110  N.CICLO=04281035   ORA=80.06.27/18.59.45
+X= 030.04   Y=-125.14   <b>R= 129.04</b>   A=166 01'     Q= 00*A1136*C250      SSR.PR.</pre>
+Sostituendo i numeri, per un ipotetico sfasamento di 3° si ottiene: d = 129 &middot; sen(3) = 6,75 nm, cioè se l'antenna fosse ruotata di 3° rispetto al nord geografico, il plot si troverebbe distante circa 6,75 nm (12,5 km) dal punto reale.<br>
+Risulta, quindi, chiaro che una piccola rotazione dei plot fa cambiare completamente la modalità con la quale l'aereo è sceso (o precipitato) verso il mare, in quanto, prese per buone le coordinate di ritrovamento dei relitti sommersi (coordinate che nessuna delle parti ha contestato), se l'aereo si trovava oltre 10 km a ovest o a est del punto di ritrovamento significa che ha volato per arrivarci ed era quindi strutturalmente integro (sebbene danneggiato), se invece il DC-9 si trovava nei pressi dei relitti, è molto probabile che sia semplicemente precipitato dopo essere stato gravemente danneggiato in aria.<br>
+<br>
+Come già messo in evidenza in altra parte di questo sito, le varie perizie e consulenze depositate non sono di grande aiuto, in quanto si contraddicono vicendevolmente. Si passa da uno sfasamento angolare nullo, ad uno sfasamento di 2,29° W per il Selenia e 1,5° W per il Marconi, per poi adottare 2,25° W per entrambi. In definitiva, l'adozione di un particolare sfasamento angolare costituirebbe una sorta di atto di fede nei confronti di un perito o di un altro, tanto più che le perizie e consulenze si basano su considerazioni puramente teoriche sul funzionamento dei radar e prendono per buoni i dati nominali dei due radar, ben sapendo che la realtà può essere significativamente diversa dai valori nominali.<br>
+Quindi, anche in questo caso, converrà basarsi su fatti che derivano da semplici ma concrete analisi basate esclusivamente su dati oggettivi (come i tabulati radar), lasciando perdere altre teorie difficilmente oggettivabili.<br>
+<br>
+Le analisi presentate in questa pagina si basano su due aspetti diversi:
+<ol>
+<li>comunicazioni <abbr title="Terra/Bordo/Terra, tra piloti e controllori">TBT</abbr> relative alla posizione dell'aereo rispetto ad un punto noto;</li>
+<li>posizione di alcuni aerei rispetto a rotte note (aereovie, sentieri d'avvicinamento e decollo).
+</ol>
+
+<br>
+
+<!-- Posizione RADAR -->
+
+<h3>Posizione dei radar Marconi e Selenia</h3>
+
+<br>
+<div style="margin-bottom: 30px; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="marconi.webp" style="float:left; padding-right: 30px;" alt="" title="" width="437" height="456">
+L'immagine mostra l'<a href="https://www.google.com/maps/place/41%C2%B047'51.0%22N+12%C2%B013'11.0%22E/@41.7979408,12.2192208,703m/data=!3m1!1e3!4m5!3m4!1s0x0:0x0!8m2!3d41.7975!4d12.21972" target="_blank">ubicazione del radar Marconi</a> con evidenziato il punto dato dalla "<a href="http://www.stragi80.it/documenti/gi/perizie/049.pdf" target="_blank">Perizia tecnico scientifica Misiti; parte radaristica 1<sup>a</sup></a>", pag. 4. Si nota che l'ubicazione reale è spostata di una novantina di metri. Le coordinate 41,798275° N, 12,219387° E risultano più accurate e sono quelle usate per i calcoli in questo sito (si tratta, comunque, di piccole differenze).<br>
+<br>
+Per il Selenia, vengono usate le coordinate date nella perizia Misiti: 41,806389° N, 12,249444° E.
+</div>
+
+
+
+<!-- Analisi POSIZIONI NOTE -->
+
+<h3>Analisi posizioni note</h3>
+
+Dalle <a href="http://www.noidellitavia.it/176334379" target="_blank">comunicazioni TBT</a>, è possibile conoscere la posizione che il volo IH870 aveva ad una data ora; confrontando la posizione comunicata con la posizione ottenuta dai tabulati, è possibile stabilire se lo sfasamento angolare esiste ed eventualmente calcolarne l'entità.<br>
+Le varie posizioni dell'aereo analizzate possono essere individuate nella <a href="../../fasi/cartina.html" target="_blank">cartina d'insieme</a>.<br>
+<br>
+I calcoli necessari per verificare quanto di seguito riportato non possono essere svolti con una semplice calcolatrice; conviene, invece, usare appositi siti: <a href="https://geodesyapps.ga.gov.au/vincenty-direct" target="_blank"><i>Vincenty's Direct</i></a> e <a href="https://geodesyapps.ga.gov.au/vincenty-inverse" target="_blank"><i>Vincenty's Inverse</i></a> oppure <a href="http://www.movable-type.co.uk/scripts/latlong-vincenty.html" target="_blank"><i>Vincenty solutions of geodesics on the ellipsoid</i></a>, scorrendo fino a metà pagina, dove compare "<i>Live examples</i>".<br>
+<br>
+Ai fini della corretta comprensione di questo tipo d'analisi, è importante considerare due tipi di sfasamento angolare:
+<ol style="margin-top: 0px">
+<li>lo sfasamento più ovvio è quello tra il nord geografico e il nord del radar e consiste semplicemente nell'impossibilità di allineare perfettamente un plot di ritorno da un qualunque oggetto situato a qualunque azimut e distanza dal radar con la sua reale posizione geografica;</li>
+<li>un altro sfasamento è presente tra i plot e gli elementi mostrati sullo schermo radar: aerovie, spazi aerei, radioassistenze, punti di riporto, ecc.; questi elementi venivano visualizzati analogicamente sullo schermo da una circuiteria elettronica indipendente dagli estrattori (usati per visualizzare i plot) ed anche in questo caso era impossibile allinearli perfettamente al riferimento usato per rappresentare i plot.</li>
+</ol>
+Lo sfasamento di tipo 1 determina l'errore nel calcolo della latitudine e longitudine, mentre lo sfasamento di tipo 2 determina l'errore nel posizionamento dei plot rispetto allo spazio aereo; il controllore, cioè, vede un aereo in una certa posizione rispetto, per esempio, ad una radioassistenza, mentre l'aereo è in un'altra posizione.<br>
+&Egrave; evidente che lo sfasamento di tipo 1 è del tutto irrilevante ai fini del controllo del traffico aereo, mentre quello di tipo 2 è critico. Se, per assurdo, lo sfasamento di tipo 1 fosse 10°, ma anche lo spazio aereo mostrato sullo schermo fosse ruotato di 10°, il controllore non avrebbe alcun tipo di problema nel garantire la separazione tra gli aerei e il volo all'interno delle aerovie.<br>
+Un altro tipo di sfasamento angolare molto importante ai fini del traffico è quello presente tra i radar dei centri di controllo confinanti. Tuttavia, questo tipo di sfasamento è irrilevante per l'argomento trattato in questa pagina.<br>
+<br>
+<br>
+
+<!-- A-13 ALFA -->
+
+Iniziamo con la comunicazione delle 20:56B (18:56Z), in cui l'IH870 riporta l'ALFA al controllore Antonio La Torre del settore <abbr title="Terminale Sud Roma">TSR</abbr> di Roma radar:
+<b><pre>20.56.00 =IH870= E' SULL'ALFA LA 870
+=ROMA= E SI', AFFERMATIVO, LEGGERMENTE SPOSTATO SULLA DESTRA, DICIAMO 4 MIGLIA, E COMUNQUE IL RADAR TERMINA, 28.8 PER ULTERIORI</pre></b>
+
+Le coordinate del punto ALFA sono 40° 12' N, 13° 1' E (v. "<a href="https://www.stragi80.it/documenti/processo/sentenza/motivazioni/parte1.pdf" target="_blank">Motivazioni - Parte 1<sup>a</sup></a>", pag. 154).<br>
+<br>
+Siccome non è possibile sapere quale estrattore stesse usando il controllore, l'analisi li prende in considerazione tutti. Per ognuno di essi, si scelgono due plot aventi un orario molto vicino alle 18:56. Per l'estrattore 3 del Marconi, ad esempio, si ha:
+<pre>RADAR=03  SETTORE=07  NUM.PLOTS=02  TEMPO=0329  N.CICLO=04279894   ORA=80.06.27/<b>18.55.58</b>
+X= 025.02   Y=-096.22   <b>R= 100.00   A=164 52'</b>     Q= 00*A1136*C250      SSR.PR.
+
+RADAR=03  SETTORE=07  NUM.PLOTS=02  TEMPO=0399  N.CICLO=04279922   ORA=80.06.27/<b>18.56.03</b>
+X= 026.09   Y=-097.00   <b>R= 100.20   A=164 16'</b>     Q= 00*A1136*C250      SSR.PR.</pre>
+
+Ruotando quei 164,... gradi dell'azimut di un certo numero di gradi, si può calcolare lo sfasamento da applicare ad <i>A</i> per posizionare l'IH870 a 4 nm dal punto ALFA.<br>
+La seguente tabella mostra il risultato ottenuto per 4 sfasamenti angolari preimpostati più altri 2: uno è quello che consente di ottenere una distanza dei plot dal punto ALFA pari esattamente a 4 nm e l'altro è lo sfasamento che consente di posizionare i plot esattamente a 43 nm da Ponza (distanza del punto ALFA):<br>
+<br>
+
+<div style="margin-bottom: .5em; vertical-align: top; position:relative; display: inline-block; width:100%;">
+
+<table style="box-sizing: border-box; vertical-align: bottom; position:relative; display: inline-table; float:left; margin:5px 20px 20px 0px; table-layout: fixed;">
+
+<tr> <td><b>Estrattore<br>Orario</b></td> <td><b>Sfas.</b><br>[°]</td> <td><b>Lat</b><br>[°]</td> <td><b>Lon</b><br>[°]</td> <td><b>D</b><br>[nm]</td> <td><b>AZM</b><br>[°]</td>  <td><b>D<sub>PNZ</sub></b><br>[nm]</td> </tr>
+<td rowspan=6><b>Marconi 1<br>18:55:58</b></td> <td>0,00</td> <td>40,18827</td> <td>12,79318</td> <td>10,3</td> <td>86,0</td> <td>44,0</td> </tr>
+<tr> <td>-2,25</td> <td>40,20634</td> <td>12,87526</td> <td>6,5</td> <td>93,3</td> <td>42,5</td> </tr>
+<tr> <td>-2,65</td> <td>40,20981</td> <td>12,88975</td> <td>5,9</td> <td>95,7</td> <td>42,2</td> </tr>
+<tr> <td>-3,00</td> <td>40,21290</td> <td>12,90241</td> <td>5,3</td> <td>98,3</td> <td>42,0</td> </tr>
+<tr> <td>-3,88</td> <td>40,22091</td> <td>12,93404</td> <td>4,0</td> <td>108,2</td> <td>41,4</td> </tr>
+<tr> <td>-1,46</td> <td>40,19974</td> <td>12,84664</td> <td>7,8</td> <td>89,8</td> <td>43,0</td> </tr>
+
+<td rowspan=6><b>Marconi 1<br>18:56:03</b></td> <td>0,00</td> <td>40,18050</td> <td>12,81301</td> <td>9,4</td> <td>82,8</td> <td>44,3</td> </tr>
+<tr> <td>-2,25</td> <td>40,19916</td> <td>12,89547</td> <td>5,6</td> <td>89,4</td> <td>42,8</td> </tr>
+<tr> <td>-2,65</td> <td>40,20274</td> <td>12,91003</td> <td>4,9</td> <td>91,9</td> <td>42,6</td> </tr>
+<tr> <td>-3,00</td> <td>40,20592</td> <td>12,92274</td> <td>4,3</td> <td>94,7</td> <td>42,4</td> </tr>
+<tr> <td>-3,21</td> <td>40,20785</td> <td>12,93029</td> <td>4,0</td> <td>96,7</td> <td>42,2</td> </tr>
+<tr> <td>-1,99</td> <td>40,19686</td> <td>12,88587</td> <td>6,0</td> <td>88,2</td> <td>43,0</td> </tr>
+
+<td rowspan=6><b>Marconi 3<br>18:55:58</b></td> <td>0,00</td> <td>40,18702</td> <td>12,78706</td> <td>10,6</td> <td>85,7</td> <td>44,2</td> </tr>
+<tr> <td>-2,25</td> <td>40,20492</td> <td>12,86921</td> <td>6,8</td> <td>92,4</td> <td>42,6</td> </tr>
+<tr> <td>-2,65</td> <td>40,20835</td> <td>12,88372</td> <td>6,1</td> <td>94,6</td> <td>42,3</td> </tr>
+<tr> <td>-3,00</td> <td>40,21142</td> <td>12,89639</td> <td>5,6</td> <td>97,0</td> <td>42,1</td> </tr>
+<tr> <td>-4,04</td> <td>40,22089</td> <td>12,93395</td> <td>4,0</td> <td>108,2</td> <td>41,4</td> </tr>
+<tr> <td>-1,63</td> <td>40,19972</td> <td>12,84653</td> <td>7,8</td> <td>89,8</td> <td>43,0</td> </tr>
+
+<td rowspan=6><b>Marconi 3<br>18:56:03</b></td> <td>0,00</td> <td>40,18151</td> <td>12,81265</td> <td>9,4</td> <td>83,2</td> <td>44,3</td> </tr>
+<tr> <td>-2,25</td> <td>40,20016</td> <td>12,89506</td> <td>5,6</td> <td>90,1</td> <td>42,8</td> </tr>
+<tr> <td>-2,65</td> <td>40,20373</td> <td>12,90961</td> <td>4,9</td> <td>92,6</td> <td>42,5</td> </tr>
+<tr> <td>-3,00</td> <td>40,20691</td> <td>12,92232</td> <td>4,4</td> <td>95,4</td> <td>42,3</td> </tr>
+<tr> <td>-3,22</td> <td>40,20899</td> <td>12,93045</td> <td>4,0</td> <td>97,7</td> <td>42,2</td> </tr>
+<tr> <td>-1,89</td> <td>40,19702</td> <td>12,88198</td> <td>6,2</td> <td>88,3</td> <td>43,0</td> </tr>
+
+<td rowspan=6><b>Selenia 2<br>18:55:56</b></td> <td>0,00</td> <td>40,19369</td> <td>12,79353</td> <td>10,3</td> <td>87,8</td> <td>43,7</td> </tr>
+<tr> <td>-2,25</td> <td>40,21089</td> <td>12,87576</td> <td>6,5</td> <td>95,7</td> <td>42,2</td> </tr>
+<tr> <td>-2,65</td> <td>40,21420</td> <td>12,89029</td> <td>5,9</td> <td>98,3</td> <td>41,9</td> </tr>
+<tr> <td>-3,00</td> <td>40,21716</td> <td>12,90298</td> <td>5,3</td> <td>101,1</td> <td>41,7</td> </tr>
+<tr> <td>-3,92</td> <td>40,22519</td> <td>12,93614</td> <td>4,0</td> <td>112,2</td> <td>41,2</td> </tr>
+<tr> <td>-1,02</td> <td>40,20122</td> <td>12,83104</td> <td>8,5</td> <td>90,4</td> <td>43,0</td> </tr>
+
+<td rowspan=6><b>Selenia 2<br>18:56:01</b></td> <td>0,00</td> <td>40,17909</td> <td>12,78456</td> <td>10,7</td> <td>83,2</td> <td>44,6</td> </tr>
+<tr> <td>-2,25</td> <td>40,19603</td> <td>12,86753</td> <td>6,9</td> <td>88,0</td> <td>43,1</td> </tr>
+<tr> <td>-2,65</td> <td>40,19930</td> <td>12,88219</td> <td>6,2</td> <td>89,6</td> <td>42,9</td> </tr>
+<tr> <td>-3,00</td> <td>40,20222</td> <td>12,89499</td> <td>5,6</td> <td>91,3</td> <td>42,6</td> </tr>
+<tr> <td>-3,98</td> <td>40,21073</td> <td>12,93078</td> <td>4,0</td> <td>99,2</td> <td>42,1</td> </tr>
+<tr> <td>-2,44</td> <td>40,19759</td> <td>12,87456</td> <td>6,5</td> <td>88,7</td> <td>43,0</td> </tr>
+
+<td rowspan=6><b>Selenia 4<br>18:55:56</b></td> <td>0,00</td> <td>40,19181</td> <td>12,78373</td> <td>10,7</td> <td>87,3</td> <td>43,9</td> </tr>
+<tr> <td>-2,25</td> <td>40,20873</td> <td>12,86606</td> <td>6,9</td> <td>94,3</td> <td>42,4</td> </tr>
+<tr> <td>-2,65</td> <td>40,21199</td> <td>12,88061</td> <td>6,3</td> <td>96,5</td> <td>42,1</td> </tr>
+<tr> <td>-3,00</td> <td>40,21490</td> <td>12,89332</td> <td>5,7</td> <td>98,9</td> <td>41,9</td> </tr>
+<tr> <td>-4,18</td> <td>40,22516</td> <td>12,93599</td> <td>4,0</td> <td>112,1</td> <td>41,2</td> </tr>
+<tr> <td>-1,30</td> <td>40,20129</td> <td>12,83140</td> <td>8,5</td> <td>90,5</td> <td>43,0</td> </tr>
+
+<td rowspan=6><b>Selenia 4<br>18:56:01</b></td> <td>0,00</td> <td>40,17909</td> <td>12,78456</td> <td>10,7</td> <td>83,2</td> <td>44,6</td> </tr>
+<tr> <td>-2,25</td> <td>40,19603</td> <td>12,86753</td> <td>6,9</td> <td>88,0</td> <td>43,1</td> </tr>
+<tr> <td>-2,65</td> <td>40,19930</td> <td>12,88219</td> <td>6,2</td> <td>89,6</td> <td>42,9</td> </tr>
+<tr> <td>-3,00</td> <td>40,20222</td> <td>12,89499</td> <td>5,6</td> <td>91,3</td> <td>42,6</td> </tr>
+<tr> <td>-3,98</td> <td>40,21073</td> <td>12,93078</td> <td>4,0</td> <td>99,2</td> <td>42,1</td> </tr>
+<tr> <td>-2,44</td> <td>40,19759</td> <td>12,87456</td> <td>6,5</td> <td>88,7</td> <td>43,0</td> </tr>
+
+</table>
+
+<i>Lat</i> e <i>Lon</i> sono le coordinate dell'IH870 calcolate per <i>R</i> e <i>A</i> riportati nel tabulato apportando la correzione ad <i>A</i> pari a <i>Sfas.</i> (<i>nota</i>: la distanza del plot dall'antenna non è <i>R</i>, in quanto la parte dopo il punto decimale rappresenta i 32<sup>i</sup> di miglio; ad esempio, <i>R</i> del secondo plot non è 100,2 nm, ma è 100 + 20 / 32 nm, ovvero 100,625 nm).<br>
+<i>D</i> e <i>AZM</i> sono la distanza e l'azimut del punto ALFA rispetto al punto di coordinate <i>Lat</i> e <i>Lon</i>.<br>
+<i>D<sub>PNZ</sub></i> è la distanza del punto <i>Lat</i> e <i>Lon</i> da Ponza.<br>
+<br>
+Le prime 4 righe di ogni blocco di 6 sono quelle con lo sfasamento preimpostato ad alcuni valori d'esempio; segue, poi la riga con lo sfasamento che dà una distanza dal punto ALFA uguale a 4 nm (colonna <i>D</i> con valore pari a 4,0); l'ultima riga di ogni blocco è quella con lo sfasamento che dà una distanza del plot da Ponza pari esattamente a 43 nm (colonna <i>D<sub>PNZ</sub></i> con valore pari a 43,0).<br>
+<br>
+&Egrave; assolutamente evidente che l'azimut dei plot non è allineato con il nord geografico, in quanto l'aereo sarebbe distante 10 nm dal punto ALFA, anziché 4, come riportato dal controllore.<br>
+&Egrave; altresì evidente che la distanza riportata dal controllore non può essere considerata assolutamente esatta ("<u>diciamo</u> 4 miglia"), ma la correzione di 2,25° W indicata in alcune perizie e consulenze risulta insufficiente per giustificare una distanza di 4 nm.<br>
+<br>
+Molta importanza riveste la colonna <i>AZM</i>. L'IH870, infatti, pur non trovandosi esattamente sull'ALFA (in quanto non aveva alcuna guida azimutale a causa dello spegnimento del VOR e dell'NDB di Ponza), riceveva comunque la distanza dal TACAN di Ponza (come risulta dalle comunicazioni TBT). Una volta che i piloti leggono sul DME del pannello strumenti una distanza da Ponza di circa 43 nm (v. <a href="../../defi/rdrpro/rdrpro.html" target="_blank">2<sup>a</sup> cartina</a>) riportano l'ALFA al controllore. Siccome il DC-9 si trovava ad ovest dell'ALFA, <i>AZM</i> in tabella deve essere molto vicino a 90°, cosa che, molto chiaramente, non accade.<br>
+<br>
+Una colonna che avrebbe potuto essere di grande utilità per determinare il reale sfasamento è <i>D<sub>PNZ</sub></i>. Infatti, lo sfasamento esatto sarebbe quello che dà 43 nm da Ponza. Purtroppo, questo è vero solo in teoria, in quanto non si ha alcuna certezza sull'effettiva sincronizzazione degli orari riportati nelle comunicazioni TBT con quelli indicati sui tabulati. L'errore di sincronismo potrebbe essere di un giro d'antenna (circa 5 s) come pure 10 s, non è possibile stabilirlo con assoluta certezza. Inoltre, è possibile che i piloti abbiano riportato l'ALFA poco dopo essersi trovati a 43 nm da Ponza, ad esempio 10/20 secondi dopo (non sarebbe né grave né inusuale). Bisogna considerare, infine, anche l'errore strumentale del DME.<br>
+Insomma, ci sono tante di quelle variabili in gioco che ritenere valido il riporto dell'ALFA per il calcolo dello sfasamento è del tutto inaccettabile, soprattutto per un aereo che si muove di più di 1 nm ogni 10 s.<br>
+L'estrema variabilità dello sfasamento per 43 nm da Ponza è ben evidenziata dalla tabella.<br>
+<br>
+In sostanza, l'unica informazione utile che è possibile ottenere dal riporto di posizione sull'ALFA è che <u>lo sfasamento non può essere nullo ed è certamente superiore ad 1° in senso antiorario</u>.
+</div>
+
+<br>
+<hr style="border: 1px dotted;">
+<br>
+
+<!-- PONZA -->
+
+Passiamo ad una precedente comunicazione del controllore:
+<b><pre>20.50.45 =ROMA= L'IH870, DICIAMO, HA LASCIATO PONZA 3 MIGLIA SULLA DESTRA, QUINDI, QUASI, QUASI, VA BENE PER PALERMO COSI'</b></pre>
+
+Il controllore sta vedendo l'IH870 andare verso sud, lasciandosi alle spalle la radioassistenza di Ponza. Il DC-9 è al traverso di Ponza alle 18:50:18, ma la comunicazione avviene una trentina di secondi dopo.<br>
+Questa comunicazione è ancora meno utile della precedente, poiché la distanza dell'aereo dall'asse dell'aerovia è in continuo aumento (non è stabile). Ad ogni modo, nell'ottica di sfruttare tutto ciò che è possibile sfruttare, possiamo considerare i due plot che immediatamente precedono la comunicazione e il cui azimut è stabile; questo è l'esempio per l'estrattore 3:
+
+<pre>RADAR=03  SETTORE=07  NUM.PLOTS=02  TEMPO=0389  N.CICLO=04278273   ORA=80.06.27/<b>18.50.35</b>
+X= 026.31   Y=-056.15   <b>R= 062.28   A=153 37'</b>     Q= 00*A1136*C257      SSR.PR.
+
+RADAR=03  SETTORE=07  NUM.PLOTS=02  TEMPO=0459  N.CICLO=04278302   ORA=80.06.27/<b>18.50.40</b>
+X= 026.25   Y=-057.06   <b>R= 063.14   A=154 04'</b>     Q= 00*A1136*C256      SSR.PR.</pre>
+
+Vediamo il risultato per vari sfasamenti angolari:<br>
+<br>
+
+<div style="margin-bottom: .5em; vertical-align: top; position:relative; display: inline-block; width:100%;">
+
+<table style="box-sizing: border-box; vertical-align: bottom; position:relative; display: inline-table; float:left; margin:5px 20px 20px 0px; table-layout: fixed;">
+
+<tr> <td><b>Estrattore<br>Orario</b></td> <td><b>Sfas.</b><br>[°]</td> <td><b>Lat</b><br>[°]</td> <td><b>Lon</b><br>[°]</td> <td><b>D</b><br>[nm]</td> <td><b>AZM</b><br>[°]</td> </tr>
+<td rowspan=5><b>Marconi 1<br>18:50:35</b></td> <td>0,00</td> <td>40,85802</td> <td>12,83487</td> <td>6,4</td> <td>59,9</td> </tr>
+<tr> <td>-2,25</td> <td>40,87682</td> <td>12,88312</td> <td>4,0</td> <td>58,1</td> </tr>
+<tr> <td>-2,65</td> <td>40,88031</td> <td>12,89160</td> <td>3,5</td> <td>57,7</td> </tr>
+<tr> <td>-3,00</td> <td>40,88340</td> <td>12,89899</td> <td>3,2</td> <td>57,3</td> </tr>
+<tr> <td>-3,15</td> <td>40,88477</td> <td>12,90223</td> <td>3,0</td> <td>57,1</td> </tr>
+
+<td rowspan=5><b>Marconi 1<br>18:50:40</b></td> <td>0,00</td> <td>40,84744</td> <td>12,83447</td> <td>6,8</td> <td>55,3</td> </tr>
+<tr> <td>-2,25</td> <td>40,86624</td> <td>12,88326</td> <td>4,3</td> <td>51,0</td> </tr>
+<tr> <td>-2,65</td> <td>40,86973</td> <td>12,89183</td> <td>3,9</td> <td>49,7</td> </tr>
+<tr> <td>-3,00</td> <td>40,87282</td> <td>12,89931</td> <td>3,5</td> <td>48,5</td> </tr>
+<tr> <td>-3,50</td> <td>40,87729</td> <td>12,90993</td> <td>3,0</td> <td>46,2</td> </tr>
+
+<td rowspan=5><b>Marconi 3<br>18:50:35</b></td> <td>0,00</td> <td>40,85735</td> <td>12,83307</td> <td>6,5</td> <td>59,9</td> </tr>
+<tr> <td>-2,25</td> <td>40,87610</td> <td>12,88135</td> <td>4,1</td> <td>58,2</td> </tr>
+<tr> <td>-2,65</td> <td>40,87958</td> <td>12,88984</td> <td>3,6</td> <td>57,8</td> </tr>
+<tr> <td>-3,00</td> <td>40,88266</td> <td>12,89723</td> <td>3,3</td> <td>57,4</td> </tr>
+<tr> <td>-3,23</td> <td>40,88469</td> <td>12,90205</td> <td>3,0</td> <td>57,1</td> </tr>
+
+<td rowspan=5><b>Marconi 3<br>18:50:40</b></td> <td>0,00</td> <td>40,84531</td> <td>12,82862</td> <td>7,1</td> <td>55,7</td> </tr>
+<tr> <td>-2,25</td> <td>40,86393</td> <td>12,87752</td> <td>4,6</td> <td>51,7</td> </tr>
+<tr> <td>-2,65</td> <td>40,86739</td> <td>12,88612</td> <td>4,2</td> <td>50,6</td> </tr>
+<tr> <td>-3,00</td> <td>40,87046</td> <td>12,89361</td> <td>3,8</td> <td>49,5</td> </tr>
+<tr> <td>-3,77</td> <td>40,87731</td> <td>12,90998</td> <td>3,0</td> <td>46,2</td> </tr>
+
+<td rowspan=5><b>Selenia 2<br>18:50:37</b></td> <td>0,00</td> <td>40,85142</td> <td>12,82704</td> <td>7,0</td> <td>58,5</td> </tr>
+<tr> <td>-2,25</td> <td>40,86912</td> <td>12,87606</td> <td>4,5</td> <td>55,3</td> </tr>
+<tr> <td>-2,65</td> <td>40,87242</td> <td>12,88468</td> <td>4,1</td> <td>54,4</td> </tr>
+<tr> <td>-3,00</td> <td>40,87534</td> <td>12,89220</td> <td>3,7</td> <td>53,6</td> </tr>
+<tr> <td>-3,64</td> <td>40,88074</td> <td>12,90582</td> <td>3,0</td> <td>51,5</td> </tr>
+
+<td rowspan=5><b>Selenia 2<br>18:50:43</b></td> <td>0,00</td> <td>40,83803</td> <td>12,82120</td> <td>7,6</td> <td>54,4</td> </tr>
+<tr> <td>-2,25</td> <td>40,85556</td> <td>12,87091</td> <td>5,2</td> <td>49,4</td> </tr>
+<tr> <td>-2,65</td> <td>40,85883</td> <td>12,87965</td> <td>4,8</td> <td>48,0</td> </tr>
+<tr> <td>-3,00</td> <td>40,86173</td> <td>12,88728</td> <td>4,4</td> <td>46,7</td> </tr>
+<tr> <td>-4,33</td> <td>40,87305</td> <td>12,91602</td> <td>3,0</td> <td>39,0</td> </tr>
+
+<td rowspan=5><b>Selenia 4<br>18:50:37</b></td> <td>0,00</td> <td>40,85017</td> <td>12,82337</td> <td>7,1</td> <td>58,7</td> </tr>
+<tr> <td>-2,25</td> <td>40,86776</td> <td>12,87246</td> <td>4,7</td> <td>55,6</td> </tr>
+<tr> <td>-2,65</td> <td>40,87104</td> <td>12,88109</td> <td>4,3</td> <td>54,8</td> </tr>
+<tr> <td>-3,00</td> <td>40,87394</td> <td>12,88862</td> <td>3,9</td> <td>54,0</td> </tr>
+<tr> <td>-3,81</td> <td>40,88078</td> <td>12,90593</td> <td>3,0</td> <td>51,5</td> </tr>
+
+<td rowspan=5><b>Selenia 4<br>18:50:43</b></td> <td>0,00</td> <td>40,83728</td> <td>12,81897</td> <td>7,7</td> <td>54,6</td> </tr>
+<tr> <td>-2,25</td> <td>40,85475</td> <td>12,86872</td> <td>5,3</td> <td>49,7</td> </tr>
+<tr> <td>-2,65</td> <td>40,85801</td> <td>12,87747</td> <td>4,9</td> <td>48,4</td> </tr>
+<tr> <td>-3,00</td> <td>40,86090</td> <td>12,88510</td> <td>4,5</td> <td>47,1</td> </tr>
+<tr> <td>-4,43</td> <td>40,87302</td> <td>12,91594</td> <td>3,0</td> <td>39,0</td> </tr>
+
+</table>
+
+In questo caso, <i>D</i> e <i>AZM</i> sono la distanza e l'azimut della radioassistenza di Ponza rispetto al punto di coordinate <i>Lat</i> e <i>Lon</i>.<br>
+<br>
+L'ultima riga di ogni blocco di 5 rappresenta lo sfasamento che dà esattamente 3 nm da Ponza.<br>
+<br>
+Il disallineamento è sempre ben evidente; la distanza senza correzione angolare è più del doppio di quella riportata dal controllore.<br>
+Valori di distanza più ragionevoli si ottengono per correzioni intorno ai 3° W.<br>
+<br>
+Anche in questo caso, è praticamente impossibile scegliere un valore ben preciso per lo sfasamento, ma è fuori di dubbio che <u>lo sfasamento non può essere nullo ed è certamente superiore ad un paio di gradi in senso antiorario</u>.
+</div>
+
+
+
+<br>
+
+
+<!-- POSIZIONE rispetto alle aerovie -->
+
+<h3>Analisi rotta rispetto alle aerovie</h3>
+
+Questa analisi ha il vantaggio di essere completamente svincolata da tutte le incertezze viste in precedenza. Essa si basa sul fatto che gli aerei civili dovevano volare rigorosamente all'interno dello spazio aereo controllato (salvo rarissime deroghe da parte degli enti di controllo del traffico aereo).<br>
+<br>
+Riportando i plot su di una cartina con i necessari elementi aeronautici, si può osservare se un aereo ha una traiettoria compatibile con quella attesa. Se lo sfasamento angolare è corretto, la cartina mostrerà gli aerei nelle posizioni attese (ad esempio, in asse con le aerovie), altrimenti sembrerà che gli aerei stiano seguendo rotte prive di senso.<br>
+<br>
+Siccome la distanza tra i plot rilevati dal radar Marconi e dal Selenia normalmente è modesta, questa analisi considera soltanto l'estrattore 3, che fa capo al radar Marconi, anche perché il Selenia non viene mai usato in questo sito per analisi di particolare importanza.<br>
+<br>
+Le seguenti immagini mostrano la rotta seguita da alcuni aerei ottenuta senza alcuna correzione dell'azimut e con la correzione che mostra l'aereo nella posizione corretta. La correzione applicata è riportata in rosso in alto a sinistra di ogni immagine. Quasi tutte le immagini hanno le dimensioni dimezzate rispetto all'originale; per vederle a grandezza naturale basta cliccarci sopra.<br>
+<br>
+
+
+<!-- GROSSETO -->
+
+<div style="margin-bottom: 30px; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="dec_tf104_0.png" style="float:left; padding-right: 30px;" alt="" title="">
+<img src="dec_tf104_-2.7.png" style="float:left; padding-right: 30px;" alt="" title="">
+
+Qui vediamo uno dei TF-104G di ritorno dall'esercitazione (è quello che affianca l'IH870 dopo Firenze).<br>
+L'aereo esegue la procedura d'avvicinamento finale che prevede il sorvolo del TACAN di Grosseto (dischetto verde), l'allontanamento seguendo una specifica radiale del TACAN (oggi è la 245, all'epoca poteva essere leggermente diversa) e la virata verso l'aeroporto (non presente nei tabulati di Ciampino) per atterrare sulla pista 03 (segmento arancione).<br>
+<br>
+&Egrave; evidente che senza alcuna correzione, l'aereo passa decisamente a nord del TACAN.
+</div>
+
+
+<!-- CIAMPINO -->
+
+<div style="margin-bottom: 30px; vertical-align: top; display: inline-block;">
+
+<div class="click-zoom" style="vertical-align: top; padding-right: 20px; display: inline-block; float:left;">
+	<label> <input type="checkbox">
+	<img src="dec_lira_0.png" alt="" title="" width="172" height="283">
+	</label>
+</div>
+
+<div class="click-zoom" style="vertical-align: top; padding-right: 20px; display: inline-block; float:left;">
+	<label> <input type="checkbox">
+	<img src="dec_lira_-2.png" alt="" title="" width="172" height="283">
+	</label>
+</div>
+
+Questi sono gli atterraggi e i decolli dall'aeroporto di Ciampino, la cui pista è rappresentata dal segmento arancione. I plot rosa rappresentano l'IH779.<br>
+<br>
+Nonostante la distanza dall'antenna sia di appena 30 km, è comunque necessaria una correzione di ben 2° W, altrimenti gli aerei decollano ed atterrano nel nulla.
+</div>
+
+
+<!-- 0227 -->
+
+<div style="margin-bottom: 30px; vertical-align: top; display: inline-block;">
+
+<div class="click-zoom" style="vertical-align: top; padding-right: 20px; display: inline-block; float:left;">
+	<label> <input type="checkbox">
+	<img src="dec_227_0.png" alt="" title="" width="280" height="454">
+	</label>
+</div>
+
+<div class="click-zoom" style="vertical-align: top; padding-right: 20px; display: inline-block; float:left;">
+	<label> <input type="checkbox">
+	<img src="dec_227_-2.5.png" alt="" title="" width="280" height="454">
+	</label>
+</div>
+
+Questo aereo con transponder 0227 (volo AZ1133, Palermo - Milano), ha bisogno di almeno 2,5° W per volare in aerovia. Notare, tuttavia, il disallineamento ancora presente nella parte sud; per correggerlo sono necessari 2,7° W.
+</div>
+
+
+<!-- KM153 -->
+
+<div style="margin-bottom: 30px; vertical-align: top; display: inline-block;">
+
+<div class="click-zoom" style="vertical-align: top; padding-right: 20px; display: inline-block; float:left;">
+	<label> <input type="checkbox">
+	<img src="dec_km153_0.png" alt="" title="" width="360" height="331">
+	</label>
+</div>
+
+<div class="click-zoom" style="vertical-align: top; padding-right: 20px; display: inline-block; float:left;">
+	<label> <input type="checkbox">
+	<img src="dec_km153_-3.png" alt="" title="" width="360" height="331">
+	</label>
+</div>
+
+Il famoso volo KM153 dell'Air Malta ha bisogno di ben 3° W di correzione per volare all'interno delle aerovie.
+</div>
+
+
+<!-- 2000 -->
+
+<div style="margin-bottom: 30px; vertical-align: top; display: inline-block;">
+
+<div class="click-zoom" style="vertical-align: top; padding-right: 20px; display: inline-block; float:left;">
+	<label> <input type="checkbox">
+	<img src="dec_2000_0.png" alt="" title="" width="434" height="278">
+	</label>
+</div>
+
+<div class="click-zoom" style="vertical-align: top; padding-right: 20px; display: inline-block; float:left;">
+	<label> <input type="checkbox">
+	<img src="dec_2000_-2.7.png" alt="" title="" width="434" height="278">
+	</label>
+</div>
+
+Questi sono alcuni aerei con transponder 2000. Una correzione di 2,7° W sembra perfetta.
+</div>
+
+
+<br>
+
+<hr style="border: 1px dotted;">
+<br>
+La motivazione per giustificare il disallineamento nelle immagini viste (che rappresentano solo una piccola parte di tutte le situazioni analizzate) potrebbe essere ricercata nella variazione della <a href="https://www.mondogeo.com/2019/02/07/la-declinazione-magnetica-in-italia/" target="_blank">declinazione magnetica</a> nel corso degli anni. Infatti, il radar Marconi è entrato in funzione nel dicembre 1963 (v. "<a href="https://anacna.it/attachments/aavv/archivio/AAVV2012_04_142.pdf" target="_blank">Assistenza al volo - Air Traffic Control</a>", pag. 26 a metà della 1<sup>a</sup> colonna), quando la declinazione magnetica a Fiumicino era pari a circa 1,8° W, per diventare circa 0,4° W nel 1980. Il mancato riallineamento periodico <u>potrebbe</u> aver contribuito ad amplificare o semplicemente a determinare lo sfasamento presente nel 1980, ma è solo un'ipotesi.<br>
+<br>
+Quale che sia il motivo di questo disallineamento, è certo che:
+<ul>
+<li>il fatto di non applicare alcuna correzione all'azimut è assolutamente inaccettabile, i plot sono in posizione notevolmente falsata rispetto alla realtà;</li>
+<li>la correzione di 2,25° W adottata in alcune perizie risulta evidentemente insufficiente;</li>
+<li>la correzione più verosimile risulta compresa tra 2,6 e 2,8° W.</li>
+</ul>
+
+Trovare un valore esatto al decimo di grado per la correzione da applicare non risulta possibile, quindi, in base a tutte le considerazioni fatte e dando l'evidente scarso peso alle comunicazioni TBT, <b>tutti i plot dei radar Marconi e Selenia usati nei calcoli sono ruotati in senso antiorario di 2,65°</b>, cioé:
+<p style="text-align:center"><b><i>Azimut<sub>vero</sub> = Azimut<sub>radar</sub> - 2,65</i></b></p>
+
+
+</body>
+</html>

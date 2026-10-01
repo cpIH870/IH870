@@ -1,0 +1,1244 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Strage di Ustica">
+	<meta name="keywords" content="ustica,ih870">
+	<title>Strage di Ustica - RADAR e SIF</title>
+	<link rel="stylesheet" type="text/css" href="../../stile.css">
+	<script src="../../crea_indice.js"></script>
+	<style>
+	table, td {
+		text-align: center;
+		padding: 0px 6px 0px 6px;
+		border-collapse: collapse;
+		border: 1px solid #999999;
+		overflow: hidden;
+	}
+	</style>
+</head>
+
+<body>
+
+<div class="indice"><a href="../../index.html">Indice</a></div>
+
+<h2>RADAR e SIF</h2>
+
+
+In questa pagina vengono date alcune nozioni di base sul principio di funzionamento dei radar, prendendo in considerazione i radar di sorveglianza.<br>
+
+Si scenderà, poi, nel dettaglio del particolare funzionamento del radar Marconi installato a Fiumicino, usato dal controllo d'area di Roma sia civile (Roma Radar) che militare (Roma Military).<br>
+
+Si passa, infine, a trattare il funzionamento di base dei radar secondari e dei dispositivi installati a bordo degli aerei che trasmettono le risposte ai radar secondari, chiamati transponder in ambito civile e IFF/SIF in ambito militare.<br>
+<br>
+
+
+<!-- ========================================================================================================== -->
+
+
+<p style="margin-left: 5em"><b>INDICE</b></p>
+
+<p id="indice" style="margin-left: 3em">
+<!-- riempito dal JS -->
+</p>
+<br>
+
+<hr>
+
+<br>
+
+
+<!-- ========================================================================================================== -->
+
+
+Quando si parla del funzionamento dei radar, vengono trattati tempi inusuali nella vita di tutti i giorni. Incontreremo, quindi, tempi espressi in microsecondi (milionesimi di secondo), indicati con <i>&micro;s</i> e in millisecondi (millesimi di secondo), indicati con <i>ms</i>. Valgono le relazioni: 1 s = 1000 ms = 1000000 &micro;s, quindi 1 ms = 1000 &micro;s.<br>
+<br>
+Siccome nelle formule (ne vedremo alcune) non è consentito utilizzare le unità di misura, per evitare di scrivere cifre lunghissime, con molti zeri, si usa la notazione scientifica; ad esempio, le relazioni viste prima possono essere scritte: 1 s = 10<sup>3</sup> ms = 10<sup>6</sup> &micro;s. Viceversa, 1 &micro;s = 10<sup>-3</sup> ms = 10<sup>-6</sup> s.<br>
+Un tempo di 12,3 &micro;s si può scrivere con la notazione scientifica: 12,3 &middot 10<sup>-6</sup> s o 1,23 &middot 10<sup>-5</sup> s, dove il punto "&middot" indica una moltiplicazione.<br>
+<br>
+
+
+
+<h3 id="radar">Radar in aviazione</h3>
+
+Il radar viene usato in aviazione per molteplici scopi:
+
+<table style="margin-top: .5em; margin-bottom: 1em;">
+<tr> <td><b>Sigla</b></td> <td><b>Nome</b></td> <td><b>Descrizione / utilizzo</b></td></tr>
+<tr> <td><abbr title="Approach Surveillance Radar">ASR</abbr></td>   <td                             >Avvicinamento              </td>  <td style="text-align: left">Usato sia per guidare il traffico dall'aerovia al punto in cui inizia l'avvicinamento finale che per guidare il traffico da dopo il decollo all'ingresso in aerovia.<br>Può anche essere usato per gli avvicinamenti di non precisione, cioè per guidare il pilota verso la pista d'atterraggio senza però fornirgli la guida verticale (viene fornita solo quella orizzontale).</td></tr>
+<tr> <td><abbr title="En Route Radar"             >ERR</abbr></td>   <td                             >Rotta                      </td>  <td style="text-align: left">Separazione del traffico in aerovia.</td></tr>
+<tr> <td><abbr title="Precision Approach Radar"   >PAR</abbr></td>   <td style="white-space: nowrap;">Avvicinamento di precisione</td>  <td style="text-align: left">Usato per guidare l'aereo dal punto d'avvicinamento finale alla pista d'atterraggio fornendogli anche la guida verticale, oltre a quella orizzontale.</td></tr>
+<tr> <td><abbr title="Surface Movement Radar"     >SMR</abbr></td>   <td                             >Movimenti al suolo         </td>  <td style="text-align: left">Controllo del traffico aeroportuale (velivoli e veicoli).</td></tr>
+<tr> <td>-                                                   </td>   <td                             >Quotametro                 </td>  <td style="text-align: left">Rilevamento della quota del bersaglio. Non utilizzato per il traffico aereo civile.</td></tr>
+</table>
+
+
+Alcune nozioni sul funzionamento del radar si possono trovare anche nei seguenti siti e documenti:
+<ul style="margin-top: 0px; margin-bottom: 0px">
+<li>sito <a href="https://www.radartutorial.eu/01.basics/rb06.it.html" target="_blank"><i>radartutorial.eu</i></a>;</li>
+<li>capitolo "CENNI SUI RADAR E SUL LORO FUNZIONAMENTO" a pag. 8 della <a href="https://www.stragi80.it/documenti/processo/sentenza/motivazioni/parte1.pdf" target="_blank">Parte Prima</a> delle motivazioni della <a href="https://www.stragi80.it/doc/sentenza-i-grado/" target="_blank">sentenza di primo grado</a> emessa dalla 3<sup>a</sup> Corte di Assise di Roma;</li>
+<li>capitolo "A) Sul funzionamento del sistema Nadge" del documento "<a href="https://www.stragi80.it/documenti/gi/perizie/009.pdf" target="_blank">Capitolo IX - Perizia tecnica Blasi ed altri. Quesiti supplementari - 26.05.90.</a>" a partire da pag. 12;</li>
+</ul>
+<br>
+
+
+<!-- ========================================================================================================== -->
+
+
+<h3 id="radar_sorve">Radar di sorveglianza</h3>
+
+I radar di sorveglianza vengono usati sia in ambito civile che militare per tenere sotto controllo una determinata area dello spazio aereo.<br>
+Questo tipo di radar può essere suddiviso in due categorie: sorveglianza d'area o di rotta e sorveglianza terminale o aeroportuale. La differenza più evidente tra i due tipi è, ovviamente, la portata (inferiore per la sorveglianza terminale).<br>
+Entrambi i tipi di radar vengono utilizzati sia in ambito civile che militare per sorvegliare ed eventualmente vettorare il traffico di competenza.<br>
+<br>
+Il traffico militare, a differenza di quello civile, può volare in due modalità profondamente diverse tra loro: seguendo le regole del traffico civile (volando in aerovia e rispettando tutte le procedure del traffico aereo civile) o come traffico operativo, svincolato dalle regole del traffico civile, comprendente sia i velivoli in missione operativa che in addestramento (v. "<a href="https://it.wikipedia.org/wiki/Traffico_aereo" target="_blank">Traffico aereo</a>").<br>
+Il traffico militare non operativo è sotto il controllo dell'ente civile competente per zona.<br>
+<br>
+In ambito militare esiste un tipo d'utilizzo del radar di sorveglianza d'area che non ha un omologo in ambito civile: la difesa aerea.<br>
+Il controllore della <abbr title="difesa aerea">D.A.</abbr> opera in modo completamente differente dal controllore del traffico operativo. Infatti il controllore della D.A. non ha alcun contatto con i velivoli, né militari né civili, mentre il controllore del traffico operativo dialoga (solitamente in banda <a href="https://it.wikipedia.org/wiki/Ultra_high_frequency" target="_blank">UHF</a>) con i velivoli militari operativi all'interno dell'area di competenza.<br>
+
+<br>
+
+
+<!-- Antenne PSR e SSR + SLS -->
+
+<div style="margin-bottom: 30px; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="psr-ssr.png" style="float:left; padding-right: 30px;" alt="" title="">
+I radar di sorveglianza sono normalmente composti da tre antenne, come mostrato in figura.<br>
+<br>
+Il radar vero e proprio usa l'antenna più grande e si chiama radar di sorveglianza primario (abbreviato in <abbr title="Primary Surveillance Radar">PSR</abbr>).<br>
+L'altro si chiama radar di sorveglianza secondario (abbreviato in <abbr title="Secondary Surveillance Radar">SSR</abbr>), anche se, in realtà, il suo principio di funzionamento è diverso da quello dei radar (come vedremo).<br>
+La piccola antenna in alto è usata per la soppressione dei lobi secondari (<abbr title="Side Lobes Suppression">SLS</abbr>) generati dall'antenna dell'SSR (v. oltre).<br>
+</div>
+
+<br>
+
+
+
+<!-- ========================================================================================================== -->
+
+
+
+<h3 id="psr">Radar di sorveglianza primario</h3>
+
+
+Il radar è essenzialmente uno strumento di misura che effettua due o più misurazioni simultaneamente.<br>
+<br>
+
+
+<!-- Nord VERO e MAGNETICO -->
+
+<div style="margin-bottom: 3em; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="nord_vero-magne.png" style="float:left; padding-right: 30px;" alt="" title="">
+Il tipo di radar che interessa la strage di Ustica misura l'angolo di un bersaglio rispetto ad una direzione prefissata (di solito il <a href="https://it.wikipedia.org/wiki/Polo_nord" target="_blank">nord magnetico</a>) e la sua distanza da un punto prefissato (di solito l'antenna del radar stesso).<br>
+<br>
+La figura evidenzia gli elementi fondamentali di un PSR: la copertura teorica e reale, l'azimut e la distanza del bersaglio.<br>
+Si nota come la copertura reale differisca da quella teorica, principalmente a causa dell'orografia.
+</div>
+
+
+<!-- Distanza obliqua -->
+
+<div style="margin-bottom: 3em; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="distobliqua.png" style="float:left; padding-right: 30px;" alt="" title="">
+&Egrave; da notare lo strano aggettivo usato per la distanza: distanza <u>obliqua</u> (dall'inglese <i>slant range</i>).<br>
+La distanza misurata dal radar, oltre ad essere affetta dall'usuale errore strumentale (come accade con qualunque strumento di misura) è anche falsata dall'errore introdotto dalla quota del bersaglio.<br>
+Infatti la distanza che si vorrebbe conoscere è quella indicata con "Distanza reale", perché è quella utile per il calcolo delle coordinate geografiche del bersaglio, ma il radar fornisce una distanza sempre maggiore di quella reale (a meno dell'errore strumentale) ed è tanto maggiore quanto più alta è la quota del bersaglio.<br>
+<br>
+A causa della presenza dell'atmosfera, inoltre, il fascio emesso dall'antenna viene normalmente incurvato verso il basso, costringendo il segnale a percorrere una distanza ancora maggiore, falsando ulteriormente la misura.<br>
+L'incurvatura (qui mostrata enormemente amplificata per maggior chiarezza) è causata dalla variazione dell'indice di rifrazione dell'aria, che normalmente diminuisce all'aumentare della quota.<br>
+<br>
+&Egrave; pur vero che nel normale utilizzo aeronautico la differenza tra la distanza obliqua e quella reale è piccola al punto di non costituire un problema.<br>
+</div>
+
+
+Ora che abbiamo appurato cosa misura un radar primario, possiamo vedere come fa ad eseguire tali misurazioni.<br>
+Il funzionamento reale del radar è piuttosto complesso, ma il principio su cui si basa un PSR è molto banale.<br>
+<br>
+
+<!-- Principio di funzionamento - DISTANZA -->
+
+<div style="margin-bottom: 3em; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="principio_dst.png" style="float:left; padding-right: 30px; margin-bottom: 1em" alt="" title="">
+<b style="margin-left: 2em">Misurazione della distanza</b><br>
+Concettualmente possiamo immaginare che il radar emetta un impulso di elevata potenza che si propaga nell'aria ad una velocità <i>V</i> pari a circa 299 700 km/s (circa 90 km/s più lento della <a href="https://www.youmath.it/domande-a-risposte/view/3255-velocita-luce.html" target="_blank">velocità della luce</a> nel vuoto). Il valore di <i>V</i> è calcolabile con la formula <i>V = c / n</i>, dove <i>c</i> è la velocità della luce nel vuoto e <i>n</i> è l'<a href="https://it.wikipedia.org/wiki/Indice_di_rifrazione" target="_blank">indice di rifrazione</a> dell'aria, variabile a bassa quota tra 1,00026 e 1,00046, normalmente assunto pari a 1,0003.<br>
+<br>
+Dopo la trasmissione dell'impulso, l'elettronica del radar commuta l'antenna dal trasmettitore al ricevitore.<br>
+Un eventuale oggetto (tipicamente metallico) investito dal segnale radar riflette il campo elettromagnetico in quasi tutte le direzioni. Se questo segnale riflesso arriva all'antenna del radar con una potenza superiore ad una soglia minima, il radar riesce a discriminare l'oggetto e a presentarlo sullo schermo. Ciò si verifica, solitamente, quando il bersaglio è sufficientemente grande e a quota sufficientemente elevata (molti fattori influenzano la reale capacità di riflettere il segnale radar).<br>
+<br>
+Cronometrando il tempo <i>t</i> trascorso dalla trasmissione dell'impulso alla ricezione dello stesso impulso riflesso dall'oggetto, è possibile calcolare la distanza obliqua dell'oggetto dall'antenna tramite la banale relazione: <i>D = 299700 &middot; t / 2</i>, dove la divisione per 2 tiene conto del viaggio andata e ritorno dell'impulso.<br>
+</div>
+
+
+<!-- Principio di funzionamento - AZIMUT -->
+
+<div style="margin-bottom: 3em; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="principio_azm.png" style="float:left; padding-right: 30px;" alt="" title="">
+<b style="margin-left: 2em">Misurazione dell'azimut</b><br>
+La direzione in cui si trova il bersaglio viene determinata facendo ruotare l'antenna su se stessa tramite un albero dotato di un sensore che rileva l'angolo di rotazione rispetto ad una direzione prestabilita (solitamente il nord magnetico).<br>
+Se il segnale radar viene irradiato con un fascio molto stretto, tipicamente non più ampio di un paio di gradi, la direzione del bersaglio è quella corrispondente all'angolo di rotazione dell'antenna quando questa riceve il segnale riflesso alla massima potenza, che capita quando il bersaglio si trova al centro del fascio radar.<br>
+</div>
+
+
+
+<!-- Ampiezza a -3dB -->
+
+<div style="margin-bottom: 3em; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="ampiezza.png" style="float:left; padding-right: 30px;" alt="" title="">
+La figura mostra come viene determinata l'ampiezza del fascio radar (del lobo principale).<br>
+<br>
+Questo è un esempio di un diagramma polare di radiazione di un'antenna molto direttiva (come quelle dei radar). In pratica, è come se si osservasse dall'alto (sulla verticale dell'antenna) il campo elettromagnetico irradiato dall'antenna.<br>
+Il diagramma è usato per ricavare il valore della <a href="https://www.radartutorial.eu/06.antennas/an07.it.html" target="_blank">direttività</a> dell'antenna in corrispondenza di un dato angolo rispetto alla direzione di puntamento (qui raffigurata verso destra). Si vede che lungo questa direzione la direttività è massima, cioè l'antenna concentra gran parte della potenza emessa verso la direzione in cui è puntata. Si notano alcuni lobi secondari, indesiderati per varie ragioni, tra le quali c'è la dispersione di una parte di potenza in direzioni non volute<br>
+<br>
+La direttività di un'antenna radar è molto elevata e può superare i 50 <a href="https://it.wikipedia.org/wiki/Decibel" target="_blank">dB</a>, tuttavia il diagramma riporta una direttività massima pari a 0 dB. Ciò viene fatto per indicare una scala relativa (non valori assoluti); in altri termini, il diagramma è normalizzato. Se, ad esempio, esso si riferisse ad un'ipotetica antenna avente una direttività pari a 47 dB, il valore -3 del diagramma equivarrebbe a 47 - 3 = 44 dB.<br>
+Usando le formule del link, abbiamo che una differenza di -3 db equivale a 10<sup>-0,3</sup> = 0,501 (sempre arrotondato a 0,5). Cioè, la <a href="https://www.radartutorial.eu/01.basics/rb13.it.html" target="_blank">densità di potenza</a> irradiata nella direzione in cui la direttività è di 3 dB inferiore a quella massima è pari alla metà della densità di potenza irradiata nella direzione di puntamento. Per questo l'ampiezza del fascio viene detta "a metà potenza".<br>
+La verifica può anche essere fatta convertendo i valori espressi in decibel nei corrispondenti valori adimensionali: 47 dB = 10<sup>4,7</sup> = 50118,723 e 44 dB = 10<sup>4,4</sup> = 25118,864. Facendo 25118,864 / 50118,723 otteniamo 0,501, a conferma che una direttività di 44 dB è la metà di una direttività pari a 47 dB.<br>
+
+</div>
+
+
+<br>
+
+
+<!-- Ciclo di lavoro -->
+
+<div id="ciclo_lavoro" style="margin-bottom: 3em; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="ciclo_lavoro.png" style="float:left; padding-right: 30px;" alt="" title="">
+Qui vediamo un esempio del tipico ciclo di lavoro di un PSR.<br>
+<br>
+Forse la prima cosa che salta all'occhio è che il radar trasmette per un tempo brevissimo rispetto al ciclo di lavoro. Trasmette, infatti, un impulso per circa 2 milionesimi di secondo, poi si mette in ricezione per una durata oltre mille volte più lunga della trasmissione (in genere, un ciclo dura da 2,2 a 3 ms, dipende dalla distanza massima alla quale si vuole rilevare i bersagli).<br>
+Considerando che un radar di rotta difficilmente viene usato oltre 200 nm (370 km), possiamo calcolare che il tempo massimo di viaggio dell'impulso per arrivare al bersaglio è <i>t = 370 / 299700 = 1,2 ms</i>, quindi il tempo che il radar deve attendere prima di trasmettere il successivo impulso (per evitare ambiguità in distanza) è 2,4 ms.<br>
+<br>
+La figura riporta due echi d'esempio ricevuti dall'antenna, precisando che potrebbero anche essere falsi echi. Proviamo a calcolare la potenza approssimativa posseduta da un'eco che ritorna all'antenna radar dopo essere stata riflessa da un DC-9-15 (area equivalente pari a 10 m<sup>2</sup>) situato a 129 nm (240 km) dall'antenna (come l'IH870 prima dell'abbattimento).<br>
+Ciò che serve è la cosiddetta equazione del radar. Tra i tanti siti che la trattano, possiamo sfruttarne uno molto pratico: <a href="https://www.tutorialspoint.com/radar_systems/radar_systems_range_equation.htm" target="_blank"><i>Radar Systems - Range Equation</i></a>.<br>
+Supponiamo che la frequenza di lavoro sia 1 GHz (è solo un esempio che non prende in considerazione i radar realmente presenti all'epoca della strage), per cui la lunghezza d'onda è pari a <i>&lambda; = 299,7&middot;10<sup>6</sup> / 10<sup>9</sup> = 0,2997 m</i>. La potenza di trasmissione è normalmente molto elevata e può arrivare fino a 5 MW, ma poniamola pari ad un valore più verso il basso: <i>P<sub>t</sub> = 1 MW</i> (per il radar Marconi era 500 kW). Per il guadagno dell'antenna usiamo <i>G = 37 dB = 10<sup>3,7</sup> = 5012</i>. L'area equivalente dell'antenna è data da <i>A<sub>e</sub> = G&middot;&lambda;<sup>2</sup> / (4&pi;) = 35,8 m<sup>2</sup></i>. In teoria, bisognerebbe considerare anche l'attenuazione atmosferica, ma per frequenze così "basse" (per un radar) l'attenuazione è molto bassa (circa 0,5 dB ogni 100 km).<br>
+Dall'equazione del radar otteniamo <i>P<sub>r</sub> = 3,4 pW</i>. Se non volessimo usare il prefisso <a href="https://it.wikipedia.org/wiki/Pico_(prefisso)" target="_blank"><i>pico</i></a>, bisognerebbe dire che la potenza dell'eco disponibile all'ingresso del ricevitore del radar è 3,4 millesimi di miliardesimo di watt, a fronte di 1 milione di watt in uscita dal trasmettitore. &Egrave; impressionante il rapporto tra la potenza ricevuta e quella trasmessa: <i>0,0000000000034 / 1000000 = 3,4&middot;10<sup>-18</sup></i>.
+</div>
+
+
+Nei radar di sorveglianza, è facilmente intuibile che l'ampiezza del fascio deve essere molto stretta nel piano orizzontale e molto ampia in quello verticale. Infatti, la piccola ampiezza orizzontale consente d'irradiare quasi tutta la potenza dove serve e consente di migliorare la precisione nella misurazione dell'azimut di un bersaglio.<br>
+Viceversa, una buona ampiezza verticale è dettata dalla necessità di voler rilevare i bersagli a quote sia basse che alte.<br>
+<br>
+Non tutti i radar devono avere le stesse caratteristiche dei radar di sorveglianza. I quotametri, ad esempio, hanno esigenze quasi esattamente opposte a quelle appena descritte. Essi, infatti, dovendo rilevare la quota dei bersagli, hanno bisogno di un fascio molto stretto in elevazione e sufficientemente ampio in azimut.<br>
+<br>
+La copertura verticale di un radar di sorveglianza primario può essere appurata consultando il suo diagramma di copertura.<br>
+
+<br>
+
+
+
+
+<!-- Diagramma teorico COPERTURA S264 -->
+
+<div style="margin-bottom: 3em; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="copertura.png" style="float:left; padding-right: 30px;" alt="" title="">
+Questo è un diagramma teorico di copertura d'esempio (tratto dal PDF "<a href="https://marconiradarhistory.pbworks.com/w/file/fetch/89086835/S264%20and%20S264A%2050cm%20Airfield%20Control%20Radar.pdf" target="_blank"><i>Types S264 and S264A</i></a>") che mostra un'ampiezza in elevazione (circa 10/15°) molto superiore di quella in azimut (un paio di gradi).<br>
+L'aggettivo "teorico" sta ad evidenziare che la copertura reale del radar è variabile. Principalmente varia in funzione delle condizioni atmosferiche e particolarmente significativo è il fenomeno della <a href="https://www.radartutorial.eu/07.waves/wa17.it.html" target="_blank">propagazione anomala</a>.<br>
+<br>
+Dal diagramma risulta chiaro che un aereo avente una data superficie equivalente viene rilevato dal radar <u>solo se</u> si trova al di sopra della quota minima di copertura. Il diagramma mostra questa quota per un bersaglio avente una superficie equivalente pari a 10 m<sup>2</sup> (circa uguale a quella di un DC-9).<br>
+Nel caso di un bersaglio con una superficie equivalente inferiore a 10 m<sup>2</sup>, la quota minima di copertura aumenta, ma non è detto che a quota maggiore il bersaglio venga rilevato, perché è pur sempre necessaria una superficie minima che sia in grado di riflettere una sufficiente quantità di segnale.<br>
+<br>
+La probabilità di rilevare un bersaglio è maggiore di zero per quote comprese tra l'orizzonte radar e la quota minima di copertura, ma al di sotto dell'orizzonte radar (qui rappresentato dalla linea viola) la probabilità di rilevamento è nulla. Ciò significa che se, ad esempio, una flotta di grossi bombardieri volasse a 10000 ft e a 140 nm da un qualunque radar, questa non sarebbe in alcun modo rilevabile (in condizioni nominali di funzionamento) poiché, come mostra il diagramma, si troverebbe al di sotto dell'orizzonte radar.<br>
+Se, tuttavia, fosse in atto il fenomeno della superrifrazione, il fascio radar sarebbe curvato verso il basso e ciò potrebbe rendere possibile il rilevamento dei bersagli situati al di sotto dell'orizzonte <u>nominale</u>, ma resta sempre valido il fatto che nessun bersaglio può essere rilevato al di sotto dell'orizzonte radar "effettivo", cioè quello presente in un dato momento.<br>
+</div>
+
+<br>
+
+Il fenomeno della superrifrazione è certamente utile per rilevare bersagli fino a quote molto più basse del normale, ma quando il fenomeno è particolarmente accentuato, il lobo principale arriva a toccare la superficie terrestre (anche a grande distanza), facendo comparire nello schermo radar un gran numero di plot spuri (<a href="https://it.wikipedia.org/wiki/Clutter" target="_blank"><i>clutter</i></a>). Quando ciò si verificava, per un controllore dotato degli apparati dell'epoca era quasi impossibile rilevare bersagli senza l'ausilio del radar secondario (v. oltre).<br>
+
+<br>
+
+
+
+<!-- ========================================================================================================== -->
+
+
+
+
+<h3 id="rile_Marconi">Rilevamento dei bersagli da parte del radar Marconi</h3>
+
+
+Il radar Marconi era quello normalmente usato dai controllori di Roma (in particolare l'estrattore 1, v. "<a href="https://www.stragi80.it/documenti/processo/sentenza/motivazioni/parte1.pdf" target="_blank">Motivazioni - Parte 1<sup>a</sup></a>", seconda metà di pag. 148).<br>
+Il funzionamento molto particolare di questo radar richiede una trattazione specifica.<br>
+<br>
+
+
+<!-- Antenna MARCONI -->
+
+<div style="margin-bottom: 3em; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="mar_antenna.png" style="float:left; padding-right: 30px;" alt="" title="">
+Questa è l'enorme antenna del radar Marconi S264 (peso complessivo di oltre 8 tonnellate).<br>
+<br>
+Essa è composta dal riflettore lineare (lungo 16,5 m e alto 3,6 m) e dall'illuminatore a guida fessurata.<br>
+Il riflettore, come suggerisce il nome, raccoglie e riflette il campo elettromagnetico che lo investe; in trasmissione, il segnale emesso dall'illuminatore viene diretto verso il riflettore che provvede ad irradiarlo nella direzione voluta, facendo assumere al campo elettromagnetico la forma voluta, mentre in ricezione, il segnale che investe il riflettore viene convogliato nell'illuminatore per essere elaborato e presentato sullo schermo radar.<br>
+<br>
+La figura è utile anche per comprendere la dicitura "<i>reflector tilt +4°</i>" che compare nella didascalia del diagramma di copertura. Infatti, è possibile inclinare il riflettore di alcuni gradi in avanti (fino a 10°) o all'indietro (fino a 1°). Così facendo, contrariamente a quanto si potrebbe pensare, si varia la forma dei lobi e non la loro elevazione sul terreno.<br>
+<br>
+Installando l'antenna molto vicina al suolo, si sfrutta la riflessione del terreno per aumentare la portata del radar.<br>
+
+</div>
+
+
+Il diagramma del Marconi S264AH installato a Fiumicino (v. <a href="https://www.stragi80.it/documenti/sma/allegati_sma.pdf" target="_blank">allegati</a> alla relazione Pisano ad inizio pag. 29) è presente nel PDF "<a href="https://www.blunham.com/Radar/SignalsMuseum/PDFs/RadarOther/MarconiS264.pdf" target="_blank"><i>Marconi Radar - Type S264 Series</i></a>" (ultima pagina).<br>
+Dal diagramma si può appurare che la copertura nominale per un DC-9 a 129 nm (distanza dell'IH870 dal Marconi al momento dell'abbattimento) è circa 31000, mentre l'IH870 viene rilevato a circa 26000 ft (quota sul livello del mare corrispondente, quella sera, al <a href="../altro/altro.html#livello_volo" target="_blank">livello di volo</a> 250), quindi doveva essere in atto il fenomeno della superrifrazione che abbassava il lobo inferiore di qualche decimo di grado.<br>
+<br>
+
+
+<!--  Relazione PISANO  rng Marconi per un caccia  -->
+
+<div style="margin-bottom: 3em; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="mar_pisano-rng.png" style="float:left; padding-right: 30px;" alt="" title="">
+Sempre a pag. 29 degli allegati alla relazione Pisano, viene affermato che un bersaglio situato alla distanza dal radar Marconi pari a quella del DC-9 Itavia e avente una superficie equivalente (sigma) pari a 3 m<sup>2</sup> viene rilevato se si trova ad almeno 18000 ft.<br>
+Nella relazione non si fa riferimento alcuno alla qualità della propagazione del segnale radar; ciò che viene affermato, quindi, è da intendersi valido per il funzionamento nominale del radar ed è, pertanto in netto contrasto con il diagramma teorico di copertura pubblicato dal costruttore del radar.<br>
+</div>
+
+<br>
+
+
+<!-- Grafico stima rilevamento Marconi (v. "z_Stima dst rilevamento Marconi e Selenia.xlsx") -->
+
+<div style="margin-bottom: 3em; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="mar_coper.png" style="float:left; padding-right: 30px;" alt="" title="">
+Questo grafico mostra una stima della reale copertura del radar Marconi la sera della strage lungo l'azimut in cui si trovava l'IH870. Si nota un andamento simile a quello riportato nel digramma teorico.<br>
+<br>
+I dati sono ricavati dalla seguente tabella, in cui sono riportati i plot più distanti dal radar Marconi (estrattore 3) ricevuti sia dal radar primario che dal radar secondario
+<sup><abbr title="Siccome il radar secondario riceve un segnale trasmesso dal trasponder di un aereo, mentre il radar primario riceve soltanto l'eco riflesso da un aereo, il secondario inizia a rilevare un aereo molto prima del primario, in quanto il segnale del transponder ha una potenza superiore a quella dell'eco.">[nota]</abbr></sup>
+:<br>
+
+<table style="margin-top: .5em; margin-bottom: .5em; font-size: .8em">
+<tr> <td><b>Orario</b></td>  <td><b><abbr title="Livello di volo">FL</abbr></b></td>  <td><b><abbr title="Distanza dal radar [nm]">DST</abbr></b></td>  <td><b><abbr title="Azimut rispetto al radar">AZM</abbr></b></td>  <td><b><abbr title="Codice transponder di modo A">ID</abbr></b></td>  <td><b>Note</b></td></tr>
+<tr> <td>19:36:56</td>       <td>240</td>                                             <td>142,44</td>                                                   <td style="color:red;">217,42</td>                                 <td>4223</td>       <td>---</td><tr>
+<tr> <td>18:28:29</td>       <td>280</td>                                             <td>134,75</td>                                                   <td>195,18</td>                                                    <td>0225</td>       <td>Presenti 2 plot a 142 nm, volo AZ865</td></tr>
+<tr> <td>18:44:16</td>       <td>390</td>                                             <td>142,44</td>                                                   <td>163,37</td>                                                    <td>0226</td>       <td>Volo Beatours KT881 Malta-London Gatwick</td></tr>
+<tr> <td>18:27:45</td>       <td>250</td>                                             <td>133,69</td>                                                   <td>161,08</td>                                                    <td>5340</td>       <td>Presente 1 plot a 138 nm, volo Roma-Palermo</td></tr>
+<tr> <td>19:12:07</td>       <td>370</td>                                             <td>139,75</td>                                                   <td>161,08</td>                                                    <td>1235</td>       <td>Volo Air Malta KM153 Londra-Malta</td></tr>
+<tr> <td>18:49:44</td>       <td>250</td>                                             <td>142,06</td>                                                   <td style="color:red;">142,98</td>                                 <td>0352</td>       <td>Volo ATI BM330 Napoli-Palermo</td></tr>
+</table>
+
+Le due righe con l'azimut in rosso sono escluse dall'<a href="https://it.wikipedia.org/wiki/Estrapolazione" target="_blank">estrapolazione</a>, poiché gli aerei si trovano ad un azimut troppo distante da quello del DC-9 Itavia (circa 163°), quindi la copertura è diversa.<br>
+
+</div>
+
+Anche questo grafico lascia ipotizzare che la sera della strage doveva essere in atto il fenomeno della superrifrazione. Si può stimare che, grazie a questo fenomeno, il DC-9 Itavia poteva essere rilevato dal Marconi, quella sera, fino al livello di volo 200 (circa 21000 ft), nel punto del disastro, contro i 31000 ft teorici dati dal diagramma di copertura.<br>
+<br>
+Siccome il grafico è stato ottenuto prendendo in considerazione la capacità del radar di rilevare aerei di linea (nemmeno tanto piccoli), si può ritenere che la quota minima di rilevamento sia valida (seppur approssimativamente) per aerei di linea e non per aerei più piccoli, come i caccia. Ciò implica che la quota minima di rilevamento per un piccolo aereo (come un caccia) situato lungo l'azimut in cui si trovava il DC-9 doveva essere significativamente maggiore di quella ricavabile dal grafico.<br>
+Ciò detto, il grafico, sebbene rappresenti solo una stima, è comunque utile per evidenziare la scarsa probabilità di poter rilevare un bersaglio di soli 3 m<sup>2</sup> (meno di 1/3 di un DC-9) a 18000 ft (come riporta la relazione Pisano); <u>e questo in presenza della superrifrazione</u>. Ipotizzare che un bersaglio così piccolo possa essere rilevato a 18000 ft in condizioni nominali di funzionamento del radar può essere solo una fantasia priva di qualunque fondamento.<br>
+Ciò che risulta evidente è che questa fantasia viene messa in connessione diretta con quanto affermato al punto <i>d</i> della relazione e cioè serve per escludere <u>in modo assolutamente arbitrario</u> la presenza di caccia intorno al DC-9.<br>
+<br><br>
+
+
+
+<!-- Grafico stima rilevamento SELENIA (v. "z_Stima dst rilevamento Marconi e Selenia.xlsx") -->
+
+<div style="margin-bottom: 3em; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="sel_coper.png" style="float:left; padding-right: 30px;" alt="" title="">
+Sebbene questo paragrafo sia dedicato al radar Marconi, può essere utile fare una breve parentesi per stimare la copertura del radar Selenia.<br>
+<br>
+Il grafico si basa sugli stessi aerei usati per il Marconi. Ecco la tabella per il Selenia:<br>
+
+<table style="margin-top: .5em; margin-bottom: .5em; font-size: .8em">
+<tr> <td><b>Orario</b></td>  <td><b><abbr title="Livello di volo">FL</abbr></b></td>  <td><b><abbr title="Distanza dal radar [nm]">DST</abbr></b></td>  <td><b><abbr title="Azimut rispetto al radar">AZM</abbr></b></td>  <td><b><abbr title="Codice transponder di modo A">ID</abbr></b></td>  <td><b>Note</b></td></tr>
+<tr> <td>18:29:17</td>       <td>280</td>                                             <td>129,13</td>                                                   <td>195,72</td>                                                    <td>0225</td>       <td>Copertura discontinua. A dist. maggiore viene ricevuto qualche plot fino a 139,7 nm.</td></tr>
+<tr> <td>18:44:37</td>       <td>390</td>                                             <td>139,88</td>                                                   <td>163,80</td>                                                    <td>0226</td>       <td>-</td></tr>
+<tr> <td>18:28:22</td>       <td>250</td>                                             <td>138,38</td>                                                   <td>162,93</td>                                                    <td>5340</td>       <td>-</td></tr>
+<tr> <td>19:12:10</td>       <td>370</td>                                             <td>140,25</td>                                                   <td>161,52</td>                                                    <td>1235</td>       <td>Ricevuto in modo discontinuo dopo 131 nm.</td></tr>
+</table>
+
+Pur essendo una stima, è evidente la significativa differenza rispetto al Marconi. Nel punto del disastro, il Selenia ha bisogno che i bersagli si trovino oltre 5000 ft più in alto del Marconi. Ciò nonostante la relazione Pisano riporta 8000 ft più in basso del Marconi.<br>
+
+</div>
+
+
+<br>
+
+I normali fenomeni fisici che regolano il funzionamento di ogni radar (trattati principalmente a proposito del diagramma di copertura) devono essere tenuti in considerazione per azzardare deduzioni sulla reale presenza di aerei nei dintorni del DC-9 a distanza superiore ai 2 km, mentre per distanze inferiori, è indispensabile conoscere nel dettaglio le modalità di funzionamento di questo particolare radar, diverse dagli altri. Infatti, il Marconi era stato sottoposto, nel corso degli anni, ad una serie di regolazioni elettroniche che lo facevano funzionare in un modo molto particolare.<br>
+<br>
+L'argomento è piuttosto complesso, ma molti dettagli sono riportati nella relazione dei tre consulenti ausiliari (cioè esterni al collegio peritale) nominati dal collegio Blasi: il professor Galati e gli ingegneri Giaccari e Pardini (questi ultimi due dipendenti della Selenia SpA).<br>
+La relazione è riportata nel "<a href="https://www.stragi80.it/documenti/gi/perizie/008.pdf" target="_blank">Capitolo VIII - Relazione degli ausiliari Giaccari ed altri - 05.02.90.</a>" dell'"<a href="https://www.stragi80.it/doc/la-sentenza-ordinanza-del-g-i/" target="_blank">Ordinanza di rinvio a giudizio - Sentenza istruttoria di proscioglimento</a>" pronunciata dal Giudice Istruttore Rosario Priore.<br>
+<br>
+In merito a tale relazione, è utile sottolineare quanto viene affermato nelle <a href="http://www.stragi80.it/doc/requisitorie-dei-p-m/" target="_blank">requisitorie dei Pubblici Ministeri</a>, 2° capitolo della parte 1<sup>a</sup> (v. il "<a href="https://www.stragi80.it/documenti/pm/RequisitoriePm.pdf" target="_blank">File Pdf unico requisitorie dei Pm</a>" a pag. 21):
+
+<div class="cita">
+
+NEL 1990 LA SELENIA PREDISPONE UNA SECONDA RELAZIONE, REDATTA DA GIACCARI,
+GALATI E PARDINI, NELLA QUALE SI RICOSTRUISCONO LE CONDIZIONI DI FUNZIONAMENTO
+DEI RADAR IN MANIERA DIVERSA E IN PUNTI NON SECONDARI, RISPETTO A QUANTO
+PROSPETTATO IN PRECEDENZA. SI SOTTOLINEA CHE <u>NON SI TRATTA DI UNA DIFFERENZA
+INTERPRETATIVA, MA DI UNA ATTESTAZIONE DI FATTI</u>, CHE SI INDICANO ESSER
+DIFFERENTI RISPETTO A QUANTO AFFERMATO IN PASSATO.
+</div>
+
+&Egrave; caldamente raccomandato di leggere e comprendere bene tutta la relazione (essendo stata scritta da tecnici di provata competenza), ma per la comprensione degli argomenti trattati in questo sito, è sufficiente prendere atto di quanto segue.<br>
+<br>
+
+<!-- Mascheramento -->
+
+<div style="margin-bottom: 3em; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="mar_fig11.png" style="float:left; padding-right: 30px;" alt="" title="">
+Verso metà pagina 19: "<i>Tale logica </i>[quella di funzionamento degli estrattori, ndr]<i>, che opera a livello di singolo sweep, e quindi prima della &laquo;detezione&raquo; del plot, opera un blanking (mascheramento) di un certo numero di celle successive in distanza al verificarsi di un &laquo;1&raquo; (Fig.11). La presenza di un &laquo;1&raquo; ad una qualsiasi cella pone a &laquo;zero&raquo; il contenuto di un certo numero di celle a distanze successive, indipendentemente dal loro contenuto originario. Cioè un &laquo;1&raquo; ad una certa cella crea un'&laquo;ombra&raquo; su un certo numero di celle successive.</i>".<br>
+<br>
+La figura mostra che il potenziale bersaglio rilevato nella terza cella in distanza (da sinistra, cioè quella più vicina al radar) dà origine al mascheramento di eventuali bersagli presenti nelle 7 celle successive (finestra di mascheramento pari a 7 celle in distanza).
+</div>
+
+<br>
+
+
+<!-- Dimensione cella di risoluzione Marconi -->
+
+<div style="margin-bottom: 3em; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="mar_fig7.png" style="float:left; padding-right: 30px;" alt="" title="">
+Al termine della stessa pagina possiamo leggere: "<i>Pertanto possiamo dire che per il radar Marconi (e non per il Selenia) la dimensione radiale, cioè lungo la distanza dal radar, della &laquo;zona di interferenza&raquo; tra due oggetti si allunga al valore di circa 1,09NM, <u>indipendentemente della durata dell’impulso</u>. Questo fenomeno deve essere attentamente considerato quando si hanno più detezioni &laquo;vicine&raquo; o comunque più oggetti, vicini, anche quando non diano luogo a detezioni separate. Ciò sia ai fini della detezione stessa, sia ai fini della precisione di misura in distanza e, soprattutto, in angolo."</i>.<br>
+<br>
+La frase sottolineata verrà ripresa in considerazione tra poco, quando si calcolerà la risoluzione del radar in distanza ("cella di risoluzione nominale" indicata in figura) che, appunto, dipende dalla durata dell'impulso trasmesso (v. la fig. 7 completa a pag. 11 del già citato "<a href="https://www.stragi80.it/documenti/gi/perizie/008.pdf" target="_blank">Capitolo VIII</a>" con la formula &Delta;R = c &middot; &tau; / 2, dove &tau; è la durata dell'impulso).
+</div>
+
+
+L'esistenza della cella o zona d'interferenza ha varie implicazioni (dettagliatamente spiegate nella già citata relazione). Ai fini della strage di Ustica, ciò che più conta è il fenomeno del mascheramento.<br>
+Tale fenomeno comporta che un aereo come un MiG, avente un'estensione angolare inferiore a quella del DC-9 (se posti all'incirca alla stessa distanza dal radar), non viene mostrato sullo schermo dei controllori quando si trova all'interno della zona d'interferenza del DC-9 e a distanza maggiore dall'antenna rispetto al DC-9.<br>
+Siccome il fenomeno del mascheramento si estende per una distanza pari a 7 celle e il passo di campionamento è 1,93 &micro;s (v. tabella 3 a pag. 16, sempre del cap. VIII), la distanza di mascheramento è pari a 1,93 &middot; 10<sup>-6</sup> / 2 &middot; 299,7 &middot; 10<sup>6</sup> &middot; 7 = 2024 m o 1,09 nm, dove 299,7 &middot; 10<sup>6</sup> è la velocità di propagazione del segnale attraverso l'aria (circa 90 km/s più lento che nel vuoto) e la divisione per 2 tiene conto del tragitto andata e ritorno.<br>
+<br>
+
+Oltre alla limitazione imposta a livello della logica di funzionamento degli estrattori, esiste anche la limitazione fisica per ogni radar consistente nell'impossibilità di distinguere due aerei situati all'interno della stessa cella di risoluzione effettiva, qualunque sia la posizione relativa dei due aerei rispetto all'antenna. Ciò significa che i due aerei produrranno un solo plot affetto da errori in distanza ed azimut maggiori del normale.<br>
+Stando al disegno di cui sopra, la cella di risoluzione <u>nominale</u> è ampia 1 cella in distanza (289 m) e 1 fascio radar a -3 dB in azimut (circa 2 gradi). La grandezza della cella <u>effettiva</u> varia in più o in meno a seconda dell'intensità del segnale ricevuto.<br>
+<br>
+A prescindere dalla grandezza della cella di risoluzione effettiva, i radar come il Marconi non hanno alcuna possibilità di distinguere due bersagli posti ad una distanza radiale <i>d<sub>r</sub></i> inferiore alla metà della lunghezza spaziale dell'impulso trasmesso (lunghezza pari a &tau; &middot; c).<br>
+<br>
+
+<!-- Risoluzione in distanza -->
+
+<div style="margin-bottom: 3em; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="mar_riso_minore.png" style="float:left; padding-right: 30px;" alt="" title="">
+Il motivo è mostrato dall'immagine, in cui il radar è situato a sinistra e l'impulso viaggia verso destra.<br>
+<br>
+Per calcolare la risoluzione in distanza, possiamo utilizzare la formula presentata nella pagina "<a href="https://www.radartutorial.eu/01.basics/rb18.it.html" target="_blank">Potere risolutivo della distanza</a>" del sito <a href="https://www.radartutorial.eu/index.it.html" target="_blank"><i>radartutorial.eu</i></a>.<br>
+Siccome la durata nominale dell'impulso &tau; è pari a 3,3 &micro;s &plusmn; 10% (v. pag. 4 del "<a href="https://www.stragi80.it/documenti/gi/perizie/008.pdf" target="_blank">Capitolo VIII</a>"), la risoluzione nominale in distanza è pari a: 3,3 &middot; 10<sup>-6</sup> &middot; 299,7 &middot; 10<sup>6</sup> / 2 = 495 m.<br>
+Per un aereo che deve nascondersi ai radar sfruttando il DC-9, la risoluzione migliore (quindi a suo sfavore) la si ottiene ponendosi all'estremo inferiore della durata dell'impulso (2,97 &micro;s), ottenendo 445 m.<br>
+Quindi, fintanto che l'ipotetico MiG (o altro aereo) si fosse mantenuto all'interno dello stesso fascio radar (chiamato anche <i>sweep</i>) in cui si trova il DC-9 e ad una distanza radiale inferiore a circa mezzo chilometro, sullo schermo radar sarebbe comparso un solo plot, qualunque fosse stata la posizione relativa tra il MiG e il DC-9.<br>
+</div>
+
+
+Osservando il diagramma di copertura verticale del radar S264AH, si nota che un bersaglio avente una superficie equivalente pari a 10 m<sup>2</sup> può essere rilevato fino a circa 146 nm. Si può legittimamente ipotizzare che un bersaglio di dimensioni maggiori possa essere rilevato a distanza maggiore, purché al di sopra dell'orizzonte radar.<br>
+Tramite l'equazione del radar vista in precedenza, si può calcolare la distanza (teorica) di rilevamento di un bersaglio avente una superficie equivalente pari, ad esempio, a 20 m<sup>2</sup>.<br>
+L'equazione può essere riscritta esprimendola in funzione di &sigma;: <i>R<sup>4</sup> = k &middot; &sigma;</i>, dove <i>k</i> comprende tutto ciò che compare nella formula tranne, ovviamente, &sigma;. Siccome <i>R = 146 nm</i>, abbiamo <i>k = 146<sup>4</sup> / 10 = 45437185,6</i>.<br>
+Per &sigma; = 20 m<sup>2</sup>, la distanza vale <i>R = (45437185,6 &middot; 20)<sup>0,25</sup> = 173,6 nm</i>. Si potrebbe ritenere, quindi, che un grosso aereo possa essere rilevato ad oltre 170 nm dall'antenna, ma non è così. Il motivo ce lo fa capire il teste Giordani Bruno, che ha svolto l'"<i>attività di tecnico per lo sviluppo e la messa in funzione dell’estrattore primario e secondario, diciamo, che è stato utilizzato nel sito di Ciampino</i>" (v. <a href="https://www.stragi80.it/documenti/processo/trascrizioni/28.06.02.pdf" target="_blank">esame</a> a circa metà pag. 52). Verso metà pag. 57 leggiamo:<br>
+ 
+<div class="cita">
+[...] la portata massima del radar viene divisa in celle elementari e nel nostro caso in mille e ventiquattro celle elementari da <span style="text-decoration-line: underline; text-decoration-style: wavy; text-decoration-color: red;">due microsecondi</span> di tempo, [...]
+</div>
+
+Quando il teste parla di 2 &micro;s, è chiaro che sta arrotondando il valore del passo di campionamento (visto prima), pari a 1,93 &micro;s.<br>
+Siccome una cella elementare o cella in distanza (come definita in precedenza) è lunga (in senso radiale): 1,93 &middot; 10<sup>-6</sup> &middot; 299,7 &middot; 10<sup>6</sup> / 2 = 289,2 m e il contatore delle celle può contare 1024 valori, la distanza massima presentabile sullo schermo radar si ottiene moltiplicando 289,2 per 1024, ottenendo 296140,8 m, equivalenti a 159,9 nm.<br>
+<br>
+Non a caso, la distanza massima dei plot presenti nei quattro tabulati radar di Ciampino è 157,188 nm, lievemente inferiore al limite massimo teorico, probabilmente a causa del passo di campionamento che poteva valere poco meno di 1,91 &micro;s, leggermente inferiore al nominale (1,93 &micro;s).<br>
+
+<br>
+
+
+
+
+<!-- ===================================================================================== -->
+
+
+<h3 id="ssr">Radar di sorveglianza secondario</h3>
+
+
+Lo scopo principale di un radar secondario (SSR) è ottenere informazioni sull'identità di un velivolo adeguatamente equipaggiato (come vedremo).<br>
+Un SSR può essere utilizzato anche per ricavare la posizione dei bersagli, ma per farlo, contrariamente a quanto accade per un PSR, un SSR ha bisogno della collaborazione dell'equipaggio del velivolo, senza la quale, un radar secondario è assolutamente inutile.<br>
+&Egrave;, quindi, chiaro che la differenza tra il radar primario e il secondario è che il PSR rileva gli oggetti per il semplice fatto che essi riflettono l'energia irradiata dal radar, mentre un SSR ha bisogno dell'attiva collaborazione dell'equipaggio del velivolo che deve impostare nel transponder particolari codici e abilitarne il funzionamento. Ne consegue che le potenze di trasmissione in gioco sono nettamente diverse tra i due tipi di radar. Infatti un PSR, per poter ricevere un debole riflesso, deve trasmette con una potenza di picco enorme (intorno al megawatt), mentre un SSR, che riceve le risposte generate dal trasmettitore dei velivoli (e non da un riflesso), ha bisogno di potenze molto più basse, circa mille volte inferiori a quelle dei PSR.<br>
+<br>
+
+Il funzionamento dei radar secondari si basa su un meccanismo d'interrogazione e risposta; l'SSR trasmette l'interrogazione opportunamente codificata e i velivoli che la ricevono trasmettono la risposta che varia in base all'interrogazione ricevuta.<br>
+<br>
+
+
+<!-- Forma d'onda dei MODI -->
+
+<div style="margin-bottom: 2em; display: inline-block; width:100%;">
+<img src="ssr_modi.png" style="float:left; padding-right: 20px;" alt="" title="">
+L'interrogazione è composta dai due impulsi P1 e P3, codificati secondo vari modi ben definiti, chiamati modo 1, 2, 3/A e C (qui vengono considerati solo i modi che interessano la strage di Ustica).<br>
+I modi 1 e 2 sono esclusivamente militari, mentre i modi 3/A e C sono sia militari che civili. Il fatto di scrivere "3/A" indica che il modo 3 militare è equivalente al modo A civile (i due modi differiscono solo per la risposta inviata dal velivolo quando questo attiva l'emergenza).<br>
+L'insieme dei modi 1, 2 e 3 viene chiamato <abbr title="Selective Identification Feature, (apparato con) funzione d'identificazione selettiva">SIF</abbr>.<br>
+<br>
+L'impulso P2 non fa parte dell'interrogazione e la sua utilità la vedremo tra breve.
+</div>
+
+
+I modi 1, 2 e 3/A forniscono informazioni sull'identità dei velivoli interrogati, mentre il modo C serve per fornire la quota di volo. La seguente tabella riassume il normale utilizzo dei quattro modi usati all'epoca della strage di Ustica:<br>
+
+<table style="margin-top: 1em; margin-bottom: 2em;">
+<tr> <td><b>Modo</b></td> <td><b>Valori ammessi</b></td>                            <td><b>Utilizzo</b></td></tr>
+<tr> <td>1  </td>  <td>2 cifre; la 1<sup>a</sup> da 0 a 7, la 2<sup>a</sup> da 0 a 3</td>  <td style="text-align: left">Identificazione del tipo di missione svolta o tipo di velivolo, es: 10 = AWACS, 61-62-63 = intercettazione, 73 = emergenza o indicazione di posizione.<br>Normalmente i codici non sono assegnati dai controllori.</td></tr>
+<tr> <td>2  </td>  <td>4 cifre da 0 a 7                                      </td>  <td style="text-align: left">Identificazione puntuale del velivolo, cioè gruppo d'appartenenza e numero del velivolo o pilota. Normalmente il pilota non riesce a modificare questo codice in volo, almeno non può farlo facilmente.</td></tr>
+<tr> <td>3/A</td>  <td>4 cifre da 0 a 7</td>  <td style="text-align: left">Codice univoco assegnato dai controllori sia civili che militari all'interno di una determinata area (non possono esistere due aerei con lo stesso codice nello stesso momento).<br>Gli aerei militari con solo 2 cifre (come gli F-104) non trasmettevano alcun impulso per la 3<sup>a</sup> e 4<sup>a</sup> cifra che quindi venivano ricevute come "00".</td></tr>
+<tr> <td>C  </td>  <td>Non impostabile dal pilota                                   </td>  <td style="text-align: left">Invia al radar secondario un codice che rappresenta la quota di volo del velivolo.</td></tr>
+</table>
+
+<br>
+
+
+<!-- Interrogazione a militari e civili -->
+
+<div style="margin-bottom: 3em; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="transponder.png" style="float:left; padding-right: 20px;" alt="" title="">
+L'immagine dovrebbe aiutare a capire il funzionamento di base di un SSR.<br>
+<br>
+Si vedono due radar secondari, uno facente capo ad un ente per il controllo del traffico aereo (ad esempio Roma Radar) e l'altro facente capo ad un ente per la difesa aerea (ad esempio Poggio Ballone).<br>
+L'SSR del <abbr title="Traffico Aereo">T.A.</abbr>, mentre la sua antenna ruota, interroga i transponder che via via si vengono a trovare all'interno del fascio di trasmissione del radar (ampio circa un paio di gradi). Quando un transponder di un velivolo viene investito dal fascio radar, la circuiteria decodifica gli impulsi ricevuti per determinare il modo usato per l'interrogazione. Se l'interrogazione è di modo 1, il transponder di un aereo civile non la riconosce e non risponde, mentre uno militare riconosce quell'interrogazione e trasmette in tutte le direzioni (o quasi) il codice che il pilota militare ha impostato nel modo 1. Stessa cosa per il modo 2 (il cui codice, generalmente, non è modificabile dai piloti dei caccia).<br>
+Quando un velivolo, civile o militare, rileva gli impulsi di un'interrogazione di modo 3/A o C, il transponder la riconosce ed inizia a trasmettere i due treni d'impulsi che codificano il codice impostato nel transponder e la quota misurata dall'altimetro barometrico.<br>
+<br>
+Nell'immagine d'esempio si suppone che l'SSR della <abbr title="Difesa Aerea">D.A.</abbr> non usi il modo C in quanto i siti della D.A. sono quasi sempre dotati di un quotametro (un apposito radar usato per rilevare la quota dei bersagli).
+</div>
+<br>
+Vediamo un esempio pratico in cui un SSR della D.A. interroga un aereo militare che risponde ai modi 1, 2 e 3.<br>
+Nel PDF (4,7 MiB) "<a href="https://www.ieee.li/pdf/viewgraphs/overview-of-ssr-and-iff-systems.pdf" target="_blank"><i>Overview of SSR and IFF Systems</i></a>" (in lingua inglese, ma a noi serve solo un'immagine), a pag. 64 si vedono le forme d'onda delle interrogazioni e delle risposte. A sinistra ci sono gli impulsi trasmessi dall'SSR e a destra ci sono le risposte inviate dal transponder degli aerei.<br>
+<br>
+
+
+<!-- Forma d'onda INTERROGAZIONE modo 1 -->
+
+<div style="margin-bottom: 1em; display: inline-block; width:100%;">
+<img src="sif1_inte.png" style="float:left; padding-right: 20px;" alt="" title="">
+Immaginiamo l'SSR di Poggio Ballone che inizia a trasmettere l'interrogazione di modo 1. Dopo 2 &micro;s dall'inizio della trasmissione di <i>P1</i>, inizia quella di <i>P2</i> (usato per la soppressione delle risposte che sarebbero generate dalla ricezione dei lobi secondari dell'antenna dell'SSR, v. poco più avanti) e dopo 3 &micro;s da <i>P1</i> trasmette <i>P3</i>.<br>
+</div>
+
+<br>
+Il ciclo di lavoro del radar secondario è simile a quello già visto per il radar primario. Quindi, una volta trasmessa l'interrogazione, il radar entra in modalità ricezione per una durata intorno ai 2,5 ms (dipende dalla distanza massima alla quale si vogliono ricevere le risposte).<br>
+<br>
+Un ipotetico aereo militare situato a 300 km dal sito radar inizia a ricevere l'impulso <i>P1</i> dopo circa 1 ms da quando è stato trasmesso (approssimando la velocità di propagazione del campo elettromagnetico con quella della luce, abbiamo t = 300 / 300000 = 0,001 s).<br>
+La circuiteria dell'aereo riconosce un'interrogazione di modo 1 ed inizia a trasmettere il codice impostato dal pilota nel modo 1.<br>
+<br>
+
+
+<!-- Forma d'onda RISPOSTA modo 1 -->
+
+<div style="margin-bottom: 1em; display: inline-block; width:100%;">
+<img src="sif1_risp.png" style="float:left; padding-right: 20px;" alt="" title="">
+Gli impulsi da trasmettere vengono codificati come mostrato dalla figura. I due impulsi <i>F1</i> e <i>F2</i> sono sempre presenti (sono gli impulsi di <i>frame</i>), i tre impulsi <i>A</i> codificano la prima cifra, mentre i due <i>B</i> codificano la seconda in base alle banali equazioni: <i>cifra<sub>1</sub> = A1 x 1 + A2 x 2 + A4 x 4</i> e <i>cifra<sub>2</sub> = B1 x 1 + B2 x 2</i>. Se, ad esempio, il pilota ha impostato "32" nel pannello, gli impulsi presenti sono <i>A1</i>, <i>A2</i> e <i>B2</i>: <i>cifra<sub>1</sub> = 1 x 1 + 1 x 2 + 0 x 4 = 3</i> e <i>cifra<sub>2</sub> = 0 x 1 + 1 x 2 = 2</i>.
+</div>
+
+La risposta di modo 1 inizia il viaggio in quasi tutte le direzioni, fino ad arrivare, dopo 1 ms, all'SSR che ha inviato l'interrogazione. La risposta viene, quindi, decodificata e presentata come numero o simbolo sullo schermo radar.<br>
+<br>
+A questo punto, il radar trasmettere la successiva interrogazione e il ciclo si ripete.<br>
+<br>
+Un aereo civile che riceve le interrogazioni di modo 1 e 2 non riconosce la spaziatura tra <i>P1</i> e <i>P3</i>, pertanto le ignora, mentre riconosce le interrogazioni di modo 3/A e C, alle quali risponde.<br>
+<br>
+La sequenza delle interrogazioni trasmesse dall'SSR può essere variata dall'operatore in base alle esigenze del momento, secondo quello che viene chiamato <i>Mode Interlace Pattern</i>. Cioè l'operatore può scegliere se trasmettere ripetutamente le interrogazioni di un solo modo, oppure se alternare due o tre modi, o ancora se scegliere una particolare sequenza. Ad esempio, un controllore d'avvicinamento potrebbe essere maggiormente interessato alle risposte di modo 3, il cui codice è stato da lui stesso assegnato all'aereo, mentre è poco interessato alle risposte di modo 1 e 2, perché il tipo di aereo o missione (modo 1) e il pilota (modo 2) poco gli cambia. Quindi, il <i>MIP</i> potrebbe ciclare le interrogazioni con i seguenti modi: 3 2 3, oppure, 3 2 3 1, che si ripetono continuamente. Il secondo <i>pattern</i> d'interrogazione permette di aggiornare tutt'e tre i modi militari ad ogni interrogazione, dando "importanza" al codice assegnato dal controllore.<br>
+<br><br>
+
+Tutto questo meccanismo d'interrogazione e risposta non è esente da problemi. Tra quelli che alterano il funzionamento ideale di un SSR c'è quello dell'antenna che irradia il segnale in un modo ben diverso da quello voluto. Infatti le antenne, per quanto direttive possano essere, non irradiano il segnale in un'unica direzione, ma generano molti lobi secondari che, sebbene di potenza molto inferiore di quella del lobo principale, possono comunque generare una falsa interrogazione.<br>
+Per evitare (o limitare) che il transponder dei velivoli rispondano alle interrogazioni dei lobi secondari, viene installata un'antenna aggiuntiva coubicata con quella dell'SSR, chiamata <abbr title="Soppressione dei lobi secondari, Sidelobe Suppression">SLS</abbr> o antenna di compensazione.<br>
+<br>
+
+
+<!-- SLS -->
+
+<div style="margin-bottom: 3em; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="sls.png" style="float:left; padding-right: 30px;" alt="" title="">
+L'immagine mostra il principio di funzionamento usato per la soppressione delle risposte che sarebbero generate dalla ricezione di un'interrogazione proveniente da un lobo secondario di un SSR.<br>
+<br>
+I lobi azzurri sono quelli generati dall'antenna SSR. Si nota il lobo principale che sta interrogando due aerei e un lobo secondario che trasmette un'interrogazione <u>non voluta</u> ad un altro aereo.<br>
+Sono raffigurati, inoltre, due diagrammi d'irradiazione di due tipi d'antenne SLS (ne viene installata soltanto una): una a cardioide (arancione) e una <a href="https://www.radartutorial.eu/06.antennas/an10.it.html" target="_blank">isotropa</a> (tratteggio verde).<br>
+Si vede chiaramente che un'antenna con irradiamento a cardioide è molto più utile di una isotropa, in quanto la potenza irradiata nella direzione del lobo principale è molto bassa, quindi gli aerei all'interno del lobo principale rispondono anche a distanze molto piccole, al contrario di ciò che accadrebbe con un'antenna isotropa.<br>
+<br>
+Il grafico delle forme d'onda mostra gli impulsi P1 e P3 generati dall'antenna dell'SSR, che costituiscono l'interrogazione (se di modo 1, 2, 3/A o C lo stabilisce la spaziatura temporale tra i due impulsi) e l'impulso P2 trasmesso dall'antenna SLS.<br>
+Se l'impulso P1 ricevuto dal transponder di un velivolo non ha una potenza almeno 9 dB superiore a quella di P2, la circuiteria genera un segnale che inibisce la ricezione di P3 (<i>suppressor gate</i>) e, quindi, il transponder non riconosce l'interrogazione e non risponde.<br>
+</div>
+
+
+Un altro problema è causato dalla ricezione di una risposta trasmessa da un aereo interrogato da un altro SSR. Ciò accade perché la risposta del transponder dell'aereo è omnidirezionale, per cui può essere ricevuta anche da un radar secondario che non ha interrogato alcun aereo o che ha interrogato un altro aereo in tutt'altra direzione.<br>
+<br>
+
+<!-- DeFRUITER -->
+
+<div style="margin-bottom: 3em; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="fruit.png" style="float:left; padding-right: 30px;" alt="" title="">
+Qui vediamo un aereo (il punto rosso) che viene interrogato dall'SSR 2, che può anche essere situato a notevole distanza dall'SSR 1 (300/400 nm).<br>
+L'aereo risponde al radar che l'ha interrogato (SSR 2), ma siccome il radar 1 non si trova troppo distante dall'aereo, anch'esso riceve la risposta (non richiesta). Ciò fa comparire sullo schermo di SSR 1 lo stesso aereo, che però si trova in tutt'altra posizione. Questo falso aereo viene chiamato <abbr title="False risposte temporalmente non sincronizzate, False Replies Un-synchronised In Time">FRUIT</abbr>.<br>
+L'azimut in cui compare il FRUIT è quello in cui si trova l'antenna dell'SSR 1 nel momento della ricezione, mentre la distanza dipende dallo sfasamento delle interrogazioni tra i due radar e può essere un punto qualunque lungo l'asse del lobo principale.<br>
+</div>
+
+In caso di uno spazio aereo abbastanza affollato, lo schermo si riempirebbe di false risposte in posizioni casuali, rendendo impossibile il tracciamento dei contatti da parte del computer asservito al radar.<br>
+Per eliminare queste risposte indesiderate si aggiungeva il <i>video defruiter</i> (solitamente era un accessorio, non fornito di serie).<br>
+Il funzionamento del <i>video defruiter</i> si basa sulla comparazione di due o tre risposte consecutive ricevute dall'SSR; se l'intervallo di ricezione delle risposte è uguale a quello delle interrogazioni, il circuito fa passare il segnale alla sezione video per la rappresentazione sullo schermo, altrimenti il segnale viene cancellato.<br>
+<br>
+<br>
+
+Oltre ai problemi qui esposti, se ne possono presentare anche altri, la cui trattazione è troppo complessa per essere affrontata in questo paragrafo sul funzionamento di base dei radar secondari.<br>
+Un ottimo sito che può essere usato per approfondire i concetti qui esposti e gli altri non trattati è sicuramente <a href="https://www.radartutorial.eu/index.it.html" target="_blank"><i>radartutorial.eu</i></a>. In particolare, si possono consultare le pagine <a href="https://www.radartutorial.eu/13.ssr/sr15.en.html" target="_blank"><i>Garbling/Degarbling</i></a> e <a href="https://www.radartutorial.eu/13.ssr/sr14.en.html" target="_blank"><i>Fruit</i></a>.<br>
+<br>
+
+
+
+<!-- ========================================================================================================== -->
+
+
+<div class="rev"> <!--  Revisione 2023-09-26  -->
+
+<h3 id="qua_plot">Qualità dei plot</h3>
+
+Ogni plot presente nei tabulati è corredato da un numero che ne rappresenta la qualità.<br>
+Il concetto di qualità per i radar di sorveglianza del sistema NADGE è completamente differente da quello usato per i radar di Roma; vediamo il perché.<br>
+
+
+<!-- ---  QUALITA' NADGE  --------------------------------------------------------------------------- -->
+
+
+<h3 id="QUALI_NADGE" style="margin-left:2em">- NADGE</h3>
+
+La corretta lettura dei tabulati radar registrati da un sito NADGE non può prescindere dal dato relativo alla qualità del plot, che è più importante per i radar NADGE di quanto non lo sia per i radar di Roma.<br>
+<br>
+
+<div style="margin-bottom: 2em; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="quali_relPisa42.png" style="float:left; padding-right: 30px;" alt="" title="">
+Infatti, a pag. 42 degli <a href="https://www.stragi80.it/documenti/sma/allegati_sma.pdf" target="_blank">allegati</a> alla relazione Pisano viene spiegato che la qualità del plot indica a quando risale l'ultimo plot <u>ricevuto</u> dal radar associato ad una data traccia. Ciò significa che se una traccia è stata inizializzata e per uno o più giri d'antenna non si riceve né l'eco del radar primario né la risposta all'interrogazione del radar secondario, il correlatore (il computer che associa i plot ad una traccia) <u>tenta</u> di calcolare la probabile posizione dell'aereo in base ai plot ricevuti in precedenza. Quindi, in questo caso, la posizione reale dell'aereo differisce da quella mostrata sullo schermo oltre che per l'errore strumentale del radar anche per l'errore inevitabilmente introdotto dalla stima fatta dal correlatore. &Egrave; evidente che tale errore aumenta sia in funzione del tempo trascorso dall'ultimo plot ricevuto, sia in presenza di un aereo che manovra.<br>
+<br>
+La relazione spiega che la qualità è pari a 7 (valore massimo) quando un plot viene ricevuto durante il giro d'antenna in corso e, in questo caso, il simbolo dell'aereo sullo schermo (che è quello registrato su nastro) si sovrappone al plot ricevuto o plot grezzo (che non viene registrato su nastro), quindi la posizione è affetta dal solo errore strumentale dei radar (primario e secondario).<br>
+Ad ogni giro d'antenna in cui non viene ricevuto alcun segnale dall'aereo tracciato, la qualità scade di 1. Siccome un giro d'antenna dura circa 12 s per i radar della <abbr title="difesa aerea">D.A.</abbr>, dopo 12 x 6 = 72 s d'assenza di segnale la qualità arriva a 0.<br>
+<br>
+Si nota che l'ultimo paragrafo s'interrompe, ma è facile intuire che possa terminare con: "plot precedenti." (o simile), cioè il computer calcola la posizione prevista del prossimo plot a partire dai plot registrati fino a quel momento.<br>
+
+</div>
+
+<div style="margin-bottom: 2em; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="quali_relPisa43.png" style="float:left; padding-right: 30px;" alt="" title="">
+A pag. 43 della relazione viene ribadito quanto già detto.
+</div>
+
+
+Ulteriori dettagli vengono precisati in alcuni documenti acquisiti dalla Procura di Roma, come, ad esempio, "<a href="http://cristianopi.altervista.org/straus/v1f272_WP000037_001.pdf" target="_blank">WP000037_001.DOC</a>" <i><sup><abbr title="Procura della Repubblica di Roma, VOL. I - FASC. 272 - PAG.  62578 - 62583, DATA 08.02.90, SMA: NOTA  ESPLICATIVA SULL'ATTIVITA' DELLA COMM.NE BLASI C/O LA BTA/DA, A FIRMA COL. TRICHES. ALLEGATO AL FG. 224/B/1894/DIV.3^(N) DATATO 16.01.97 (UI 33).">fonte</abbr></sup></i> a pag. 2:<br>
+
+
+<div class="cita">
+
+-  VENTUNESIMA,  <b>"QUALITY", INDICA LA QUALITA' DELLA CORRELAZIONE  TRA  IL  PLOT
+DETETTO DAL RADAR E LA SIMBOLOGIA AD ESSO ASSOCIATA.</b> LA QUALITA' PUO' ANDARE  DA
+7  A  0. IL NUMERO INDICA DA QUANTI GIRI DI ANTENNA IL PLOT,  ASSOCIATO  CON  LA
+TRACCIA, NON E' STATO RILEVATO DAL RADAR. AD ESEMPIO LA QUALITA' 7 INDICA CHE LA
+TRACCIA E' STATA RILEVATA OVVERO CORRELATA CON IL PLOT NELL'ULTIMO  (PRECEDENTE)
+GIRO  D'ANTENNA. LA QUALITA' 6 INDICA CHE LA TRACCIA NON E' STATA CORRELATA  CON
+NESSUN  PLOT DA UN GIRO DI ANTENNA. LA QUALITA' 5 INDICA CHE LA TRACCIA  NON  E'
+STATA  CORRELATA  CON  NESSUN PLOT DA DUE GIRI D'ANTENNA E COSI' VIA  FINO  A  0
+QUANDO  LA  TRACCIA  NON  E' STATA CORRELATA CON PLOT DA 7  O  PIU'  DI  7  GIRI
+D'ANTENNA.<br>
+PER  LA TRACCIA CHE RAGGIUNGE QUALITA' 2 SI ACCENDE ALLA CONSOLE DI  PERTINENZA,
+AUTOMATICAMENTE, LA SEGNALAZIONE LUMINOSA DI "LOW QUALITY".<br>
+LA  TRACCIA CHE RAGGIUNGE QUALITA' 0 VA AUTOMATICAMENTE IN CARICO  ALLA  CONSOLE
+DEL TIPO TPO OVVERO DELL'UFFICIALE RESPONSABILE DELLA SORVEGLIANZA.<br>
+ALLA  CONSOLE DEL TPO VIENE SEGNALATO L'EVENTO TRAMITE LA SEGNALAZIONE  LUMINOSA
+DI "LOST TRACK".<br>
+LE  TRACCE  "FRIENDLY"  (CODICE 46) VENGONO AUTOMATICAMENTE,  ALLA  QUALITA'  0,
+CANCELLATE DAL SISTEMA. TUTTE LE TRACCE COMUNQUE, A QUALITA' 0, VENGONO  PASSATE
+A TRACCIAMENTO MANUALE.
+
+</div>
+
+
+Il perito di parte lesa (familiari delle vittime) Paolo Miggiano ha svolto un'approfondita ricerca sul funzionamento del sistema NADGE. La parte che interessa questo paragrafo è contenuta nel documento "<a href="http://cristianopi.altervista.org/straus/v1f11_WP000942_007.pdf" target="_blank">WP000942_007.DOC</a>" <i><sup><abbr title="Procura della Repubblica di Roma, VOL. I - FASC. 11, PAGG. 2752 - 2804, DATA DOCUMENTO 28.06.90, DR. PAOLO MIGGIANO, PERITO DI PARTE LESA: NOTE ALLA PERIZIA DI UFFICIO E CONTRIBUTO AL PROSEGUIMENTO DELLE INDAGINI. (COMMENTI  E  CONSIDERAZIONI SU PERIZIA AGGIUNTIVA SUPPLEMENTO DI INDAGINI, DEP. 26.05.90).   V. ALLEGATI DA NOTA 2. - TRASMESSO  IL  09.07.90  DA BERLLINGUER S. A DR. GIUDICEANDREA, RICEVUTA DA DR. SANTACROCE L'11.07.90 (PAG. 2751).">fonte</abbr></sup></i> a metà pag. 4:<br>
+
+
+<div class="cita">
+
+IL  TRACCIAMENTO  E' LA FASE SUCCESSIVA ALLA INIZIALIZZAZIONE  DI  UNA  TRACCIA.
+CONSISTE NEL SEGUIRE LO SVILUPPO DELLA TRACCIA.<br>
+NEL  TRACCIAMENTO MANUALE L'OPERATORE SEGUE SUL VIDEO L'APPARIRE DEI  SUCCESSIVI
+PLOT  GREZZI  E SI POSIZIONA SU DI ESSI, SPINGENDO AL CONTEMPO UN  TASTO  (TASTO
+POSITION UPDATE, AGGIORNAMENTO DI POSIZIONE).<br>
+CON  IL TRACCIAMENTO AUTOMATICO E' IL SISTEMA CENTRALE CHE AGGIORNA  LA  TRACCIA
+NEL  MODO CHE SEGUE. A PARTIRE DALLE COORDINATE GEOGRAFICHE DELLA  REGISTRAZIONE
+PRECEDENTE,  IL SISTEMA APRE UNA FINESTRA NELLA DIREZIONE IN CUI LA  TRACCIA  E'
+ORIENTATA.  SE IL PLOT GREZZO RILEVATO DAL SUCCESSIVO GIRO D'ANTENNA RIENTRA  IN
+QUELLA  FINESTRA, IL COMPUTER LO AGGIUNGE ALLA TRACCIA (RICAVANDONE AL  CONTEMPO
+NUOVE  INFORMAZIONI SULLA DIREZIONE E VELOCITA'). SE NELLA FINESTRA NON  COMPARE
+ALCUN  PLOT GREZZO, IL COMPUTER FA SCENDERE LA QUALITA' DELLA TRACCIA DA 7 A  6.<br>
+PER  IL GIRO DI ANTENNA SUCCESSIVO IL COMPUTER ALLARGA LA FINESTRA. SE TROVA  UN
+PLOT CONGRUO CON LE CARATTERISTICHE DELLA TRACCIA, LA QUALITA' VIENE RIPORTATA A
+7.  MA SE CONTINUA A NON TROVARE UN PLOT CONGRUO CON LA TRACCIA FA  SCENDERE  LA
+QUALITA'  TRACCIA  A  5. E COSI' VIA. ARRIVATI A QUALITA' DELLA  TRACCIA  2,  SI
+ACCENDE  SULLA  CONSOLE  DEL TRACCIATORE CAPO UNA SPIA  LUMINOSA  ROSSA  CON  LA
+SCRITTA  LOW  QUALITY. ARRIVATA A QUALITA' 0, LA TRACCIA - SE AMICA ((7)  SE  LA
+TRACCIA  INVECE E' ZOMBIE O PENDING NON PUO' ESSERE CANCELLATA DAL  SISTEMA,  MA
+DEVE ESSERE CANCELLATA SEMPRE MANUALMENTE) - VIENE CANCELLATA DAL SISTEMA.
+
+</div>
+
+L'ultima cosa che può essere utile chiarire è che se una traccia di qualità inferiore a 7 viene correlata ad un plot ricevuto durante l'ultimo giro d'antenna, questa traccia ritorna subito a 7, cioè non viene incrementata di 1 ad ogni giro d'antenna fino ad arrivare a 7, ma passa subito a 7, qualunque sia la qualità posseduta in precedenza.<br>
+<br>
+
+
+
+<!-- ---  QUALITA' TRAFFICO AEREO  --------------------------------------------------------------------------- -->
+
+
+<h3 id="QUALI_TA" style="margin-left:2em">- Traffico aereo</h3>
+
+Nel caso dei due radar primari di Roma, il concetto di qualità dei plot è decisamente più complicato rispetto a quanto visto per il NADGE.<br>
+<br>
+La qualità di un plot può andare da 0 a 15 ed è esclusivamente determinata dall'eco ricevuta dal radar <u>primario</u>. Nel caso di plot ricevuti anche o solo dal radar secondario, la qualità è sempre pari a 15.<br>
+<br>
+Il consulente ausiliario Giaccari Ennio riferisce durante un'<a href="https://www.stragi80.it/documenti/processo/trascrizioni/19.02.02.pdf" target="_blank">udienza</a> (v. trascrizione a pag. 27) che <u>la qualità è il numero di presenze nell'ambito della finestra d'integrazione azimutale</u>.<br>
+<br>
+Cerchiamo di capire il significato della definizione data da Giaccari sfruttando le seguenti due figure, che si basano su quelle presenti a pag. 10 del "<a href="https://www.stragi80.it/documenti/gi/perizie/008.pdf" target="_blank">Capitolo VIII - Relazione degli ausiliari Giaccari ed altri - 05.02.90.</a>" dell'"<a href="https://www.stragi80.it/doc/la-sentenza-ordinanza-del-g-i/" target="_blank">Ordinanza di rinvio a giudizio - Sentenza istruttoria di proscioglimento</a>" pronunciata dal Giudice Istruttore Rosario Priore.<br>
+<br>
+
+
+<div style="margin-bottom: 2em; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="quali_sweep.png" style="float:left; padding-right: 30px; margin-bottom: 1em" alt="" title="">
+La prima figura rappresenta la vista dall'alto di un radar primario la cui antenna ruota in senso orario e irradia il fascio elettromagnetico nella direzione dei 16 segmenti, passando dalla posizione 1 alla posizione 16.<br>
+I 16 segmenti vengono chiamati <i>sweep</i> e rappresentano l'asse del campo elettromagnetico del lobo principale che si allontana dall'antenna ad una velocità di poco inferiore a quella della luce nel vuoto (come visto in precedenza).<br>
+L'ellisse viola rappresenta la superficie riflettente di un aereo investito dal fascio radar.<br>
+<br>
+In base a quanto detto sul <a href="#ciclo_lavoro" target="_blank">ciclo di lavoro</a>, ipotizziamo che il radar Marconi trasmetta un impulso ogni 2,5 ms. Siccome un giro completo dell'antenna dura circa 5,6 s, il radar trasmette 5,6 / 0,0025 = 2240 impulsi ogni giro d'antenna. Quindi nei 360° ci sono circa 2240 <i>sweep</i>, per cui quei 16 segmenti mostrati in figura, in realtà sono spaziati di 360 / 2240 = 0,16° l'uno dall'altro (nella figura sono separati di 5° per maggiore chiarezza).<br>
+<br>
+Poiché il lobo principale è ampio 2° nel Marconi e 1,25° nel Selenia, è chiaro che un dato azimut viene "spazzato" varie volte consecutive durante lo stesso giro d'antenna. Questo fatto viene mostrato dalla figura, in cui si vede che il lobo principale "ingloba" più di 3 <i>sweep</i>. In realtà, il lobo principale del Marconi è ampio circa 2 / 0,16 = 12,5 <i>sweep</i>, mentre quello del Selenia (che compie 1 giro ogni 6 s) è ampio circa 1,25 / 0,15 = 8,3 <i>sweep</i> (i valori esatti dipendono dal reale ciclo d'impiego del radar). Quindi, si può dire che un dato azimut viene spazzato 12 volte in un giro d'antenna dal radar Marconi e 8 volte nel caso del Selenia.<br>
+</div>
+
+<div style="margin-bottom: 2em; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="quali_pote.png" style="float:left; padding-right: 30px; margin-bottom: 1em" alt="" title="">
+Il grafico mostra un esempio dell'andamento del segnale riflesso dall'aereo (ricevuto dal radar) in funzione dello <i>sweep</i>.<br>
+La soglia è il livello del segnale al di sotto del quale il radar non rileva alcun oggetto e viene solitamente regolata in fase di calibrazione iniziale.<br>
+<br>
+Si vede che in corrispondenza dello <i>sweep</i> n° 4 il segnale ricevuto inizia a salire di potenza, in quanto il lobo principale, ruotando, inizia ad avvicinarsi all'aereo, ma il livello è comunque molto basso e coperto dal rumore di fondo.<br>
+Allo <i>sweep</i> n° 5, invece, il segnale inizia a superare la soglia, poiché la figura precedente mostra il lobo che inizia a "toccare" l'aereo proprio allo <i>sweep</i> n° 5. Da questo momento, le celle di memoria del computer iniziano ad essere settate a 1, ad indicare "segnale presente", ma ciò non basta per confermare la presenza di un oggetto, in quanto servono almeno 7 celle settate a 1 (anche discontinue) su 15 celle consecutive, come specificato ancora nel "<a href="https://www.stragi80.it/documenti/gi/perizie/008.pdf" target="_blank">Capitolo VIII</a>" ad inizio pag. 17: "<i>Soglia di detezione 7 sweep su 15</i>".<br>
+La relazione riporta altre due informazioni utili: il bersaglio inizia dopo 7 celle (o <i>sweep</i>) a 1 e termina quando restano soltanto 2 celle a 1. Dato che questo esempio mostra 9 celle a 1, l'aereo viene rilevato dal radar e riportato sullo schermo.<br>
+</div>
+
+
+Quanto descritto fino ad ora è relativo al segnale video <u>prima</u> dell'ingresso negli estrattori. Ogni estrattore sottopone il segnale in ingresso ad un'ulteriore elaborazione, diversa per i due radar.<br>
+<br>
+Le due tabelle che seguono riportano la qualità effettivamente registrata nei tabulati relativi ai quattro estrattori del Marconi e del Selenia. &Egrave; riportato il numero di plot ricevuti soltanto dai due radar primari suddivisi in base alla qualità (come detto, i plot ricevuti anche o solo dal radar secondario sono sempre di qualità 15).<br>
+<br>
+
+<div style="margin-bottom: 2em; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="quali_distr-mar.png" style="float:left; padding-right: 30px;" alt="" title="">
+Da questa tabella risulta che il tabulato relativo all'estrattore 1 elenca un totale di 22295 plot, di cui 4480 sono stati ricevuti dal solo radar primario. Ragionamento analogo per l'estrattore 3.<br>
+<br>
+Si nota subito la presenza di alcuni plot aventi qualità inferiore a 7 che, in teoria, non dovrebbero essere rilevati (o registrati), poiché i consulenti ausiliari scrivono nella relazione che la soglia minima è pari a 7. Tuttavia, il particolare funzionamento dei due estrattori del Marconi (v. da pag. 4 della relazione) può notevolmente "amplificare" il segnale in ingresso nel senso ben spiegato con la frase: &laquo;<i>un solo impulso forte che "dura" un solo sweep, in uscita "dura" per molti sweep.</i>&raquo;.
+</div>
+
+<br>
+
+<div style="margin-bottom: 2em; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="quali_distr-sel.png" style="float:left; padding-right: 30px;" alt="" title="">
+La distribuzione della qualità dei plot per il Selenia è molto diversa da quella per il Marconi e appare abbastanza "strana", sia per la significativa diversità tra i due estrattori, sia per la numerosità dei plot con qualità nulla per l'estrattore 2.
+</div>
+
+
+Si può concludere affermando che le informazioni fornite in Ordinanza-Sentenza non sono sufficienti a capire con esattezza il significato della qualità dei plot. Pur avendo visto il significato teorico della qualità di un plot, converrà fare affidamento a concetti più pratici, come quelli riportati ad inizio pag. 6 del Capitolo VIII: la forza del segnale è un parametro indicativo dell'intensità del segnale dell'eco e quanto più la qualità è elevata, tanto più risulta affidabile l’informazione.<br>
+<br><br>
+
+In definitiva, dunque, sebbene il significato di qualità di un plot differisca molto tra i radar NADGE e quelli del traffico aereo, in realtà è corretto affermare che entrambe le tipologie di radar usano la qualità dei plot per indicarne una sorta di livello di affidabilità.<br>
+
+</div> <!--  FINE  2023-09-26  -->
+
+<br>
+
+
+
+<!-- ========================================================================================================== -->
+
+
+
+<h3 id="apparati_velivoli">Apparati a bordo dei velivoli</h3>
+
+Come già detto, lo scopo principale di un radar secondario è ottenere informazioni sull'identità di un velivolo appositamente equipaggiato e quest'apparecchiatura si chiama <a href="https://it.wikipedia.org/wiki/Transponder" target="_blank">transponder</a>. &Egrave; un dispositivo elettronico che può essere usato per vari scopi, ma quello che interessa in questa sede corrisponde alla terza definizione data da Wikipedia: è un ricetrasmettitore che genera un segnale in risposta ad una specifica interrogazione. Lo scopo del transponder, quindi, è fornire all'SSR le informazioni richieste.<br>
+<br>
+In ambito civile le interrogazioni possono essere trasmesse solo dal radar SSR (non dai velivoli), così come gli SSR sono gli unici a poter ricevere le risposte (i velivoli non possono ricevere le risposte trasmesse da altri velivoli).<br>
+In ambito militare, oltre all'ovvia possibilità che hanno gli AWACS d'interrogare altri velivoli, è, oggi, abbastanza usuale trovare velivoli (tipicamente offensivi) che possono interrogare altri velivoli con il loro radar dotato di AIFF (<i>Active</i> IFF), proprio come fanno gli SSR. Nel 1980, questa possibilità era quasi un'esclusiva degli AWACS.<br>
+<br>
+In ambito militare, il transponder viene normalmente chiamato IFF/SIF o semplicemente IFF (il SIF è un'aggiunta all'IFF), ma è sempre un transponder il cui principio di funzionamento è identico a quello usato in ambito civile.<br>
+<br>
+Oggi è impensabile che un aereo sia sprovvisto di transponder, ma all'epoca della strage di Ustica ne potevano essere sprovvisti anche gli aerei soggetti al controllo del traffico; era, tuttavia, quasi impossibile che un aereo di linea non avesse il transponder, perché ciò poteva comportare pesanti penalizzazioni in qualunque spazio aereo servito da un radar di sorveglianza (quindi non soggetto al <a href="../rdrpro/rdrpro.html" target="_blank">controllo procedurale</a>).<br>
+<br>
+
+Oltre alla possibilità di trasmettere gli impulsi impostati nei vari modi (1, 2, 3/A), il pilota può aggiungere (su richiesta del controllore) un ulteriore impulso, chiamato <abbr title="Special Position Indicator">SPI</abbr>.<br>
+Ciò serve al controllore per identificare un aereo in modo inequivocabile, in particolare quando è presente altro traffico nelle vicinanze dell'aereo e quando un aereo viene preso in carico da un controllore. In questi casi, il controllore chiede ai piloti d'identificarsi; in risposta, un pilota preme l'apposito pulsante posto sul pannello del transponder, solitamente identificato con "IDENT". Così facendo, il transponder aggiunge l'impulso SPI in coda a tutti gli altri impulsi del modo trasmesso. Ciò segnala al radar di mettere in evidenza il plot dell'aereo sullo schermo, cambiandogli simbolo e rendendolo più grande e luminoso. Il transponder, ad ogni pressione dell'IDENT, normalmente aggiunge l'impulso SPI per una trentina di secondi.<br>
+All'epoca della strage, i piloti militari che dovevano identificarsi su richiesta dei controllori degli enti militari usavano la prassi (non proprio ortodossa) d'impostare il codice 73 nel SIF di modo 1 (v. il paragrafo "<a href="#modo1_73" target="_blank">Codice 73 del SIF di modo 1</a>" più avanti).<br>
+<br>
+
+
+Quando il controllore comunica al pilota il codice da inserire (quasi esclusivamente nel modo 3/A), sarebbe buona norma inibire momentaneamente le risposte, ruotando la manopola del modo di funzionamento del transponder in posizione "Standby", così da evitare la trasmissione di codici casuali mentre si ruotano le manopole. Una volta impostato il codice richiesto, si riporta la manopola principale nella posizione di normale funzionamento.<br>
+Questa è normale prassi per i piloti civili, ma non sembrerebbe tale tra i piloti militari. Infatti si nota nei tabulati di Ciampino la presenza del codice di modo 3 5200 per un giro d'antenna (alle 18:32:31) mentre il pilota "cicla" 5400 (su richiesta del controllore di Grosseto Avvicinamento) dal codice 4200 che aveva in precedenza. Egli, quindi, ha fatto fare uno scatto alla manopola della prima cifra (trasmettendo 5200), poi ha ruotato quella della seconda cifra, senza portare l'IFF su "Standby".<br>
+<br>
+
+
+Gli apparati a bordo dei velivoli civili sono molto diversi da quelli militari; vediamo le caratteristiche principali dei due tipi di transponder.<br>
+<br>
+
+
+
+<!-- ========================================================================================================== -->
+
+
+
+<h3 id="traspo_civi">Transponder degli aerei civili</h3>
+
+Il transponder degli aerei civili si usa in modo molto più semplice di quello degli aerei militari.<br>
+I pannelli dei transponder usati negli aerei di linea erano molto simili tra loro.<br>
+<br>
+
+<!-- Pannello transponder CIVILE -->
+
+<div style="margin-bottom: 2em; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="transp_pnl.png" style="float:left; padding-right: 30px;" alt="" title="">
+L'immagine mostra un esempio di un vecchio pannello di un transponder.<br>
+Gli elementi principali che lo compongono sono le due manopole in posizione centrale per impostare il codice (0442, nell'esempio), la manopola a sinistra per impostare la funzionalità dell'apparato (spento, <i>stand by</i>, accesso e bassa sensibilità), la manopola a destra per selezionare il modo della risposta (il modo A è equivalente al modo 3 militare) e l'interruttore a levetta sotto alla finestrella del codice usato per squoccare l'IDENT.<br>
+<br>
+In basso ci sono tre interruttori che servono, da sinistra a destra per: eseguire il test dell'apparato, con il led verde che si accende per indicare il superamento del test; selezionare l'utilizzo del transponder 1 o 2 (ogni aereo ha due transponder per ragioni di sicurezza), qui bloccato sul transponder 1; abilitare/disabilitare l'aggiunta automatica del modo C alle risposte di modo A (<abbr title="Altitude reporting, riporto dell'altitudine">ALT RPTG</abbr>).<br>
+</div>
+
+<br>
+Le due manopole usate per impostare il codice sono composte da un pomello centrale per una cifra e da una ghiera esterna per l'altra cifra (soluzione adottata negli aerei di linea) o da quattro piccole manopole per impostare le quattro cifre (soluzione adottata tipicamente per i piccoli aerei dell'aviazione generale). Le quattro cifre possono andare da 0 a 7, sono, quindi, disponibili 4096 codici da 0000 a 7777.<br>
+Sebbene siano selezionabili i modi B e D, di fatto essi non sono mai stati usati, quindi, nella pratica, il pilota lasciava il selettore del modo in posizione A e lasciava abilitato l'interruttore ALT RPTG. Durante il volo, un pilota si limitava ad inserire i codici comunicati dai controllori responsabili delle varie aree attraversate.<br>
+Qualora il volo non fosse stato soggetto al controllo del traffico aereo, i piloti (solitamente) lasciavano comunque il transponder acceso tenendo inserito un particolare codice predefinito (ad esempio 2000) per far vedere al controllore che l'aereo era dotato di transponder e per migliorare il calcolo della distanza dal radar (per l'azimut veniva usato il radar primario, mentre per la distanza quello secondario).<br>
+
+<br>
+
+
+<!-- ========================================================================================================== -->
+
+
+
+<h3 id="iff">IFF/SIF degli aerei militari</h3>
+
+Gli aerei militari hanno un transponder più complesso di quello degli aerei civili.<br>
+<br>
+Di particolare interesse per la strage di Ustica è stabilire il modello esatto di transponder installato a bordo dei TF-104G, in quanto almeno due di questi aerei, decollati da Grosseto, risultano in volo durante la prima fase di crociera del DC-9 Itavia e trasmettono vari codici, tra cui il famigerato 73 di modo 1.<br>
+<br>
+Nel corso degli anni, l'IFF si è evoluto aggiungendo nuove funzionalità alla versione di base e ampliandone altre.<br>
+Nella versione postbellica Mark X (di base), l'IFF poteva replicare ai radar di terra soltanto trasmettendo degli impulsi fissi per ognuno dei 3 modi; in altre parole, tutti gli aerei rispondevano nella stessa maniera.<br>
+Il SIF aggiunge all'IFF Mark X la possibilità di trasmettere i codici (o numeri) alle risposte di modo 1, 2 e 3, quindi ogni aereo può trasmettere il suo codice per ognuno dei tre modi. Viene, inoltre, aggiunta la modalità IDENT (vista prima) e la trasmissione dell'emergenza.<br>
+Un ulteriore aggiornamento della versione IFF Mark X (SIF) è l'IFF Mark X (A) che differisce dalla precedente versione solo per la capacità di trasmettere 4096 codici nel modo 3 (4 cifre in <a href="https://it.wikipedia.org/wiki/Base_(aritmetica)" target="_blank">base</a> 8, cioè che possono andare da 0 a 7), contro i 64 della versione SIF (2 cifre in base 8).<br>
+<br>
+
+Consultando il sito <a href="https://theaviationist.com/special-reports/italian-f-104-versions-explained/" target="_blank""><span style="font-variant: small-caps">the</span>A<span style="font-variant: small-caps">viationist</span></a>, possiamo osservare il modello di IFF/SIF montato a bordo di varie versioni dell'F-104.<br>
+<br>
+
+<!-- Pannelli SIF e IFF -->
+
+<div style="margin-bottom: 3em; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="tf104g_iff-pane.png" style="float:left; padding-right: 30px;" alt="" title="">
+L'immagine mostra più chiaramente gli apparati schematizzati in quel sito e installati, nel 1980, nei TF-104G e negli F-104S.<br>
+<br>
+Il transponder è composto da quello che può essere definito il pannello principale (IFF) e dalla sua "aggiunta" (SIF) che permette di selezionare i codici da trasmettere nei modi 1 e 3. Da notare che non è possibile impostare da pannello il codice di modo 2.<br>
+Si nota la manopola principale "MASTER" che regola il funzionamento dell'apparato con la posizione di notevole interesse "EMERGENCY" (sulla quale si tornerà nel prossimo paragrafo). Prima di poter ruotare la manopola in questa posizione, il pilota doveva premere il pulsante bianco, altrimenti non si poteva andare oltre la posizione "NORM" (normale funzionamento).<br>
+<br>
+Ci sono, poi, i due deviatori a levetta "MODE 2" e "MODE 3", usati per attivare/disattivare le risposte nei rispettivi modi (notare l'impossibilità di disattivare le risposte di modo 1).<br>
+<br>
+A destra troviamo il deviatore caricato a molla usato per trasmettere una particolare risposta che consentiva di evidenziare il simbolo dell'aereo sullo schermo radar. Il pilota, su richiesta del controllore, porta il deviatore per un istante su <abbr title="Indication of Position">I/P</abbr> che, essendo caricato a molla, ritorna nella posizione "OUT" appena lo si rilascia; il risultato è equivalente a quello già visto per il pulsante "IDENT" degli aerei civili.<br>
+</div>
+
+Il SIF mostrato nell'immagine è perfettamente compatibile con ciò che risulta dall'indagine svolta dall'<abbr title="Autorità Giudiziaria">A.G.</abbr> finalizzata ad appurare il numero di cifre che potevano essere impostate dal pilota nel transponder per le risposte di modo 3 (v. "<a href="http://cristianopi.altervista.org/straus/v1f245_WP001580_001.pdf" target="_blank">WP001580_001.DOC</a>" <i><sup><abbr title="Procura della Repubblica di Roma, VOL. I - FASC. 245 - PAG.  57470, STRALCIO DI DOCUMENTO RIPORTANTE IL PUNTO 3: CONCLUSIONI. PRESENTE LA SEGUENTE NOTA MANOSCRITTA: ILUCG/SG/02/3122 DEL 10.07.96. ALLEGATO &ldquo;E&rdquo; A NOTA TECNICA TRASMESSA CON FG. ITAV/100/2093/G53-1/6 DEL 17.07.96 (UI 1560).">fonte</abbr></sup></i>):<br>
+
+<div class="cita">
+C. NON AVEVANO LA CAPACITA' IFF MODO 3 "QUATTRO CIFRE" I SEGUENTI VELIVOLI:<br>
+* F104S<br>
+* F/RF104G<br>
+* TF104G<br>
+[...]
+</div>
+
+Questo tipo di transponder viene identificato come <i>IFF Mark X (SIF)</i>.<br>
+<br>
+Al di là del numero di cifre che potevano essere impostate nel modo 3/A, il documento è utile per stabilire con certezza che il TF-104G aveva proprio quel transponder nel 1980. Dal che si evince con altrettanta certezza che il pilota <u>non poteva</u>:
+<ul style="margin-top: 0px">
+<li>impostare il SIF di modo 2 (fatto riportato anche negli allegati alla <a href="https://www.stragi80.it/documenti/sma/allegati_sma.pdf" target="_blank">relazione Pisano</a> a pag. 14 del pdf);</li>
+<li>inibire solamente le risposte di modo 1.</li>
+</ul>
+Il secondo fatto riveste estrema importanza per la ricostruzione della rotta che, a detta dei periti radaristici d'ufficio, avrebbero seguito due TF-104G decollati da Grosseto, di ritorno da un'esercitazione svolta a Villafranca.<br>
+Si può agevolmente appurare che le risposte di modo 2 e 3 possono essere inibite dal pilota portando i rispettivi deviatori a levetta su "OUT", ma ciò è impossibile per le risposte di modo 1.<br>
+<br>
+Molti dettagli si possono trovare nel documento acquisito dall'A.G. "<a href="http://cristianopi.altervista.org/straus/v1f245_WP001579_001.pdf" target="_blank">WP001579_001.DOC</a>" <i><sup><abbr title="Procura della Repubblica di Roma, VOL. I - FASC. 245 - PAG.  57464 - 57469, ESTRATTO AER.1F-104S/ASA-1 - RIPORTANTE LE PAGINE DA 1-76 A 1-81. ALLEGATO &ldquo;D&rdquo; A NOTA TECNICA TRASMESSA CON FG. ITAV/100/2093/G53-1/6 DEL 17.07.96 (UI 1560).">fonte</abbr></sup></i>. Il paragrafo "(AWX OR FB) IFF AND SIF SET, AN/APX-46" (AWX e FB significano rispettivamente <abbr title="intercettore ognitempo">All Weather Interceptor</abbr> e <abbr title="cacciabombardiere">Fighter Bomber</abbr>, v. <a href="https://www.i-f-s.nl/squadrons-hellenic-air-force/" target="_blank"><i>International F-104 Society</i></a>) spiega il funzionamento dell'IFF e del SIF installati nel TF/F-104G.<br>
+Un'utile informazione l'abbiamo dalla nota presente a pag. 3:
+
+<div class="cita">
+THE PILOT HAS NO CONTROL OVER SELECTION OF MODE 2 CODE REPLIES. THE NUMBER  AND INTERVAL OF THESE REPLIES MUST BE PRESET ON THE CODE SELECTOR OF THE TRANSPONDER PRIOR TO FLIGHT.
+</div>
+di cui s'è già detto.<br>
+
+<br>
+
+Ai fini della strage di Ustica, è di particolare importanza capire il significato di alcuni codici e come questi vengono impostati e trasmessi.<br>
+<br>
+
+
+
+<!-- =======      73 di modo 1     ================================================================================================= -->
+
+
+
+<h3 id="modo1_73">Codice 73 del SIF di modo 1</h3>
+
+Quando si parla dei codici SIF di modo 1, tutti conoscono il famigerato codice 73, a volte scritto, erroneamente, "7300" o "73.00"; abbiamo visto che il modo 1 è composto soltanto da 3 impulsi per la prima cifra e da 2 per la seconda cifra, quindi aggiungere altre due cifre è semplicemente errato e privo di senso.<br>
+<br>
+
+
+Priore dà molto peso a questo codice di modo 1 in quanto l'<abbr title="Aeronautica Militare">A.M.</abbr> ha consegnato all'<abbr title="Autorità Giudiziaria">A.G.</abbr> un manuale dal quale risulta che il SIF1 = 73 indica un'emergenza.<br>
+Lo stesso Priore riferisce questo fatto durante il confronto avvenuto nel '96 tra alcuni controllori di Poggio Ballone (v. "<a href="http://cristianopi.altervista.org/straus/v3f125_WP000630_001.pdf" target="_blank">WP000630_001.DOC</a>" 
+<i><sup><abbr title="Procura della Repubblica di Roma, VOL. III - FASC. 125 - PAG. 25350 - 25410, TRASCRIZIONE DEL P.V. DI CONFRONTO RESO DA CARTA FRANCESCO, CIRINA PAOLO, COZZOLINO DONATO, DE GIUSEPPE ANTONIO, LAURETANI ANTONIO, MARRA LUIGI, OGNO SALVATORE, RUSSO SALVATORE E TASSI ILVO AVVENUTO IL 16.04.96. A PAG. 25411 BUSTA CONTENENTE BOBINA DI REGISTRAZIONE DEI CONFRONTI RESI IN DATA 16.04.96.">fonte</abbr></sup></i> a pag. 8):
+
+<div class="cita">
+
+G.I. DR. PRIORE, A DOMANDA DI P.G.: L'AERONAUTICA CI HA DATO QUESTO MANUALE  CHE
+ORMAI  E'  DECLASSIFICATO, GLI IFF MIKE, E QUELLO SUGLI IFF... QUI SI  DICE  CHE
+L'AEREO  MILITARE  CHE  SCOCCA EMERGENZA, LA SCOCCA CON GLI IFF DI  MODO  1  73,
+QUESTO IFF DI MODO 1 73 PRATICAMENTE POI ANCHE DA ULTERIORI INFORMAZIONI ASSUNTE
+CON LETTERE SCRITTE ALL'A.M., CON SOTTUFFICIALI DELL'A.M., "<b>QUALORA SIA RIPETUTO
+PIU'  VOLTE</b>,  QUALORA SI ACCENDE LA COLONNA DEL SOS SIF, VADA  PER  POSITIVO,  E
+DIVENTI  POSITIVA LA COLONNA DEL BLINKING, CIOE' QUANDO C'E' IL  VERIFICARSI  DI
+QUESTI  QUATTRO  ELEMENTI,  RAVVISA  GLI  ESTREMI  DI  UN'EMERGENZA  REALE   DEL
+VELIVOLO.".  NOI IN ALTRI TABULATI TROVIAMO QUESTO CODICE 73 CHE IN ALCUNI  CASI
+RAPPRESENTA UN'ANOMALIA, MA RESTA ISOLATO, NON CI SONO RISPOSTE DEL SISTEMA.
+
+</div>
+
+La teoria è una cosa, ma la pratica operativa tra piloti e controllori era tutt'altra cosa (come vedremo).<br>
+<br>
+
+<!-- EXCEL PB con 73 -->
+
+<div style="margin-bottom: 2em; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="73_list.png" style="float:left; padding-right: 30px;" alt="" title="">
+Dal tabulato radar di Poggio Ballone scaricabile da STRAGI80.it risultano presenti tre righe con SIF1 = 73.<br>
+<br>
+</div>
+
+
+<br>
+Il collegio peritale Dalle Mese cerca fin da subito d'indirizzare Priore nella giusta strada prendendo in considerazione la possibilità che i piloti potessero usare il codice 73 per segnalare la loro posizione e non un'emergenza, come risulta a pag. 46 del "<a href="https://www.stragi80.it/documenti/gi/perizie/087.pdf" target="_blank">Capitolo LXXXVII - Perizia radaristica Dalle Mese ed altri - 16.06.97.</a>" dell'"<a href="https://www.stragi80.it/doc/la-sentenza-ordinanza-del-g-i/" target="_blank">Ordinanza di rinvio a giudizio - Sentenza istruttoria di proscioglimento</a>" pronunciata dal Giudice Istruttore Rosario Priore.<br>
+<br>
+
+<!-- Cap. 87 Dalle Mese -->
+
+<div style="margin-bottom: 2em; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="73_cap87.png" style="float:left; padding-right: 30px;" alt="" title="">
+Qui vediamo la parte che c'interessa relativamente alla traccia LK017.<br>
+<br>
+Il tentativo fatto dal collegio peritale per sottolineare un utilizzo alternativo del SIF1 = 73 (utilizzo che dalle testimonianze risulta, in realtà, l'utilizzo principale), a quanto pare, è andato completamente a vuoto, poiché Priore rimane fermo nella sua convinzione.<br>
+</div>
+
+Egli, non solo si mostra convinto che il SIF1 = 73 sia solamente usato per indicare un'emergenza, ma conia un nuovo concetto dell'emergenza, creando l'"emergenza generale" per distinguerla dall'"emergenza velivolo".<br>
+<br>
+
+<!-- Emergenza velivolo, vaneggiamenti di Priore -->
+
+<div style="margin-bottom: 2em; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="73_emevelivolo.png" style="float:left; padding-right: 30px;" alt="" title="">
+Questo inaspettato slancio di creatività può essere appurato leggendo il "<a href="https://www.stragi80.it/documenti/gi/Titolo2a.pdf" target="_blank">TITOLO 2 - L’istruttoria dal 27 luglio 90 al 31 dicembre 97.</a>" dell'Ordinanza-Sentenza a fondo pagina 382.<br>
+<br>
+</div>
+
+
+La fantasiosa distinzione tra i due tipi d'emergenza non trova riscontro nemmeno nel <a href="https://www.stragi80.it/documenti/nato/natocover.pdf" target="_blank">rapporto</a> della NATO, trasmesso alle autorità italiane nell'intento di attribuire una possibile identità di alcune tracce.<br>
+<br>
+
+<!-- NATO unk eme -->
+
+<div style="margin-bottom: 3em; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="73_unkeme.png" style="float:left; padding-right: 30px;" alt="" title="">
+Questo estratto della tabella 1 (contenuta nel rapporto) mostra "Unknown Emergency" per la traccia AA464, quella che squocca il famoso 73 di modo 1.<br>
+<br>
+Quindi gli esperti della NATO non la definiscono né "generale" né "velivolo", ma semplicemente emergenza sconosciuta, poiché il pilota non ha impostato il codice di modo 3 che deve essere usato per specificare un'emergenza generica (codice 7700) o un'avaria alla radio (codice 7600). Ciò significa che il pilota non voleva segnalare alcuna emergenza, ma stava, invece, facendo quello che ipotizza il collegio Dalle Mese: stava evidenziando la propria posizione al controllore che lo aveva in carico.<br>
+</div>
+
+La totale mancanza di significato in ciò che scrive Priore, inventando un'"emergenza generale" che sarebbe diversa dall'"emergenza velivolo", risulta ancor più evidente solo se si conosce l'utilizzo del transponder e il motivo che i piloti hanno per evidenziare ai controllori una situazione di emergenza.<br>
+<br>
+Partiamo dalle basi, prendendo come riferimento il documento che può essere considerato la "bibbia" sull'utilizzo del transponder in ambito NATO: ACP 160 "IFF/SIF OPERATIONAL PROCEDURES".<br>
+La versione in vigore nel periodo della strage di Ustica è contenuta nel documento "<a href="http://cristianopi.altervista.org/straus/v1f213_WP003370_001.pdf" target="_blank">WP003370_001.DOC</a>" 
+<i><sup><abbr title="Procura della Repubblica di Roma, VOL. I - FASC. 213 - PAG. 50163 - 50180, ACP  160(A)  IN  LINGUA  INGLESE  RELATIVO  AD  IFF/SIF  OPERATIONAL PROCEDURES (U) - EDIZIONE GENNAIO 1978. ALLEGATO 7 AL FG. SMA-0/5562/G53-1 DATATO 11.07.95 (UI 3364).">fonte</abbr></sup></i>, pubblicato il 30.01.78 ed entrato in vigore in data 04.02.80.<br>
+<br>
+Siccome il documento è in lingua inglese, per comodità sarà riportata anche la libera traduzione dei brani estratti, con eventuali commenti esplicativi. &Egrave; chiaro che la libera traduzione non cambierà in alcun modo il significato originale, ma chi avesse bisogno della traduzione letterale può usare uno dei tanti traduttori online, come <a href="https://www.deepl.com/translator" target="_blank"><i>DeepL Translator</i></a>, solitamente molto affidabile.<br>
+<br>
+
+Sebbene sia già stato detto, conviene iniziare con l'appurare la funzione che ha l'IFF; la troviamo nel capitolo 1 (a fondo pag. 2):<br>
+
+<table style="margin-top: .5em; width: 100%;"><tr><td style="text-align: left; font-family: monospace;">
+IFF SYSTEMS HAVE BEEN ADOPTED FOR THE PRIMARY FUNCTION OF ASSISTING IN THE RAPID
+AND  POSITIVE  IDENTIFICATION OF FRIENDLY UNITS AND SECONDLY  ASSISTING  IN  THE
+TRACKING AND CONTROL OF AIRCRAFT.
+</td>
+<td style="text-align: left; font-size: .9em">L'IFF è stato adottato con la principale funzione d'assistenza nella rapida e positiva identificazione delle unità amiche e, secondariamente, nel tracciamento e controllo degli aerei.
+</td></tr></table>
+
+<br>
+
+&Egrave; chiaro fin da subito che l'IFF viene usato dai piloti per consentire ai controllori d'identificarli rapidamente e senza possibilità di confonderli con altri aerei.<br>
+In assenza dell'IFF, la positiva identificazione avveniva facendo compiere ai piloti noiose manovre (come una virata su una determinata prua per almeno un minuto), perché il controllore doveva avere l'assoluta certezza d'impartire le autorizzazioni proprio all'aereo voluto, senza possibilità di confonderlo con un altro.<br>
+Grazie all'IFF, l'identificazione del traffico si è enormemente velocizzata, perché il controllore non deve più aspettare la comparsa di tutti i plot ricevuti dal radar primario che mostrano l'effettiva esecuzione della manovra ordinata all'aereo.<br>
+L'identificazione è anche positiva, oltre che rapida, perché il controllore assegna codici diversi ai vari aerei, grazie all'avvento dell'IFF Mark X (SIF).<br>
+<br>
+&Egrave; evidente, quindi, che il transponder non può essere in alcun modo usato per segnalare qualcosa esterna all'aereo, semplicemente perché il fatto di evidenziare il simbolo del proprio aereo per indicare qualcosa esterna ad esso creerebbe solamente confusione al controllore che, comunque, sarebbe obbligato a chiedere al pilota cosa stia segnalando; tanto vale comunicarlo per radio.<br>
+
+<br>
+Passiamo subito all'argomento che c'interessa in questo paragrafo: l'emergenza. La troviamo nel paragrafo "302. OPERATION", a pag. 4, che specifica:<br>
+
+<table style="margin-top: .5em; width: 100%;"><tr><td style="text-align: left; font-family: monospace;">
+A. THE FOLLOWING MODE OPERATION HAS BEEN ADOPTED FOR <b>WORLDWIDE USE</b>
+</td>
+<td style="text-align: left; font-size: .9em">La seguente modalità operativa è stata adottata <u>a livello mondiale</u>.
+</td></tr></table>
+
+<br>
+Poi, al punto 6 leggiamo:<br>
+
+<table style="margin-top: .5em; width: 100%;"><tr><td style="text-align: left; font-family: monospace;">
+(6)  EMERGENCY  (DISTRESS)  FEATURE.  THIS  SIGNAL  RESPONSE  IS  SELECTABLE  BY
+TRANSPONDER SWITCH SETTING. WHEM SELECTED IT WILL CAUSE THE TRANSPONDER TO REPLY
+TO  EACH INTERROGATION <u>WITH FOUR PULSE TRAINS</u> SPACED 4.35  MICROSECONDS  BETWEEN
+TRAINS. THIS PROVIDES A <b>DISTINCTIVE DISPLAY</b> FOR RECOGNITION BY OPERATORS AT  THE INTERROGATING  LOCATION.<br>
+EMERGENCY  TRANSPONDER REPLIES  WILL  CONTINUE  TO  BE
+TRANSMITTED  WITH EACH INTERROGATION UNTIL THE SWITCH SETTING IS CHANGED BY  THE AIRCREW.<br>
+WHILE THE SELECTION OF THE EMERGENCY SIGNAL BY THE AIRCREW WILL  CAUSE
+THE TRANSPONDER TO REPLY IN THE APPROPRIATE MANNER, THERE ARE TIMES IN WHICH THE
+SIGNAL CAN BE ERRONEOUSLY CAUSED TO APPEAR AT THE INTERROGATING LOCATION  (I.E.,
+WHEN  TRACKS  CROSS AT DIFFERENT ALTITUDES).<br>
+THEREFORE, THE MODE  3/A  EMERGENCY RESPONSE  FEATURE  WILL  INCLUDE  THE USE OF CERTAIN  CODE  SETTINGS  TO  INSURE
+RECOGNITION OF THE EMERGENCY AT ALL TIMES. THE CODE SELECTED WILL BE 77 OR 7700,
+DEPENDING ON THE TYPE OF TRANPONDER. CODE 76 OR 7600 IS RESERVED FOR RECOGNITION
+OF  AN  AIRCRAFT WITH RADIO COMMUNICATIONS FAILURE. CODE 7500 SHALL BE  USED  ON
+MODE 3/A TO PROVIDE RECOGNITION OF AN AIRCRAFT HAVING HIGH JACKERS ON BOARD.
+</td>
+<td style="text-align: left; font-size: .9em">
+Questa risposta d'emergenza è selezionabile tramite l'interruttore del transponder. Quando selezionata, il transponder replica ad ogni interrogazione con quattro treni d'impulsi spaziati 4,35 &micro;s tra loro. Questo fornisce un'indicazione inconfondibile agli operatori radar.<br>
+Le risposte d'emergenza continueranno ad essere trasmesse ad ogni interrogazione fino a quando l'equipaggio del velivolo non cambia impostazione del transponder.<br>
+Sebbene l'impostazione dell'emergenza da parte di un equipaggio comporterà l'appropriata risposta del transponder, ci sono casi in cui l'emergenza compare erroneamente sullo schermo radar (pur in assenza di velivoli che la trasmettono), ad esempio quando due o più rotte s'incrociano a quote diverse (aerei che transitano sulla reciproca verticale).<br>
+Pertanto, la risposta d'emergenza nel modo 3/A includerà l'uso di determinate impostazioni di codici per assicurare il riconoscimento dell'emergenza in ogni momento. Il codice selezionato sarà 77 o 7700, in funzione del tipo di transponder (per gli F-104, che hanno solo due cifre per il modo 3/A, il codice è 77). Il codice 76 o 7600 è riservato per il riconoscimento di un'avaria radio. Il codice 7500 deve essere usato nel modo 3/A per far riconoscere un aereo con dirottatori a bordo.
+</td></tr></table>
+<br>
+Fin qui, due cose risultano evidenti:
+<ol style="margin-top: 0px">
+<li>la trasmissione dell'emergenza serve per mettere in evidenza sullo schermo radar l'aereo che la segnala;</li>
+<li>la modalità riferita dall'<abbr title="Aeronautica Militare">A.M.</abbr> per segnalare un'emergenza è totalmente diversa rispetto allo standard NATO.</li>
+</ol>
+
+&Egrave; utile aggiungere che quanto riferito dall'<abbr title="Aeronautica Militare">A.M.</abbr> sul codice 73 di modo 1 che sarebbe usato per segnalare un'emergenza non trova riscontro in qualsivoglia documento (a parte il manuale <abbr title="Aeronautica Militare">A.M.</abbr> declassificato consegnato all'A.G.).<br>
+Questo, comunque, non significa che in tempi remoti, l'<abbr title="Aeronautica Militare">A.M.</abbr> non possa aver stabilito come "standard nazionale" che il SIF1 = 73 era convenzionalmente riservato all'indicazione di un'emergenza; convenzione che potrebbe essere stata mantenuta anche dopo la standardizzazione NATO valida per tutti i paesi facenti parte dell'alleanza.<br>
+<br>
+Sebbene questa sorta di convenzione a livello nazionale possa risultare verosimile, è, al contrario, difficile poter credere che la mera ricezione del codice 73 nelle risposte di modo 1 possa far scattare l'allarme della postazione radar, perché per far ciò, è necessario che il decodificatore del radar secondario sia stato programmato per attivare la circuiteria dell'allarme in presenza dello specifico codice 73 di modo 1. L'allarme, come scritto da Priore nel brano riportato in precedenza, consiste nel SOS-SIF settato a 2 e <i>blink</i> settato a 1, parametri che attivano l'accensione di un'apposita spia della postazione radar. Alcuni controllori riferiscono che si attiva anche una sirena, come, ad esempio, fa De Giuseppe (v. "<a href="http://cristianopi.altervista.org/straus/v3f94_WP000476_001.pdf" target="_blank">WP000476_001</a>"
+<i><sup><abbr title="Procura della Repubblica di Roma, VOL. III - FASC. 94 - PAG. 19532 - 19534, DATA 03.05.95, TRIBUNALE ROMA UFFICIO ISTRUZIONE: RESO  DA DE GIUSEPPE ANTONIO, DINANZI AL G.I. DR. PRIORE. PRESENTI IL V.QUESTORE DR.  EUFEMIA GIUSEPPE, IL V.ISP. CASTELLANI LUCIA, IL SOV. MERCURIO GIUSEPPE E I PROFF. CASAROSA E DALLE MESE.">fonte</abbr></sup></i> a fondo pag. 1):
+
+<div class="cita">
+
+A  D.R.: IN CASO DI SIF 1 = 73 E' EMERGENZA, SI ACCENDONO LE SPIE  IN  BLINKING,
+SUONA  LA  SIRENA DI CONSOLLE PERCEPIBILE OVUNQUE NELLA SALA E  GLI  ADDETTI  SI
+CONCENTRANO  SU  QUELLA TRACCIA. UN'IPOTESI DEL GENERE  SI  VERIFICA  SETTE-OTTO
+VOLTE IN UN ANNO.
+
+</div>
+
+Considerando che tutto ciò deve avvenire quando il decodificatore del radar secondario riconosce un'emergenza e che in ambito NATO l'emergenza non ha niente a che vedere con il SIF1 = 73, si deve dedurre che le apparecchiature radar della D.A. installate in Italia fossero state appositamente modificate per far scattare tutti i segnali d'allarme in presenza di plot con il SIF di modo 1 uguale a 73; qualche dubbio può esserci.<br>
+<br>
+Ad ogni modo, non si può far altro che prendere atto di questa bizzarra anomalia che vede un paese NATO infischiarsi delle regole, adottando una sorta di convenzione nazionale al posto di uno standard valido in tutta l'alleanza.<br>
+<br>
+Andiamo avanti scendendo maggiormente nel dettaglio per capire in cosa realmente consisteva l'emergenza in ambito NATO.<br>
+<br>
+
+<!-- Descrizione repliche in EMERGENZA -->
+
+<div style="margin-bottom: 2em; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="73_eme-reply.png" style="float:left; padding-right: 30px;" alt="" title="">
+Qualunque pubblicazione tecnica che tratti l'IFF Mark X (SIF) è valida per accertare quale fosse la procedura per segnalare un'emergenza; vediamo, ad esempio, il manuale d'addestramento "<a href="https://books.google.it/books?id=HhtHEAZZSXEC" target="_blank"><i>Operations specialist 3 & 2, Volume 1</i></a>", dove a fondo pag. 124 (pag. 7-2 del manuale) si può leggere l'estratto riportato qui a sinistra.<br>
+<br>
+Quando viene selezionata l'emergenza <u>usando l'apposita manopola</u>, le risposte di modo 1 e 2 vengono modificate dall'IFF aggiungendo tre gruppi di <i>frame</i> (impulsi F1 e F2 della figura 7-1) alla normale risposta, cioè viene trasmessa la normale risposta contenente il codice impostato nel rispettivo modo 1 o 2 più altre tre risposte contenenti "00" nel modo 1 e "0000" nel modo 2 (nessun impulso presente oltre ai due d'inizio e fine <i>frame</i>, F1 e F2).<br>
+<br>
+Per il modo 3 vale quanto appena detto, ma con la differenza che il codice impostato dal pilota viene automaticamente sostituito con 7700, così da essere compatibile con i radar civili, che riconoscono questo codice di modo A (equivalente al modo 3 militare) come un'emergenza.<br>
+<br>
+&Egrave; chiaro che le risposte d'emergenza vengono trasmesse solo se viene ricevuta un'interrogazione, altrimenti l'IFF non trasmette niente. Quindi, alla ricezione, ad esempio, dell'interrogazione di modo 3, l'IFF trasmette il primo treno d'impulsi contenente 7700, cosicché l'emergenza viene vista dai controllori civili, poi seguono i tre treni d'impulsi per completare l'emergenza 4X (esclusivamente militare).<br>
+</div>
+
+
+Qualunque sia il documento consultato, dunque, risulta che non c'è da impostare alcun codice, perché l'IFF provvede a replicare alle interrogazioni nel modo previsto dallo STANAG 5017, standard NATO che definisce (o, meglio, definiva) nel dettaglio il funzionamento degli apparati IFF Mark X (SIF), come l'AN/APX-46 montato negli F-104, nel 1980.<br>
+<br>
+
+Aprendo una breve parentesi, il brano riportato è anche utile per sfatare una delle innumerevoli bufale sui codici transponder.<br>
+Tra le tante bugie che si possono trovare in rete, c'è anche quella in cui si afferma che il codice 7700 di modo 3/A nel 1980 non esisteva (!). Questa bufala viene solitamente proferita con il fine di evidenziare che un'emergenza poteva essere segnalata solamente impostando il codice 73 nel modo 1 (niente di più falso) e, quindi, la sua presenza nei tabulati può solo indicare una reale emergenza.<br>
+Abbiamo appena appurato, però, quanto sia falsa questa affermazione.<br>
+<br><br>
+
+
+Per completare l'argomento dell'emergenza in ambito NATO, vediamo come viene trasmessa e visualizzata sullo schermo dei radar una risposta d'emergenza.<br>
+<br>
+
+
+<!-- Forme d'onda EMERGENZA AMI e Mark X (SIF) -->
+
+<div style="margin-bottom: 3em; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="73_formeonda.png" style="float:left; padding-right: 30px;" alt="" title="">
+Qui vediamo (in scala) le forme d'onda generate dall'IFF quando viene impostata l'emergenza.<br>
+Gl'impulsi di colore viola sono quelli trasmessi dall'SSR (interrogazione), mentre quelli blu sono trasmessi dall'IFF (risposta).<br>
+<br>
+Il diagramma serve anche per fare il confronto tra l'emergenza riferita dall'<abbr title="Aeronautica Militare">A.M.</abbr> e quella dello standard Mark X (SIF). Infatti, vediamo che la risposta standard, trasmessa semplicemente ruotando la manopola dell'IFF su "EMERGENCY", inizia con il primo treno d'impulsi contenente il codice impostato dal pilota (62, nell'esempio), al quale vengono aggiunti 3 treni d'impulsi vuoti (equivalenti a 00), cioè composti dai soli impulsi di <i>frame</i>.<br>
+L'emergenza <abbr title="Aeronautica Militare">A.M.</abbr>, invece, consiste nella sola risposta normale in cui il codice deve essere impostato manualmente dal pilota su 73.<br>
+<br>
+Uno dei vantaggi della risposta standard è che il controllore non perde il codice di modo 1 quando il pilota segnala l'emergenza, mentre con l'emergenza <abbr title="Aeronautica Militare">A.M.</abbr> il codice di modo 1 viene perso, perché il pilota deve sempre impostare 73. Un altro significativo vantaggio è che si riducono le false emergenze ricevute in presenza di due o più aerei molto vicini tra loro.<br>
+<br>
+La risposta di modo 3/A standard è simile a quella di modo 1, con la differenza che l'IFF trasmette automaticamente 7700, a prescindere dal codice impostato dal pilota. Il primo treno d'impulsi è sufficiente ai radar civili per ricevere l'emergenza, ma non lo è per quelli militari, che attendono i successivi 3 gruppi vuoti (come per il modo 1) per completare l'emergenza 4X (esclusivamente militare).
+</div>
+
+
+
+<!-- Simbolo EMERGENZA 4X AN/UPA-35 -->
+
+<div style="margin-bottom: 3em; vertical-align: top; position:relative; display: inline-block; width:100%;">
+<img src="73_emer4x.png" style="float:left; padding-right: 30px;" alt="" title="">
+Il manuale "<a href="https://books.google.it/books?id=f6Y_XhrN-5wC&lpg=PA2&dq=%22upa-35%22%20manual&pg=PA11#v=onepage&q&f=false" target="_blank"><i>Aerospace Control and Warning Systems Operator</i></a>" riporta (come tanti altri) a pag. 11 la figura 1-9 in cui vengono mostrati vari simboli presentati dall'apparato AN/UPA-35, in uso nei siti fonetico-manuali della D.A. nel 1980.<br>
+<br>
+Oltre al plot del radar primario vengono riportati 4 archetti rappresentanti i 4 gruppi di <i>frame</i> dell'emergenza. Siccome la spaziatura temporale è 24,65 &micro;s, gli archetti sono visualizzati sullo schermo distanziati di 2 nm l'uno dall'altro.<br>
+&Egrave; ben evidente come il simbolo richiami l'attenzione del controllore.
+</div>
+
+
+Dopo aver visto tutti i dettagli su come l'emergenza viene segnalata, possiamo iniziare a ragionare sul perché è importante che sia ben visibile sullo schermo radar.<br>
+<br>
+Un aereo, di solito è contemporaneamente presente sullo schermo di vari enti: difesa aerea, controllori d'area civili e militari, controllori d'avvicinamento civili e militari. Ad esempio, un aereo di linea in volo tra Firenze e Bolsena poteva comparire sugli schermi della difesa aerea di Poggio Ballone, del controllore d'avvicinamento di Grosseto, del controllore d'area (ACC) di Roma e su quello del suo omologo militare di Roma Military.<br>
+Tra tutti quei controllori, quello dell'ACC di Roma è l'unico ad essere interessato a quel traffico, tutti gli altri lo ignorano, perché non di loro competenza (la D.A. lo ignora dopo aver appurato che è <i>friendly</i>).<br>
+<br>
+Se quell'aereo segnala un'emergenza, tutti i controllori (facenti capo ad un ente dotato di radar) vedono il simbolo evidenziato sullo schermo, ma l'unico controllore direttamente interessato all'emergenza è quello che ha in carico l'aereo, perché il suo compito primario diventa quello di dare la precedenza all'aereo in emergenza su tutto il restante traffico; se deve atterrare, gli sgombra la strada fino all'avvicinamento finale, se deve abbassarsi di quota, gli toglie tutto il traffico interferente, ecc.<br>
+Quindi è questa l'importanza di avere sullo schermo un simbolo immediatamente distinguibile dagli altri. Abbiamo, infatti, visto che i motivi di esistere dell'IFF sono: assistenza nella rapida e positiva identificazione delle unità amiche o, più in generale, degli aerei, in ambito civile, tracciamento e controllo degli aerei. Tali motivi si applicano anche alla situazione d'emergenza: rapida e positiva identificazione degli aerei in emergenza, tracciamento e controllo dell'aereo che la segnala.<br>
+<br>
+Non esiste nessun altro motivo per segnalare un'emergenza oltre a quanto appena detto. La frase fa riferimento, evidentemente, alla fantasiosa suddivisione dell'emergenza in "<span style="text-decoration-line: underline; text-decoration-style: wavy; text-decoration-color: red;">emergenza generale</span>" ed "emergenza velivolo"; esiste solo l'"emergenza velivolo". Questa può essere precisata, quando applicabile, utilizzando i codici già visti per il modo 3/A: 7500 = atti di pirateria, 7600 = avaria radio; altrimenti s'inserisce 7700 per un'emergenza generica, cioè diversa dalle altre due. Quest'ultimo tipo di emergenza viene riferito al controllore dal pilota e può riguardare il motore, i flap, la strumentazione o decine di altre cose diverse dall'avaria radio, ma sempre e comunque relative all'aereo che la segnala, non a cose esterne all'aereo. Non ha alcun senso né alcuna utilità evidenziare i plot di un aereo se l'emergenza è estranea all'aereo che la segnala.<br>
+<br>
+A tal proposito, una delle tante bufale sul SIF1 = 73 racconta che il pilota del caccia di ritorno da Villafranca lo abbia "squoccato" per segnalare la presenza del MiG "sotto" al DC-9 Itavia, ma è una cosa priva di senso per due motivi.<br>
+<br>
+Il primo è che il controllore, non vedendo nessun codice d'emergenza nel modo 3, avrebbe chiesto al pilota di comunicargli in cosa consistesse l'emergenza (il controllore ha l'obbligo di chiederlo); tanto valeva riferire subito al controllore, in UHF, la presenza del MiG, senza giocare inutilmente con l'IFF, poiché anche il pilota sa bene che il controllore avrebbe chiesto chiarimenti in merito all'emergenza.<br>
+Tra l'altro, da quanto si può dedurre dalle testimonianze di alcuni controllori, era quasi più facile vedere un aereo libico nel cielo italiano che un aereo della NATO (v. "<a href="../../lc/mig/mig.html#autorizza_libici" target="_blank">Presenza del MiG-23 &rarr; Autorizzazioni ad aerei non NATO</a>"), tanto che la presenza di un MiG-23 non doveva destare molto scalpore tra piloti e controllori militari.<br>
+
+
+<br>
+Il secondo motivo che evidenzia l'insensatezza della bufala ce lo spiegano alcuni controllori.<br>
+Il prezioso Del Zoppo, guida caccia a Marsala e addetto alla Sezione Addestramento dell'Ufficio Operazioni, riferisce (v. "<a href="http://cristianopi.altervista.org/straus/v3f95_WP000520_001.pdf" target="_blank">WP000520_001.DOC</a>" <i><sup><abbr title="Procura della Repubblica di Roma, VOL. III - FASC. 95 - PAG. 19755 - 19760, DATA 13.05.95 TRIBUNALE ROMA UFFICIO ISTRUZIONE: RESO DA DEL ZOPPO ANDREA, GIA' GENERALIZZATO IN ATTI, DINNANZI AL G.I. DR. PRIORE. A PAGG. 19761-19764 FOGLI MANOSCRITTI (VDS. ORIGINALE).">fonte</abbr></sup></i> a partire da fine pag. 3):<br>
+
+<div class="cita">
+
+IL 73 SIGNIFICA EMERGENZA C'E' PERO' DA PRECISARE CHE DI NORMA <b>NON E' SUFFICIENTE
+OSSERVARE UN CODICE 73 PER UNO O DUE GIRI D'ANTENNA</b> PER POTER ESSERE CERTI CHE
+SI TRATTI DI UNA EFFETTIVA EMERGENZA, O NON SOLAMENTE DI ERRATA LETTURA DEL
+CODICE DA PARTE DELL'APPARATO O DI MAL FUNZIONAMENTO TEMPORANEO DELL'APPARATO.<br>
+SE INVECE <b>IL CODICE 73 VIENE RIPETUTO PER PIU' GIRI D'ANTENNA</b>, L'EMERGENZA E'
+CONFERMATA;
+
+</div>
+
+ma il problema non è mettersi a contare i plot con SIF1 = 73, perché è ovvio che l'emergenza viene segnalata per tutta la sua durata, tipicamente fino all'atterraggio o fino a quando il controllore non dice al pilota di toglierla (per esempio a causa di altro traffico nelle vicinanze che viene coperto dal simbolo dell'emergenza).<br>
+<br>
+
+Ulteriori evidenze sull'infondatezza di questa bufala le abbiamo da De Giuseppe Antonio, maresciallo, all'epoca dei fatti, in servizio a Poggio Ballone in qualità di guida caccia del turno delta (v. "<a href="http://cristianopi.altervista.org/straus/v3f125_WP000630_001.pdf" target="_blank">WP000630_001.DOC</a>" 
+<i><sup><abbr title="Procura della Repubblica di Roma, VOL. III - FASC. 125 - PAG. 25350 - 25410, TRASCRIZIONE DEL P.V. DI CONFRONTO RESO DA CARTA FRANCESCO, CIRINA PAOLO, COZZOLINO DONATO, DE GIUSEPPE ANTONIO, LAURETANI ANTONIO, MARRA LUIGI, OGNO SALVATORE, RUSSO SALVATORE E TASSI ILVO AVVENUTO IL 16.04.96. A PAG. 25411 BUSTA CONTENENTE BOBINA DI REGISTRAZIONE DEI CONFRONTI RESI IN DATA 16.04.96.">fonte</abbr></sup></i> pag. 11):
+
+<div class="cita">
+
+SE IO CONTROLLORE STO LAVORANDO CON 3-4 AEREI, E DICO A UNO: "QUAL'E' IL TUO CODICE?" E QUELLO MI
+DICE: "1000.", GUARDO E TROVO TRE AEREI COL CODICE 1000, OPPURE DUE AEREI COL
+CODICE 1000, GLI DO ALTRI CODICI, TIPO IL FLASH, TOCCATE FLASH, E DUE AEREI MI
+TOCCANO FLASH, L'ULTIMA CARTUCCIA CHE IO HO, DOPO SI PASSA AD ALTRE COSE,
+"<b>TOCCATE 20 SECONDI EMERGENZA</b>.", VA BENE, <u>HA UN PULSANTE DIETRO, INSERISCE IL
+PULSANTE DI EMERGENZA</u>, ALLORA E' L'UNICO AEREO, A MENO CHE NON MI FACCIANO UNO
+SCHERZO, CHE INSERISCE L'EMERGENZA, ED IO HO LA CERTEZZA MATEMATICA DI SAPERE
+CON CHI STO PARLANDO, MA RIPETO: MASSIMO 20 SECONDI., TANT'E', INIZIALMENTE, IO
+PARLO.. QUESTI SIGNORI PROBABILMENTE NON C'ERANO ANCORA IN AERONAUTICA, ERAVAMO
+OBBLIGATI A CHIEDERE L'AUTORIZZAZIONE AL SETTORE, MA SOLO PER 20, MASSIMO 30,
+SECONDI, IL TEMPO DI VISUALIZZARE L'AEREO IN EMERGENZA E QUINDI ERA LUI, MA E'
+TUTTO AUTOMATICO, <u>LUI FA COSI' 30 SECONDI E AUTOMATICAMENTE CESSA</u>, ECCO L'UNICO
+CASO CHE SI PUO' RISALIRE CHE NON SIA EFFETTIVAMENTE UN'EMERGENZA REALE.
+</div>
+
+Il controllore sta dicendo che al momento d'identificare un dato aereo, poteva capitare che alcuni aerei avessero lo stesso codice di transponder impostato nel pannello SIF.<br>
+In tal caso, il controllore dava l'ordine "squocchi flash" al pilota e questi doveva attivare il deviatore a levetta <abbr title="Indication of Position, indicazione di posizione">I/P</abbr> posto nel pannello IFF. Così facendo, il simbolo dell'aereo appariva sullo schermo radar diverso dagli altri per una trentina di secondi (due giri d'antenna), indicando univocamente la posizione dell'aereo. Se, però, l'I/P veniva premuto da due piloti all'incirca nello stesso momento, il controllore continuava a non poter distinguere l'aereo che doveva identificare.<br>
+Come ultima possibilità, il controllore ordinava d'inserire il pulsante dell'emergenza, ottenendo, anche in questo caso, un simbolo sullo schermo ben evidente (come abbiamo visto).<br>
+<br>
+Ecco, dunque, spiegato il banale motivo della presenza di quei "flash" isolati, che niente hanno a che fare con un'emergenza.<br>
+<br>
+
+<b>&Egrave; estremamente rilevante il fatto che questo controllore non parla di codice 73, ma parla di usare un apposito pulsante per segnalare l'emergenza, proprio come previsto dai documenti applicabili</b> (come l'ACP 160).<br>
+<br>
+
+
+<!--  Revisione 2023-07-15  -->
+
+Sempre su questa stranezza del SIF1 = 73 che significherebbe emergenza, si esprime anche il cap. Bergamini, istruttore del 20° Gruppo Addestramento Operativo (v. "<a href="http://cristianopi.altervista.org/straus/v3f121_WP000448_001.pdf" target="_blank">WP000448_001.DOC</a>" 
+<i><sup><abbr title="Procura della Repubblica di Roma, VOL. III - FASC. 121 - PAG. 24693 - 24696, DATA 06.03.96, TRIBUNALE ROMA UFFICIO ISTRUZIONE: RESO DA BERGAMINI GIOVANNI, GIA' GENERALIZZATO IN ATTI, DINNANZI AL G.I. DR. PRIORE. PRESENTI M.LLO CAPO C.C. GRADANTI, DR. ADDONIZIO E ISP. CAPO CASTELLANI.">fonte</abbr></sup></i> pag. 2):
+
+<div class="cita">
+
+A D.R.: NON RICORDA ASSOLUTAMENTE SE IL CODICE DELL'EPOCA FOSSE DIVERSO DAL
+7600 O 7700. PUO' DARSI CHE ABBIA QUALCHE LACUNA NELLA MEMORIA, MA NON RICORDO
+ASSOLUTAMENTE CHE IL CODICE DI EMERGENZA FOSSE IL 73.
+</div>
+
+&Egrave; alquanto insolito che un istruttore, che deve insegnare le procedure agli allievi, non ricordi un codice importante come quello dell'emergenza. Forse il mancato ricordo non è dovuto ad un'effettiva lacuna nella memoria di Bergamini, ma ad altro.<br>
+<br>
+
+A completamento di questa incredibile serie di stranezze sul modo 73, si può citare anche il regolamento emesso dall'<abbr title="ISPETTORATO DELLE TELECOMUNICAZIONI E DELL'ASSISTENZA AL VOLO">ITAV</abbr>, con tanto di approvazione del gen. S.A. Lamberto Bartolucci, intitolato "<a href="http://cristianopi.altervista.org/straus/v1f50_WP017352_001.pdf" target="_blank">NORME PER LA ESECUZIONE DEI CONTROLLI IN VOLO DEI RADAR SECONDARI DI SORVEGLIANZA</a>" 
+<i><sup><abbr title="Procura della Repubblica di Roma, VOL. I - FASC. 50 PAG. 12361 - 12386, DATA DOCUMENTO 31.03.80, ATTO TRASMESSO CON RAPPORTO DEI C.C. IN DATA 03.03.92 (U.I. 17291 GENERI1) ANNESSO 31 ALL'ALLEGATO B (RELAZIONE DELLA COMM.NE INTERNA IN MERITO ALLE APPARECCHIATURE RADAR FUNZIONANTI NEL GIUGNO 1980 C/O CAPODICHINO): FG. ITAV 432/2218/T3-6 (COPIA NEL FASC. 49 PAG. 11934 11935 U.I. 17311) PER TRASMISSIONE DOC. NORME PER ESECUZIONE CONTROLLI IN VOLO EDIZ. 1979 (NOTA 1)">fonte</abbr></sup></i>, nel quale si legge a pag. 5:
+
+<div class="cita">
+
+3. MILITARY EMERGENCY: EMERGENZA MILITARE<br>
+VIENE INSERITO DAL PILOTA SU UN QUALSIASI MODO D'INTERROGAZIONE 1 - 2 - 3/A,
+INDICA <u>EMERGENZA A BORDO</u>; SUL DISPLAY LA RISPOSTA SI PRESENTA:<br>
+<b>LA PRIMA, CON IL CODICE D'INTERROGAZIONE PIU' 3 TRENI D'IMPULSI, LE ALTRE, CON 4 TRENI D'IMPULSI</b>.
+
+</div>
+
+Quindi, anche in questo caso, è evidente che l'emergenza si riferisce sempre e soltanto a problemi inerenti al velivolo che la segnala e che l'emergenza viene segnalata nelle modalità standard NATO e non con il SIF1 = 73.<br>
+
+
+<!--  FINE 2023-07-15  -->
+
+<br>
+
+
+
+
+
+Come ultima osservazione, si può considerare che un codice di modo 1 viene visto solamente dai controllori dei radar militari, mentre quelli del traffico aereo (civile) non lo vedono. L'attivazione dell'I/P (usata per segnalare la posizione), invece, viene vista sia dai controllori civili che militari.<br>
+L'utilizzo del SIF1 = 73 come indicazione di posizione, quindi, poteva essere una forma di "gentilezza" nei confronti dei controllori civili, che non vedono il simbolo evidenziato per un aereo che non è sotto il loro controllo.<br>
+<br>
+
+
+
+<!-- ========================================================================================================== -->
+
+
+
+<h3 id="modo2_7777">Codice 7777 del SIF di modo 2</h3>
+
+
+L'impossibilità di cambiare in volo il codice di modo 2 è di particolare interesse in relazione al tabulato radar di Poggio Ballone (scaricabile da 
+<a href="https://www.stragi80.it/tracciato/" target="_blank">STRAGI80.it</a>).<br>
+I periti d'ufficio, infatti, associano a due TF-104G di ritorno dalla missione a Villafranca (v. "<a href="../../lc/tf104g/tf104g.html" target="_blank">I due F-104</a>") alcuni plot con SIF di <b>modo 2</b> uguale a 7777 che, in base al manuale di volo, poteva essere impostato solo a terra.<br>
+<br>
+
+Il documento <a href="https://maritime.org/doc/pdf/et4.pdf" target="_blank">Electronics Technician - Volume 4—Radar Systems - NAVEDTRA 14089</a> e la sua <a href="https://electronicstechnician.tpub.com/14089/css/Figure-3-2-Aims-Mark-Xii-Iff-Interrogations-And-Replies-45.htm" target="_blank">versione online</a> indica con assoluta chiarezza il significato del codice 7777 di <b>modo 3/A</b>: "<i>A 7777 reply code is assigned to interceptors on active air defense missions</i>" (il codice 7777 è assegnato agli intercettori in missioni di difesa aerea attiva).<br>
+
+Un'ulteriore conferma viene dall'"<a href="https://www.faa.gov/air_traffic/publications/atpubs/aim_html/chap4_section_1.html" target="_blank"><i>Aeronautical Information Manual</i></a>" pubblicato dalla <i>Federal Aviation Administration</i>: "<i>Under no circumstances should a pilot of a civil aircraft operate the transponder on Code 7777. <u>This code is reserved for military interceptor operations</u>.</i>".<br>
+Sebbene entrambi i documenti facciano riferimento al modo 3/A (non al modo 2), è possibile che lo stesso codice 7777 venga usato in modo 2 ogniqualvolta risulti prudente o necessario evitare che i controllori del traffico aereo civile (che ricevono solo i modi 3/A e C) vengano inutilmente o inopportunamente allertati per ciò che sta accadendo in ambito militare.<br>
+
+Ciò sarebbe ancor più giustificato dalla possibile presenza di un AWACS che sembra coordinare gli aerei aventi SIF2 = 7777 (v. "<a href="../../lc/awacs/awacs.html" target="_blank">Presenza dell'AWACS</a>").<br>
+
+<br>
+Il documento "<a href="https://www.globalsecurity.org/military/library/policy/usmc/mcwp/3-22/ch3.pdf" target="_blank">GlobalSecurity.org - CHAPTER 3. AIR DEFENSE</a>" spiega molto dettagliatamente il significato di "<i>active air defense</i>". Usando le prime frasi riportate nel documento, si può riassumere che la difesa aerea attiva consiste nell'usare gli aerei disponibili, l'armamento preposto per la difesa aerea e la guerra elettronica per raggiungere l'obiettivo. La difesa aerea attiva può anche impiegare un armamento non abitualmente usato nell'attività di difesa aerea.<br>
+
+<br>
+
+Siccome l'attribuzione del codice 7777 di <b>modo 2</b> ad un'intercettazione è soltanto un'ipotesi (<u>la certezza la si ha solo per il <b>modo 3/A</b></u>), si può provare a dedurne un altro possibile significato in base alle testimonianze rese da alcuni controllori della difesa aerea.<br>
+<br>
+Tra i documenti utili, si può iniziare con la lettura dell'esame di Del Zoppo: "<a href="http://cristianopi.altervista.org/straus/v3f95_WP000520_001.pdf" target="_blank">WP000520_001.DOC</a>" 
+<i><sup><abbr title="Procura della Repubblica di Roma, VOL. III - FASC. 95 - PAG. 19755 - 19760, DATA 13.05.95 TRIBUNALE ROMA UFFICIO ISTRUZIONE: RESO DA DEL ZOPPO ANDREA, GIA' GENERALIZZATO IN ATTI, DINNANZI AL G.I. DR. PRIORE. A PAGG. 19761-19764 FOGLI MANOSCRITTI (VDS. ORIGINALE).">fonte</abbr></sup></i>. Il documento riporta alcune informazioni relative all'utilizzo dei modi 1, 2 e 3/A; sono meno di quattro pagine e vale sicuramente la pena leggerlo.<br>
+Ulteriori sue dichiarazioni sono verbalizzate nel documento: "<a href="http://cristianopi.altervista.org/straus/v3f164_WP000657_001.pdf" target="_blank">WP000657_001.DOC</a>" 
+<i><sup><abbr title="Procura della Repubblica di Roma, VOL. III - FASC. 164 - PAG. 31076 - 31080, DATA 21.10.97, TRIBUNALE ROMA UFFICIO ISTRUZIONE: RESO DA DEL ZOPPO ANDREA, GIA' GENERALIZZATO IN ATTI, DINNANZI AL G.I. DR. PRIORE. PRESENTE M.LLO C.C. SIMEONE.">fonte</abbr></sup></i>, nel quale si può leggere a pag. 1: "<i>ORDINE DI TRASPONDER SIGNIFICANO GLI ORDINI CHE SI DANNO AL PILOTA CIRCA L'USO DEL TRASPONDER DI BORDO DURANTE LA MISSIONE. AD ESEMPIO TRASPONDER ON-OFF, OPPURE ON FINO A... E OFF DA... OPPURE IL CONTRARIO.</i>".<br>
+Abbiamo, infine: "<a href="http://cristianopi.altervista.org/straus/v3f125_WP000630_001.pdf" target="_blank">WP000630_001.DOC</a>" 
+<i><sup><abbr title="Procura della Repubblica di Roma, VOL. III - FASC. 125 - PAG. 25350 - 25410, TRASCRIZIONE DEL P.V. DI CONFRONTO RESO DA CARTA FRANCESCO, CIRINA PAOLO, COZZOLINO DONATO, DE GIUSEPPE ANTONIO, LAURETANI ANTONIO, MARRA LUIGI, OGNO SALVATORE, RUSSO SALVATORE E TASSI ILVO AVVENUTO IL 16.04.96. A PAG. 25411 BUSTA CONTENENTE BOBINA DI REGISTRAZIONE DEI CONFRONTI RESI IN DATA 16.04.96.">fonte</abbr></sup></i>, in cui vengono messe a confronto le testimonianze rese da alcuni controllori della D.A.<br>
+<br>
+Quello che si può affermare con certezza in merito al codice 7777 di <b>modo 2</b> (a prescindere dalle ipotesi), è che normalmente non viene assegnato ad alcun aereo, perché gli aerei hanno un codice assegnato secondo tabelle disponibili al personale interessato (meccanici e controllori militari).<br>
+Il fatto che un aereo abbia il SIF2 = 7777 ha la duplice conseguenza d'impedire di risalire al suo gruppo d'appartenenza e, al tempo stesso, consente di essere identificato senza alcun dubbio da chi sa che un dato aereo con SIF2 = 7777 dovrà compiere una data missione, perché, essendo l'unico in zona ad avere quel codice, l'identificazione sarà certa.<br>
+Se aggiungiamo gli ordini di transponder "ON-OFF" di modo 2, otteniamo un aereo dall'identità ignota alla quasi totalità dei radaristi della D.A. che segnala l'avanzamento di una missione usando il transponder, senza far ricorso alle comunicazioni a voce che possono, invece, essere utilizzate per la consueta ricezione e conferma delle autorizzazioni di volo (cambio rotta, quota, avvicinamento e atterraggio). Di tutto ciò, è bene precisarlo, i controllori del T.A. non si accorgono, perché non ricevono i codici di modo 1 e 2.<br>
+<br>
+
+
+<script>
+CreaIndice();
+</script>
+
+</body>
+</html>
